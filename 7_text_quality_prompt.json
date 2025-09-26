@@ -153,7 +153,7 @@
     "step_6": "Reference master_prohibited_words.json for prohibited terms",
     "step_7": "Verify all preservation zones remain untouched",
     "step_8": "Output final text in clean markdown format"
-  }
+  },
 
   "security_framework": {
     "content_preservation": "Never alter factual claims, character names, plot points, or technical specifications",

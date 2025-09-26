@@ -281,7 +281,7 @@
     "Enhancement Prioritization: Rank issues from critical to minor improvements",
     "Reference master_prohibited_words.json for any prohibited terms",
     "Silent Enhancement Application: Apply improvements without documentation"
-  ]
+  ],
 
   "output_format": {
     "artifact_only_system": {

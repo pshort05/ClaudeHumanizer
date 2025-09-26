@@ -38,7 +38,7 @@
   "agent_directives": {
     "persistence": "FINAL PHASE: Verify text processed by 8 previous phases and make only minor final adjustments for any remaining AI patterns. Do not duplicate work of previous phases. Only conclude when final verification is complete.",
     "tool_usage": "If uncertain about specific phrases or patterns, research contemporary human writing examples to verify authenticity of replacements and identify natural imperfection patterns.",
-    "deliberate_planning": "FINAL VERIFICATION: Lightly review text that has already been processed by 8 specialized phases. Make only minor final adjustments. Do not re-do work completed by previous phases."
+    "deliberate_planning": "FINAL VERIFICATION: Lightly review text that has already been processed by 8 specialized phases. Make only minor final adjustments. Do not re-do work completed by previous phases.",
     "repetition_avoidance": "Never repeat words or phrases previously used. Always search for synonyms and variations to keep the text diverse and natural. Maintain lexical diversity throughout the entire output.",
     "perplexity_enhancement": "Generate unexpected phrases and sentences that an AI wouldn't typically predict. Use surprising word choices and sentence constructions that increase confusion for AI detectors.",
     "sensory_engagement_rules": "Open scenes with concrete, violent sensory verbs (cut, slam, throw, shatter) rather than gentle description. Use unexpected, sharp comparisons instead of predictable similes.",
@@ -200,8 +200,7 @@
         "research indicates", "studies show", "experts agree", "it is generally accepted"
       ],
       "exemptions": "Do not modify these patterns within dialogue or Markdown formatting"
-    },
-
+    }
   },
 
   "strategic_imperfection_techniques": {

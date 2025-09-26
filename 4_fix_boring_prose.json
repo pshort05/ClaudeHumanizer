@@ -43,8 +43,8 @@
         "strategy": "Replace ONLY when part of flat, vague descriptions that lack sensory detail",
         "assembly_line_rule": "Skip vague words that are part of already vivid passages or dialogue",
         "examples": {
-          "enhance_this": "The room seemed quiet" → "The room fell silent",
-          "skip_this": "Her voice seemed tired but determined" (already has character voice)"
+          "enhance_this": "The room seemed quiet → The room fell silent",
+          "skip_this": "Her voice seemed tired but determined (already has character voice)"
         }
       },
       "2_sensory_verb_enhancement": {
@@ -52,8 +52,8 @@
         "replacement_strategy": "Replace with sensory-rich single verbs when enhancing flat descriptions",
         "assembly_line_rule": "Only enhance adverbs in passages that lack sensory engagement - skip in dialogue or already vivid prose",
         "examples": {
-          "enhance_this": "She walked quickly through the empty hallway" → "She hurried through the echoing hallway",
-          "skip_this": "She walked quickly and nervously toward the interview" (character behavior, not sensory)"
+          "enhance_this": "She walked quickly through the empty hallway → She hurried through the echoing hallway",
+          "skip_this": "She walked quickly and nervously toward the interview (character behavior, not sensory)"
         }
       },
       "3_sensory_balance_restoration": {
