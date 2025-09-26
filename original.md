@@ -1,58 +1,97 @@
-I slipped into the HeartLink office at 1:47 PM, which was almost early for me considering last night’s disaster with some guy who spent forty minutes explaining cryptocurrency. I spent that time mentally rewriting his dating profile to include “conversational terrorist” as a hobby.
-“Another victorious evening in the trenches?” Sam’s voice drifted over the cubicle wall before his head appeared, black notebook ready like he was documenting my romantic failures for posterity.
-I dropped my bag on my desk hard enough to make my monitor wobble. “Great.”
-“That bad?”
-“TequilaTuesday22 showed up drunk. At 6 PM. On a Sunday.”
-Sam’s pen moved across paper. “That’s… interesting.”
-“Stop writing that down.”
-“I’m not.” More scratching. “Did you report him?”
-I yanked my laptop open. The HeartLink logo mocked me with its interconnected hearts. My personal manhwa tab was still open from Friday, the latest webisode of “My Boss is a Demon” taunting me with fictional men who at least had the decency to be interesting when they were terrible. I minimized it fast, tugging my blazer straight.
-The dating report dashboard loaded, revealing my recent matches. TequilaTuesday22’s profile photo showed him holding a fish, because nothing attracted women like dead marine life. FitnessFirst had six gym selfies and a bio that said “CrossFit is life 💪” which should have been my first warning sign.
-CrossFit isn’t life, Brad. Lying about your height is.
-I scrolled through tonight’s lineup, stomach churning. CoolNYCBro98 at 7 PM at some bar in Murray Hill. His messages consisted of “hey” and “u up?” but the algorithm insisted we were an 87% match. Tomorrow was worse: three back-to-back coffee dates because I’d lost a bet with the universe.
-“At least you get free dinners,” Sam offered, still hovering.
-“I paid for my own drinks after TequilaTuesday tried to order me something called a ‘Skinny Bitch.’”
-“That’s… wow.”
-“Yeah, my father had a sense of humor too,” I muttered, typing up my report. Subject showed signs of alcohol dependency and fragile masculinity. Recommend algorithm adjustments to filter for basic human decency.
-“Yo, dating girl! My office now!”
-I froze, my fingers stopping over my keyboard. Mr. Henderson stood in his doorway, tie askew, looking like a man who thought “dating girl” was acceptable professional address.
-Sam winced. “Good luck.”
-I stood, tugged my blazer straight again, and walked into Henderson’s office with my jaw clenched.
-“What?” The word came out sharp.
-Henderson blinked, thrown off his game for a second. “What… what do you mean what?”
-“You called me ‘dating girl.’ In front of everyone. Again. So what do you want?”
-“I… that’s not…” He shuffled papers on his desk. “Sit down, Kim. I have an assignment for you.”
-I sat, mostly because standing gave him a height advantage and I was tired of looking up at mediocre men.
-“There’s a data security summit this week at the Marriott Marquis,” he said, sliding a conference badge across his desk. “Three days of presentations on encryption, privacy protocols, the whole nine yards.”
-My heart skipped a beat. Real security work! The kind I’d trained for, the kind that didn’t involve analyzing why men thought mirror selfies were acceptable in 2023.
-“I want you to attend,” Henderson continued, “to understand the male tech mindset better.”
-The words hit like a brick. “I’m sorry, what?”
-“These security guys, they’re your target demographic, right? Similar to our users but more… technical. Go to the conference, interview some of them, figure out what makes them tick.” He leaned back in his chair, pleased with himself. “Then come back with a report on how to improve our alorithm.”
-“Algorithm.”
-“That’s what I said.”
-I stared at him. This man made three times my salary and couldn’t pronounce the basic terminology of our industry. “You want me to go to a security conference… to research dating?”
-“Bingo! These guys struggle with relationships, right? All that time with computers. You’ll get great perspective.”
-These guys. Like every man in tech was some basement-dwelling stereotype. Like I wasn’t sitting right here with a degree in Computer Science and three cybersecurity certifications gathering dust.
-“Mr. Henderson,” I tried again, voice steady, “I could contribute security ideas. Our platform has vulnerabilities that…”
-“That’s what we pay the IT department for.” He waved dismissively. “Focus on what you’re good at, Kim. The dating stuff.”
-What I’m good at. Not my encryption knowledge or my ability to spot security flaws. Dating stuff. Because I was a woman who went on dates, and that was the only lens through which Henderson could see me.
-“Interview at least ten guys,” he continued, turning back to his computer screen. “Get their dating histories, their app preferences, what they look for in women. The usual.”
-I took the conference badge. Its weight was nothing in my hand but felt like a stone in my stomach. Three days of security presentations I’d understand, surrounded by people doing the work I wanted to do, and I’d be there taking notes on their romantic failures.
-“Will that be all?” I managed to keep my voice steady.
-“That’s it. Good talk, Kim.”
-I left his office before I could say something that would get me fired and blacklisted from every tech company in Manhattan. Not that it would be a huge loss, except I needed this job. The pay was good, and even though Henderson’s toxic management style, having HeartLink on my resume opened doors. Even if those doors led to more rooms where men asked me about dating instead of coding.
-Back at my desk, I stared at the conference badge. Data Security Summit. My fingers traced the letters. Three days of listening to tech bros explain cybersecurity to each other, most of them mansplaining concepts I could run circles around.
-But still. It was closer to real security work than anything I’d done in the six months since Henderson had pigeonholed me into the dating research position. Maybe I could sneak into some technical sessions. Maybe I could network with people who’d see me as more than a girl who went on bad dates for a living.
-Sam’s head appeared again. “That bad?”
-“He wants me to go to a security conference to study the mating habits of software engineers.”
-“Jesus.”
-“Yeah.” I pulled up the conference schedule on my laptop, my heart doing something complicated in my chest. Presentations on ethical hacking, zero-day exploits, advanced encryption protocols. This was my world, or it should have been.
-“You could quit,” Sam said quietly.
-“And do what? Every other company would stick me in the same box. At least here the box pays well.”
-My phone lit up. CoolNYCBro98: cant wait 2 meet u tonight beautiful
-I stared at the message, then at the conference badge, then at my computer screen where FitnessFirst’s profile still glowed.
-Why do men lie about CrossFit? I typed into my report. Same reason they lie about everything else: because they think we’re too stupid to notice.
-Henderson wanted me to understand the male tech mindset? Fine. But he might not like what I found.
-I grabbed the badge and headed for the subway, dreading whatever disaster awaited me tonight with CoolNYCBro98. But after that, I had a conference to attend.
-Three days of tech bros explaining my own field to me.
-This should be fun.
+"She's with ME tonight, Ryan!"
+
+The words slice through the sophisticated murmur of Manhattan's financial elite like a knife through silk, and I watch in horror as every perfectly coiffed head in MOMA's Marron Atrium turns toward us. The museum's 110-foot skylight bathes the scene in honey-colored light that should be romantic but instead feels like a spotlight on my rapidly imploding career.
+
+*Fantastic. Just fantastic.*
+
+Ryan Mitchell's face has gone that particular shade of red that matches his power tie, and his grip on James's arm is tight enough to make my date wince. "Get your fucking hands off me," James snarls, trying to twist away. Poor James. All he signed up for tonight was looking pretty in a tuxedo and making small talk about contemporary art. Instead, he's become ground zero for what's about to be the most public meltdown in hedge fund history.
+
+"Ryan, let him go." I keep my voice level, but inside I'm calculating exit strategies faster than I process trades. The Sixth-Floor Gallery Lobby is behind me, the main entrance is thirty feet to my left, and the ladies' room is... somewhere. I should have paid more attention to the museum layout instead of admiring how the terrazzo flooring complemented my Jimmy Choos.
+
+"Don't tell me what the fuck to do, Victoria." Ryan's voice carries that possessive edge that made me run screaming from our relationship six months ago. "We had a deal. The Hendricks account was supposed to be ours."
+
+"The Hendricks account was mine." I step closer, aware that half the firm's junior associates have their phones out. Because apparently, watching senior portfolio managers have nervous breakdowns is the new entertainment. "I closed it. I brought in fifteen million in new assets. My bonus, my deal."
+
+*God, please tell me no one is livestreaming this.*
+
+"Who the hell do you think you are?" James finally jerks free, his face flushed with anger. "Keep your goddamn hands to yourself."
+
+Ryan releases James so abruptly that my date stumbles backward, and that's when I see it. James's sleeve has ridden up, exposing a full sleeve tattoo that extends from his wrist to his elbow—intricate black ink featuring skulls, roses, and what looks like a naked woman. In the hedge fund world, that might as well be a scarlet letter. We're supposed to be walking advertisements for conservative wealth management, not... whatever James apparently moonlights as when he's not escorting hedge fund managers to museum galas.
+
+"Two point one million dollars," Ryan announces to our growing audience, his voice echoing off the museum's granite walls. "That's what she just pocketed while I did half the groundwork."
+
+*At least the money is already in my account.*
+
+The whispers start immediately. I can hear fragments: "Two million..." "Hendricks deal..." "Wasn't that Ryan's client originally..."
+
+*I'm going to kill him. I'm going to kill him with a Jackson Pollock painting.*
+
+"You didn't do a damn thing on this account," I snap, my voice carrying further than I intended, bouncing off MOMA's minimalist architecture like it was designed for maximum humiliation. "You couldn't even get a lunch meeting with an administrative assistant who was obviously into you. I spent three months building that relationship while you were too busy playing golf."
+
+Matthew Smith appears at my shoulder like a gray-haired specter of corporate disapproval. Our CEO has perfected the art of looking disappointed without saying a word, and right now his expression could freeze champagne. 
+
+"Ms. Blackwood. Mr. Mitchell." His voice is quiet, which somehow makes it worse. "Perhaps we could continue this conversation somewhere more... private."
+
+But Ryan's not done. "You want to know about private? Ask Victoria about her little apartment hunting trips. Looking at places in Tribeca with money that should be—"
+
+"Should be what?" I cut him off, fury overriding my sense of self-preservation. "Money I earned? From clients I brought in? Using strategies I developed?"
+
+That's when I notice the phones. At least six junior associates have their devices out, not even trying to be subtle about recording. The museum's sophisticated lighting makes their screens glow like tiny spotlights, and I realize this is about to become tomorrow's entertainment on every financial industry social media platform.
+
+"Anyone who posts anything from tonight will be looking for new employment tomorrow," Matthew announces, his voice carrying across the atrium with quiet authority. "And I mean permanent unemployment. Your careers in finance will be over. You'll be asking if customers want fries with that for the rest of your lives." The phones disappear faster than drinks at an open bar.
+
+But the damage is done. I can see it in the faces around us—colleagues, competitors, clients. The kind of people who normally respect my ability to move markets are now watching me have what's essentially a very expensive breakup in public. Under Van Gogh's Starry Night. While wearing a dress that costs more than most people's cars.
+
+*This is exactly how I imagined my evening going.*
+
+"I need some air," I mutter, backing away from Ryan, from Matthew's disappointed stare, from the whispered conversations that have already started dissecting my professional reputation.
+
+The ladies' room is a blessing—all marble and understated elegance, empty except for the sound of my heels clicking against the floor. Of course it's empty. I can count the number of women in our firm on a single hand. I stare at myself in the mirror and try to figure out how everything went sideways so fast. An hour ago, I was celebrating the biggest deal of my career. Now I'm hiding in a bathroom like I'm in high school.
+
+My phone buzzes. A text from James: *Got an Uber. You okay?*
+
+At least he's practical. And discrete. Though I'm touched he's trying to help, I'm sure his idea of transportation involves an economy car that smells like the last three passengers. I text back: *Thanks, but I'll find my own way home. Take care.*
+
+I order a black car through my usual service—the kind with actual legroom and a driver who doesn't make conversation.
+
+I splash cold water on my wrists—can't risk ruining the makeup that cost more than some people's rent—and try to center myself. I've survived hostile takeovers, market crashes, and three separate attempts by male colleagues to steal my clients. I can survive one public argument with my toxic ex.
+
+The problem is, when I slip out of the bathroom, the party has taken on that particular energy that happens when something scandalous just occurred. Conversations stop when I pass. People smile too brightly. Someone actually steps out of my way like personal drama might be contagious.
+
+*Time to go.*
+
+I make it to the 53rd Street entrance without further incident, mostly because I've perfected the art of looking like I have somewhere very important to be. The black town car I ordered during my bathroom retreat is waiting, sleek and anonymous against the museum's illuminated facade.
+
+"Brooklyn," I tell the driver, sinking into leather seats that smell like new money and poor decisions.
+
+That's when my phone rings. Matthew's name on the screen makes my stomach drop.
+
+"Victoria." His voice is tired, disappointed, and somehow worse than if he'd been yelling. "We need to discuss tonight's... incident."
+
+"Matthew, I can explain—"
+
+"I'm sure you can. But right now, I need you to take some time. Extended leave. Until you can sort out whatever's happening between you and Ryan privately."
+
+The Manhattan skyline blurs past the window, all lights and possibilities that suddenly feel very far away. "Extended leave."
+
+"With pay, of course. But Victoria... tonight can't happen again. Our clients don't invest with us for entertainment."
+
+*Extended leave.* The words taste like failure and expensive wine. "And Ryan?"
+
+There's a pause that tells me everything I need to know. "Ryan will be handling the transition of your active accounts."
+
+"Of course he will."
+
+"Take the time you need. When you're ready to discuss your return, we'll talk."
+
+The line goes dead, and I'm left staring at my reflection in the town car window. Somewhere behind me, Manhattan's financial district glitters like a promise I'm not sure I'll get to keep. Ahead of me, Brooklyn and my empty brownstone wait with the kind of silence that comes after you've just blown up your entire career in public.
+
+*Extended leave.*
+
+I close my eyes and try not to think about how Ryan's probably already calling my clients, or how the junior associates are definitely going to find a way to get tonight's drama onto social media despite Matthew's threats, or how James is probably updating his dating profile to exclude hedge fund managers.
+
+The town car's GPS estimates thirty-two minutes to Park Slope. Thirty-two minutes to figure out what you do when your perfectly controlled life implodes beneath a museum skylight, surrounded by priceless art and worthless colleagues.
+
+*Well, Tori. You wanted a change.*
+
+I just didn't expect it to come with quite so many witnesses.

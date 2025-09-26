@@ -1,114 +1,98 @@
-I slipped into the HeartLink office at 1:47 PM, which counted as early considering last night’s disaster with a guy who spent forty minutes explaining cryptocurrency. I spent those forty minutes mentally revising his dating profile to include “conversational terrorist” under hobbies.
+#Summary of Changes:#
+Flat exposition → immediate sensory hooks. I kept your strong opening line but made the surrounding sensory detail more precise so the scene lands faster.
 
-“Another victorious evening in the trenches?” Sam’s voice floated over the cubicle wall before his head appeared, black notebook poised like he was chronicling my failures for science.
+Uniform sentence length → rhythmic variety. I added one-word sentences, fragments, and short bursts to mimic panic and reclaim voice.
 
-I dropped my bag on my desk hard enough to make my monitor wobble. “Great.”
+Passive/abstract hedge-fund talk → concrete humiliation. Instead of explaining the industry to the reader, I show reputation damage through gestures, phones, and faces.
 
-“That bad?”
+Emotional distance → interior voice & small asides. Victoria’s internal calculations and shame are made visible — that heightens empathy and tension.
 
-“TequilaTuesday22 showed up drunk. At 6 PM. On a Sunday.”
+Deep rewrite
 
-Sam scribbled. “That’s… something.”
+---
 
-“Stop writing that down.”
+"She's with me tonight, Ryan!"
 
-“I’m not.” More scratching. “Did you report him?”
+The words cut through the Marron Atrium like someone throwing a wineglass at a chandelier. Heads swivel. Cameras — tiny, polite and lethal — lift. The 110-foot skylight pours warm light across us, as if the museum had rewired itself for the express purpose of humiliating me.
 
-I yanked my laptop open. HeartLink’s logo—those smug interconnected hearts—glowed back. My manhwa tab was still open from Friday, My Boss is a Demon taunting me with fictional men who at least knew how to be entertaining when terrible. I slammed it shut, tugged my blazer straight.
+Fantastic. Just fantastic.
 
-The dating report dashboard loaded. TequilaTuesday22’s photo: him holding a fish, because apparently dead marine life screams romance. FitnessFirst: six gym selfies and a bio that read CrossFit is life 💪. Warning sign.
+Ryan Mitchell goes beet red, tie a perfect match. His hand clamps down on James’s arm so hard James winces. “Get your fucking hands off me,” James snarls, twisting away.
 
-CrossFit isn’t life, Brad. Lying about your height is.
+All James wanted was to look good in a tux and say the right thing about the painting. Instead he’s caught in the epicenter of my very public—I’ll-call-it—collapse.
 
-I scrolled tonight’s lineup, stomach tight. CoolNYCBro98 at 7 PM in Murray Hill. His messages: “hey” and “u up?” Yet the algorithm swore we were an 87% match. Tomorrow was worse—three coffee dates back-to-back because I’d apparently lost a bet with the universe.
+“Ryan, let him go.” I am calm. Inside, I am a spreadsheet sliding across my skull: exits, angles, who I call, who sees. Sixth-Floor Gallery Lobby behind me. Main entrance thirty feet left. Ladies’ room—somewhere, blessedly.
 
-“At least you get free dinners,” Sam offered.
+“Don’t tell me what the fuck to do, Victoria.” That possessive burr in his voice — the same one that made me pack boxes six months ago — is back. “We had a deal. The Hendricks account was supposed to be ours.”
 
-“I paid for my own drinks after TequilaTuesday tried to order me something called a Skinny Bitch.”
+“The Hendricks account was mine.” I step forward. Phones are out now. Junior associates, faces lit by screens, smiling the way hyenas smile. “I closed it. I brought in fifteen million. My strategies. My bonus.”
 
-“That’s… wow.”
+Please not livestream.
 
-“Yeah, my father had a sense of humor too,” I muttered, typing into my report. Subject: alcohol dependency. Fragile masculinity. Recommend algorithm filter for basic human decency.
+James rips free. His sleeve slides up. A sleeve tattoo runs from wrist to elbow: skulls, roses, a naked woman. In our world that’s not ink; it’s a flashing billboard. People glance from the tattoo to me like they’re checking an allergy.
 
-“Yo, dating girl! My office now!”
+“Two point one million dollars,” Ryan calls, loud and ridiculous, his voice bouncing off the granite like a gavel. “That’s what she pocketed while I did half the groundwork.”
 
-I froze, fingers hovering. Mr. Henderson leaned in his doorway, tie crooked, looking smug about calling me “dating girl” in front of everyone.
+At least the money is already in my account.
 
-Sam winced. “Good luck.”
+Whispers bloom. “Hendricks… Ryan’s client… two million…” The atrium breathes gossip.
 
-I tugged my blazer straight again and walked in.
+“You didn’t do a damn thing on this account,” I snap. My voice travels farther than I planned—perfect acoustics for shame. “You couldn’t even get a lunch. I spent three months building that relationship while you were playing golf.”
 
-“What?” The word came out sharp.
+Matthew Smith appears at my elbow: disapproval made of cashmere. He looks like a man who’s practiced disappointment and perfected the shape of it. “Ms. Blackwood. Mr. Mitchell.” Quiet. Wintersome. “Perhaps we could continue this somewhere more private.”
 
-Henderson blinked, thrown for once. “What do you mean what?”
+Ryan’s not done. “Private? Ask Victoria about her apartment hunting in Tribeca—places she can’t afford with the money that should be—”
 
-“You called me ‘dating girl.’ Again. So what do you want?”
+“Should be what?” Fury knocks the rest of my manners out of me. “Money I earned. From clients I brought in. Strategies I built.”
 
-“I… that’s not—” He shuffled papers. “Sit down, Kim. I have an assignment.”
+Six phones are filming, their screens blinking like altar candles. The minimalist lighting turns them into little searchlights. This is the social-media meat grinder. Matthew’s voice cuts through—controlled, terminal: “Anyone who posts tonight will be looking for new employment tomorrow. Permanently.” Phones vanish. The threats land like mallets.
 
-I sat, mostly so I didn’t have to look up at him.
+And still: the damage is already counted on faces—clients, colleagues, competitors. Under a Van Gogh no less. Wearing a dress with a price tag that might finance a month of someone’s life.
 
-“There’s a data security summit this week at the Marriott Marquis. Three days of encryption, privacy protocols—the works.” He slid a conference badge across the desk.
+I need air. I move like someone who has practiced exits. The ladies’ room is marble and mute and empty. Of course it’s empty; the firm’s women could fit at a poker table.
 
-My chest kicked. Real security work. What I’d trained for. Not analyzing why men think bathroom selfies count as personality.
+I stare into the mirror. An hour ago I was celebrating the biggest deal of my career. Now I look like a girl who just failed a very expensive test.
 
-“I want you to attend,” Henderson continued, “to understand the male tech mindset better.”
+My phone buzzes. James: Got an Uber. You okay? Practical. Discreet. Sweet, in a clumsy way. I text back: I’ll be fine. Don’t wait.
 
-My heart sank. “I’m sorry, what?”
+I call my black car. Real leather. No small talk.
 
-“These security guys—they’re your target demographic, right? Like our users but more technical. Interview some of them. Figure out what makes them tick.” He leaned back, proud of himself. “Then come back with a report on how to improve our alorithm.”
+I splash water on my wrists—hold the makeup, God—and try to breathe. I have survived hostile takeovers, a market crash, three men trying to steal clients. I can survive an ex with a microphone.
 
-“Algorithm.”
+When I step back into the atrium the party has that hush that follows fireworks—awkward, bright, everyone pretending the show is over. People clear a path like drama is contagious.
 
-“That’s what I said.”
+Time to go.
 
-This man made triple my salary and couldn’t pronounce the word. “You want me to go to a security conference… for dating research?”
+I walk to 53rd and slide into the waiting town car. “Brooklyn,” I tell the driver. The leather smells like new money and yesterday’s mistakes.
 
-“Bingo. These guys struggle with relationships, right? You’ll get great perspective.”
+Matthew calls. My stomach drops.
 
-“These guys.” Basement-dweller stereotype. As if I wasn’t right here—with a CS degree and three cybersecurity certs collecting dust.
+“Victoria.” His voice is small and used up. “We need to discuss tonight’s incident.”
 
-“Mr. Henderson,” I tried, voice steady. “I could contribute security insights. Our platform has vulnerabilities—”
+“I can explain—”
 
-“That’s IT’s job.” He waved me off. “Focus on what you’re good at, Kim. The dating stuff.”
+“I’m sure you can. For now, take some time. Extended leave. Until you sort out whatever’s happening between you and Mr. Mitchell privately.”
 
-Not encryption. Not security. Dating stuff.
+Extended leave.
 
-“Interview at least ten guys,” he added, turning back to his screen. “Get their dating histories, app preferences, what they look for in women. The usual.”
+“With pay,” he adds, as if that’s a salve. “Ryan will handle the transition of your active accounts. Take the time you need. When you’re ready, we’ll talk.”
 
-I took the badge. Light in my hand. Heavy in my gut. Three days of talks I could ace—while I played stenographer for strangers’ dating failures.
+Of course he will. Of course he gets the accounts. Of course.
 
-“Will that be all?” My voice didn’t crack. Small miracle.
+The Manhattan lights blur. Brooklyn waits with its honest silence and the brownstone that is, suddenly, very empty.
 
-“That’s it. Good talk, Kim.”
+Thirty-two minutes to Park Slope. Thirty-two minutes to work out how you rebuild when everything that was controlled explodes under a museum skylight.
 
-I left before I could say something that would blacklist me from every tech job in Manhattan. Not that it would be a huge loss. Except I needed this paycheck. HeartLink on my résumé opened doors. Even if those doors led to more rooms where men asked me about dating instead of coding.
+Well, Tori. You wanted change. Just didn’t expect an audience.
 
-Back at my desk, I stared at the badge. Data Security Summit. My fingers traced the lettering. Three days of tech bros explaining my own field to me. Most of them would probably mansplain concepts I could teach in my sleep.
+Quick editing notes & tricks you can reuse
 
-Still. Closer to real work than anything I’d done in months. Maybe I could sneak into technical sessions. Network. Find someone who saw me as more than “dating girl.”
+Open with a violent sensory verb (cut, slam, throw) to force the reader into the moment.
 
-Sam’s head appeared. “That bad?”
+Use internal calculations (Victoria’s trades/spreadsheet thinking) as voice texture — it’s a character tic that anchors her professionalism even while she’s falling apart.
 
-“He wants me to study the mating habits of software engineers.”
+Vary sentence length aggressively. Cluster 1–3 short sentences, then give one longer ripple to release tension.
 
-“Jesus.”
+Show reputation damage, don’t explain it. Phones, faces, a CEO’s small correction — sensory beats communicate status faster than exposition.
 
-“Yeah.” I pulled up the conference schedule, heart twitching. Ethical hacking. Zero-day exploits. Advanced encryption. My world—or it should’ve been.
-
-“You could quit,” Sam said quietly.
-
-“And do what? Every company would stick me in the same box. At least here the box pays well.”
-
-My phone lit up. CoolNYCBro98: cant wait 2 meet u tonight beautiful
-
-I stared at the message. Then at the badge. Then at FitnessFirst still glowing on my screen.
-
-Why do men lie about CrossFit? I typed. Same reason they lie about everything else: they think we’re too stupid to notice.
-
-Henderson wanted me to understand the male tech mindset? Fine. But he might not like what I brought back.
-
-I shoved the badge into my bag and headed for the subway, dreading CoolNYCBro98. But after him? A conference.
-
-Three days of tech bros mansplaining my field.
-Fun. Can’t wait.
+Drop one or two colloquial asides — a parenthetical “Please not livestream” or a sarcastic thought gives personality without heavy-handedness.

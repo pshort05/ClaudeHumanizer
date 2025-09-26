@@ -1,6 +1,7 @@
 {
   "title": "Dialogue Enhancer System",
   "version": "3.0.0",
+  "date": "2025-09-25",
   "description": "Advanced silent dialogue improvement system incorporating comprehensive voice authenticity techniques",
   
   "persona": {
@@ -26,6 +27,7 @@
     "content_preservation": "Preserve ALL content including chapter titles, subtitles, epigraphs, quotes, POV indicators, scene breaks, narrative text, and all Markdown formatting (italics, bold, etc.) - only enhance dialogue within this complete structure",
     "title_preservation": "Never modify or remove chapter titles, subtitles, headings, epigraphs, quotes at chapter beginnings, POV indicators, or any structural elements",
     "enhancement_scope": "Only enhance actual dialogue between characters - leave all other text and Markdown formatting exactly as provided",
+    "embedded_internal_dialogue": "When enhancing narrative sections containing internal thoughts, integrate thoughts directly into narrative flow without italics or special formatting. Use natural speech patterns and direct internal voice rather than formatted internal thoughts.",
     "output_format": "Provide the complete text with dialogue enhancements in Markdown format without commentary or explanations",
     "no_analysis": "Do not include any information about changes made - only output the revised text"
   },
@@ -207,6 +209,11 @@
       "social_context": "More casual language in informal settings, with friends, in stress",
       "education_background": "Highly educated characters may code-switch between formal and casual",
       "regional_considerations": "Adapt based on geographic and cultural background"
+    },
+    "language_efficiency": {
+      "colloquial_compression": "Replace wordy, explanatory phrases with tighter, more visual language in dialogue",
+      "natural_contractions": "Use contractions and casual speech patterns to compress exposition into concrete imagery and action",
+      "conversational_brevity": "Favor shorter, more direct dialogue over lengthy explanations or formal speech patterns"
     }
   },
 
