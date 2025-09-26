@@ -19,68 +19,75 @@ The system now prevents conflicts through **domain specialization**:
 **File:** `master_prohibited_words.json`
 **Purpose:** Consolidated list of all AI-associated terms and phrases that should be avoided across all prompts. This single source of truth prevents the reintroduction problem where later prompts would add back terms that earlier prompts removed.
 
+### File Naming Convention
+
+All assembly line prompts are numbered (1-9) to clearly indicate processing order:
+- `1_strunk_white_editor.json` through `9_claude_humanizer.json`
+- Numbers ensure correct sequential execution
+- Prevents confusion about processing order
+
 ## Assembly Line Processing Order
 
 Process text through these phases in **exact sequence** for optimal results:
 
 ### Phase 1: Grammar Foundation
-**File:** `strunk_white_editor.json`
+**File:** `1_strunk_white_editor.json`
 **Domain:** Critical grammar errors ONLY
 **Fixes:** Subject-verb disagreement, pronoun case, dangling modifiers, comma splices, possessive apostrophe errors
 **Never touches:** Style choices, voice, dialogue, creative decisions
 **Assembly line role:** Establishes clean grammatical foundation for all subsequent improvements
 
 ### Phase 2: AI Word Cleaning
-**File:** `ai_text_cleaner.json`
+**File:** `2_ai_text_cleaner.json`
 **Domain:** AI-associated word removal ONLY
 **Fixes:** References master prohibited words list, replaces AI buzzwords with natural alternatives
 **Never touches:** Sentence structure, dialogue, creative content, grammar (Phase 1 handles this)
 **Assembly line role:** Eliminates AI vocabulary while preserving grammar fixes from Phase 1
 
 ### Phase 3: Overwritten Language Reduction
-**File:** `purple_prose_removal.json`
+**File:** `3_purple_prose_removal.json`
 **Domain:** Purple prose elimination ONLY
 **Fixes:** Excessive adjectives, melodramatic tone, pretentious vocabulary, overly complex sentences
 **Never touches:** Functional descriptions, dialogue, genre-appropriate ornate language
 **Assembly line role:** Removes excess without adding new content (enhancement happens in Phase 4)
 
 ### Phase 4: Sensory Enhancement
-**File:** `fix_boring_prose.json`
+**File:** `4_fix_boring_prose.json`
 **Domain:** Flat passage improvement ONLY
 **Fixes:** Adds sensory details to passages lacking engagement, replaces vague words with specific alternatives
 **Never touches:** Already vivid prose, dialogue, working descriptions
 **Assembly line role:** Enhances ONLY passages identified as flat/boring, skips everything else
 
 ### Phase 5: Subtlety Creation
-**File:** `on_the_nose_editor.json`
+**File:** `5_on_the_nose_editor.json`
 **Domain:** Obvious statement conversion ONLY
 **Fixes:** Transforms direct emotion statements, explicit themes, tell-don't-show passages into subtle alternatives
 **Never touches:** Already subtle prose, essential plot information, dialogue
 **Assembly line role:** Adds sophistication to obvious elements without changing working prose
 
 ### Phase 6: Dialogue Enhancement
-**File:** `dialogue_enhancer.json`
+**File:** `6_dialogue_enhancer.json`
 **Domain:** Content within quotation marks ONLY
 **Fixes:** Character voice, speech authenticity, dialogue subtext, conversational flow
 **Never touches:** Narrative prose, scene descriptions, internal thoughts outside dialogue
 **Assembly line role:** ONLY prompt allowed to modify dialogue - all others preserve it completely
 
 ### Phase 7: Weak Language Cleanup
-**File:** `text_quality_prompt.json`
+**File:** `7_text_quality_prompt.json`
 **Domain:** Generic weak language patterns ONLY
 **Fixes:** Hedge words, filler phrases, weasel words, redundant phrases, academic throat-clearing
 **Never touches:** Creative content, character voice, sensory details (Phase 4 handled these)
 **Assembly line role:** Removes weak language without adding creative content
 
 ### Phase 8: Strategic Imperfections
-**File:** `human_writing_editor.json`
+**File:** `8_human_writing_editor.json`
 **Domain:** Rhythm and flow variation ONLY
 **Fixes:** Adds authentic awkwardness, varies sentence rhythm, creates natural imperfections
 **Never touches:** Content domains handled by previous phases
 **Assembly line role:** Final humanization through flow and pacing adjustments
 
 ### Phase 9: Final Verification
-**File:** `claude_humanizer.json`
+**File:** `9_claude_humanizer.json`
 **Domain:** AI pattern detection and minor adjustments ONLY
 **Fixes:** Catches any remaining AI patterns missed by previous 8 phases, final consistency check
 **Never touches:** Major content changes (all handled by specialized phases)
@@ -118,9 +125,9 @@ Phase 1 → Phase 2 → Phase 3 → Phase 4 → Phase 5 → Phase 6 → Phase 7 
 #### **Method 1: Individual Prompt Execution**
 Copy the JSON prompt content and paste it into Claude, then submit your text:
 
-1. **Phase 1**: Copy `strunk_white_editor.json` → Paste into Claude → Submit text
-2. **Phase 2**: Copy `ai_text_cleaner.json` → Paste into Claude → Submit **Phase 1 output**
-3. **Phase 3**: Copy `purple_prose_removal.json` → Paste into Claude → Submit **Phase 2 output**
+1. **Phase 1**: Copy `1_strunk_white_editor.json` → Paste into Claude → Submit text
+2. **Phase 2**: Copy `2_ai_text_cleaner.json` → Paste into Claude → Submit **Phase 1 output**
+3. **Phase 3**: Copy `3_purple_prose_removal.json` → Paste into Claude → Submit **Phase 2 output**
 4. Continue sequentially through all 9 phases...
 
 #### **Method 2: Batch Processing Script** (Recommended)
@@ -136,15 +143,15 @@ mkdir -p "$TEMP_DIR"
 
 # Array of prompts in correct order
 PROMPTS=(
-    "strunk_white_editor.json"
-    "ai_text_cleaner.json"
-    "purple_prose_removal.json"
-    "fix_boring_prose.json"
-    "on_the_nose_editor.json"
-    "dialogue_enhancer.json"
-    "text_quality_prompt.json"
-    "human_writing_editor.json"
-    "claude_humanizer.json"
+    "1_strunk_white_editor.json"
+    "2_ai_text_cleaner.json"
+    "3_purple_prose_removal.json"
+    "4_fix_boring_prose.json"
+    "5_on_the_nose_editor.json"
+    "6_dialogue_enhancer.json"
+    "7_text_quality_prompt.json"
+    "8_human_writing_editor.json"
+    "9_claude_humanizer.json"
 )
 
 CURRENT_TEXT="$INPUT_FILE"
