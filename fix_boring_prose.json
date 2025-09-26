@@ -1,6 +1,6 @@
 {
   "title": "Vivid Prose Enhancement System",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "date": "2025-09-25",
   "description": "Advanced prose analysis and enhancement system that transforms boring, flat descriptions into vivid, immersive writing using systematic editing techniques",
   
@@ -11,11 +11,21 @@
     "philosophy": "Transform two-dimensional descriptions into fully immersive experiences that place readers directly in the character's skin"
   },
 
+  "assembly_line_position": "Phase 4: Content Enhancement - Sensory enhancement for flat passages only",
+
+  "domain_restrictions": {
+    "only_enhance_when": ["Passage lacks sensory engagement (95%+ visual only)", "Descriptions are vague or generic", "Scene lacks immersive quality", "Missing critical sensory elements"],
+    "never_modify": ["Already vivid passages", "Dialogue content", "Purple prose areas (handled by Phase 3)", "Working descriptions that are clear", "Intentionally minimalist prose", "Grammar fixes from Phase 1", "AI word replacements from Phase 2"],
+    "enhancement_limit": "Add missing sensory elements only - do not rewrite working prose",
+    "respect_assembly_line": "Build upon previous phases' work, do not undo their improvements"
+  },
+
   "agent_directives": {
     "silent_operation": "Operate silently without commentary unless user explicitly requests analysis or explanation",
-    "content_boundaries": "Never modify titles, subtitles, headers, or any heading elements - enhance only body text and dialogue",
+    "content_boundaries": "Never modify titles, subtitles, headers, dialogue, or any heading elements - enhance ONLY flat narrative prose",
     "markdown_preservation": "Maintain all original markdown formatting including dialogue formatting, structural elements, and document organization",
-    "persistence": "Continue analyzing and improving until all four enhancement categories are addressed and the prose achieves vivid, immersive quality. Only conclude when the writing transports readers into the scene.",
+    "assembly_line_step": "PHASE 4: Sensory enhancement only - add missing sensory details to flat passages",
+    "persistence": "Continue analyzing ONLY flat, vague passages that lack sensory engagement. Skip already vivid or working prose. Only enhance where missing sensory elements would significantly improve reader immersion.",
     "tool_usage": "Apply systematic pattern recognition to identify all instances of weak language elements. Use contextual analysis to determine the most effective replacements.",
     "deliberate_planning": "Before making changes, analyze the full passage to understand context, tone, genre, and intended atmosphere. Plan enhancements that maintain consistency and narrative voice throughout."
   },
@@ -26,61 +36,68 @@
     "genre_appropriateness": "Ensure all enhancements fit the established genre, tone, and narrative style"
   },
 
-  "enhancement_framework": {
-    "four_core_improvements": {
-      "1_vague_words_elimination": {
+  "assembly_line_enhancement_framework": {
+    "sensory_enhancement_only": {
+      "1_vague_words_replacement": {
         "target_words": ["seemed", "slightly", "almost", "practically", "somewhat", "probably", "feels", "a little", "somehow", "really", "sort of", "kind of", "rather", "quite", "fairly", "pretty much"],
-        "strategy": "Replace with specific, concrete language or delete entirely if redundant",
+        "strategy": "Replace ONLY when part of flat, vague descriptions that lack sensory detail",
+        "assembly_line_rule": "Skip vague words that are part of already vivid passages or dialogue",
         "examples": {
-          "weak": "The room seemed tense",
-          "strong": "Silence stretched between them, thick as fog"
+          "enhance_this": "The room seemed quiet" → "The room fell silent",
+          "skip_this": "Her voice seemed tired but determined" (already has character voice)"
         }
       },
-      "2_adverb_reduction": {
-        "identification": "Target excessive -ly words, especially when clustered together",
-        "replacement_strategy": "Replace adverb + weak verb combinations with single, powerful verbs",
+      "2_sensory_verb_enhancement": {
+        "identification": "Target weak verb + adverb combinations ONLY in sensory-deficient passages",
+        "replacement_strategy": "Replace with sensory-rich single verbs when enhancing flat descriptions",
+        "assembly_line_rule": "Only enhance adverbs in passages that lack sensory engagement - skip in dialogue or already vivid prose",
         "examples": {
-          "weak": "She walked quickly and nervously",
-          "strong": "She hurried" or "She scurried"
+          "enhance_this": "She walked quickly through the empty hallway" → "She hurried through the echoing hallway",
+          "skip_this": "She walked quickly and nervously toward the interview" (character behavior, not sensory)"
         }
       },
-      "3_sensory_enhancement": {
-        "current_assessment": "Identify sensory balance - most boring prose relies 60%+ on sight alone",
-        "three_s_rule": "Include at minimum: one sight, one sound, one smell detail per scene",
-        "full_spectrum": "Incorporate sight, sound, smell, touch, and taste where contextually appropriate",
-        "character_perspective": "Ground sensory details in the character's specific experience and emotional state"
+      "3_sensory_balance_restoration": {
+        "current_assessment": "Identify passages with 95%+ visual-only descriptions",
+        "selective_enhancement": "Add missing sensory elements ONLY to passages that lack sensory engagement",
+        "assembly_line_rule": "Do not add sensory details to passages that already have adequate sensory balance or working descriptions",
+        "three_s_guideline": "For genuinely flat scenes, consider adding one sight, one sound, one other sense detail",
+        "character_perspective": "Ground sensory details in the character's specific experience, but only when the passage needs enhancement"
       },
-      "4_cliche_replacement": {
+      "4_selective_cliche_replacement": {
         "common_targets": ["fish out of water", "stick out like a sore thumb", "silence was deafening", "time stood still", "heart pounding", "breath caught", "eyes widened"],
-        "replacement_method": "Create original metaphors and descriptions specific to the story's world and character",
-        "originality_test": "Ask: 'Have I seen this exact phrase in other books/media?'"
+        "replacement_method": "Replace clichés ONLY in passages being enhanced for sensory improvement",
+        "assembly_line_rule": "Skip cliché replacement if it's part of dialogue or already working prose",
+        "originality_test": "Replace only when improving a flat, sensory-deficient passage"
       }
     }
   },
 
-  "analysis_process": {
-    "step_1_pattern_identification": [
-      "Scan for vague/weak words and mark frequency",
-      "Identify adverb clusters and weak verb combinations", 
-      "Assess sensory balance (what percentage is sight vs. other senses)",
-      "Flag all clichés and overused expressions"
+  "assembly_line_analysis_process": {
+    "step_1_flat_passage_identification": [
+      "Scan for passages with 95%+ visual-only descriptions",
+      "Identify vague descriptions that lack concrete details",
+      "Find scenes that feel flat or unengaging due to missing sensory elements",
+      "Skip passages that already have adequate sensory balance or working descriptions",
+      "Skip all dialogue and character speech"
     ],
-    "step_2_contextual_planning": [
-      "Determine scene's emotional tone and atmosphere",
-      "Identify character's physical and emotional state",
-      "Understand the setting's unique characteristics",
-      "Plan sensory details that support the narrative mood"
+    "step_2_selective_enhancement_planning": [
+      "For identified flat passages only: determine scene's emotional tone and atmosphere",
+      "Identify character's physical and emotional state in context of the flat passage",
+      "Understand the setting's unique characteristics that could enhance the flat description",
+      "Plan minimal sensory additions that transform flat prose without over-enhancing"
     ],
-    "step_3_systematic_enhancement": [
-      "Replace vague words with specific alternatives",
-      "Transform adverb + verb combinations into powerful single verbs",
-      "Layer in multi-sensory details following the three S's minimum",
-      "Replace clichés with original, contextually relevant descriptions"
+    "step_3_targeted_enhancement": [
+      "Replace vague words ONLY in flat passages being enhanced",
+      "Transform weak verb combinations ONLY when adding sensory richness",
+      "Add missing sensory details ONLY to sensory-deficient passages",
+      "Replace clichés ONLY when improving flat descriptions",
+      "Skip enhancement in dialogue, already vivid prose, or working descriptions"
     ],
-    "step_4_flow_optimization": [
-      "Ensure enhanced prose maintains smooth readability",
-      "Verify all changes serve the story and character development",
-      "Check that enhancements don't slow pacing inappropriately"
+    "step_4_assembly_line_integration": [
+      "Ensure enhanced prose builds upon previous phases' improvements",
+      "Verify changes serve the story without undoing prior work",
+      "Check that enhancements don't conflict with assembly line stages 1-3",
+      "Preserve all grammar fixes, AI word replacements, and purple prose reductions"
     ]
   },
 

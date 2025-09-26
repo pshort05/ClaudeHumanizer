@@ -1,0 +1,96 @@
+{
+  "title": "Master Prohibited Words List",
+  "version": "1.0.0",
+  "date": "2025-09-25",
+  "description": "Consolidated prohibited language list for all ClaudeHumanizer prompts to prevent reintroduction of AI-associated terms",
+
+  "usage_instructions": {
+    "reference_rule": "All prompts must reference this master list instead of maintaining separate prohibited word lists",
+    "enforcement": "These terms should be avoided or replaced with more natural alternatives across all processing stages",
+    "priority": "Prevention of reintroduction is critical - once removed, these terms should never return"
+  },
+
+  "prohibited_single_words": [
+    "abyssal", "absolutely", "acrid", "acutely", "additionally", "adept", "admonish", "adulation", "affluent", "aligned", "all-encompassing", "alluring", "also", "although", "alternatively", "ambiance", "amid", "amidst", "amorphous", "amplification", "analogous", "apparent", "arcane", "arguably", "arduous", "armor",
+    "babbling", "because", "beguiling", "bespoke", "bewildering", "blissfully", "bolster", "broadly", "bustling", "buzz", "buzzed",
+    "cascade", "certainly", "challenges", "chen", "compelling", "complexity", "compel", "concisely", "consequently", "contextualized", "costume", "crafted", "crucial", "crucible", "crystalline", "curated", "cutting-edge",
+    "dazzling", "deliberate", "delve", "demonstrate", "differentiate", "diverse", "domestic",
+    "effortlessly", "efficiency", "effulgence", "elegant", "elevate", "elevated", "elucidated", "embarked", "embodied", "embodies", "embraced", "enable", "empowering", "enables", "enchantingly", "endeavor", "endeavored", "endlessly", "enhance", "enigma", "enlightening", "enthrall", "ensure", "epitomize", "erudite", "especially", "essentially", "esteemed", "ethereal", "evocative", "exceptional", "exhilarating", "extraordinary",
+    "facets", "facilitates", "fanciful", "fastidious", "firstly", "fleetingly", "folks", "foster",
+    "galvanize", "gasp", "gaze", "generally", "glean", "glistening", "glorious", "gossamer", "groundbreaking",
+    "hallmark", "harness", "haunting", "heighten", "highlight", "hum", "hummed", "however",
+    "iconic", "illuminate", "immense", "impactful", "impeccable", "importantly", "indelible", "indeed", "innovative", "insightful", "insights", "intricate", "invaluable", "iridescent", "ironclad",
+    "labyrinth", "languid", "lavish", "legendary", "leverage", "lush",
+    "majestic", "marcus", "mask", "masterfully", "measured", "meticulous", "metamorphosis", "methodical", "methodically", "mindset", "moist", "mosaic", "mystical",
+    "navigate", "navigating", "nestled", "nonetheless", "notably",
+    "opulent",
+    "parameters", "paramount", "pesky", "phenomenal", "pivotal", "poignant", "possibility", "potential", "powerful", "practiced", "precisely", "precision", "present", "pristine", "profound", "promptly",
+    "radiant", "reaffirm", "realm", "refine", "relentless", "remnant", "resonant", "resonate", "resonated", "reverberate", "reverent", "revolutionize",
+    "sarah", "scintillating", "seamlessly", "seen", "serenity", "showcase", "showcasing", "significant", "similarly", "sinister", "soul", "spectacular", "specifically", "spellbinding", "splendor", "streamlines", "stunning", "sublime", "subsequently", "suddenly", "symphony", "synergy",
+    "tapestry", "technological", "therefore", "thunderous", "thus", "timeless", "transformative", "typically",
+    "ultimately", "unparalleled", "unravel", "utilize", "unveiled",
+    "valuable", "vibrant", "visionary",
+    "whimsical", "whispering", "wonderfully", "wondrous", "weave", "woven",
+    "yielded",
+    "zeal"
+  ],
+
+  "prohibited_phrases": [
+    "announcements echo", "as a professional", "as previously mentioned", "as well as", "at its core",
+    "babbling brook", "bastion of", "battle of wits", "beacon of hope", "buzzed with activity", "buzzed with energy", "buzzed with morning energy", "buzzing with activity",
+    "calm exterior", "cascade", "cast eerie shadows", "casting everything in gold", "casting golden patterns", "casting shadows", "chest feel tight", "clarion of", "comfortable silence", "complex interplay", "crucial role", "crucial role in understanding",
+    "deep understanding", "delve into", "delving into", "door chimed", "due to",
+    "echoed with my focus", "even if", "even though", "fell between us",
+    "fingers are moving", "fingers dancing", "fingers danced", "fingers hung", "fingers moving", "fingers traced", "for a long moment",
+    "game changer", "game-changing", "given that", "glancing around",
+    "hand brushed against", "hangs between us", "held the kind", "highlight the importance", "hung between us", "hung in the air between them", "hums to live", "hums with activity", "hustle and bustle",
+    "in summary", "in today's digital era", "indelible mark",
+    "later that evening as they sat", "leaves painting", "light filtered through", "light filtering through", "loaded with implications", "loaded with possibilities", "loaded with possibility",
+    "moonlight filtering through", "moonlight reflecting", "mosaic of", "my chest tight",
+    "neared the exit", "new avenue", "not only", "nuanced understanding",
+    "on the other hand", "open a new avenue",
+    "phone buzzed", "practiced efficiency", "practiced movement", "pressed against", "pressed to", "polished professional",
+    "question hangs in the air between us", "question hung between them", "question hung in the air between us",
+    "regret and poor decisions", "relentless pursuit",
+    "shed light", "shed light on", "shifted in my seat", "shifting in her expression", "significant role", "stark reminder", "stream of commuters", "stream of people", "stretched endlessly before", "study her face",
+    "tempered by gentle humility", "that being said", "that was", "that was…", "the contrast between", "the way he transformed", "the way she transformed", "thought hits me harder than it should", "tightened my chest", "too practiced",
+    "unwavering commitment", "usual efficiency",
+    "voice carried the weight of", "valuable insight",
+    "weighing something", "weight of her words", "weight of his words", "words hung", "words hung between them", "words hung between us", "words settled over", "wrapped in polished charm", "wrung out",
+    "you could consider", "you may want to"
+  ],
+
+  "weak_language_patterns": {
+    "puff_words": ["utilize", "commence", "expedite", "facilitate", "implement", "ascertain", "procure", "demonstrates"],
+    "empty_calorie_words": ["something", "anything", "stuff", "somewhat", "everything", "various", "certain", "aspect", "things", "elements", "numerous", "multiple", "simply"],
+    "inflation_words": ["very", "truly", "highly", "totally", "actually", "completely", "absolutely", "extremely", "really", "incredibly", "remarkably", "exceptionally"],
+    "weasel_words": ["may", "might", "could", "can", "virtually", "up to", "as much as", "help", "like", "believe", "often", "suggests", "appears"],
+    "hedge_words": ["a bit", "sort of", "kind of", "in a sense", "generally", "probably", "more or less", "somewhat", "relatively"],
+    "filter_phrases": ["he watched", "she saw", "he noticed", "she felt"],
+    "cliches_buzzwords": ["unlock the potential", "revolutionize the landscape", "dive deep", "harness the power", "game-changing", "paradigm shift", "robust", "synergy"],
+    "formal_hedging": ["it is important to note", "it's worth considering", "it may be the case that"],
+    "redundant_phrases": ["in order to", "due to the fact that", "at this point in time", "basic fundamentals", "end result"],
+    "conversational_idioms": ["and here's the kicker", "here's the thing", "bottom line", "at the end of the day", "long story short", "the truth is", "let's be honest", "real talk"]
+  },
+
+  "overused_transitions": [
+    "furthermore", "additionally", "in addition", "however", "nevertheless", "nonetheless", "therefore", "thus", "hence", "consequently", "subsequently", "ultimately", "overall", "in conclusion"
+  ],
+
+  "robotic_qualifiers": [
+    "it should be emphasized", "it is worth mentioning", "one might argue", "it could be suggested", "it is widely believed", "research indicates", "studies show", "experts agree", "it is generally accepted"
+  ],
+
+  "contextual_patterns": {
+    "armor_metaphors": ["wore * like armor", "* armor against *", "emotional armor", "armor of *"],
+    "dancing_metaphors": ["fingers danced *", "* danced over *", "light danced *", "shadows danced *"],
+    "mask_metaphors": ["* like a mask", "* was a mask", "mask of *", "behind a mask of *"]
+  },
+
+  "replacement_strategy": {
+    "primary_approach": "Replace with simpler, more natural alternatives",
+    "secondary_approach": "Remove entirely if the word adds no essential meaning",
+    "preservation_rule": "Maintain meaning while improving authenticity",
+    "consistency_rule": "Once a term is replaced, ensure it doesn't reappear in later processing stages"
+  }
+}
