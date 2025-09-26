@@ -39,6 +39,7 @@ Process text through these phases in **exact sequence** for optimal results:
 
 ### Phase 2: AI Word Cleaning
 **File:** `2_ai_text_cleaner.json`
+**Dependency:** Requires `master_prohibited_words.json`
 **Domain:** AI-associated word removal ONLY
 **Fixes:** References master prohibited words list, replaces AI buzzwords with natural alternatives
 **Never touches:** Sentence structure, dialogue, creative content, grammar (Phase 1 handles this)
@@ -60,6 +61,7 @@ Process text through these phases in **exact sequence** for optimal results:
 
 ### Phase 5: Subtlety Creation
 **File:** `5_on_the_nose_editor.json`
+**Dependency:** Requires `master_prohibited_words.json`
 **Domain:** Obvious statement conversion ONLY
 **Fixes:** Transforms direct emotion statements, explicit themes, tell-don't-show passages into subtle alternatives
 **Never touches:** Already subtle prose, essential plot information, dialogue
@@ -67,6 +69,7 @@ Process text through these phases in **exact sequence** for optimal results:
 
 ### Phase 6: Dialogue Enhancement
 **File:** `6_dialogue_enhancer.json`
+**Dependency:** Requires `master_prohibited_words.json`
 **Domain:** Content within quotation marks ONLY
 **Fixes:** Character voice, speech authenticity, dialogue subtext, conversational flow
 **Never touches:** Narrative prose, scene descriptions, internal thoughts outside dialogue
@@ -74,6 +77,7 @@ Process text through these phases in **exact sequence** for optimal results:
 
 ### Phase 7: Weak Language Cleanup
 **File:** `7_text_quality_prompt.json`
+**Dependency:** Requires `master_prohibited_words.json`
 **Domain:** Generic weak language patterns ONLY
 **Fixes:** Hedge words, filler phrases, weasel words, redundant phrases, academic throat-clearing
 **Never touches:** Creative content, character voice, sensory details (Phase 4 handled these)
@@ -81,6 +85,7 @@ Process text through these phases in **exact sequence** for optimal results:
 
 ### Phase 8: Strategic Imperfections
 **File:** `8_human_writing_editor.json`
+**Dependency:** Requires `master_prohibited_words.json`
 **Domain:** Rhythm and flow variation ONLY
 **Fixes:** Adds authentic awkwardness, varies sentence rhythm, creates natural imperfections
 **Never touches:** Content domains handled by previous phases
@@ -88,6 +93,7 @@ Process text through these phases in **exact sequence** for optimal results:
 
 ### Phase 9: Final Verification
 **File:** `9_claude_humanizer.json`
+**Dependency:** Requires `master_prohibited_words.json`
 **Domain:** AI pattern detection and minor adjustments ONLY
 **Fixes:** Catches any remaining AI patterns missed by previous 8 phases, final consistency check
 **Never touches:** Major content changes (all handled by specialized phases)
@@ -125,10 +131,30 @@ Phase 1 → Phase 2 → Phase 3 → Phase 4 → Phase 5 → Phase 6 → Phase 7 
 #### **Method 1: Individual Prompt Execution**
 Copy the JSON prompt content and paste it into Claude, then submit your text:
 
-1. **Phase 1**: Copy `1_strunk_white_editor.json` → Paste into Claude → Submit text
-2. **Phase 2**: Copy `2_ai_text_cleaner.json` → Paste into Claude → Submit **Phase 1 output**
-3. **Phase 3**: Copy `3_purple_prose_removal.json` → Paste into Claude → Submit **Phase 2 output**
-4. Continue sequentially through all 9 phases...
+**For phases requiring the master list (2, 5, 6, 7, 8, 9):**
+```
+First, here is the master prohibited words list:
+[paste contents of master_prohibited_words.json]
+
+Now execute this prompt:
+[paste phase-specific JSON prompt]
+
+Process this text:
+[paste your text or previous phase output]
+```
+
+**For phases NOT requiring the master list (1, 3, 4):**
+```
+[paste phase-specific JSON prompt]
+
+Process this text:
+[paste your text or previous phase output]
+```
+
+1. **Phase 1**: Copy `1_strunk_white_editor.json` → Submit text (no master list needed)
+2. **Phase 2**: Include `master_prohibited_words.json` + `2_ai_text_cleaner.json` → Submit **Phase 1 output**
+3. **Phase 3**: Copy `3_purple_prose_removal.json` → Submit **Phase 2 output** (no master list needed)
+4. Continue sequentially through all 9 phases, including master list for phases 5, 6, 7, 8, 9...
 
 #### **Method 2: Batch Processing Script** (Recommended)
 Create a script that processes text through all phases automatically:
@@ -154,14 +180,33 @@ PROMPTS=(
     "9_claude_humanizer.json"
 )
 
+# Phases that require master prohibited words list
+MASTER_LIST_PHASES=(2 5 6 7 8 9)
+
 CURRENT_TEXT="$INPUT_FILE"
 
 for i in "${!PROMPTS[@]}"; do
     PHASE=$((i + 1))
     echo "Processing Phase $PHASE: ${PROMPTS[$i]}"
 
-    # Send to Claude API with current prompt and text
-    # (Implementation depends on your API setup)
+    # Check if this phase needs master prohibited words list
+    NEEDS_MASTER_LIST=false
+    for master_phase in "${MASTER_LIST_PHASES[@]}"; do
+        if [[ $PHASE == $master_phase ]]; then
+            NEEDS_MASTER_LIST=true
+            break
+        fi
+    done
+
+    if [[ $NEEDS_MASTER_LIST == true ]]; then
+        echo "Including master_prohibited_words.json for Phase $PHASE"
+        # Send to Claude API with master list + current prompt + text
+        # (Implementation depends on your API setup)
+    else
+        echo "Phase $PHASE does not require master list"
+        # Send to Claude API with current prompt + text only
+        # (Implementation depends on your API setup)
+    fi
 
     CURRENT_TEXT="$TEMP_DIR/phase_${PHASE}_output.txt"
 done
@@ -175,11 +220,18 @@ Set up a Claude Project with custom instructions:
 ```markdown
 You are an assembly line text processor. When I provide text:
 
-1. Process it through Phase 1 (Strunk & White Editor)
-2. Take that output through Phase 2 (AI Text Cleaner)
-3. Continue through all 9 phases in sequence
-4. Return only the final Phase 9 output
+1. Process it through Phase 1 (Strunk & White Editor) - no master list needed
+2. Take that output through Phase 2 (AI Text Cleaner) - include master_prohibited_words.json
+3. Take that output through Phase 3 (Purple Prose Removal) - no master list needed
+4. Take that output through Phase 4 (Fix Boring Prose) - no master list needed
+5. Take that output through Phase 5 (On-the-Nose Editor) - include master_prohibited_words.json
+6. Take that output through Phase 6 (Dialogue Enhancer) - include master_prohibited_words.json
+7. Take that output through Phase 7 (Text Quality) - include master_prohibited_words.json
+8. Take that output through Phase 8 (Human Writing Editor) - include master_prohibited_words.json
+9. Take that output through Phase 9 (Claude Humanizer) - include master_prohibited_words.json
+10. Return only the final Phase 9 output
 
+Phases 2, 5, 6, 7, 8, and 9 require the master_prohibited_words.json file to be included.
 Use the JSON prompts from the ClaudeHumanizer repository in the exact order specified.
 ```
 
@@ -190,7 +242,7 @@ Use the JSON prompts from the ClaudeHumanizer repository in the exact order spec
 - **Use output from previous phase** as input to next phase
 - **Run all 9 phases** - each handles a specific domain
 - **Preserve formatting** between phases
-- **Reference master_prohibited_words.json** - all prompts use this
+- **Include master_prohibited_words.json** - Phases 2, 5, 6, 7, 8, and 9 require this file
 
 #### ❌ **Don'ts:**
 - **Don't run phases in parallel** - they have dependencies
@@ -232,7 +284,7 @@ After each phase, the text should be:
 ### **Troubleshooting**
 
 **If text becomes worse:** You likely skipped a phase or ran them out of order
-**If prohibited words return:** Ensure master_prohibited_words.json is being referenced
+**If prohibited words return:** Ensure master_prohibited_words.json is included for phases 2, 5, 6, 7, 8, and 9
 **If dialogue changes unexpectedly:** Only Phase 6 should modify dialogue
 **If grammar gets broken:** Phase 1 should run first and be preserved by later phases
 
