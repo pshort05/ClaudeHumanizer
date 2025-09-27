@@ -1,0 +1,131 @@
+# Google-Only Pipeline Configuration - ClaudeHumanizer Assembly Line
+# Uses only Google Gemini models for systematic consistency
+# Cost: Medium ($1.50-2.50 per 1000 words)
+# Quality Score: 70%
+
+input_file: "input_text.md"
+output_file: "humanized_output.md"
+
+# Global configuration with Google ecosystem
+global_config:
+  api_base_url: "https://openrouter.ai/api/v1"
+  log_level: "INFO"
+  user: "humanizer_google"
+  provider:
+    order: ["Google"]
+    allow_fallbacks: false
+
+prompts:
+  # Phase 1: Grammar Foundation - Systematic pattern recognition
+  prompt 1:
+    name: "grammar_foundation"
+    prompt_file: "1_grammar_foundation.json"
+    model: "google/gemini-1.5-pro"
+    temperature: 0.2
+    max_tokens: 25000
+    top_k: 20
+    seed: 42
+
+  # Phase 2: AI Word Cleaning - Consistent rule application
+  prompt 2:
+    name: "ai_word_cleaning"
+    prompt_file: "2_ai_word_cleaning.json"
+    model: "google/gemini-1.5-pro"
+    temperature: 0.4
+    max_tokens: 25000
+    top_p: 0.9
+    frequency_penalty: 0.1
+
+  # Phase 3: Overwritten Language Reduction - Systematic approach
+  prompt 3:
+    name: "overwritten_language_reduction"
+    prompt_file: "3_overwritten_language_reduction.json"
+    model: "google/gemini-1.5-pro"
+    temperature: 0.3
+    max_tokens: 25000
+    presence_penalty: 0.1
+
+  # Phase 4: Sensory Enhancement - Limited creative capabilities
+  prompt 4:
+    name: "sensory_enhancement"
+    prompt_file: "4_sensory_enhancement.json"
+    model: "google/gemini-1.5-pro"
+    temperature: 0.7
+    max_tokens: 30000
+    top_p: 0.9
+    min_p: 0.05
+
+  # Phase 5: Subtlety Creation - Analytical approach
+  prompt 5:
+    name: "subtlety_creation"
+    prompt_file: "5_subtlety_creation.json"
+    model: "google/gemini-1.5-pro"
+    temperature: 0.5
+    max_tokens: 25000
+    presence_penalty: 0.2
+
+  # Phase 6: Dialogue Enhancement - Basic voice capabilities
+  prompt 6:
+    name: "dialogue_enhancement"
+    prompt_file: "6_dialogue_enhancement.json"
+    model: "google/gemini-1.5-pro"
+    temperature: 0.8
+    max_tokens: 30000
+    top_p: 0.9
+    presence_penalty: 0.3
+
+  # Phase 6.5: Character-Specific Dialogue Pass (Optional but included)
+  prompt 6.5:
+    name: "character_dialogue_pass"
+    prompt_file: "6.5_character_dialogue_pass.json"
+    model: "google/gemini-1.5-pro"
+    temperature: 0.8
+    max_tokens: 30000
+    top_p: 0.9
+    presence_penalty: 0.3
+    stream: false
+
+  # Phase 7: Weak Language Cleanup - Excellent pattern detection
+  prompt 7:
+    name: "weak_language_cleanup"
+    prompt_file: "7_weak_language_cleanup.json"
+    model: "google/gemini-1.5-pro"
+    temperature: 0.2
+    max_tokens: 25000
+    top_k: 15
+    frequency_penalty: 0.2
+
+  # Phase 8: Strategic Imperfections - Systematic variation
+  prompt 8:
+    name: "strategic_imperfections"
+    prompt_file: "8_strategic_imperfections.json"
+    model: "google/gemini-1.5-pro"
+    temperature: 0.8
+    max_tokens: 25000
+    top_p: 0.9
+    repetition_penalty: 1.1
+
+  # Phase 9: Final Verification - Superior systematic scanning
+  prompt 9:
+    name: "final_verification"
+    prompt_file: "9_final_verification.json"
+    model: "google/gemini-1.5-pro"
+    temperature: 0.1
+    max_tokens: 25000
+    top_k: 10
+    usage:
+      include: true
+
+# Pipeline metadata
+metadata:
+  configuration_type: "google_only"
+  estimated_cost_per_1000_words: "$1.50-2.50"
+  quality_score: "70%"
+  model_family: "Google Gemini"
+  models_used: ["gemini-1.5-pro"]
+  benefits: ["Consistent systematic approach", "Long context window", "Cost-effective"]
+  best_for: "Users prioritizing systematic consistency over creativity"
+  limitations: ["Limited creative capabilities", "Less literary sophistication", "Weaker dialogue generation"]
+  phases_requiring_master_list: [2, 5, 6, 6.5, 7, 8, 9]
+  total_phases: 10
+  includes_optional_6_5: true

@@ -1,0 +1,141 @@
+# Single-Family Anthropic Configuration - ClaudeHumanizer Assembly Line
+# Optimized Anthropic model distribution across all phases
+# Cost: High ($3.00-5.00 per 1000 words)
+# Quality Score: 95%
+
+input_file: "input_text.md"
+output_file: "humanized_output.md"
+
+# Global configuration optimized for Anthropic ecosystem
+global_config:
+  api_base_url: "https://openrouter.ai/api/v1"
+  log_level: "INFO"
+  user: "humanizer_anthropic_optimized"
+  provider:
+    order: ["Anthropic"]
+    allow_fallbacks: true
+  usage:
+    include: true
+
+prompts:
+  # Phase 1: Grammar Foundation - Sonnet for precision tasks
+  prompt 1:
+    name: "grammar_foundation"
+    prompt_file: "1_grammar_foundation.json"
+    model: "anthropic/claude-3-5-sonnet-20241022"
+    temperature: 0.2
+    max_tokens: 25000
+    top_k: 20
+    seed: 42
+
+  # Phase 2: AI Word Cleaning - Sonnet for consistent instruction following
+  prompt 2:
+    name: "ai_word_cleaning"
+    prompt_file: "2_ai_word_cleaning.json"
+    model: "anthropic/claude-3-5-sonnet-20241022"
+    temperature: 0.4
+    max_tokens: 25000
+    top_p: 0.9
+    frequency_penalty: 0.1
+
+  # Phase 3: Overwritten Language Reduction - Opus for literary sophistication
+  prompt 3:
+    name: "overwritten_language_reduction"
+    prompt_file: "3_overwritten_language_reduction.json"
+    model: "anthropic/claude-3-opus-20240229"
+    temperature: 0.3
+    max_tokens: 25000
+    presence_penalty: 0.1
+
+  # Phase 4: Sensory Enhancement - Opus for peak creative capability
+  prompt 4:
+    name: "sensory_enhancement"
+    prompt_file: "4_sensory_enhancement.json"
+    model: "anthropic/claude-3-opus-20240229"
+    temperature: 0.7
+    max_tokens: 30000
+    top_p: 0.95
+    min_p: 0.02
+
+  # Phase 5: Subtlety Creation - Opus for superior subtext understanding
+  prompt 5:
+    name: "subtlety_creation"
+    prompt_file: "5_subtlety_creation.json"
+    model: "anthropic/claude-3-opus-20240229"
+    temperature: 0.5
+    max_tokens: 25000
+    presence_penalty: 0.2
+
+  # Phase 6: Dialogue Enhancement - Opus for character voice mastery
+  prompt 6:
+    name: "dialogue_enhancement"
+    prompt_file: "6_dialogue_enhancement.json"
+    model: "anthropic/claude-3-opus-20240229"
+    temperature: 0.8
+    max_tokens: 30000
+    top_p: 0.9
+    presence_penalty: 0.3
+
+  # Phase 6.5: Character-Specific Dialogue Pass (Optional but included)
+  prompt 6.5:
+    name: "character_dialogue_pass"
+    prompt_file: "6.5_character_dialogue_pass.json"
+    model: "anthropic/claude-3-opus-20240229"
+    temperature: 0.8
+    max_tokens: 30000
+    top_p: 0.9
+    presence_penalty: 0.3
+    stream: true
+
+  # Phase 7: Weak Language Cleanup - Sonnet for systematic pattern detection
+  prompt 7:
+    name: "weak_language_cleanup"
+    prompt_file: "7_weak_language_cleanup.json"
+    model: "anthropic/claude-3-5-sonnet-20241022"
+    temperature: 0.2
+    max_tokens: 25000
+    top_k: 15
+    frequency_penalty: 0.2
+
+  # Phase 8: Strategic Imperfections - Opus for authentic human patterns
+  prompt 8:
+    name: "strategic_imperfections"
+    prompt_file: "8_strategic_imperfections.json"
+    model: "anthropic/claude-3-opus-20240229"
+    temperature: 0.9
+    max_tokens: 25000
+    top_p: 0.95
+    repetition_penalty: 1.1
+
+  # Phase 9: Final Verification - Sonnet for reliable consistency
+  prompt 9:
+    name: "final_verification"
+    prompt_file: "9_final_verification.json"
+    model: "anthropic/claude-3-5-sonnet-20241022"
+    temperature: 0.1
+    max_tokens: 25000
+    top_k: 10
+    usage:
+      include: true
+
+# Pipeline metadata
+metadata:
+  configuration_type: "single_family_anthropic"
+  estimated_cost_per_1000_words: "$3.00-5.00"
+  quality_score: "95%"
+  model_family: "Anthropic Claude (Optimized Distribution)"
+  model_distribution:
+    sonnet_phases: [1, 2, 7, 9]  # Precision and systematic tasks
+    opus_phases: [3, 4, 5, 6, 6.5, 8]  # Creative and sophisticated tasks
+  models_used:
+    - "anthropic/claude-3-5-sonnet-20241022"
+    - "anthropic/claude-3-opus-20240229"
+  benefits:
+    - "Consistent instruction following across all phases"
+    - "Excellent literary understanding and voice preservation"
+    - "Superior creative capabilities where needed"
+    - "Optimal model selection within Anthropic ecosystem"
+  best_for: "Users prioritizing literary quality with Anthropic consistency"
+  phases_requiring_master_list: [2, 5, 6, 6.5, 7, 8, 9]
+  total_phases: 10
+  includes_optional_6_5: true
