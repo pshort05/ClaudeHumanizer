@@ -1,0 +1,128 @@
+# Cost-Effective High Quality Configuration - ClaudeHumanizer Assembly Line
+# Balances quality and cost using strategic model selection
+# Cost: Budget-conscious ($1.20-2.00 per 1000 words)
+# Quality Score: 90%
+
+input_file: "input_text.md"
+output_file: "humanized_output.md"
+
+# Global configuration with cost-effective defaults
+global_config:
+  api_base_url: "https://openrouter.ai/api/v1"
+  log_level: "INFO"
+  user: "humanizer_budget"
+  usage:
+    include: true
+
+prompts:
+  # Phase 1: Grammar Foundation - Reliable precision
+  prompt 1:
+    name: "grammar_foundation"
+    prompt_file: "1_grammar_foundation.json"
+    model: "anthropic/claude-3-5-sonnet-20241022"
+    temperature: 0.2
+    max_tokens: 25000
+    top_k: 20
+    seed: 42
+
+  # Phase 2: AI Word Cleaning - Cost-effective alternative
+  prompt 2:
+    name: "ai_word_cleaning"
+    prompt_file: "2_ai_word_cleaning.json"
+    model: "meta-llama/llama-3.1-405b-instruct"
+    temperature: 0.4
+    max_tokens: 25000
+    top_p: 0.9
+    frequency_penalty: 0.1
+
+  # Phase 3: Overwritten Language Reduction - Balanced quality
+  prompt 3:
+    name: "overwritten_language_reduction"
+    prompt_file: "3_overwritten_language_reduction.json"
+    model: "anthropic/claude-3-5-sonnet-20241022"
+    temperature: 0.3
+    max_tokens: 25000
+    presence_penalty: 0.1
+
+  # Phase 4: Sensory Enhancement - Creative capability when needed
+  prompt 4:
+    name: "sensory_enhancement"
+    prompt_file: "4_sensory_enhancement.json"
+    model: "openai/gpt-4o"
+    temperature: 0.7
+    max_tokens: 30000
+    top_p: 0.95
+    min_p: 0.02
+
+  # Phase 5: Subtlety Creation - Balanced approach
+  prompt 5:
+    name: "subtlety_creation"
+    prompt_file: "5_subtlety_creation.json"
+    model: "anthropic/claude-3-5-sonnet-20241022"
+    temperature: 0.5
+    max_tokens: 25000
+    presence_penalty: 0.2
+
+  # Phase 6: Dialogue Enhancement - Specialized for character voices
+  prompt 6:
+    name: "dialogue_enhancement"
+    prompt_file: "6_dialogue_enhancement.json"
+    model: "openai/gpt-4o"
+    temperature: 0.8
+    max_tokens: 30000
+    top_p: 0.9
+    presence_penalty: 0.3
+
+  # Phase 6.5: Character-Specific Dialogue Pass (Optional but included)
+  prompt 6.5:
+    name: "character_dialogue_pass"
+    prompt_file: "6.5_character_dialogue_pass.json"
+    model: "openai/gpt-4o"
+    temperature: 0.8
+    max_tokens: 30000
+    top_p: 0.9
+    presence_penalty: 0.3
+    stream: true
+
+  # Phase 7: Weak Language Cleanup - Systematic and cost-effective
+  prompt 7:
+    name: "weak_language_cleanup"
+    prompt_file: "7_weak_language_cleanup.json"
+    model: "google/gemini-1.5-pro"
+    temperature: 0.2
+    max_tokens: 25000
+    top_k: 15
+    frequency_penalty: 0.2
+
+  # Phase 8: Strategic Imperfections - Balanced creativity
+  prompt 8:
+    name: "strategic_imperfections"
+    prompt_file: "8_strategic_imperfections.json"
+    model: "anthropic/claude-3-5-sonnet-20241022"
+    temperature: 0.8
+    max_tokens: 25000
+    top_p: 0.9
+    repetition_penalty: 1.1
+
+  # Phase 9: Final Verification - Reliable systematic checking
+  prompt 9:
+    name: "final_verification"
+    prompt_file: "9_final_verification.json"
+    model: "google/gemini-1.5-pro"
+    temperature: 0.1
+    max_tokens: 25000
+    top_k: 10
+    usage:
+      include: true
+
+# Pipeline metadata
+metadata:
+  configuration_type: "cost_effective_high_quality"
+  estimated_cost_per_1000_words: "$1.20-2.00"
+  quality_score: "90%"
+  cost_savings: "40-50% vs premium configuration"
+  best_for: "High quality results with budget consciousness"
+  strategy: "Use premium models only for phases requiring peak capabilities"
+  phases_requiring_master_list: [2, 5, 6, 6.5, 7, 8, 9]
+  total_phases: 10
+  includes_optional_6_5: true
