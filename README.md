@@ -75,6 +75,14 @@ Process text through these phases in **exact sequence** for optimal results:
 **Never touches:** Narrative prose, scene descriptions, internal thoughts outside dialogue
 **Assembly line role:** ONLY prompt allowed to modify dialogue - all others preserve it completely
 
+#### Phase 6.5: Character-Specific Dialogue Pass (Optional)
+**File:** `6.5_character_dialogue_pass.json`
+**When to use:** When specific characters need targeted voice refinement beyond general dialogue enhancement
+**Domain:** Dialogue for specified target characters ONLY
+**Fixes:** Character-specific speech patterns, vocabulary, voice consistency, targeted style adjustments
+**Never touches:** Other characters' dialogue, narrative prose, work from previous phases
+**Assembly line role:** Optional refinement pass that targets individual character voices based on detailed specifications
+
 ### Phase 7: Weak Language Cleanup
 **File:** `7_weak_language_cleanup.json`
 **Dependency:** Requires `master_prohibited_words.json`
@@ -123,7 +131,7 @@ Only Phase 6 (Dialogue Enhancer) modifies quoted speech - all others preserve it
 The prompts **must** be run in exact order - each phase builds on the previous work:
 
 ```
-Phase 1 → Phase 2 → Phase 3 → Phase 4 → Phase 5 → Phase 6 → Phase 7 → Phase 8 → Phase 9
+Phase 1 → Phase 2 → Phase 3 → Phase 4 → Phase 5 → Phase 6 → [Phase 6.5 (Optional)] → Phase 7 → Phase 8 → Phase 9
 ```
 
 ### **Execution Methods**
@@ -155,6 +163,7 @@ Process this text:
 2. **Phase 2**: Include `master_prohibited_words.json` + `2_ai_word_cleaning.json` → Submit **Phase 1 output**
 3. **Phase 3**: Copy `3_overwritten_language_reduction.json` → Submit **Phase 2 output** (no master list needed)
 4. Continue sequentially through all 9 phases, including master list for phases 5, 6, 7, 8, 9...
+5. **Optional Phase 6.5**: If specific characters need targeted voice refinement, run after Phase 6 before continuing to Phase 7
 
 #### **Method 2: Batch Processing Script** (Recommended)
 Create a script that processes text through all phases automatically:
@@ -266,6 +275,8 @@ Use the JSON prompts from the ClaudeHumanizer repository in the exact order spec
 🎭 Phase 5: Subtlety creation → Sophisticated implications
     ↓
 💬 Phase 6: Dialogue enhancement → Authentic character voices
+    ↓
+🎭 Phase 6.5: Character-specific dialogue (Optional) → Targeted voice refinement
     ↓
 🔍 Phase 7: Weak language cleanup → Stronger expressions
     ↓
@@ -1076,4 +1087,301 @@ class ClaudeHumanizerNode {
 
 ---
 
-**Appendix Last Updated:** 2025-09-27 - Comprehensive LLM optimization analysis and pipeline automation integration
+## Appendix B: Customizing Phase 6.5 Character-Specific Dialogue
+
+Phase 6.5 provides targeted character voice refinement beyond the general dialogue enhancement in Phase 6. This appendix explains how to customize the sample prompt for your specific characters and projects.
+
+### Understanding the Character Specifications Structure
+
+The `6.5_character_dialogue_pass.json` file contains a `character_specifications` section with examples and a template. Here's how to customize it:
+
+#### Basic Character Template Structure
+
+```json
+{
+  "character_name": "[Your Character's Name]",
+  "voice_requirements": {
+    "background_integration": "[Character's education, profession, regional background, family history]",
+    "speech_patterns": "[Sentence length preferences, rhythm, unique grammatical patterns]",
+    "vocabulary_preferences": "[Specific word choices, technical terminology, slang usage]",
+    "signature_phrases": ["[List of 3-5 phrases character uses frequently]"],
+    "disfluencies": "[How character speaks imperfectly - filler words, hesitations, etc.]",
+    "formality_level": "[Formal, casual, code-switching patterns]",
+    "emotional_expression": "[How character expresses or avoids expressing emotions]"
+  },
+  "specific_adjustments": [
+    "[Specific instruction 1]",
+    "[Specific instruction 2]",
+    "[Specific instruction 3]",
+    "[Additional targeted changes needed]"
+  ]
+}
+```
+
+### Step-by-Step Customization Guide
+
+#### Step 1: Identify Characters Needing Voice Refinement
+
+Before using Phase 6.5, determine which characters require targeted voice work:
+
+- **Characters with unclear distinction** after Phase 6
+- **Characters requiring specific cultural/professional speech patterns**
+- **Characters whose voice needs to match established series continuity**
+- **Characters requiring significant personality shifts mid-story**
+
+#### Step 2: Replace Example Characters
+
+Remove the example characters (`example_character_1`, `example_character_2`) and replace with your actual characters:
+
+```json
+"character_specifications": {
+  "usage_note": "Customized for [Your Project Name]",
+
+  "main_character_name": {
+    "character_name": "Sarah Chen",
+    "voice_requirements": {
+      "background_integration": "Second-generation immigrant, software engineer, Silicon Valley tech culture",
+      "speech_patterns": "Precise, analytical. Uses technical metaphors. Short sentences when stressed.",
+      "vocabulary_preferences": "Tech jargon naturally integrated, avoids corporate buzzwords",
+      "signature_phrases": ["Let me think about this", "That doesn't compute", "Running the numbers"],
+      "disfluencies": "Says 'um' when processing complex ideas, trails off when overwhelmed",
+      "formality_level": "Professional but approachable. Uses contractions with friends.",
+      "emotional_expression": "Processes emotions like debugging - systematic, step-by-step"
+    },
+    "specific_adjustments": [
+      "Replace flowery language with precise technical descriptions",
+      "Add subtle tech metaphors for emotional states",
+      "Include occasional coding references in casual speech",
+      "Ensure dialogue reflects logical thinking patterns"
+    ]
+  }
+}
+```
+
+#### Step 3: Define Voice Requirements Components
+
+**Background Integration:**
+- Education level and type (formal education, self-taught, trade school)
+- Professional experience and current job
+- Regional/cultural background
+- Family and socioeconomic history
+- Life experiences that shape worldview
+
+**Speech Patterns:**
+- Sentence length preference (short and clipped vs. long and flowing)
+- Rhythm and pacing (fast talker vs. deliberate speaker)
+- Question vs. statement tendency
+- Complex vs. simple sentence structures
+
+**Vocabulary Preferences:**
+- Professional jargon and technical terms
+- Regional dialect or slang
+- Generational language markers
+- Words they would never use
+- Preferred synonyms for common concepts
+
+**Signature Phrases:**
+- Catchphrases or verbal tics
+- Common expressions they overuse
+- Transitional phrases
+- Emotional outlet phrases
+- Professional expressions
+
+**Disfluencies:**
+- Filler words (um, uh, like, you know)
+- Speech patterns when nervous/excited/angry
+- Tendency to interrupt or be interrupted
+- Incomplete thoughts or trailing sentences
+
+**Formality Level:**
+- Code-switching patterns (formal with authority, casual with peers)
+- Contraction usage
+- Polite vs. direct communication style
+- Professional vs. personal speech differences
+
+**Emotional Expression:**
+- How they show happiness, anger, sadness, fear
+- Tendency to be direct vs. indirect with feelings
+- Use of humor, sarcasm, or deflection
+- Physical expressions that accompany speech
+
+#### Step 4: Write Specific Adjustments
+
+Provide concrete, actionable instructions for the AI:
+
+**Good Examples:**
+- "Replace academic language with street-smart expressions"
+- "Add occasional Spanish words during emotional moments"
+- "Include military rank structure references in casual conversation"
+- "Remove contractions to reflect formal upbringing"
+
+**Avoid Vague Instructions:**
+- "Make them sound more professional" ❌
+- "Add personality" ❌
+- "Make dialogue better" ❌
+
+#### Step 5: Test and Refine
+
+After running Phase 6.5:
+
+1. **Check voice consistency** - Can you identify the character without dialogue tags?
+2. **Verify background authenticity** - Does speech reflect their established background?
+3. **Assess character distinction** - Is this character clearly different from others?
+4. **Review specification compliance** - Were all voice requirements implemented?
+
+### Character Type Examples
+
+#### The Academic Professor
+```json
+"professor_martinez": {
+  "character_name": "Dr. Elena Martinez",
+  "voice_requirements": {
+    "background_integration": "Literature PhD, 20 years teaching, multilingual Spanish/English",
+    "speech_patterns": "Long, complex sentences. Pauses to choose precise words.",
+    "vocabulary_preferences": "Literary references, avoids slang, precise word choice",
+    "signature_phrases": ["Precisely", "That's fascinating", "Consider this", "In my experience"],
+    "disfluencies": "Hmm when thinking, occasional Spanish under breath",
+    "formality_level": "Formal with students, warmer with colleagues, never crude",
+    "emotional_expression": "Uses metaphor and literary allusion to express feelings"
+  },
+  "specific_adjustments": [
+    "Expand simple statements into more nuanced expressions",
+    "Add subtle literary references or metaphors",
+    "Include occasional Spanish during emotional moments",
+    "Ensure vocabulary reflects education level and precision"
+  ]
+}
+```
+
+#### The Street-Smart Detective
+```json
+"detective_burke": {
+  "character_name": "Detective Mike Burke",
+  "voice_requirements": {
+    "background_integration": "20 years NYPD, working-class Brooklyn, high school education",
+    "speech_patterns": "Short, direct sentences. Rapid-fire when excited.",
+    "vocabulary_preferences": "Police procedural terms, street slang, avoids academic language",
+    "signature_phrases": ["What've we got", "Copy that", "Let's roll", "You kidding me"],
+    "disfluencies": "Rarely hesitates except when dealing with personal topics",
+    "formality_level": "Professional with superiors, casual with partners, blunt with suspects",
+    "emotional_expression": "Shows emotion through action rather than words"
+  },
+  "specific_adjustments": [
+    "Replace academic language with street-smart expressions",
+    "Add police procedural terminology naturally",
+    "Keep responses short and action-oriented",
+    "Include Brooklyn dialect markers without phonetic spelling"
+  ]
+}
+```
+
+#### The Teenager Character
+```json
+"maya_teenager": {
+  "character_name": "Maya",
+  "voice_requirements": {
+    "background_integration": "16 years old, Gen Z, social media native, suburban middle class",
+    "speech_patterns": "Run-on sentences when excited, fragments when texting-influenced",
+    "vocabulary_preferences": "Current slang, social media terms, avoids formal language",
+    "signature_phrases": ["literally", "like", "no cap", "that's so random", "I can't even"],
+    "disfluencies": "Like as filler word, trails off when distracted by phone",
+    "formality_level": "Casual with everyone, slightly more respectful with teachers",
+    "emotional_expression": "Dramatic emotional expression, everything is 'literally the worst/best'"
+  },
+  "specific_adjustments": [
+    "Add current Gen Z slang and expressions",
+    "Include social media influenced speech patterns",
+    "Replace formal language with casual alternatives",
+    "Add appropriate generational markers without overdoing it"
+  ]
+}
+```
+
+### Advanced Customization Techniques
+
+#### Multiple Characters in One Pass
+
+You can target multiple characters simultaneously:
+
+```json
+"character_specifications": {
+  "main_protagonist": { ... },
+  "love_interest": { ... },
+  "antagonist": { ... }
+}
+```
+
+#### Character Arc Considerations
+
+For characters who change throughout the story:
+
+```json
+"character_development_notes": {
+  "early_story_voice": "Formal, hesitant, academic language",
+  "mid_story_transition": "Mixing formal with street language",
+  "late_story_voice": "Confident, direct, more casual expressions"
+}
+```
+
+#### Relationship-Specific Speech
+
+Characters may speak differently depending on who they're addressing:
+
+```json
+"contextual_speech_patterns": {
+  "with_authority_figures": "Formal, deferential, uses titles",
+  "with_peers": "Casual, uses slang, more interrupting",
+  "with_subordinates": "Direct, commanding, less hedging"
+}
+```
+
+### Quality Control Checklist
+
+After customizing and running Phase 6.5:
+
+- [ ] Each targeted character has a distinct voice
+- [ ] Speech patterns match established background
+- [ ] Vocabulary choices feel authentic
+- [ ] Signature phrases appear naturally
+- [ ] Emotional expression style is consistent
+- [ ] Formality levels match situational context
+- [ ] Character remains recognizable without dialogue tags
+- [ ] Voice changes don't contradict established personality
+
+### Common Customization Mistakes
+
+**❌ Over-Specification:**
+- Too many requirements that conflict with each other
+- Overly complex speech patterns that become unreadable
+- Too many signature phrases (limit to 3-5)
+
+**❌ Under-Specification:**
+- Vague background descriptions
+- Generic personality traits
+- No specific adjustments listed
+
+**❌ Inconsistent Requirements:**
+- Formal education but casual speech without explanation
+- Shy personality but bold speech patterns
+- Regional background that doesn't match vocabulary
+
+**✅ Best Practices:**
+- Focus on 2-3 key voice elements that define the character
+- Provide specific, actionable adjustments
+- Consider how character relationships affect speech
+- Test with sample dialogue before full processing
+
+### Integration with Main Pipeline
+
+Phase 6.5 should be used:
+
+1. **After Phase 6** completes general dialogue enhancement
+2. **Before Phase 7** continues with weak language cleanup
+3. **Only when needed** - not every text requires character-specific refinement
+4. **With specific goals** - know which characters need targeted work
+
+Remember: Phase 6.5 is designed for precision targeting. Use it when general dialogue enhancement isn't sufficient for your specific character voice requirements.
+
+---
+
+**Appendix Last Updated:** 2025-09-27 - Comprehensive LLM optimization analysis, pipeline automation integration, and Phase 6.5 customization guide
