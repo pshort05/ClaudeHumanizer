@@ -22,7 +22,7 @@ The system now prevents conflicts through **domain specialization**:
 ### File Naming Convention
 
 All assembly line prompts are numbered (1-9) to clearly indicate processing order:
-- `1_strunk_white_editor.json` through `9_claude_humanizer.json`
+- `1_grammar_foundation.json` through `9_final_verification.json`
 - Numbers ensure correct sequential execution
 - Prevents confusion about processing order
 
@@ -31,14 +31,14 @@ All assembly line prompts are numbered (1-9) to clearly indicate processing orde
 Process text through these phases in **exact sequence** for optimal results:
 
 ### Phase 1: Grammar Foundation
-**File:** `1_strunk_white_editor.json`
+**File:** `1_grammar_foundation.json`
 **Domain:** Critical grammar errors ONLY
 **Fixes:** Subject-verb disagreement, pronoun case, dangling modifiers, comma splices, possessive apostrophe errors
 **Never touches:** Style choices, voice, dialogue, creative decisions
 **Assembly line role:** Establishes clean grammatical foundation for all subsequent improvements
 
 ### Phase 2: AI Word Cleaning
-**File:** `2_ai_text_cleaner.json`
+**File:** `2_ai_word_cleaning.json`
 **Dependency:** Requires `master_prohibited_words.json`
 **Domain:** AI-associated word removal ONLY
 **Fixes:** References master prohibited words list, replaces AI buzzwords with natural alternatives
@@ -46,21 +46,21 @@ Process text through these phases in **exact sequence** for optimal results:
 **Assembly line role:** Eliminates AI vocabulary while preserving grammar fixes from Phase 1
 
 ### Phase 3: Overwritten Language Reduction
-**File:** `3_purple_prose_removal.json`
+**File:** `3_overwritten_language_reduction.json`
 **Domain:** Purple prose elimination ONLY
 **Fixes:** Excessive adjectives, melodramatic tone, pretentious vocabulary, overly complex sentences
 **Never touches:** Functional descriptions, dialogue, genre-appropriate ornate language
 **Assembly line role:** Removes excess without adding new content (enhancement happens in Phase 4)
 
 ### Phase 4: Sensory Enhancement
-**File:** `4_fix_boring_prose.json`
+**File:** `4_sensory_enhancement.json`
 **Domain:** Flat passage improvement ONLY
 **Fixes:** Adds sensory details to passages lacking engagement, replaces vague words with specific alternatives
 **Never touches:** Already vivid prose, dialogue, working descriptions
 **Assembly line role:** Enhances ONLY passages identified as flat/boring, skips everything else
 
 ### Phase 5: Subtlety Creation
-**File:** `5_on_the_nose_editor.json`
+**File:** `5_subtlety_creation.json`
 **Dependency:** Requires `master_prohibited_words.json`
 **Domain:** Obvious statement conversion ONLY
 **Fixes:** Transforms direct emotion statements, explicit themes, tell-don't-show passages into subtle alternatives
@@ -68,7 +68,7 @@ Process text through these phases in **exact sequence** for optimal results:
 **Assembly line role:** Adds sophistication to obvious elements without changing working prose
 
 ### Phase 6: Dialogue Enhancement
-**File:** `6_dialogue_enhancer.json`
+**File:** `6_dialogue_enhancement.json`
 **Dependency:** Requires `master_prohibited_words.json`
 **Domain:** Content within quotation marks ONLY
 **Fixes:** Character voice, speech authenticity, dialogue subtext, conversational flow
@@ -76,7 +76,7 @@ Process text through these phases in **exact sequence** for optimal results:
 **Assembly line role:** ONLY prompt allowed to modify dialogue - all others preserve it completely
 
 ### Phase 7: Weak Language Cleanup
-**File:** `7_text_quality_prompt.json`
+**File:** `7_weak_language_cleanup.json`
 **Dependency:** Requires `master_prohibited_words.json`
 **Domain:** Generic weak language patterns ONLY
 **Fixes:** Hedge words, filler phrases, weasel words, redundant phrases, academic throat-clearing
@@ -84,7 +84,7 @@ Process text through these phases in **exact sequence** for optimal results:
 **Assembly line role:** Removes weak language without adding creative content
 
 ### Phase 8: Strategic Imperfections
-**File:** `8_human_writing_editor.json`
+**File:** `8_strategic_imperfections.json`
 **Dependency:** Requires `master_prohibited_words.json`
 **Domain:** Rhythm and flow variation ONLY
 **Fixes:** Adds authentic awkwardness, varies sentence rhythm, creates natural imperfections
@@ -92,7 +92,7 @@ Process text through these phases in **exact sequence** for optimal results:
 **Assembly line role:** Final humanization through flow and pacing adjustments
 
 ### Phase 9: Final Verification
-**File:** `9_claude_humanizer.json`
+**File:** `9_final_verification.json`
 **Dependency:** Requires `master_prohibited_words.json`
 **Domain:** AI pattern detection and minor adjustments ONLY
 **Fixes:** Catches any remaining AI patterns missed by previous 8 phases, final consistency check
@@ -151,9 +151,9 @@ Process this text:
 [paste your text or previous phase output]
 ```
 
-1. **Phase 1**: Copy `1_strunk_white_editor.json` → Submit text (no master list needed)
-2. **Phase 2**: Include `master_prohibited_words.json` + `2_ai_text_cleaner.json` → Submit **Phase 1 output**
-3. **Phase 3**: Copy `3_purple_prose_removal.json` → Submit **Phase 2 output** (no master list needed)
+1. **Phase 1**: Copy `1_grammar_foundation.json` → Submit text (no master list needed)
+2. **Phase 2**: Include `master_prohibited_words.json` + `2_ai_word_cleaning.json` → Submit **Phase 1 output**
+3. **Phase 3**: Copy `3_overwritten_language_reduction.json` → Submit **Phase 2 output** (no master list needed)
 4. Continue sequentially through all 9 phases, including master list for phases 5, 6, 7, 8, 9...
 
 #### **Method 2: Batch Processing Script** (Recommended)
@@ -169,15 +169,15 @@ mkdir -p "$TEMP_DIR"
 
 # Array of prompts in correct order
 PROMPTS=(
-    "1_strunk_white_editor.json"
-    "2_ai_text_cleaner.json"
-    "3_purple_prose_removal.json"
-    "4_fix_boring_prose.json"
-    "5_on_the_nose_editor.json"
-    "6_dialogue_enhancer.json"
-    "7_text_quality_prompt.json"
-    "8_human_writing_editor.json"
-    "9_claude_humanizer.json"
+    "1_grammar_foundation.json"
+    "2_ai_word_cleaning.json"
+    "3_overwritten_language_reduction.json"
+    "4_sensory_enhancement.json"
+    "5_subtlety_creation.json"
+    "6_dialogue_enhancement.json"
+    "7_weak_language_cleanup.json"
+    "8_strategic_imperfections.json"
+    "9_final_verification.json"
 )
 
 # Phases that require master prohibited words list
@@ -220,15 +220,15 @@ Set up a Claude Project with custom instructions:
 ```markdown
 You are an assembly line text processor. When I provide text:
 
-1. Process it through Phase 1 (Strunk & White Editor) - no master list needed
-2. Take that output through Phase 2 (AI Text Cleaner) - include master_prohibited_words.json
-3. Take that output through Phase 3 (Purple Prose Removal) - no master list needed
-4. Take that output through Phase 4 (Fix Boring Prose) - no master list needed
-5. Take that output through Phase 5 (On-the-Nose Editor) - include master_prohibited_words.json
-6. Take that output through Phase 6 (Dialogue Enhancer) - include master_prohibited_words.json
-7. Take that output through Phase 7 (Text Quality) - include master_prohibited_words.json
-8. Take that output through Phase 8 (Human Writing Editor) - include master_prohibited_words.json
-9. Take that output through Phase 9 (Claude Humanizer) - include master_prohibited_words.json
+1. Process it through Phase 1 (Grammar Foundation) - no master list needed
+2. Take that output through Phase 2 (AI Word Cleaning) - include master_prohibited_words.json
+3. Take that output through Phase 3 (Overwritten Language Reduction) - no master list needed
+4. Take that output through Phase 4 (Sensory Enhancement) - no master list needed
+5. Take that output through Phase 5 (Subtlety Creation) - include master_prohibited_words.json
+6. Take that output through Phase 6 (Dialogue Enhancement) - include master_prohibited_words.json
+7. Take that output through Phase 7 (Weak Language Cleanup) - include master_prohibited_words.json
+8. Take that output through Phase 8 (Strategic Imperfections) - include master_prohibited_words.json
+9. Take that output through Phase 9 (Final Verification) - include master_prohibited_words.json
 10. Return only the final Phase 9 output
 
 Phases 2, 5, 6, 7, 8, and 9 require the master_prohibited_words.json file to be included.

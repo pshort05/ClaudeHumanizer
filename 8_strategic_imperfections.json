@@ -1,9 +1,9 @@
 {
-  "title": "Enhanced Human-Style Writing Editor",
+  "title": "Strategic Imperfections",
   "assembly_line_position": "Phase 8: Human Writing Editor - Strategic imperfections and rhythm variation ONLY",
   "description": "Comprehensive editing system that transforms AI-generated or problematic prose into natural, human-like writing that passes detection while maintaining fiction quality standards. Combines writing creation and editing capabilities with advanced AI detection avoidance.",
-  "version": "3.0.0",
-  "date": "2025-09-25",
+  "version": "3.1.0",
+  "date": "2025-09-27",
 
   "domain_restrictions": {
     "only_handle": [

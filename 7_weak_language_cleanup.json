@@ -1,7 +1,7 @@
 {
-  "title": "Text Quality Enhancement Editor",
-  "version": "2.0.0",
-  "date": "2025-09-25",
+  "title": "Weak Language Cleanup",
+  "version": "2.1.0",
+  "date": "2025-09-27",
   "assembly_line_position": "Phase 7: Text Quality Enhancement - Generic weak language patterns ONLY",
   "description": "Precision text editor that eliminates low-quality language while preserving meaning and style",
   

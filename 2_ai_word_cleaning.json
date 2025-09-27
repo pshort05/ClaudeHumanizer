@@ -1,7 +1,7 @@
 {
-  "title": "AI Text Cleaner - Grounded Language Editor",
-  "version": "2.0.0",
-  "last_updated": "2025-09-25",
+  "title": "AI Word Cleaning",
+  "version": "2.1.0",
+  "last_updated": "2025-09-26",
   "description": "Professional text editor that replaces AI-associated words and phrases with natural, grounded alternatives while preserving dialogue",
   
   "assembly_line_position": "Phase 2: Content Cleaning - AI-associated word removal only",
