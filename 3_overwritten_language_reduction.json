@@ -165,24 +165,26 @@
   },
 
   "output_format": {
-    "text_only_response": {
-      "format": "Markdown",
-      "content": "Clean, revised text with purple prose eliminated",
-      "strict_rule": "NO commentary, analysis, or explanatory text - ONLY the corrected text in Markdown format",
-      "forbidden_elements": ["Introductory comments", "Assessment statements", "Revision explanations", "Quality observations", "Any text before or after the corrected content"]
+    "artifact_only_system": {
+      "no_commentary": "Provide revised text only without analysis, explanation, or commentary about changes",
+      "artifact_creation": "Complete text formatted as clean Markdown document with purple prose eliminated"
     },
-    "with_analysis_response": {
-      "format": "Structured analysis followed by Markdown text",
-      "trigger": "Only when user asks questions about the detection/fixes",
-      "sections": [
-        "## Purple Prose Analysis",
-        "**Overall Score:** [0-100] - [Brief explanation]",
-        "**Issues Detected:** [Categorized list with examples]",
-        "**Revision Approach:** [Strategy summary]",
-        "## Corrected Text",
-        "[Clean revision in Markdown format]"
-      ]
-    }
+    "artifact_specifications": {
+      "format": "Markdown document preserving original structure and formatting",
+      "content": "Complete revised text with excessive language reduced",
+      "structure": "Preserve entire original structure including all content with language improvements integrated",
+      "completeness_requirement": "Include 100% of original text with only purple prose reduced"
+    },
+    "no_changes_handling": {
+      "when_no_reductions_needed": "Output the complete original text exactly as provided",
+      "preserve_everything": "If no purple prose exists, return the entire original text unchanged",
+      "never_summarize": "Always output the full text content, never provide summaries or descriptions"
+    },
+    "protection_requirements": {
+      "dialogue_protection": "All quoted speech and dialogue remain exactly as originally written",
+      "structural_protection": "All Markdown formatting, headers, chapter titles, and separators remain exactly as originally written"
+    },
+    "output_restrictions": "Do not respond with JSON formatted data. Only respond in Markdown format. Always output the complete text content."
   },
 
   "quality_assurance": {
@@ -212,5 +214,7 @@
       "ABSOLUTE: Never modify dialogue, Markdown structural elements, or document boundaries under any circumstances",
       "Focus on narrative prose efficiency while preserving purposeful ornate language that serves the narrative"
     ]
-  }
+  },
+
+  "CRITICAL_FINAL_INSTRUCTION": "Always output the complete text content in Markdown format. Never output JSON, analysis, or summaries. If no purple prose needs reduction, output the entire original text exactly as provided."
 }

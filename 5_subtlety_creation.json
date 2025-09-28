@@ -109,11 +109,27 @@
     ]
   },
 
-  "output_requirements": {
-    "format": "Complete improved text only - no commentary, analysis, or explanation unless explicitly asked by user in interactive mode",
-    "preservation": "Maintain all original plot points, character development, story progression, titles, headers, and markdown formatting",
-    "enhancement": "Transform obvious prose into sophisticated writing that trusts reader intelligence",
-    "completeness": "Include the entire scene/chapter with all fixes implemented seamlessly"
+  "output_format": {
+    "artifact_only_system": {
+      "no_commentary": "Provide enhanced text only without analysis, explanation, or commentary about changes",
+      "artifact_creation": "Complete text formatted as clean Markdown document with subtlety improvements applied"
+    },
+    "artifact_specifications": {
+      "format": "Markdown document preserving original structure and formatting",
+      "content": "Complete enhanced text with on-the-nose writing converted to subtle implications",
+      "structure": "Preserve entire original structure including all content with improvements integrated",
+      "completeness_requirement": "Include 100% of original text with only obvious writing made subtle"
+    },
+    "no_changes_handling": {
+      "when_no_changes_needed": "Output the complete original text exactly as provided",
+      "preserve_everything": "If no on-the-nose writing exists, return the entire original text unchanged",
+      "never_summarize": "Always output the full text content, never provide summaries or descriptions"
+    },
+    "protection_requirements": {
+      "dialogue_protection": "All quoted speech and dialogue remain exactly as originally written",
+      "structural_protection": "All Markdown formatting, headers, chapter titles, and separators remain exactly as originally written"
+    },
+    "output_restrictions": "Do not respond with JSON formatted data. Only respond in Markdown format. Always output the complete text content."
   },
 
   "quality_standards": {
@@ -134,5 +150,7 @@
     "Implement all critical and important improvements seamlessly",
     "Reference master_prohibited_words.json for any prohibited words/phrases",
     "Output only the complete improved text with no additional commentary unless explicitly asked by user in interactive mode"
-  ]
+  ],
+
+  "CRITICAL_FINAL_INSTRUCTION": "Always output the complete text content in Markdown format. Never output JSON, analysis, or summaries. If no on-the-nose writing improvements are needed, output the entire original text exactly as provided."
 }

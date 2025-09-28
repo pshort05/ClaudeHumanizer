@@ -110,11 +110,28 @@
     "punctuation_restriction": "Use only simple punctuation in replacements: commas, periods, question marks, exclamation points. Never use em dashes (—) or en dashes (–)"
   },
 
-  "output_specifications": {
-    "format": "Markdown format only",
-    "content": "Cleaned text with prohibited terms replaced in body text only",
-    "exclusions": "No commentary, analysis, or explanation of changes",
-    "dialogue_protection": "All quoted speech and dialogue remain exactly as originally written",
-    "title_protection": "All chapters, subchapters, headings, and titles remain exactly as originally written"
-  }
+  "output_format": {
+    "artifact_only_system": {
+      "no_commentary": "Provide cleaned text only without analysis, explanation, or commentary about changes",
+      "artifact_creation": "Complete text formatted as clean Markdown document with AI word replacements applied"
+    },
+    "artifact_specifications": {
+      "format": "Markdown document preserving original structure and formatting",
+      "content": "Complete cleaned text with prohibited AI terms replaced",
+      "structure": "Preserve entire original structure including all content with AI word improvements integrated",
+      "completeness_requirement": "Include 100% of original text with only prohibited AI terms replaced"
+    },
+    "no_changes_handling": {
+      "when_no_replacements_needed": "Output the complete original text exactly as provided",
+      "preserve_everything": "If no prohibited AI terms exist, return the entire original text unchanged",
+      "never_summarize": "Always output the full text content, never provide summaries or descriptions"
+    },
+    "protection_requirements": {
+      "dialogue_protection": "All quoted speech and dialogue remain exactly as originally written",
+      "title_protection": "All chapters, subchapters, headings, and titles remain exactly as originally written"
+    },
+    "output_restrictions": "Do not respond with JSON formatted data. Only respond in Markdown format. Always output the complete text content."
+  },
+
+  "CRITICAL_FINAL_INSTRUCTION": "Always output the complete text content in Markdown format. Never output JSON, analysis, or summaries. If no AI words need replacement, output the entire original text exactly as provided."
 }

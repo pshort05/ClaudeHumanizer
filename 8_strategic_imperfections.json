@@ -289,5 +289,28 @@
     "style_sophistication": "Maintain literary quality while removing artificial elements"
   },
   
-  "output_format": "If no text is provided, request scene or chapter submission. If text is provided, output ONLY the edited text in clean Markdown format with no additional content."
+  "output_format": {
+    "artifact_only_system": {
+      "no_commentary": "Provide enhanced text only without analysis, explanation, or commentary about changes",
+      "artifact_creation": "Complete text formatted as clean Markdown document with strategic imperfections and rhythm variations applied"
+    },
+    "artifact_specifications": {
+      "format": "Markdown document preserving original structure and formatting",
+      "content": "Complete enhanced text with strategic imperfections and rhythm improvements applied",
+      "structure": "Preserve entire original structure including all content with improvements integrated",
+      "completeness_requirement": "Include 100% of original text with only flow and pacing enhanced"
+    },
+    "no_changes_handling": {
+      "when_no_changes_needed": "Output the complete original text exactly as provided",
+      "preserve_everything": "If no strategic imperfections are needed, return the entire original text unchanged",
+      "never_summarize": "Always output the full text content, never provide summaries or descriptions"
+    },
+    "protection_requirements": {
+      "dialogue_protection": "All quoted speech and dialogue remain exactly as originally written",
+      "structural_protection": "All Markdown formatting, headers, chapter titles, and separators remain exactly as originally written"
+    },
+    "output_restrictions": "Do not respond with JSON formatted data. Only respond in Markdown format. Always output the complete text content."
+  },
+
+  "CRITICAL_FINAL_INSTRUCTION": "Always output the complete text content in Markdown format. Never output JSON, analysis, or summaries. If no strategic imperfections or rhythm improvements are needed, output the entire original text exactly as provided."
 }

@@ -162,13 +162,27 @@
   },
 
   "output_format": {
-    "format": "Clean markdown with improved text only",
-    "restrictions": [
-      "No explanatory text or commentary",
-      "No meta-discussion of changes made", 
-      "No analysis or justification included",
-      "No tracking of modifications"
-    ],
-    "structure": "Preserve original formatting, paragraph breaks, and section divisions"
-  }
+    "artifact_only_system": {
+      "no_commentary": "Provide enhanced text only without analysis, explanation, or commentary about changes",
+      "artifact_creation": "Complete text formatted as clean Markdown document with weak language patterns cleaned up"
+    },
+    "artifact_specifications": {
+      "format": "Markdown document preserving original structure and formatting",
+      "content": "Complete enhanced text with weak language patterns improved",
+      "structure": "Preserve entire original structure including all content with improvements integrated",
+      "completeness_requirement": "Include 100% of original text with only weak language patterns enhanced"
+    },
+    "no_changes_handling": {
+      "when_no_changes_needed": "Output the complete original text exactly as provided",
+      "preserve_everything": "If no weak language patterns exist, return the entire original text unchanged",
+      "never_summarize": "Always output the full text content, never provide summaries or descriptions"
+    },
+    "protection_requirements": {
+      "dialogue_protection": "All quoted speech and dialogue remain exactly as originally written",
+      "structural_protection": "All Markdown formatting, headers, chapter titles, and separators remain exactly as originally written"
+    },
+    "output_restrictions": "Do not respond with JSON formatted data. Only respond in Markdown format. Always output the complete text content."
+  },
+
+  "CRITICAL_FINAL_INSTRUCTION": "Always output the complete text content in Markdown format. Never output JSON, analysis, or summaries. If no weak language cleanup is needed, output the entire original text exactly as provided."
 }

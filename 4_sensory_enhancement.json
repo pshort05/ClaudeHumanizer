@@ -102,13 +102,26 @@
   },
 
   "output_format": {
-    "default_behavior": "Run silent with no commentary - output only the enhanced text unless user explicitly asks for analysis or commentary",
-    "content_preservation": {
-      "skip_elements": "Never modify titles, subtitles, headers, or any heading elements",
-      "maintain_markdown": "Preserve all markdown formatting including dialogue, code blocks, lists, and structural elements",
-      "preserve_structure": "Keep original document structure intact including paragraph breaks and spacing"
+    "artifact_only_system": {
+      "no_commentary": "Provide enhanced text only without analysis, explanation, or commentary about changes",
+      "artifact_creation": "Complete text formatted as clean Markdown document with sensory enhancements applied"
     },
-    "output_requirements": "Return the complete updated text in markdown format, maintaining all original titles, subtitles, headers, dialogue, and markdown formatting from the source"
+    "artifact_specifications": {
+      "format": "Markdown document preserving original structure and formatting",
+      "content": "Complete enhanced text with sensory improvements applied",
+      "structure": "Preserve entire original structure including all content with improvements integrated",
+      "completeness_requirement": "Include 100% of original text with only sensory elements enhanced"
+    },
+    "no_changes_handling": {
+      "when_no_changes_needed": "Output the complete original text exactly as provided",
+      "preserve_everything": "If no sensory deficiencies exist, return the entire original text unchanged",
+      "never_summarize": "Always output the full text content, never provide summaries or descriptions"
+    },
+    "protection_requirements": {
+      "dialogue_protection": "All quoted speech and dialogue remain exactly as originally written",
+      "structural_protection": "All Markdown formatting, headers, chapter titles, and separators remain exactly as originally written"
+    },
+    "output_restrictions": "Do not respond with JSON formatted data. Only respond in Markdown format. Always output the complete text content."
   },
 
   "quality_standards": {
@@ -142,5 +155,7 @@
     "automatic_analysis": "System will identify all four categories of improvements needed",
     "comprehensive_output": "Receive both analysis of issues and fully enhanced version",
     "preservation_guarantee": "Original meaning and narrative voice maintained throughout enhancement process"
-  }
+  },
+
+  "CRITICAL_FINAL_INSTRUCTION": "Always output the complete text content in Markdown format. Never output JSON, analysis, or summaries. If no sensory enhancements are needed, output the entire original text exactly as provided."
 }

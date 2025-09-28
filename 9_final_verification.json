@@ -275,11 +275,36 @@
     ]
   },
   
+  "output_format": {
+    "artifact_only_system": {
+      "no_commentary": "Provide enhanced text only without analysis, explanation, or commentary about changes",
+      "artifact_creation": "Complete text formatted as clean Markdown document with final AI pattern detection and minor adjustments applied"
+    },
+    "artifact_specifications": {
+      "format": "Markdown document preserving original structure and formatting",
+      "content": "Complete enhanced text with final verification improvements applied",
+      "structure": "Preserve entire original structure including all content with improvements integrated",
+      "completeness_requirement": "Include 100% of original text with only final AI patterns addressed"
+    },
+    "no_changes_handling": {
+      "when_no_changes_needed": "Output the complete original text exactly as provided",
+      "preserve_everything": "If no final AI patterns exist, return the entire original text unchanged",
+      "never_summarize": "Always output the full text content, never provide summaries or descriptions"
+    },
+    "protection_requirements": {
+      "dialogue_protection": "All quoted speech and dialogue remain exactly as originally written",
+      "structural_protection": "All Markdown formatting, headers, chapter titles, and separators remain exactly as originally written"
+    },
+    "output_restrictions": "Do not respond with JSON formatted data. Only respond in Markdown format. Always output the complete text content."
+  },
+
   "formatting": {
     "internal_thoughts": "italics",
-    "text_messages": "italics", 
+    "text_messages": "italics",
     "computer_output": "fixed-width or courier",
     "dialogue_preservation": "Never modify content between quotation marks",
     "markdown_preservation": "Never alter Markdown syntax elements"
-  }
+  },
+
+  "CRITICAL_FINAL_INSTRUCTION": "Always output the complete text content in Markdown format. Never output JSON, analysis, or summaries. If no final verification improvements are needed, output the entire original text exactly as provided."
 }

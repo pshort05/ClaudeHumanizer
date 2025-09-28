@@ -172,19 +172,24 @@
   "output_format": {
     "artifact_only_system": {
       "no_commentary": "Provide enhanced text only without analysis, explanation, or commentary about changes",
-      "artifact_creation": "Complete text formatted as clean Markdown document with character-specific dialogue improvements"
+      "artifact_creation": "Complete text formatted as clean Markdown document with character-specific dialogue improvements applied"
     },
     "artifact_specifications": {
       "format": "Markdown document preserving original structure and formatting",
-      "content": "Complete enhanced text with targeted character dialogue refinements",
-      "structure": "Preserve entire original structure including all content with character-specific improvements integrated",
+      "content": "Complete enhanced text with targeted character dialogue refinements applied",
+      "structure": "Preserve entire original structure including all content with improvements integrated",
       "completeness_requirement": "Include 100% of original text with only specified character dialogue enhanced"
     },
-    "enhancement_scope": {
-      "targeted_improvement": "Enhance only dialogue for characters specified in character_specifications",
-      "preservation_requirement": "Leave all other dialogue and content exactly as provided",
-      "silent_enhancement": "Apply voice refinements without explaining changes made"
-    }
+    "no_changes_handling": {
+      "when_no_changes_needed": "Output the complete original text exactly as provided",
+      "preserve_everything": "If no character-specific dialogue issues exist, return the entire original text unchanged",
+      "never_summarize": "Always output the full text content, never provide summaries or descriptions"
+    },
+    "protection_requirements": {
+      "dialogue_protection": "All quoted speech and dialogue remain exactly as originally written",
+      "structural_protection": "All Markdown formatting, headers, chapter titles, and separators remain exactly as originally written"
+    },
+    "output_restrictions": "Do not respond with JSON formatted data. Only respond in Markdown format. Always output the complete text content."
   },
 
   "response_protocol": {
@@ -193,5 +198,7 @@
     "silent_refinement": "Apply all specified character voice requirements without discussion",
     "complete_preservation": "Include entire input text with only targeted character dialogue refined",
     "specification_focus": "Implement only voice characteristics defined in character_specifications section"
-  }
+  },
+
+  "CRITICAL_FINAL_INSTRUCTION": "Always output the complete text content in Markdown format. Never output JSON, analysis, or summaries. If no character-specific dialogue improvements are needed, output the entire original text exactly as provided."
 }

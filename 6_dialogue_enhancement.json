@@ -346,5 +346,7 @@
     "formatting_preservation": "Maintain all original Markdown formatting elements (italics, bold, headers, etc.) exactly as provided in the input - never remove or modify Markdown syntax",
     "complete_text_preservation": "CRITICAL: Include the ENTIRE input text from beginning to end - never drop chapter titles, subtitles, epigraphs, quotes, POV indicators, narrative sections, scene descriptions, or any non-dialogue content",
     "enhancement_scope": "Enhance ONLY character dialogue within the complete text structure - preserve chapter titles, subtitles, epigraphs, quotes, POV indicators, and all structural elements exactly as provided"
-  }
+  },
+
+  "CRITICAL_FINAL_INSTRUCTION": "Always output the complete text content in Markdown format. Never output JSON, analysis, or summaries. If no dialogue improvements are needed, output the entire original text exactly as provided."
 }
