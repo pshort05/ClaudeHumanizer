@@ -12,11 +12,11 @@ Advanced customization options for tailoring the ClaudeHumanizer assembly line t
 
 ## Character-Specific Dialogue Customization
 
-Phase 6.5 provides targeted character voice refinement beyond general dialogue enhancement. This section explains how to customize the sample prompt for your specific characters and projects.
+Phase 6.1 provides targeted character voice refinement beyond general dialogue enhancement. This section explains how to customize the sample prompt for your specific characters and projects.
 
 ### Understanding Character Specifications
 
-The `6.5_character_dialogue_pass.json` file contains a `character_specifications` section that you can customize for your project's characters.
+The `6.1_character_dialogue_pass.json` file contains a `character_specifications` section that you can customize for your project's characters.
 
 #### Basic Character Template Structure
 
@@ -45,7 +45,7 @@ The `6.5_character_dialogue_pass.json` file contains a `character_specifications
 
 #### Step 1: Identify Characters Needing Voice Refinement
 
-Use Phase 6.5 for characters requiring:
+Use Phase 6.1 for characters requiring:
 - **Unclear distinction** after general Phase 6 enhancement
 - **Specific cultural/professional speech patterns**
 - **Series continuity matching** for established character voices
@@ -250,7 +250,7 @@ Characters may speak differently depending on who they're addressing:
 
 ### Quality Control for Character Dialogue
 
-After running Phase 6.5, verify:
+After running Phase 6.1, verify:
 
 - [ ] Each targeted character has a distinct voice
 - [ ] Speech patterns match established background
@@ -537,7 +537,7 @@ Process different content types with different phase combinations:
 def get_phase_configuration(content_type, text_analysis):
     if content_type == "dialogue_heavy":
         return {
-            "phases": [1, 2, 6, 6.5, 7, 9],
+            "phases": [1, 2, 6, 6.1, 7, 9],
             "character_focus": True
         }
     elif content_type == "technical_description":

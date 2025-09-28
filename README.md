@@ -60,7 +60,7 @@ Set up n8n, Make.com, or API workflows (see [Technical Reference](docs/TECHNICAL
 
 ### Optional Enhancement
 
-**Phase 6.5**: `6.5_character_dialogue_pass.json` - Character-specific dialogue customization for targeted voice refinement (see [Customization Guide](docs/CUSTOMIZATION.md))
+**Phase 6.1**: `6.1_character_dialogue_pass.json` - Character-specific dialogue customization for targeted voice refinement (see [Customization Guide](docs/CUSTOMIZATION.md))
 
 ## Key Features
 
@@ -91,7 +91,7 @@ ClaudeHumanizer/
 ├── 4_sensory_enhancement.json
 ├── 5_subtlety_creation.json
 ├── 6_dialogue_enhancement.json
-├── 6.5_character_dialogue_pass.json   # Optional
+├── 6.1_character_dialogue_pass.json   # Optional
 ├── 7_weak_language_cleanup.json
 ├── 8_strategic_imperfections.json
 ├── 9_final_verification.json
@@ -129,7 +129,7 @@ Advanced customization options including character-specific dialogue enhancement
     ↓
 💬 Phase 6: Dialogue Enhancement → Authentic voices
     ↓
-🎭 Phase 6.5: Character-Specific (Optional) → Targeted refinement
+🎭 Phase 6.1: Character-Specific (Optional) → Targeted refinement
     ↓
 🔍 Phase 7: Weak Language Cleanup → Stronger expressions
     ↓

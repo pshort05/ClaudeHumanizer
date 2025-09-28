@@ -18,7 +18,7 @@ ClaudeHumanizer/
 ├── 4_sensory_enhancement.json         # Phase 4: Flat passage improvement
 ├── 5_subtlety_creation.json          # Phase 5: Obvious statement conversion
 ├── 6_dialogue_enhancement.json       # Phase 6: Character voice refinement
-├── 6.5_character_dialogue_pass.json  # Optional: Character-specific targeting
+├── 6.1_character_dialogue_pass.json  # Optional: Character-specific targeting
 ├── 7_weak_language_cleanup.json      # Phase 7: Weak language patterns
 ├── 8_strategic_imperfections.json    # Phase 8: Natural rhythm variation
 ├── 9_final_verification.json         # Phase 9: AI pattern detection
@@ -43,7 +43,7 @@ When creating or modifying prompts:
 
 **File Naming Convention:**
 - Use numbered prefixes: `1_phase_name.json` through `9_phase_name.json`
-- Optional phases use decimal notation: `6.5_character_dialogue_pass.json`
+- Optional phases use decimal notation: `6.1_character_dialogue_pass.json`
 
 **JSON Structure Requirements:**
 ```json
@@ -97,7 +97,7 @@ echo "Test content" | process_phase 2 --with-master-list
 ### Advanced Development
 
 **Character Dialogue Customization:**
-- Modify `6.5_character_dialogue_pass.json` for project-specific characters
+- Modify `6.1_character_dialogue_pass.json` for project-specific characters
 - Follow template structure in `docs/CUSTOMIZATION.md`
 - Test character voice consistency after changes
 

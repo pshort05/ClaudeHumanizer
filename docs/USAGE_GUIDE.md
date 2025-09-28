@@ -198,8 +198,8 @@ See [Technical Reference](TECHNICAL_REFERENCE.md) for n8n, Make.com, and API int
 
 **Critical note**: ONLY phase allowed to modify quoted speech
 
-### Phase 6.5: Character-Specific Dialogue (Optional)
-**File**: `6.5_character_dialogue_pass.json`
+### Phase 6.1: Character-Specific Dialogue (Optional)
+**File**: `6.1_character_dialogue_pass.json`
 **When to use**: When specific characters need targeted voice refinement
 **Dependencies**: Character specifications, `master_prohibited_words.json`
 
@@ -263,7 +263,7 @@ See [Customization Guide](CUSTOMIZATION.md) for detailed setup instructions.
 | 4 | `4_sensory_enhancement.json` | ❌ No |
 | 5 | `5_subtlety_creation.json` | ✅ Yes |
 | 6 | `6_dialogue_enhancement.json` | ✅ Yes |
-| 6.5 | `6.5_character_dialogue_pass.json` | ✅ Yes |
+| 6.1 | `6.1_character_dialogue_pass.json` | ✅ Yes |
 | 7 | `7_weak_language_cleanup.json` | ✅ Yes |
 | 8 | `8_strategic_imperfections.json` | ✅ Yes |
 | 9 | `9_final_verification.json` | ✅ Yes |
@@ -296,7 +296,7 @@ Must be included with phases: 2, 5, 6, 7, 8, 9
 - ✅ Check: Later phases are preserving grammar fixes
 
 **Character voices become inconsistent**:
-- ✅ Consider using Phase 6.5 for character-specific refinement
+- ✅ Consider using Phase 6.1 for character-specific refinement
 - ✅ Check character specifications are properly defined
 
 ### Processing Flow Validation
