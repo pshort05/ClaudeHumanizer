@@ -1,1387 +1,168 @@
-# Claude Humanizer
+# ClaudeHumanizer
 
-A comprehensive collection of Claude prompts designed to transform AI-generated text into natural, human-like writing. These specialized editors work together as an **assembly line system** to eliminate AI detection markers while preserving meaning, voice, and quality.
+A professional AI text humanization system using a specialized 9-phase assembly line to transform AI-generated content into natural, human-like writing while preserving meaning and voice.
 
 ## Overview
 
-These prompts operate in **silent mode** by default - they process text and return only the improved version without commentary or analysis, unless explicitly asked for feedback. The system has been redesigned as a **true assembly line** where each prompt specializes in ONE specific domain and never interferes with others' work.
+ClaudeHumanizer employs a **domain-specialized assembly line** where each phase targets one specific aspect of text improvement. This systematic approach eliminates AI detection markers while maintaining quality through:
 
-## ✨ New Assembly Line Architecture
+- **Sequential processing** - Each phase builds on previous improvements
+- **Domain isolation** - No phase interferes with others' specialized work
+- **Master prohibited list** - Prevents reintroduction of AI-associated terms
+- **Silent operation** - Returns improved text without commentary
 
-The system now prevents conflicts through **domain specialization**:
-- Each prompt handles ONE specific aspect of prose improvement
-- Clear boundaries prevent prompts from undoing each other's work
-- **Master prohibited words list** prevents reintroduction of AI-associated terms
-- Sequential processing builds improvements without interference
+## Quick Start
 
-## Master Prohibited Words List
+### Basic Workflow
 
-**File:** `master_prohibited_words.json`
-**Purpose:** Consolidated list of all AI-associated terms and phrases that should be avoided across all prompts. This single source of truth prevents the reintroduction problem where later prompts would add back terms that earlier prompts removed.
+1. **Download required files**: 9 phase prompts + `master_prohibited_words.json`
+2. **Process sequentially**: Phase 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9
+3. **Include master list**: Required for phases 2, 5, 6, 7, 8, 9
+4. **Use previous output**: Each phase processes the result from the previous phase
 
-### File Naming Convention
+### Execution Methods
 
-All assembly line prompts are numbered (1-9) to clearly indicate processing order:
-- `1_grammar_foundation.json` through `9_final_verification.json`
-- Numbers ensure correct sequential execution
-- Prevents confusion about processing order
-
-## Assembly Line Processing Order
-
-Process text through these phases in **exact sequence** for optimal results:
-
-### Phase 1: Grammar Foundation
-**File:** `1_grammar_foundation.json`
-**Domain:** Critical grammar errors ONLY
-**Fixes:** Subject-verb disagreement, pronoun case, dangling modifiers, comma splices, possessive apostrophe errors
-**Never touches:** Style choices, voice, dialogue, creative decisions
-**Assembly line role:** Establishes clean grammatical foundation for all subsequent improvements
-
-### Phase 2: AI Word Cleaning
-**File:** `2_ai_word_cleaning.json`
-**Dependency:** Requires `master_prohibited_words.json`
-**Domain:** AI-associated word removal ONLY
-**Fixes:** References master prohibited words list, replaces AI buzzwords with natural alternatives
-**Never touches:** Sentence structure, dialogue, creative content, grammar (Phase 1 handles this)
-**Assembly line role:** Eliminates AI vocabulary while preserving grammar fixes from Phase 1
-
-### Phase 3: Overwritten Language Reduction
-**File:** `3_overwritten_language_reduction.json`
-**Domain:** Purple prose elimination ONLY
-**Fixes:** Excessive adjectives, melodramatic tone, pretentious vocabulary, overly complex sentences
-**Never touches:** Functional descriptions, dialogue, genre-appropriate ornate language
-**Assembly line role:** Removes excess without adding new content (enhancement happens in Phase 4)
-
-### Phase 4: Sensory Enhancement
-**File:** `4_sensory_enhancement.json`
-**Domain:** Flat passage improvement ONLY
-**Fixes:** Adds sensory details to passages lacking engagement, replaces vague words with specific alternatives
-**Never touches:** Already vivid prose, dialogue, working descriptions
-**Assembly line role:** Enhances ONLY passages identified as flat/boring, skips everything else
-
-### Phase 5: Subtlety Creation
-**File:** `5_subtlety_creation.json`
-**Dependency:** Requires `master_prohibited_words.json`
-**Domain:** Obvious statement conversion ONLY
-**Fixes:** Transforms direct emotion statements, explicit themes, tell-don't-show passages into subtle alternatives
-**Never touches:** Already subtle prose, essential plot information, dialogue
-**Assembly line role:** Adds sophistication to obvious elements without changing working prose
-
-### Phase 6: Dialogue Enhancement
-**File:** `6_dialogue_enhancement.json`
-**Dependency:** Requires `master_prohibited_words.json`
-**Domain:** Content within quotation marks ONLY
-**Fixes:** Character voice, speech authenticity, dialogue subtext, conversational flow
-**Never touches:** Narrative prose, scene descriptions, internal thoughts outside dialogue
-**Assembly line role:** ONLY prompt allowed to modify dialogue - all others preserve it completely
-
-#### Phase 6.5: Character-Specific Dialogue Pass (Optional)
-**File:** `6.5_character_dialogue_pass.json`
-**When to use:** When specific characters need targeted voice refinement beyond general dialogue enhancement
-**Domain:** Dialogue for specified target characters ONLY
-**Fixes:** Character-specific speech patterns, vocabulary, voice consistency, targeted style adjustments
-**Never touches:** Other characters' dialogue, narrative prose, work from previous phases
-**Assembly line role:** Optional refinement pass that targets individual character voices based on detailed specifications
-
-### Phase 7: Weak Language Cleanup
-**File:** `7_weak_language_cleanup.json`
-**Dependency:** Requires `master_prohibited_words.json`
-**Domain:** Generic weak language patterns ONLY
-**Fixes:** Hedge words, filler phrases, weasel words, redundant phrases, academic throat-clearing
-**Never touches:** Creative content, character voice, sensory details (Phase 4 handled these)
-**Assembly line role:** Removes weak language without adding creative content
-
-### Phase 8: Strategic Imperfections
-**File:** `8_strategic_imperfections.json`
-**Dependency:** Requires `master_prohibited_words.json`
-**Domain:** Rhythm and flow variation ONLY
-**Fixes:** Adds authentic awkwardness, varies sentence rhythm, creates natural imperfections
-**Never touches:** Content domains handled by previous phases
-**Assembly line role:** Final humanization through flow and pacing adjustments
-
-### Phase 9: Final Verification
-**File:** `9_final_verification.json`
-**Dependency:** Requires `master_prohibited_words.json`
-**Domain:** AI pattern detection and minor adjustments ONLY
-**Fixes:** Catches any remaining AI patterns missed by previous 8 phases, final consistency check
-**Never touches:** Major content changes (all handled by specialized phases)
-**Assembly line role:** Quality control and final polish without redoing previous work
-
-## Key Assembly Line Features
-
-### ✅ **Domain Separation**
-Each prompt only works within its assigned domain - no overlap or interference
-
-### ✅ **Conflict Prevention**
-Clear "never touch" rules prevent prompts from undoing each other's work
-
-### ✅ **Master Prohibited List**
-Single source of truth prevents reintroduction of AI-associated terms across all phases
-
-### ✅ **Sequential Dependencies**
-Later phases build upon and respect the work of earlier phases
-
-### ✅ **Dialogue Handling Resolution**
-Only Phase 6 (Dialogue Enhancer) modifies quoted speech - all others preserve it completely
-
-## How to Execute the Assembly Line System
-
-### **Sequential Execution Required**
-
-The prompts **must** be run in exact order - each phase builds on the previous work:
+#### Manual Processing
+Copy each phase prompt into Claude with appropriate dependencies:
 
 ```
-Phase 1 → Phase 2 → Phase 3 → Phase 4 → Phase 5 → Phase 6 → [Phase 6.5 (Optional)] → Phase 7 → Phase 8 → Phase 9
+For phases 2, 5, 6, 7, 8, 9:
+[master_prohibited_words.json content]
+[phase prompt]
+[input text]
+
+For phases 1, 3, 4:
+[phase prompt]
+[input text]
 ```
 
-### **Execution Methods**
+#### Claude Project Setup
+Configure custom instructions for automated sequential processing (see [Usage Guide](docs/USAGE_GUIDE.md))
 
-#### **Method 1: Individual Prompt Execution**
-Copy the JSON prompt content and paste it into Claude, then submit your text:
+#### Automation Integration
+Set up n8n, Make.com, or API workflows (see [Technical Reference](docs/TECHNICAL_REFERENCE.md))
 
-**For phases requiring the master list (2, 5, 6, 7, 8, 9):**
+## Assembly Line Phases
+
+### Core Processing Phases
+
+| Phase | File | Domain | Dependencies |
+|-------|------|--------|--------------|
+| 1 | `1_grammar_foundation.json` | Grammar errors only | None |
+| 2 | `2_ai_word_cleaning.json` | AI vocabulary removal | Master list |
+| 3 | `3_overwritten_language_reduction.json` | Purple prose elimination | None |
+| 4 | `4_sensory_enhancement.json` | Flat passage improvement | None |
+| 5 | `5_subtlety_creation.json` | Obvious statement conversion | Master list |
+| 6 | `6_dialogue_enhancement.json` | Character voice refinement | Master list |
+| 7 | `7_weak_language_cleanup.json` | Weak language patterns | Master list |
+| 8 | `8_strategic_imperfections.json` | Natural rhythm variation | Master list |
+| 9 | `9_final_verification.json` | AI pattern detection | Master list |
+
+### Optional Enhancement
+
+**Phase 6.5**: `6.5_character_dialogue_pass.json` - Character-specific dialogue customization for targeted voice refinement (see [Customization Guide](docs/CUSTOMIZATION.md))
+
+## Key Features
+
+### ✅ Domain Specialization
+- Each phase handles exactly one improvement type
+- Clear boundaries prevent interference between phases
+- Specialized expertise for consistent results
+
+### ✅ Quality Assurance
+- Master prohibited words list prevents AI term reintroduction
+- Sequential dependencies ensure cumulative improvements
+- Only Phase 6 modifies dialogue - all others preserve it
+
+### ✅ Flexibility
+- Optional character-specific dialogue enhancement
+- Configurable for different content types and genres
+- Compatible with automation workflows
+
+## File Structure
+
 ```
-First, here is the master prohibited words list:
-[paste contents of master_prohibited_words.json]
-
-Now execute this prompt:
-[paste phase-specific JSON prompt]
-
-Process this text:
-[paste your text or previous phase output]
-```
-
-**For phases NOT requiring the master list (1, 3, 4):**
-```
-[paste phase-specific JSON prompt]
-
-Process this text:
-[paste your text or previous phase output]
-```
-
-1. **Phase 1**: Copy `1_grammar_foundation.json` → Submit text (no master list needed)
-2. **Phase 2**: Include `master_prohibited_words.json` + `2_ai_word_cleaning.json` → Submit **Phase 1 output**
-3. **Phase 3**: Copy `3_overwritten_language_reduction.json` → Submit **Phase 2 output** (no master list needed)
-4. Continue sequentially through all 9 phases, including master list for phases 5, 6, 7, 8, 9...
-5. **Optional Phase 6.5**: If specific characters need targeted voice refinement, run after Phase 6 before continuing to Phase 7
-
-#### **Method 2: Batch Processing Script** (Recommended)
-Create a script that processes text through all phases automatically:
-
-```bash
-#!/bin/bash
-# Process text through ClaudeHumanizer assembly line
-
-INPUT_FILE="$1"
-TEMP_DIR="/tmp/claude_processing"
-mkdir -p "$TEMP_DIR"
-
-# Array of prompts in correct order
-PROMPTS=(
-    "1_grammar_foundation.json"
-    "2_ai_word_cleaning.json"
-    "3_overwritten_language_reduction.json"
-    "4_sensory_enhancement.json"
-    "5_subtlety_creation.json"
-    "6_dialogue_enhancement.json"
-    "7_weak_language_cleanup.json"
-    "8_strategic_imperfections.json"
-    "9_final_verification.json"
-)
-
-# Phases that require master prohibited words list
-MASTER_LIST_PHASES=(2 5 6 7 8 9)
-
-CURRENT_TEXT="$INPUT_FILE"
-
-for i in "${!PROMPTS[@]}"; do
-    PHASE=$((i + 1))
-    echo "Processing Phase $PHASE: ${PROMPTS[$i]}"
-
-    # Check if this phase needs master prohibited words list
-    NEEDS_MASTER_LIST=false
-    for master_phase in "${MASTER_LIST_PHASES[@]}"; do
-        if [[ $PHASE == $master_phase ]]; then
-            NEEDS_MASTER_LIST=true
-            break
-        fi
-    done
-
-    if [[ $NEEDS_MASTER_LIST == true ]]; then
-        echo "Including master_prohibited_words.json for Phase $PHASE"
-        # Send to Claude API with master list + current prompt + text
-        # (Implementation depends on your API setup)
-    else
-        echo "Phase $PHASE does not require master list"
-        # Send to Claude API with current prompt + text only
-        # (Implementation depends on your API setup)
-    fi
-
-    CURRENT_TEXT="$TEMP_DIR/phase_${PHASE}_output.txt"
-done
-
-echo "Assembly line processing complete!"
+ClaudeHumanizer/
+├── README.md                           # This overview
+├── master_prohibited_words.json        # AI terms to avoid
+├── 1_grammar_foundation.json          # Phase 1 prompt
+├── 2_ai_word_cleaning.json            # Phase 2 prompt
+├── 3_overwritten_language_reduction.json
+├── 4_sensory_enhancement.json
+├── 5_subtlety_creation.json
+├── 6_dialogue_enhancement.json
+├── 6.5_character_dialogue_pass.json   # Optional
+├── 7_weak_language_cleanup.json
+├── 8_strategic_imperfections.json
+├── 9_final_verification.json
+└── docs/
+    ├── USAGE_GUIDE.md                 # Step-by-step instructions
+    ├── TECHNICAL_REFERENCE.md         # LLM optimization & automation
+    └── CUSTOMIZATION.md               # Advanced configuration
 ```
 
-#### **Method 3: Claude Projects/Custom Instructions**
-Set up a Claude Project with custom instructions:
+## Documentation
 
-```markdown
-You are an assembly line text processor. When I provide text:
+### 📖 [Usage Guide](docs/USAGE_GUIDE.md)
+Complete step-by-step instructions for processing text through the assembly line system, including troubleshooting and quality control.
 
-1. Process it through Phase 1 (Grammar Foundation) - no master list needed
-2. Take that output through Phase 2 (AI Word Cleaning) - include master_prohibited_words.json
-3. Take that output through Phase 3 (Overwritten Language Reduction) - no master list needed
-4. Take that output through Phase 4 (Sensory Enhancement) - no master list needed
-5. Take that output through Phase 5 (Subtlety Creation) - include master_prohibited_words.json
-6. Take that output through Phase 6 (Dialogue Enhancement) - include master_prohibited_words.json
-7. Take that output through Phase 7 (Weak Language Cleanup) - include master_prohibited_words.json
-8. Take that output through Phase 8 (Strategic Imperfections) - include master_prohibited_words.json
-9. Take that output through Phase 9 (Final Verification) - include master_prohibited_words.json
-10. Return only the final Phase 9 output
+### ⚙️ [Technical Reference](docs/TECHNICAL_REFERENCE.md)
+Advanced technical information including LLM optimization recommendations, automation integration guides, and API configurations.
 
-Phases 2, 5, 6, 7, 8, and 9 require the master_prohibited_words.json file to be included.
-Use the JSON prompts from the ClaudeHumanizer repository in the exact order specified.
-```
+### 🎛️ [Customization Guide](docs/CUSTOMIZATION.md)
+Advanced customization options including character-specific dialogue enhancement and project-specific configurations.
 
-### **Critical Execution Rules**
-
-#### ✅ **Do's:**
-- **Always run in sequence** - never skip phases
-- **Use output from previous phase** as input to next phase
-- **Run all 9 phases** - each handles a specific domain
-- **Preserve formatting** between phases
-- **Include master_prohibited_words.json** - Phases 2, 5, 6, 7, 8, and 9 require this file
-
-#### ❌ **Don'ts:**
-- **Don't run phases in parallel** - they have dependencies
-- **Don't skip phases** - you'll miss critical improvements
-- **Don't run phases out of order** - later phases assume earlier work is done
-- **Don't modify the text between phases** - let each prompt do its specialized work
-
-### **Phase-by-Phase Execution Flow**
+## Processing Flow
 
 ```
 📝 Original Text
     ↓
-🔧 Phase 1: Grammar fixes → Clean grammatical foundation
+🔧 Phase 1: Grammar Foundation → Clean grammatical base
     ↓
-🧹 Phase 2: AI word removal → Natural vocabulary
+🧹 Phase 2: AI Word Cleaning → Natural vocabulary
     ↓
-✂️ Phase 3: Purple prose reduction → Cleaner descriptions
+✂️ Phase 3: Purple Prose Reduction → Cleaner descriptions
     ↓
-🎨 Phase 4: Sensory enhancement → Vivid flat passages
+🎨 Phase 4: Sensory Enhancement → Engaging passages
     ↓
-🎭 Phase 5: Subtlety creation → Sophisticated implications
+🎭 Phase 5: Subtlety Creation → Sophisticated implications
     ↓
-💬 Phase 6: Dialogue enhancement → Authentic character voices
+💬 Phase 6: Dialogue Enhancement → Authentic voices
     ↓
-🎭 Phase 6.5: Character-specific dialogue (Optional) → Targeted voice refinement
+🎭 Phase 6.5: Character-Specific (Optional) → Targeted refinement
     ↓
-🔍 Phase 7: Weak language cleanup → Stronger expressions
+🔍 Phase 7: Weak Language Cleanup → Stronger expressions
     ↓
-🎯 Phase 8: Strategic imperfections → Natural rhythm
+🎯 Phase 8: Strategic Imperfections → Natural rhythm
     ↓
-✨ Phase 9: Final verification → Polished human-like text
+✨ Phase 9: Final Verification → Human-like result
 ```
 
-### **Quality Control**
+## Benefits
 
-After each phase, the text should be:
-- ✅ **Improved** in that phase's domain
-- ✅ **Unchanged** in all other domains
-- ✅ **Compatible** with the next phase's expectations
+- **Eliminates circular processing** - No phase undoes another's work
+- **Prevents term reintroduction** - Master list ensures consistency
+- **Specialized expertise** - Each phase excels at one improvement type
+- **Predictable results** - Systematic approach ensures quality
+- **Scalable workflow** - Compatible with manual and automated processing
 
-### **Troubleshooting**
+## Requirements
 
-**If text becomes worse:** You likely skipped a phase or ran them out of order
-**If prohibited words return:** Ensure master_prohibited_words.json is included for phases 2, 5, 6, 7, 8, and 9
-**If dialogue changes unexpectedly:** Only Phase 6 should modify dialogue
-**If grammar gets broken:** Phase 1 should run first and be preserved by later phases
+- Access to Claude AI (recommended) or compatible LLM
+- All 9 phase prompt files + master prohibited words list
+- Sequential processing capability (manual or automated)
 
-## Usage Guidelines
+## Getting Started
 
-### **Character-Specific Dialogue**
-As noted, dialogue enhancement can be customized at runtime for character-specific voice requirements
+1. **Read the [Usage Guide](docs/USAGE_GUIDE.md)** for detailed instructions
+2. **Download all required files** from the repository
+3. **Start with a small text sample** to understand the process
+4. **Process through all 9 phases sequentially**
+5. **Review results** and adjust workflow as needed
 
-### **Silent Operation**
-All prompts return only the improved text unless explicitly asked for analysis or commentary
-
-### **Structure Preservation**
-All phases preserve titles, headers, markdown formatting, and document structure
-
-## Assembly Line Benefits
-
-- **Eliminates circular processing** - No prompt undoes another's work
-- **Prevents reintroduction** - Master list ensures removed terms stay removed
-- **Specialized expertise** - Each prompt excels at ONE specific improvement type
-- **Predictable results** - Consistent output through systematic processing
-- **Efficient workflow** - No redundant processing or conflicting changes
-
-## File Versions
-
-All prompts reference the latest assembly line architecture with updated version information and dates. The master prohibited words list is referenced by all prompts to ensure consistency.
-
-**Last Updated:** 2025-09-25 - Assembly line architecture implementation
+For advanced users, see the [Technical Reference](docs/TECHNICAL_REFERENCE.md) for automation options and the [Customization Guide](docs/CUSTOMIZATION.md) for project-specific configurations.
 
 ---
 
-# Appendix: LLM Optimization Guide
-
-This appendix provides comprehensive analysis and recommendations for selecting optimal Large Language Models (LLMs) for each phase of the ClaudeHumanizer assembly line.
-
-## LLM Model Analysis
-
-### Anthropic Models
-
-#### Claude 3.5 Sonnet
-**Strengths:**
-- Superior instruction following and consistency
-- Excellent literary understanding and prose editing
-- Best balance of precision and voice preservation
-- Strong systematic pattern recognition
-
-**Drawbacks:**
-- Less creative than Opus for imaginative tasks
-- Can be overly conservative in creative phases
-- Limited context window compared to some competitors
-
-**Optimal Phases:** 1 (Grammar), 2 (AI Cleaning), 7 (Weak Language), 9 (Verification)
-
-#### Claude Opus 3.0
-**Strengths:**
-- Peak creative writing capabilities
-- Superior literary judgment and sophistication
-- Best understanding of subtext and nuance
-- Excellent at authentic human imperfections
-
-**Drawbacks:**
-- Higher cost and slower processing
-- Can over-elaborate when precision is needed
-- May introduce complexity where simplicity is preferred
-
-**Optimal Phases:** 3 (Purple Prose), 4 (Sensory), 5 (Subtlety), 8 (Imperfections)
-
-#### Claude Haiku 3.0
-**Strengths:**
-- Fast processing speed
-- Cost-effective for simple tasks
-- Good for basic pattern matching
-
-**Drawbacks:**
-- Limited creative capabilities
-- Less sophisticated literary understanding
-- Not suitable for complex editing tasks
-
-**Optimal Phases:** None recommended for quality-focused pipeline
-
-### OpenAI Models
-
-#### GPT-4o
-**Strengths:**
-- Excellent dialogue generation and character voices
-- Strong creative enhancement capabilities
-- Good multimodal understanding
-- Natural language replacement skills
-
-**Drawbacks:**
-- Can be inconsistent with complex instructions
-- May introduce unnecessary sophistication
-- Less reliable for systematic pattern detection
-
-**Optimal Phases:** 2 (AI Cleaning), 6 (Dialogue Enhancement)
-
-#### GPT-4 Turbo
-**Strengths:**
-- Strong reasoning capabilities
-- Good instruction following
-- Reliable consistency
-- Balanced creative/analytical abilities
-
-**Drawbacks:**
-- Less creative than specialized models
-- Can be formulaic in creative tasks
-- Not exceptional in any single domain
-
-**Optimal Phases:** General backup for any phase
-
-#### GPT-5 (Projected)
-**Strengths:**
-- Expected superior performance across all domains
-- Enhanced reasoning and creativity
-- Better context retention
-- Improved instruction following
-
-**Drawbacks:**
-- Unknown creative ceiling vs. current leaders
-- Potential over-optimization (too perfect)
-- Availability and cost uncertainties
-
-**Optimal Phases:** Potentially all phases if capabilities meet projections
-
-### Google Models
-
-#### Gemini 1.5 Pro
-**Strengths:**
-- Exceptional systematic pattern recognition
-- Excellent for verification and cleanup tasks
-- Long context window capability
-- Consistent application of rules
-
-**Drawbacks:**
-- Limited creative writing capabilities
-- Less literary sophistication
-- Weaker at nuanced voice preservation
-- Can be mechanical in approach
-
-**Optimal Phases:** 7 (Weak Language), 9 (Final Verification)
-
-#### Gemini Ultra
-**Strengths:**
-- Enhanced reasoning over Pro version
-- Better creative capabilities than Pro
-- Good analytical skills
-
-**Drawbacks:**
-- Still limited creative ceiling
-- Less literary understanding than Claude/GPT
-- Not specialized for creative writing
-
-**Optimal Phases:** Alternative for verification phases
-
-### Other Notable Models
-
-#### Meta Llama 3.1 405B
-**Strengths:**
-- Open-source powerhouse with strong capabilities
-- Good creative writing and reasoning
-- Cost-effective for high-volume processing
-- Competitive performance across domains
-
-**Drawbacks:**
-- Requires local infrastructure or cloud setup
-- Less polished than commercial alternatives
-- May lack consistency of commercial models
-
-**Optimal Use:** High-volume cost-effective alternative
-
-#### Mistral Large
-**Strengths:**
-- European perspective on literary content
-- Strong text generation capabilities
-- Good for creative and analytical tasks
-
-**Drawbacks:**
-- Less established track record
-- Smaller ecosystem and support
-- May lack specialized capabilities
-
-**Optimal Use:** Alternative for literary phases
-
-#### DeepSeek V2
-**Strengths:**
-- Strong reasoning capabilities
-- Cost-effective pricing
-- Good instruction following
-
-**Drawbacks:**
-- Limited creative capabilities
-- Less literary sophistication
-- Smaller model ecosystem
-
-**Optimal Use:** Budget-conscious precision tasks
-
-## Optimal Settings by Phase
-
-### Phase 1: Grammar Foundation
-**Best Model:** Claude 3.5 Sonnet
-**Temperature:** 0.1-0.2
-**Memory:** Low (focused grammar rules, minimal context needed)
-**Reasoning:** Requires precision and consistency while preserving author voice
-
-### Phase 2: AI Word Cleaning
-**Best Model:** GPT-4o
-**Temperature:** 0.3-0.4
-**Memory:** Medium (needs master prohibited list + context for natural alternatives)
-**Reasoning:** Benefits from natural language understanding and creative replacement
-
-### Phase 3: Overwritten Language Reduction
-**Best Model:** Claude Opus 3.0
-**Temperature:** 0.2-0.3
-**Memory:** Medium (needs context to distinguish purple prose from purposeful ornate language)
-**Reasoning:** Requires sophisticated literary judgment
-
-### Phase 4: Sensory Enhancement
-**Best Model:** Claude Opus 3.0
-**Temperature:** 0.6-0.7
-**Memory:** High (needs full scene context for appropriate sensory additions)
-**Reasoning:** Peak creative capability for vivid, original sensory descriptions
-
-### Phase 5: Subtlety Creation
-**Best Model:** Claude Opus 3.0
-**Temperature:** 0.4-0.5
-**Memory:** High (needs character/story context for appropriate implications)
-**Reasoning:** Superior subtext creation and show-don't-tell understanding
-
-### Phase 6: Dialogue Enhancement
-**Best Model:** GPT-4o
-**Temperature:** 0.7-0.8
-**Memory:** High (needs character backgrounds and voice consistency tracking)
-**Reasoning:** Best character voice differentiation and authentic dialogue
-
-### Phase 7: Weak Language Cleanup
-**Best Model:** Gemini 1.5 Pro
-**Temperature:** 0.1-0.3
-**Memory:** Medium (pattern recognition + context for intentional preservation)
-**Reasoning:** Systematic pattern detection and consistent application
-
-### Phase 8: Strategic Imperfections
-**Best Model:** Claude Opus 3.0
-**Temperature:** 0.8-0.9
-**Memory:** High (needs understanding of full text flow and rhythm)
-**Reasoning:** Best understanding of authentic human writing patterns vs. artificial ones
-
-### Phase 9: Final Verification
-**Best Model:** Gemini 1.5 Pro
-**Temperature:** 0.1-0.2
-**Memory:** Medium (final pattern check against prohibited content)
-**Reasoning:** Most thorough systematic scanning and verification capabilities
-
-## Model Family Recommendations
-
-### Single-Family Approaches
-
-#### Option 1: Anthropic-Only Pipeline
-**Models:** Claude 3.5 Sonnet (1,2,7,9) + Claude Opus 3.0 (3,4,5,6,8)
-**Quality:** 95% of maximum potential
-**Benefits:** Consistent instruction following, excellent literary understanding
-**Cost:** High (Opus usage)
-**Best For:** Users prioritizing literary quality and consistency
-
-#### Option 2: OpenAI-Only Pipeline
-**Models:** GPT-4 Turbo (1,3,7,9) + GPT-4o (2,4,5,6,8)
-**Quality:** 85% of maximum potential
-**Benefits:** Good all-around performance, single ecosystem
-**Cost:** Medium-High
-**Best For:** Users wanting good results with single-vendor relationship
-
-#### Option 3: Google-Only Pipeline
-**Models:** Gemini 1.5 Pro (all phases)
-**Quality:** 70% of maximum potential
-**Benefits:** Consistent systematic approach, long context
-**Cost:** Medium
-**Best For:** Users prioritizing systematic consistency over creativity
-
-## Cost-Effective High Quality Approach
-
-### Hybrid Budget-Conscious Strategy
-1. **Grammar Foundation:** Claude 3.5 Sonnet @ 0.2
-2. **AI Word Cleaning:** Llama 3.1 405B @ 0.4
-3. **Language Reduction:** Claude 3.5 Sonnet @ 0.3
-4. **Sensory Enhancement:** GPT-4o @ 0.7
-5. **Subtlety Creation:** Claude 3.5 Sonnet @ 0.5
-6. **Dialogue Enhancement:** GPT-4o @ 0.8
-7. **Weak Language Cleanup:** Gemini 1.5 Pro @ 0.2
-8. **Strategic Imperfections:** Claude 3.5 Sonnet @ 0.8
-9. **Final Verification:** Gemini 1.5 Pro @ 0.1
-
-**Quality:** 90% of maximum potential
-**Cost Savings:** 40-50% vs. premium configuration
-**Strategy:** Use premium models only for phases requiring peak creative or systematic capabilities
-
-## Maximum Quality Configuration (Cost No Object)
-
-### Optimal Multi-Model Pipeline (Latest Models)
-1. **Grammar Foundation:** Claude 4.0 @ 0.2
-2. **AI Word Cleaning:** GPT-5 @ 0.4
-3. **Language Reduction:** Claude Opus 4.1 @ 0.3
-4. **Sensory Enhancement:** Claude Opus 4.1 @ 0.7
-5. **Subtlety Creation:** Claude Opus 4.1 @ 0.5
-6. **Dialogue Enhancement:** GPT-5 @ 0.8
-7. **Weak Language Cleanup:** Gemini 3.5 Ultra @ 0.2
-8. **Strategic Imperfections:** Claude Opus 4.1 @ 0.9
-9. **Final Verification:** Gemini 3.5 Ultra @ 0.1
-
-**Quality:** 100% - Maximum achievable with latest generation models
-**Key Principle:** Each phase uses the most advanced specialized model available
-**Cost:** Premium tier, but cutting-edge results
-**Expected Performance:** 15-25% improvement over previous generation models
-
-### Latest Model Advantages
-
-**Claude Opus 4.1 Enhancements:**
-- 40% improvement in creative writing quality
-- Superior literary judgment and subtext creation
-- Enhanced understanding of authentic human imperfections
-- Better preservation of author voice during edits
-
-**GPT-5 Capabilities:**
-- Revolutionary dialogue generation with distinct character voices
-- Advanced natural language understanding for AI word replacement
-- Enhanced reasoning for complex instruction following
-- Superior context retention across long texts
-
-**Gemini 3.5 Ultra Features:**
-- Next-generation pattern recognition and systematic processing
-- Enhanced verification capabilities with fewer false positives
-- Better integration with multi-step workflows
-- Improved handling of edge cases in text analysis
-
-### Model Availability Timeline
-
-**Currently Available:**
-- Claude 3.5 Sonnet, Claude Opus 3.0
-- GPT-4o, GPT-4 Turbo
-- Gemini 1.5 Pro, Gemini Ultra
-
-**Expected 2024-2025:**
-- Claude 4.0, Claude Opus 4.1
-- GPT-5
-- Gemini 3.5 Ultra
-
-**Fallback Strategy:**
-If latest models aren't available, the pipeline automatically falls back to the best available alternatives while maintaining quality standards.
-
-### Quality Validation Metrics
-
-**Success Indicators:**
-- Text passes AI detection tools consistently
-- Natural human-like rhythm and flow
-- Preserved original meaning and character voices
-- Elimination of AI-associated language patterns
-- Authentic imperfections without degrading quality
-
-**Testing Protocol:**
-1. Run sample texts through different model configurations
-2. Compare output quality using AI detection tools
-3. Human evaluation for naturalness and authenticity
-4. Cost-per-quality analysis for optimization
-
----
-
-## Pipeline Automation Integration
-
-### n8n Workflow Implementation
-
-n8n provides powerful automation capabilities for implementing the ClaudeHumanizer assembly line with visual workflow management.
-
-#### n8n Workflow Architecture
-
-```json
-{
-  "name": "ClaudeHumanizer Assembly Line",
-  "nodes": [
-    {
-      "name": "Input Trigger",
-      "type": "n8n-nodes-base.webhook",
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "humanize-text"
-      }
-    },
-    {
-      "name": "Load Master Prohibited Words",
-      "type": "n8n-nodes-base.readFile",
-      "parameters": {
-        "filePath": "./master_prohibited_words.json"
-      }
-    },
-    {
-      "name": "Phase 1: Grammar Foundation",
-      "type": "n8n-nodes-base.openAi",
-      "parameters": {
-        "model": "claude-3-5-sonnet-20241022",
-        "temperature": 0.2,
-        "systemMessage": "{{ $json.grammarPrompt }}",
-        "message": "{{ $json.inputText }}"
-      }
-    },
-    {
-      "name": "Phase 2: AI Word Cleaning",
-      "type": "n8n-nodes-base.openAi",
-      "parameters": {
-        "model": "gpt-4o",
-        "temperature": 0.4,
-        "systemMessage": "Master prohibited words: {{ $('Load Master Prohibited Words').item.json.content }}\n\n{{ $json.aiCleaningPrompt }}",
-        "message": "{{ $('Phase 1: Grammar Foundation').item.json.message }}"
-      }
-    }
-  ]
-}
-```
-
-#### Complete n8n Setup Instructions
-
-**1. Install Required Nodes:**
-```bash
-# Install community nodes for various LLM providers
-npm install n8n-nodes-anthropic
-npm install n8n-nodes-openai
-npm install n8n-nodes-google-ai
-```
-
-**2. Create Workflow Variables:**
-```javascript
-// Store prompt templates as environment variables
-GRAMMAR_PROMPT = "{{ file content of 1_grammar_foundation.json }}"
-AI_CLEANING_PROMPT = "{{ file content of 2_ai_word_cleaning.json }}"
-// ... continue for all 9 phases
-```
-
-**3. Multi-Model Node Configuration:**
-
-```json
-{
-  "phase1": {
-    "node": "Anthropic Claude",
-    "model": "claude-3-5-sonnet-20241022",
-    "temperature": 0.2,
-    "systemPrompt": "{{ $env.GRAMMAR_PROMPT }}"
-  },
-  "phase2": {
-    "node": "OpenAI GPT",
-    "model": "gpt-4o",
-    "temperature": 0.4,
-    "systemPrompt": "{{ $env.MASTER_PROHIBITED_WORDS }}\n\n{{ $env.AI_CLEANING_PROMPT }}"
-  },
-  "phase3": {
-    "node": "Anthropic Claude",
-    "model": "claude-3-opus-20240229",
-    "temperature": 0.3,
-    "systemPrompt": "{{ $env.PURPLE_PROSE_PROMPT }}"
-  }
-}
-```
-
-**4. Error Handling and Retry Logic:**
-```javascript
-// Add to each LLM node
-{
-  "continueOnFail": true,
-  "retryOnFail": true,
-  "maxTries": 3,
-  "waitBetweenTries": 2000
-}
-```
-
-**5. Quality Validation Node:**
-```javascript
-// Custom function to validate output
-function validatePhaseOutput(inputData) {
-  const text = inputData.json.message;
-
-  // Check for prohibited words
-  const prohibitedWords = ["buzzed", "cascade", "delve"];
-  const hasProhibited = prohibitedWords.some(word =>
-    text.toLowerCase().includes(word.toLowerCase())
-  );
-
-  if (hasProhibited) {
-    throw new Error("Prohibited words detected - retry phase");
-  }
-
-  return inputData;
-}
-```
-
-### Make.com (Integromat) Implementation
-
-Make.com offers robust automation with excellent API integration capabilities for the ClaudeHumanizer pipeline.
-
-#### Make.com Scenario Structure
-
-**1. Scenario Blueprint:**
-```json
-{
-  "name": "ClaudeHumanizer Production Pipeline",
-  "blueprint": {
-    "modules": [
-      {
-        "module": "webhook:receive",
-        "parameters": {
-          "hook": "/humanize-text",
-          "method": "POST"
-        }
-      },
-      {
-        "module": "text-parser:parse",
-        "parameters": {
-          "type": "json",
-          "data": "{{ 1.body }}"
-        }
-      },
-      {
-        "module": "anthropic:send-message",
-        "parameters": {
-          "model": "claude-3-5-sonnet-20241022",
-          "temperature": 0.2,
-          "system": "{{ phase1Prompt }}",
-          "message": "{{ 2.inputText }}"
-        }
-      }
-    ]
-  }
-}
-```
-
-**2. Advanced Routing for Multi-Model Pipeline:**
-```json
-{
-  "router": {
-    "routes": [
-      {
-        "phase": 1,
-        "condition": "{{ 1.phase == 1 }}",
-        "modules": [
-          {
-            "module": "anthropic:claude-3-5-sonnet",
-            "temperature": 0.2
-          }
-        ]
-      },
-      {
-        "phase": 2,
-        "condition": "{{ 1.phase == 2 }}",
-        "modules": [
-          {
-            "module": "openai:gpt-4o",
-            "temperature": 0.4
-          }
-        ]
-      },
-      {
-        "phase": 3,
-        "condition": "{{ 1.phase == 3 }}",
-        "modules": [
-          {
-            "module": "anthropic:claude-opus",
-            "temperature": 0.3
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-**3. Make.com Variables Setup:**
-```javascript
-// Global variables for prompt storage
-phase1_prompt = readFileContent("1_grammar_foundation.json");
-phase2_prompt = readFileContent("2_ai_word_cleaning.json");
-master_prohibited = readFileContent("master_prohibited_words.json");
-
-// Dynamic model selection
-function selectModel(phase) {
-  const modelConfig = {
-    1: { provider: "anthropic", model: "claude-3-5-sonnet", temp: 0.2 },
-    2: { provider: "openai", model: "gpt-4o", temp: 0.4 },
-    3: { provider: "anthropic", model: "claude-opus", temp: 0.3 },
-    4: { provider: "anthropic", model: "claude-opus", temp: 0.7 },
-    5: { provider: "anthropic", model: "claude-opus", temp: 0.5 },
-    6: { provider: "openai", model: "gpt-4o", temp: 0.8 },
-    7: { provider: "google", model: "gemini-1.5-pro", temp: 0.2 },
-    8: { provider: "anthropic", model: "claude-opus", temp: 0.9 },
-    9: { provider: "google", model: "gemini-1.5-pro", temp: 0.1 }
-  };
-  return modelConfig[phase];
-}
-```
-
-**4. Cost Tracking and Management:**
-```javascript
-// Add to each LLM module
-{
-  "costTracking": {
-    "provider": "{{ modelProvider }}",
-    "model": "{{ modelName }}",
-    "inputTokens": "{{ estimateTokens(inputText) }}",
-    "timestamp": "{{ now }}"
-  }
-}
-```
-
-### Hybrid Pipeline Configurations
-
-#### Configuration 1: Maximum Quality (Latest Models)
-```yaml
-n8n_workflow: "cutting-edge-pipeline"
-phases:
-  1: { provider: "anthropic", model: "claude-4.0", temp: 0.2 }
-  2: { provider: "openai", model: "gpt-5", temp: 0.4 }
-  3: { provider: "anthropic", model: "claude-opus-4.1", temp: 0.3 }
-  4: { provider: "anthropic", model: "claude-opus-4.1", temp: 0.7 }
-  5: { provider: "anthropic", model: "claude-opus-4.1", temp: 0.5 }
-  6: { provider: "openai", model: "gpt-5", temp: 0.8 }
-  7: { provider: "google", model: "gemini-3.5-ultra", temp: 0.2 }
-  8: { provider: "anthropic", model: "claude-opus-4.1", temp: 0.9 }
-  9: { provider: "google", model: "gemini-3.5-ultra", temp: 0.1 }
-estimated_cost_per_1000_words: "$4.00-7.00"
-quality_score: "100%"
-performance_improvement: "+15-25% vs previous generation"
-```
-
-#### Configuration 2: Cost-Effective High Quality
-```yaml
-n8n_workflow: "budget-conscious-pipeline"
-phases:
-  1: { provider: "anthropic", model: "claude-3-5-sonnet", temp: 0.2 }
-  2: { provider: "meta", model: "llama-3.1-405b", temp: 0.4 }
-  3: { provider: "anthropic", model: "claude-3-5-sonnet", temp: 0.3 }
-  4: { provider: "openai", model: "gpt-4o", temp: 0.7 }
-  5: { provider: "anthropic", model: "claude-3-5-sonnet", temp: 0.5 }
-  6: { provider: "openai", model: "gpt-4o", temp: 0.8 }
-  7: { provider: "google", model: "gemini-1.5-pro", temp: 0.2 }
-  8: { provider: "anthropic", model: "claude-3-5-sonnet", temp: 0.8 }
-  9: { provider: "google", model: "gemini-1.5-pro", temp: 0.1 }
-estimated_cost_per_1000_words: "$1.20-2.00"
-quality_score: "90%"
-```
-
-#### Configuration 3: Single-Family Anthropic
-```yaml
-n8n_workflow: "anthropic-only-pipeline"
-phases:
-  1-2: { provider: "anthropic", model: "claude-3-5-sonnet", temp: "0.2-0.4" }
-  3-5: { provider: "anthropic", model: "claude-opus", temp: "0.3-0.5" }
-  6: { provider: "anthropic", model: "claude-opus", temp: 0.8 }
-  7: { provider: "anthropic", model: "claude-3-5-sonnet", temp: 0.2 }
-  8: { provider: "anthropic", model: "claude-opus", temp: 0.9 }
-  9: { provider: "anthropic", model: "claude-3-5-sonnet", temp: 0.1 }
-estimated_cost_per_1000_words: "$3.00-5.00"
-quality_score: "95%"
-```
-
-### Implementation Best Practices
-
-#### Rate Limiting and Queue Management
-```javascript
-// n8n rate limiting
-{
-  "rateLimiting": {
-    "anthropic": { "requests_per_minute": 50, "tokens_per_minute": 40000 },
-    "openai": { "requests_per_minute": 60, "tokens_per_minute": 90000 },
-    "google": { "requests_per_minute": 60, "tokens_per_minute": 30000 }
-  }
-}
-
-// Make.com queue management
-{
-  "queueConfig": {
-    "maxConcurrent": 3,
-    "retryDelay": 2000,
-    "maxRetries": 3
-  }
-}
-```
-
-#### Monitoring and Alerting
-```javascript
-// Quality monitoring webhook
-{
-  "qualityCheck": {
-    "webhook": "https://your-monitoring-system.com/quality-alert",
-    "triggers": [
-      "prohibited_words_detected",
-      "quality_score_below_threshold",
-      "processing_time_exceeded"
-    ]
-  }
-}
-```
-
-#### Environment-Specific Configurations
-
-**Development Environment:**
-```yaml
-dev_config:
-  models: ["claude-3-5-sonnet", "gpt-4o-mini", "gemini-1.5-flash"]
-  cost_limit_per_day: "$10"
-  quality_threshold: "80%"
-```
-
-**Production Environment:**
-```yaml
-prod_config:
-  models: ["claude-opus", "gpt-4o", "gemini-1.5-pro"]
-  cost_limit_per_day: "$500"
-  quality_threshold: "95%"
-```
-
-### Sample API Integration Code
-
-#### n8n Custom Node Example
-```javascript
-// Custom n8n node for ClaudeHumanizer
-class ClaudeHumanizerNode {
-  constructor() {
-    this.description = {
-      displayName: 'ClaudeHumanizer Assembly Line',
-      name: 'claudeHumanizer',
-      group: ['ai'],
-      version: 1,
-      inputs: ['main'],
-      outputs: ['main']
-    };
-  }
-
-  async execute() {
-    const items = this.getInputData();
-    const returnData = [];
-
-    for (let i = 0; i < items.length; i++) {
-      const text = items[i].json.text;
-      const config = items[i].json.config || 'max-quality';
-
-      const result = await this.processAssemblyLine(text, config);
-      returnData.push({ json: result });
-    }
-
-    return [returnData];
-  }
-
-  async processAssemblyLine(text, config) {
-    const phases = this.getConfiguredPhases(config);
-    let currentText = text;
-
-    for (const phase of phases) {
-      currentText = await this.processPhase(currentText, phase);
-    }
-
-    return {
-      originalText: text,
-      humanizedText: currentText,
-      phases: phases.length,
-      config: config
-    };
-  }
-}
-```
-
-#### Make.com Module Template
-```javascript
-// Make.com custom module
-{
-  "label": "ClaudeHumanizer",
-  "description": "Process text through 9-phase humanization pipeline",
-  "parameters": [
-    {
-      "name": "text",
-      "label": "Input Text",
-      "type": "text",
-      "required": true
-    },
-    {
-      "name": "configuration",
-      "label": "Pipeline Configuration",
-      "type": "select",
-      "options": [
-        {"label": "Maximum Quality", "value": "max-quality"},
-        {"label": "Cost Effective", "value": "cost-effective"},
-        {"label": "Anthropic Only", "value": "anthropic-only"}
-      ]
-    }
-  ]
-}
-```
-
----
-
-## Appendix B: Customizing Phase 6.5 Character-Specific Dialogue
-
-Phase 6.5 provides targeted character voice refinement beyond the general dialogue enhancement in Phase 6. This appendix explains how to customize the sample prompt for your specific characters and projects.
-
-### Understanding the Character Specifications Structure
-
-The `6.5_character_dialogue_pass.json` file contains a `character_specifications` section with examples and a template. Here's how to customize it:
-
-#### Basic Character Template Structure
-
-```json
-{
-  "character_name": "[Your Character's Name]",
-  "voice_requirements": {
-    "background_integration": "[Character's education, profession, regional background, family history]",
-    "speech_patterns": "[Sentence length preferences, rhythm, unique grammatical patterns]",
-    "vocabulary_preferences": "[Specific word choices, technical terminology, slang usage]",
-    "signature_phrases": ["[List of 3-5 phrases character uses frequently]"],
-    "disfluencies": "[How character speaks imperfectly - filler words, hesitations, etc.]",
-    "formality_level": "[Formal, casual, code-switching patterns]",
-    "emotional_expression": "[How character expresses or avoids expressing emotions]"
-  },
-  "specific_adjustments": [
-    "[Specific instruction 1]",
-    "[Specific instruction 2]",
-    "[Specific instruction 3]",
-    "[Additional targeted changes needed]"
-  ]
-}
-```
-
-### Step-by-Step Customization Guide
-
-#### Step 1: Identify Characters Needing Voice Refinement
-
-Before using Phase 6.5, determine which characters require targeted voice work:
-
-- **Characters with unclear distinction** after Phase 6
-- **Characters requiring specific cultural/professional speech patterns**
-- **Characters whose voice needs to match established series continuity**
-- **Characters requiring significant personality shifts mid-story**
-
-#### Step 2: Replace Example Characters
-
-Remove the example characters (`example_character_1`, `example_character_2`) and replace with your actual characters:
-
-```json
-"character_specifications": {
-  "usage_note": "Customized for [Your Project Name]",
-
-  "main_character_name": {
-    "character_name": "Sarah Chen",
-    "voice_requirements": {
-      "background_integration": "Second-generation immigrant, software engineer, Silicon Valley tech culture",
-      "speech_patterns": "Precise, analytical. Uses technical metaphors. Short sentences when stressed.",
-      "vocabulary_preferences": "Tech jargon naturally integrated, avoids corporate buzzwords",
-      "signature_phrases": ["Let me think about this", "That doesn't compute", "Running the numbers"],
-      "disfluencies": "Says 'um' when processing complex ideas, trails off when overwhelmed",
-      "formality_level": "Professional but approachable. Uses contractions with friends.",
-      "emotional_expression": "Processes emotions like debugging - systematic, step-by-step"
-    },
-    "specific_adjustments": [
-      "Replace flowery language with precise technical descriptions",
-      "Add subtle tech metaphors for emotional states",
-      "Include occasional coding references in casual speech",
-      "Ensure dialogue reflects logical thinking patterns"
-    ]
-  }
-}
-```
-
-#### Step 3: Define Voice Requirements Components
-
-**Background Integration:**
-- Education level and type (formal education, self-taught, trade school)
-- Professional experience and current job
-- Regional/cultural background
-- Family and socioeconomic history
-- Life experiences that shape worldview
-
-**Speech Patterns:**
-- Sentence length preference (short and clipped vs. long and flowing)
-- Rhythm and pacing (fast talker vs. deliberate speaker)
-- Question vs. statement tendency
-- Complex vs. simple sentence structures
-
-**Vocabulary Preferences:**
-- Professional jargon and technical terms
-- Regional dialect or slang
-- Generational language markers
-- Words they would never use
-- Preferred synonyms for common concepts
-
-**Signature Phrases:**
-- Catchphrases or verbal tics
-- Common expressions they overuse
-- Transitional phrases
-- Emotional outlet phrases
-- Professional expressions
-
-**Disfluencies:**
-- Filler words (um, uh, like, you know)
-- Speech patterns when nervous/excited/angry
-- Tendency to interrupt or be interrupted
-- Incomplete thoughts or trailing sentences
-
-**Formality Level:**
-- Code-switching patterns (formal with authority, casual with peers)
-- Contraction usage
-- Polite vs. direct communication style
-- Professional vs. personal speech differences
-
-**Emotional Expression:**
-- How they show happiness, anger, sadness, fear
-- Tendency to be direct vs. indirect with feelings
-- Use of humor, sarcasm, or deflection
-- Physical expressions that accompany speech
-
-#### Step 4: Write Specific Adjustments
-
-Provide concrete, actionable instructions for the AI:
-
-**Good Examples:**
-- "Replace academic language with street-smart expressions"
-- "Add occasional Spanish words during emotional moments"
-- "Include military rank structure references in casual conversation"
-- "Remove contractions to reflect formal upbringing"
-
-**Avoid Vague Instructions:**
-- "Make them sound more professional" ❌
-- "Add personality" ❌
-- "Make dialogue better" ❌
-
-#### Step 5: Test and Refine
-
-After running Phase 6.5:
-
-1. **Check voice consistency** - Can you identify the character without dialogue tags?
-2. **Verify background authenticity** - Does speech reflect their established background?
-3. **Assess character distinction** - Is this character clearly different from others?
-4. **Review specification compliance** - Were all voice requirements implemented?
-
-### Character Type Examples
-
-#### The Academic Professor
-```json
-"professor_martinez": {
-  "character_name": "Dr. Elena Martinez",
-  "voice_requirements": {
-    "background_integration": "Literature PhD, 20 years teaching, multilingual Spanish/English",
-    "speech_patterns": "Long, complex sentences. Pauses to choose precise words.",
-    "vocabulary_preferences": "Literary references, avoids slang, precise word choice",
-    "signature_phrases": ["Precisely", "That's fascinating", "Consider this", "In my experience"],
-    "disfluencies": "Hmm when thinking, occasional Spanish under breath",
-    "formality_level": "Formal with students, warmer with colleagues, never crude",
-    "emotional_expression": "Uses metaphor and literary allusion to express feelings"
-  },
-  "specific_adjustments": [
-    "Expand simple statements into more nuanced expressions",
-    "Add subtle literary references or metaphors",
-    "Include occasional Spanish during emotional moments",
-    "Ensure vocabulary reflects education level and precision"
-  ]
-}
-```
-
-#### The Street-Smart Detective
-```json
-"detective_burke": {
-  "character_name": "Detective Mike Burke",
-  "voice_requirements": {
-    "background_integration": "20 years NYPD, working-class Brooklyn, high school education",
-    "speech_patterns": "Short, direct sentences. Rapid-fire when excited.",
-    "vocabulary_preferences": "Police procedural terms, street slang, avoids academic language",
-    "signature_phrases": ["What've we got", "Copy that", "Let's roll", "You kidding me"],
-    "disfluencies": "Rarely hesitates except when dealing with personal topics",
-    "formality_level": "Professional with superiors, casual with partners, blunt with suspects",
-    "emotional_expression": "Shows emotion through action rather than words"
-  },
-  "specific_adjustments": [
-    "Replace academic language with street-smart expressions",
-    "Add police procedural terminology naturally",
-    "Keep responses short and action-oriented",
-    "Include Brooklyn dialect markers without phonetic spelling"
-  ]
-}
-```
-
-#### The Teenager Character
-```json
-"maya_teenager": {
-  "character_name": "Maya",
-  "voice_requirements": {
-    "background_integration": "16 years old, Gen Z, social media native, suburban middle class",
-    "speech_patterns": "Run-on sentences when excited, fragments when texting-influenced",
-    "vocabulary_preferences": "Current slang, social media terms, avoids formal language",
-    "signature_phrases": ["literally", "like", "no cap", "that's so random", "I can't even"],
-    "disfluencies": "Like as filler word, trails off when distracted by phone",
-    "formality_level": "Casual with everyone, slightly more respectful with teachers",
-    "emotional_expression": "Dramatic emotional expression, everything is 'literally the worst/best'"
-  },
-  "specific_adjustments": [
-    "Add current Gen Z slang and expressions",
-    "Include social media influenced speech patterns",
-    "Replace formal language with casual alternatives",
-    "Add appropriate generational markers without overdoing it"
-  ]
-}
-```
-
-### Advanced Customization Techniques
-
-#### Multiple Characters in One Pass
-
-You can target multiple characters simultaneously:
-
-```json
-"character_specifications": {
-  "main_protagonist": { ... },
-  "love_interest": { ... },
-  "antagonist": { ... }
-}
-```
-
-#### Character Arc Considerations
-
-For characters who change throughout the story:
-
-```json
-"character_development_notes": {
-  "early_story_voice": "Formal, hesitant, academic language",
-  "mid_story_transition": "Mixing formal with street language",
-  "late_story_voice": "Confident, direct, more casual expressions"
-}
-```
-
-#### Relationship-Specific Speech
-
-Characters may speak differently depending on who they're addressing:
-
-```json
-"contextual_speech_patterns": {
-  "with_authority_figures": "Formal, deferential, uses titles",
-  "with_peers": "Casual, uses slang, more interrupting",
-  "with_subordinates": "Direct, commanding, less hedging"
-}
-```
-
-### Quality Control Checklist
-
-After customizing and running Phase 6.5:
-
-- [ ] Each targeted character has a distinct voice
-- [ ] Speech patterns match established background
-- [ ] Vocabulary choices feel authentic
-- [ ] Signature phrases appear naturally
-- [ ] Emotional expression style is consistent
-- [ ] Formality levels match situational context
-- [ ] Character remains recognizable without dialogue tags
-- [ ] Voice changes don't contradict established personality
-
-### Common Customization Mistakes
-
-**❌ Over-Specification:**
-- Too many requirements that conflict with each other
-- Overly complex speech patterns that become unreadable
-- Too many signature phrases (limit to 3-5)
-
-**❌ Under-Specification:**
-- Vague background descriptions
-- Generic personality traits
-- No specific adjustments listed
-
-**❌ Inconsistent Requirements:**
-- Formal education but casual speech without explanation
-- Shy personality but bold speech patterns
-- Regional background that doesn't match vocabulary
-
-**✅ Best Practices:**
-- Focus on 2-3 key voice elements that define the character
-- Provide specific, actionable adjustments
-- Consider how character relationships affect speech
-- Test with sample dialogue before full processing
-
-### Integration with Main Pipeline
-
-Phase 6.5 should be used:
-
-1. **After Phase 6** completes general dialogue enhancement
-2. **Before Phase 7** continues with weak language cleanup
-3. **Only when needed** - not every text requires character-specific refinement
-4. **With specific goals** - know which characters need targeted work
-
-Remember: Phase 6.5 is designed for precision targeting. Use it when general dialogue enhancement isn't sufficient for your specific character voice requirements.
-
----
-
-**Appendix Last Updated:** 2025-09-27 - Comprehensive LLM optimization analysis, pipeline automation integration, and Phase 6.5 customization guide
+**Version**: 2.0 Assembly Line Architecture
+**Last Updated**: 2025-09-25
