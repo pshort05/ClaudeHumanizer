@@ -1,6 +1,6 @@
 {
   "title": "Weak Language Cleanup",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "date": "2025-09-27",
   "assembly_line_position": "Phase 7: Text Quality Enhancement - Generic weak language patterns ONLY",
   "description": "Precision text editor that eliminates low-quality language while preserving meaning and style",
@@ -14,12 +14,18 @@
 
   "domain_restrictions": {
     "only_handle": [
-      "Hedge words and weasel words",
-      "Filler phrases and empty calorie words",
-      "Inflation words and puff words",
-      "Redundant phrases",
-      "Generic weak language patterns",
-      "Unnecessary formal hedging"
+      "Puff words (unnecessarily formal or pretentious words)",
+      "Empty calorie words (vague words that add no specific meaning)",
+      "Inflation words (intensifiers that weaken rather than strengthen prose)",
+      "Weasel words (words that create unnecessary uncertainty or hedge claims)",
+      "Hedge words (phrases that unnecessarily qualify or weaken statements)",
+      "Filter phrases (unnecessary filtering through character perception)",
+      "Cliches and buzzwords (overused business and marketing language)",
+      "Formal hedging (academic throat-clearing phrases)",
+      "Redundant phrases (phrases that use more words than necessary)",
+      "Correlative conjunctions (often unnecessarily complex sentence constructions)",
+      "Conversational idioms (casual phrases that may weaken formal or literary text)",
+      "Generic weak language patterns"
     ],
     "never_touch": [
       "Creative content and artistic choices",

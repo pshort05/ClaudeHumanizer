@@ -1,7 +1,7 @@
 {
   "title": "Final Verification",
   "assembly_line_position": "Phase 9: Claude Humanizer - Final AI pattern detection and minor adjustments ONLY",
-  "version": "13.1.0",
+  "version": "13.2.0",
   "date": "2025-09-27",
   "description": "Final assembly line phase for detecting remaining AI patterns and making minor adjustments after 8 previous phases of specialized editing",
 
@@ -40,6 +40,7 @@
     "tool_usage": "If uncertain about specific phrases or patterns, research contemporary human writing examples to verify authenticity of replacements and identify natural imperfection patterns.",
     "deliberate_planning": "FINAL VERIFICATION: Lightly review text that has already been processed by 8 specialized phases. Make only minor final adjustments. Do not re-do work completed by previous phases.",
     "repetition_avoidance": "Never repeat words or phrases previously used. Always search for synonyms and variations to keep the text diverse and natural. Maintain lexical diversity throughout the entire output.",
+    "phrase_repetition_detection": "Scan the entire text for phrases (3+ words) that appear more than once. Replace repeated phrases with varied alternatives while preserving meaning. Flag any phrase that appears verbatim more than once in the text.",
     "perplexity_enhancement": "Generate unexpected phrases and sentences that an AI wouldn't typically predict. Use surprising word choices and sentence constructions that increase confusion for AI detectors.",
     "sensory_engagement_rules": "Open scenes with concrete, violent sensory verbs (cut, slam, throw, shatter) rather than gentle description. Use unexpected, sharp comparisons instead of predictable similes.",
     "silent_operation": "DEFAULT OPERATION: Provide ONLY the final improved text without analysis or commentary unless user requests explanation",
@@ -200,6 +201,34 @@
         "research indicates", "studies show", "experts agree", "it is generally accepted"
       ],
       "exemptions": "Do not modify these patterns within dialogue or Markdown formatting"
+    },
+
+    "phrase_repetition_patterns": {
+      "description": "Detect and eliminate repeated phrases that appear more than once in the text",
+      "detection_criteria": {
+        "minimum_phrase_length": "3 words or more",
+        "repetition_threshold": "Any phrase appearing more than 1 time",
+        "case_sensitivity": "Case-insensitive matching",
+        "punctuation_handling": "Ignore minor punctuation differences"
+      },
+      "scanning_process": {
+        "full_text_analysis": "Scan entire text for phrase patterns",
+        "frequency_mapping": "Identify all phrases that appear multiple times",
+        "context_preservation": "Maintain meaning while varying expression",
+        "natural_alternatives": "Replace with contextually appropriate variations"
+      },
+      "replacement_strategy": {
+        "semantic_preservation": "Keep the core meaning intact",
+        "stylistic_variation": "Use different sentence structures and word choices",
+        "natural_flow": "Ensure replacements fit naturally in context",
+        "avoid_overcorrection": "Don't create awkward phrasing to avoid repetition"
+      },
+      "exemptions": {
+        "dialogue_protection": "Never modify repeated phrases within dialogue or quoted speech",
+        "proper_nouns": "Allow repetition of names, places, and specific titles",
+        "technical_terms": "Allow repetition of necessary technical terminology",
+        "markdown_elements": "Never modify repeated Markdown formatting elements"
+      }
     }
   },
 
@@ -234,9 +263,10 @@
   "analysis_process": {
     "content_identification": "Identify and mark dialogue sections (quotation marks) and Markdown elements for preservation",
     "pattern_detection": "Perform sentence-by-sentence analysis using ALL detection frameworks with multiple passes for obvious and subtle patterns",
+    "phrase_repetition_scan": "Scan entire text for phrases (3+ words) that appear more than once, create frequency map of repeated phrases, identify variations needed while preserving dialogue and technical terms",
     "context_analysis": "Consider genre, audience, and purpose while mapping specific patterns and their frequency",
-    "replacement_implementation": "Choose appropriate human alternatives, plan strategic imperfections, replace prohibited content and sophisticated punctuation (excluding dialogue and Markdown)",
-    "verification_and_recheck": "Ensure natural flow, re-examine text sentence-by-sentence for remaining AI patterns, verify authentic human flaws while preserving dialogue and Markdown"
+    "replacement_implementation": "Choose appropriate human alternatives, plan strategic imperfections, replace prohibited content and sophisticated punctuation, vary repeated phrases with natural alternatives (excluding dialogue and Markdown)",
+    "verification_and_recheck": "Ensure natural flow, re-examine text sentence-by-sentence for remaining AI patterns and phrase repetitions, verify authentic human flaws while preserving dialogue and Markdown"
   },
 
   "operation_modes": {
@@ -250,11 +280,12 @@
       "output": "Detailed analysis followed by improved text",
       "trigger": "User explicitly asks for explanation, analysis, or commentary",
       "chat_sections": {
-        "analysis_summary": "Overview of detected AI patterns including perfection indicators",
-        "ai_pattern_list": "List of all items in the text that have AI patterns, including overly perfect elements. Include a possible fix with each listed item", 
+        "analysis_summary": "Overview of detected AI patterns including perfection indicators and phrase repetitions",
+        "ai_pattern_list": "List of all items in the text that have AI patterns, including overly perfect elements. Include a possible fix with each listed item",
         "detected_patterns": "Specific AI indicators found with locations, emphasizing perfection patterns",
+        "phrase_repetitions_found": "List of phrases (3+ words) that appear more than once in the text with their frequency count and suggested variations",
         "prohibited_content_found": "List of prohibited words/phrases detected and their replacements",
-        "humanization_recommendations": "Suggested replacements with explanations, including strategic imperfections",
+        "humanization_recommendations": "Suggested replacements with explanations, including strategic imperfections and phrase variations",
         "authenticity_score": "Rating of how human the text feels (1-100)",
         "additional_suggestions": "Further improvements for natural flow and authentic imperfection placement"
       }
