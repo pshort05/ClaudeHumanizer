@@ -51,18 +51,18 @@ Set up n8n, Make.com, or API workflows (see [Technical Reference](docs/TECHNICAL
 
 ### Core Processing Phases
 
-| Phase | File | Domain | Dependencies | Pattern Rules |
-|-------|------|--------|--------------|---------------|
-| 1 | `1_grammar_foundation.json` | Grammar errors only | None | - |
-| 2 | `2_ai_word_cleaning.json` | AI vocabulary removal | Master list | Dialogue pauses, Light descriptions, Finger actions |
-| 3 | `3_overwritten_language_reduction.json` | Purple prose elimination | None | - |
-| 4 | `4_sensory_enhancement.json` | Flat passage improvement | None | - |
-| 5 | `5_subtlety_creation.json` | Obvious statement conversion | None | - |
-| 6 | `6_dialogue_enhancement.json` | Character voice refinement (temp 1.0) | None | - |
-| 7 | `7_weak_language_cleanup.json` | Weak language patterns (12 categories) | None | - |
-| 8 | `8_strategic_imperfections.json` | Natural rhythm variation | None | - |
-| 9 | `9_final_verification.json` | AI pattern detection (no word filtering) | None | - |
-| 10 | `10_final_ai_word_sweep.json` | **NEW** Final prohibited word sweep | Master list | All pattern rules |
+| Phase | File | Domain | Master List | Pattern Rules |
+|-------|------|--------|-------------|---------------|
+| 1 | `1_grammar_foundation.json` | Grammar errors only | ❌ No | - |
+| 2 | `2_ai_word_cleaning.json` | AI vocabulary removal | ✅ **Required** | Dialogue pauses, Light, Finger actions |
+| 3 | `3_overwritten_language_reduction.json` | Purple prose elimination | ❌ No | - |
+| 4 | `4_sensory_enhancement.json` | Flat passage improvement | ❌ No | - |
+| 5 | `5_subtlety_creation.json` | Obvious statement conversion | ❌ No | - |
+| 6 | `6_dialogue_enhancement.json` | Character voice (temp 1.0) | ❌ No | - |
+| 7 | `7_weak_language_cleanup.json` | Weak language (12 categories) | ❌ No | - |
+| 8 | `8_strategic_imperfections.json` | Natural rhythm variation | ❌ No | - |
+| 9 | `9_final_verification.json` | AI pattern detection | ❌ No | - |
+| 10 | `10_final_ai_word_sweep.json` | **Final word sweep** | ✅ **Required** | All pattern rules |
 
 ### Optional Enhancement
 

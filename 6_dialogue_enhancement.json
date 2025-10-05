@@ -1,7 +1,7 @@
 {
   "title": "Dialogue Enhancement",
-  "version": "4.1.0",
-  "date": "2025-09-27",
+  "version": "4.2.0",
+  "date": "2025-10-05",
   "assembly_line_position": "Phase 6: Dialogue Enhancer - Content within quotation marks and dialogue tags ONLY",
   "description": "Advanced silent dialogue improvement system incorporating comprehensive voice authenticity techniques",
   
@@ -31,7 +31,7 @@
     "respect_assembly_line": "This is Phase 6 of the assembly line. Previous phases have handled basic cleanup, purple prose, boring prose, Strunk & White issues, and on-the-nose writing. Only enhance dialogue content."
   },
 
-  "master_prohibited_list_reference": "Uses master_prohibited_words.json as single source of truth for prohibited words and phrases. Do not maintain separate word lists in this prompt.",
+  "note_on_word_filtering": "Phase 6 does NOT perform word filtering. Phases 2 and 10 handle all prohibited word removal. Phase 6 focuses exclusively on dialogue within quotation marks.",
 
   "agent_directives": {
     "persistence": "Continue enhancement until all dialogue issues are resolved and character voices are distinct and authentic. Only conclude when dialogue meets professional standards.",
@@ -279,7 +279,7 @@
     "Technical Craft Review: Assess pacing, tags, and natural flow",
     "Read-Aloud Test Simulation: Flag unnatural or awkward phrasing",
     "Enhancement Prioritization: Rank issues from critical to minor improvements",
-    "Reference master_prohibited_words.json for any prohibited terms",
+    "Focus exclusively on dialogue content - Phase 10 handles word filtering outside dialogue",
     "Silent Enhancement Application: Apply improvements without documentation"
   ],
 

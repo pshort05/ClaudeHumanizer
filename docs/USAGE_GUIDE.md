@@ -182,7 +182,7 @@ See [Technical Reference](TECHNICAL_REFERENCE.md) for n8n, Make.com, and API int
 
 ### Phase 5: Subtlety Creation
 **File**: `5_subtlety_creation.json`
-**Dependencies**: `master_prohibited_words.json`
+**Dependencies**: None
 **Purpose**: Convert obvious statements to subtle implications
 
 **What it transforms**:
@@ -198,7 +198,7 @@ See [Technical Reference](TECHNICAL_REFERENCE.md) for n8n, Make.com, and API int
 
 ### Phase 6: Dialogue Enhancement
 **File**: `6_dialogue_enhancement.json`
-**Dependencies**: `master_prohibited_words.json`
+**Dependencies**: None
 **Purpose**: Improve character voice and speech authenticity
 
 **What it enhances**:
@@ -212,13 +212,13 @@ See [Technical Reference](TECHNICAL_REFERENCE.md) for n8n, Make.com, and API int
 ### Phase 6.1: Character-Specific Dialogue (Optional)
 **File**: `6.1_character_dialogue_pass.json`
 **When to use**: When specific characters need targeted voice refinement
-**Dependencies**: Character specifications, `master_prohibited_words.json`
+**Dependencies**: Character specifications
 
 See [Customization Guide](CUSTOMIZATION.md) for detailed setup instructions.
 
 ### Phase 7: Weak Language Cleanup
 **File**: `7_weak_language_cleanup.json`
-**Dependencies**: `master_prohibited_words.json`
+**Dependencies**: None
 **Purpose**: Remove generic weak language patterns
 
 **What it removes**:
@@ -234,7 +234,7 @@ See [Customization Guide](CUSTOMIZATION.md) for detailed setup instructions.
 
 ### Phase 8: Strategic Imperfections
 **File**: `8_strategic_imperfections.json`
-**Dependencies**: `master_prohibited_words.json`
+**Dependencies**: None
 **Purpose**: Add authentic human flow variations
 
 **What it adds**:
@@ -250,17 +250,34 @@ See [Customization Guide](CUSTOMIZATION.md) for detailed setup instructions.
 
 ### Phase 9: Final Verification
 **File**: `9_final_verification.json`
-**Dependencies**: `master_prohibited_words.json`
-**Purpose**: Quality control and final polish
+**Dependencies**: None
+**Purpose**: AI pattern detection and quality control
 
 **What it catches**:
-- Remaining AI patterns missed by previous phases
-- Consistency issues
-- Final prohibited word check
+- Remaining AI patterns (perfection syndrome, predictable phrasing)
+- Phrase repetition issues
+- Rhythm and flow variations needed
+- Perplexity enhancement opportunities
 
 **What it avoids**:
+- Word-level filtering (handled by Phase 10)
 - Major content changes
 - Redoing previous phases' work
+
+### Phase 10: Final AI Word Sweep
+**File**: `10_final_ai_word_sweep.json`
+**Dependencies**: `master_prohibited_words.json`
+**Purpose**: Final quality control checkpoint
+
+**What it catches**:
+- Prohibited words reintroduced by phases 3-9
+- AI vocabulary patterns missed earlier
+- Pattern rule violations (dialogue pauses, light descriptions, finger actions)
+
+**What it avoids**:
+- Dialogue modification
+- Sentence restructuring
+- Content changes
 
 ## Dependencies
 
@@ -272,18 +289,22 @@ See [Customization Guide](CUSTOMIZATION.md) for detailed setup instructions.
 | 2 | `2_ai_word_cleaning.json` | ✅ Yes |
 | 3 | `3_overwritten_language_reduction.json` | ❌ No |
 | 4 | `4_sensory_enhancement.json` | ❌ No |
-| 5 | `5_subtlety_creation.json` | ✅ Yes |
-| 6 | `6_dialogue_enhancement.json` | ✅ Yes |
-| 6.1 | `6.1_character_dialogue_pass.json` | ✅ Yes |
-| 7 | `7_weak_language_cleanup.json` | ✅ Yes |
-| 8 | `8_strategic_imperfections.json` | ✅ Yes |
-| 9 | `9_final_verification.json` | ✅ Yes |
+| 5 | `5_subtlety_creation.json` | ❌ No |
+| 6 | `6_dialogue_enhancement.json` | ❌ No |
+| 6.1 | `6.1_character_dialogue_pass.json` | ❌ No |
+| 7 | `7_weak_language_cleanup.json` | ❌ No |
+| 8 | `8_strategic_imperfections.json` | ❌ No |
+| 9 | `9_final_verification.json` | ❌ No |
+| 10 | `10_final_ai_word_sweep.json` | ✅ Yes |
 
 ### Master Prohibited Words List
 **File**: `master_prohibited_words.json`
-**Purpose**: Single source of truth for AI-associated terms to avoid
+**Purpose**: Single source of truth for AI-associated terms and pattern rules
 
-Must be included with phases: 2, 5, 6, 7, 8, 9
+**Must be included with phases: 2 and 10 ONLY**
+
+- **Phase 2**: Uses pattern rules (dialogue pauses, light descriptions, finger actions) to remove AI vocabulary
+- **Phase 10**: Final sweep to catch any prohibited words reintroduced by phases 3-9
 
 ## Troubleshooting
 
@@ -295,7 +316,8 @@ Must be included with phases: 2, 5, 6, 7, 8, 9
 - ✅ Check: Are you skipping any phases?
 
 **Prohibited words keep returning**:
-- ✅ Check: Is `master_prohibited_words.json` included for phases 2, 5, 6, 7, 8, 9?
+- ✅ Check: Is `master_prohibited_words.json` included for phases 2 and 10?
+- ✅ Check: Are you running Phase 10 as the final step?
 - ✅ Check: Are you using the most recent version of the master list?
 
 **Dialogue changes unexpectedly**:
@@ -348,7 +370,8 @@ After each phase, verify:
 **After Phase 6**: Character voices distinct and authentic
 **After Phase 7**: Weak language eliminated
 **After Phase 8**: Natural rhythm and imperfections present
-**After Phase 9**: All AI patterns eliminated, ready for publication
+**After Phase 9**: AI patterns detected, rhythm variations applied
+**After Phase 10**: All prohibited words eliminated, ready for publication
 
 ### Final Validation
 1. **AI Detection Test**: Run through multiple AI detection tools

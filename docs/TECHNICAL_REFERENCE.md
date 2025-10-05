@@ -444,7 +444,7 @@ class ClaudeHumanizerPipeline:
 
             # Prepare prompt
             prompt = self.prompts[phase]["content"]
-            # Phases 2 and 10 use pattern rules from master list
+            # ONLY Phases 2 and 10 require master list with pattern rules
             if phase in [2, 10]:
                 prompt = f"{self.master_prohibited}\\n\\n{prompt}"
 
