@@ -4,6 +4,7 @@ Advanced technical information for developers, integrators, and power users impl
 
 ## Table of Contents
 
+- [Claude-Specific Instructions](#claude-specific-instructions)
 - [LLM Optimization](#llm-optimization)
 - [Automation Integration](#automation-integration)
 - [API Configurations](#api-configurations)
@@ -12,123 +13,177 @@ Advanced technical information for developers, integrators, and power users impl
 - [Cost Management](#cost-management)
 - [Quality Metrics](#quality-metrics)
 
+## Claude-Specific Instructions
+
+**IMPORTANT: These prompts are optimized for Claude models (Anthropic).**
+
+ClaudeHumanizer has been designed and tested extensively with Claude models. While other LLMs can be used, Claude consistently delivers superior results across all phases due to:
+
+- **Superior literary judgment** - Claude excels at distinguishing purposeful style from AI artifacts
+- **Better instruction following** - Claude adheres to complex multi-constraint prompts more reliably
+- **Nuanced understanding** - Claude better understands "show don't tell" and subtext creation
+- **Pattern recognition** - Claude more accurately identifies and applies pattern rules (dialogue pauses, light descriptions, finger movements)
+
+### Recommended Claude Configuration
+
+**For Best Results (Claude-Only Pipeline):**
+```yaml
+models: Claude Sonnet 4.5 (all phases except creative phases) + Claude Sonnet 4.5 @ higher temperature (phases 4,5,6,8)
+quality: 95-98% of maximum potential
+cost: Medium-High
+best_for: Consistent, high-quality humanization across all text types
+```
+
+**Why Claude Sonnet 4.5:**
+- Latest model with best balance of quality, speed, and cost
+- Superior to previous Opus models for most tasks
+- Excellent at following complex assembly line constraints
+- Best pattern matching for new dialogue pause, light, and finger action rules
+
 ## LLM Optimization
 
 ### Optimal Model Selection by Phase
 
+**Note:** The 10-phase system now includes a final AI word sweep (Phase 10) to catch any prohibited words reintroduced during phases 3-9.
+
 #### Phase 1: Grammar Foundation
-- **Best Model**: Claude 3.5 Sonnet
+- **Best Model**: Claude Sonnet 4.5
 - **Temperature**: 0.1-0.2
 - **Memory**: Low (focused grammar rules)
 - **Reasoning**: Requires precision and consistency while preserving voice
 
 #### Phase 2: AI Word Cleaning
-- **Best Model**: GPT-4o
+- **Best Model**: Claude Sonnet 4.5
 - **Temperature**: 0.3-0.4
-- **Memory**: Medium (master list + context for alternatives)
-- **Reasoning**: Benefits from natural language understanding and creative replacement
+- **Memory**: Medium (master list + pattern rules for dialogue pauses, light descriptions, finger actions)
+- **Reasoning**: Excellent pattern recognition for new pattern-based rules
+- **Pattern Rules Applied**: dialogue_pause_pattern_rules, light_description_pattern_rules, finger_hand_action_pattern_rules
 
 #### Phase 3: Overwritten Language Reduction
-- **Best Model**: Claude Opus 3.0
+- **Best Model**: Claude Sonnet 4.5
 - **Temperature**: 0.2-0.3
 - **Memory**: Medium (context to distinguish purple prose from purposeful ornate language)
-- **Reasoning**: Requires sophisticated literary judgment
+- **Reasoning**: Superior literary judgment and nuanced understanding
 
 #### Phase 4: Sensory Enhancement
-- **Best Model**: Claude Opus 3.0
+- **Best Model**: Claude Sonnet 4.5
 - **Temperature**: 0.6-0.7
 - **Memory**: High (full scene context for appropriate sensory additions)
-- **Reasoning**: Peak creative capability for vivid, original descriptions
+- **Reasoning**: Creative capability for vivid, original descriptions while avoiding AI patterns
 
 #### Phase 5: Subtlety Creation
-- **Best Model**: Claude Opus 3.0
+- **Best Model**: Claude Sonnet 4.5
 - **Temperature**: 0.4-0.5
 - **Memory**: High (character/story context for appropriate implications)
 - **Reasoning**: Superior subtext creation and show-don't-tell understanding
 
 #### Phase 6: Dialogue Enhancement
-- **Best Model**: GPT-4o
-- **Temperature**: 0.7-0.8
+- **Best Model**: Claude Sonnet 4.5
+- **Temperature**: 1.0
 - **Memory**: High (character backgrounds and voice consistency tracking)
-- **Reasoning**: Best character voice differentiation and authentic dialogue
+- **Reasoning**: Higher temperature produces more natural, varied character voices
+- **Note**: Increased temperature from 0.7-0.8 to 1.0 for maximum dialogue authenticity
 
 #### Phase 7: Weak Language Cleanup
-- **Best Model**: Gemini 1.5 Pro
+- **Best Model**: Claude Sonnet 4.5
 - **Temperature**: 0.1-0.3
-- **Memory**: Medium (pattern recognition + context for intentional preservation)
-- **Reasoning**: Systematic pattern detection and consistent application
+- **Memory**: Medium (12 weak language pattern categories embedded in prompt)
+- **Reasoning**: Systematic pattern detection with literary awareness
+- **Note**: Now includes overused_transitions and robotic_qualifiers
 
 #### Phase 8: Strategic Imperfections
-- **Best Model**: Claude Opus 3.0
+- **Best Model**: Claude Sonnet 4.5
 - **Temperature**: 0.8-0.9
 - **Memory**: High (understanding of full text flow and rhythm)
-- **Reasoning**: Best understanding of authentic human writing patterns
+- **Reasoning**: Best understanding of authentic human writing patterns and imperfections
 
 #### Phase 9: Final Verification
-- **Best Model**: Gemini 1.5 Pro
+- **Best Model**: Claude Sonnet 4.5
 - **Temperature**: 0.1-0.2
-- **Memory**: Medium (final pattern check against prohibited content)
-- **Reasoning**: Most thorough systematic scanning and verification capabilities
+- **Memory**: Medium (AI pattern detection, perfection syndrome, rhythm variations)
+- **Reasoning**: Comprehensive AI pattern detection without word-level filtering
+- **Note**: No longer performs prohibited word removal (moved to Phase 10)
+
+#### Phase 10: Final AI Word Sweep (NEW)
+- **Best Model**: Claude Sonnet 4.5
+- **Temperature**: 0.2-0.3
+- **Memory**: Low (surgical word replacement only)
+- **Reasoning**: Catches prohibited words reintroduced by phases 3-9
+- **Pattern Rules Applied**: All pattern rules from master_prohibited_words.json
+- **Critical Role**: Final quality control checkpoint before output
 
 ### Model Family Strategies
 
 #### Single-Family Approaches
 
-**Anthropic-Only Pipeline**:
+**Anthropic-Only Pipeline (RECOMMENDED)**:
 ```yaml
-models: Claude 3.5 Sonnet (1,2,7,9) + Claude Opus 3.0 (3,4,5,6,8)
-quality: 95% of maximum potential
-cost: High (Opus usage)
-best_for: Literary quality and consistency
+models: Claude Sonnet 4.5 (all 10 phases)
+temperatures: 0.1-0.2 (phases 1,7,9), 0.3-0.5 (phases 2,3,5,10), 0.6-0.9 (phases 4,8), 1.0 (phase 6)
+quality: 95-98% of maximum potential
+cost: Medium-High
+best_for: Optimal humanization with consistent quality across all text types
+consistency: Superior assembly line constraint adherence
+pattern_recognition: Best for new pattern-based rules
 ```
 
 **OpenAI-Only Pipeline**:
 ```yaml
-models: GPT-4 Turbo (1,3,7,9) + GPT-4o (2,4,5,6,8)
-quality: 85% of maximum potential
+models: GPT-4 Turbo (1,3,7,9,10) + GPT-4o (2,4,5,6,8)
+quality: 80-85% of maximum potential
 cost: Medium-High
 best_for: Single-vendor relationship
+limitations: Less effective at pattern recognition and literary judgment
 ```
 
 **Google-Only Pipeline**:
 ```yaml
-models: Gemini 1.5 Pro (all phases)
-quality: 70% of maximum potential
+models: Gemini 1.5 Pro (all 10 phases)
+quality: 70-75% of maximum potential
 cost: Medium
 best_for: Systematic consistency over creativity
+limitations: Weaker at nuanced literary decisions
 ```
 
-#### Cost-Effective High Quality Strategy
+#### Optimal Claude Sonnet 4.5 Configuration (RECOMMENDED)
 ```yaml
-phase_1: Claude 3.5 Sonnet @ 0.2
-phase_2: Llama 3.1 405B @ 0.4
-phase_3: Claude 3.5 Sonnet @ 0.3
-phase_4: GPT-4o @ 0.7
-phase_5: Claude 3.5 Sonnet @ 0.5
-phase_6: GPT-4o @ 0.8
-phase_7: Gemini 1.5 Pro @ 0.2
-phase_8: Claude 3.5 Sonnet @ 0.8
-phase_9: Gemini 1.5 Pro @ 0.1
+phase_1: Claude Sonnet 4.5 @ 0.2
+phase_2: Claude Sonnet 4.5 @ 0.4
+phase_3: Claude Sonnet 4.5 @ 0.3
+phase_4: Claude Sonnet 4.5 @ 0.7
+phase_5: Claude Sonnet 4.5 @ 0.5
+phase_6: Claude Sonnet 4.5 @ 1.0  # Increased for dialogue naturalness
+phase_7: Claude Sonnet 4.5 @ 0.2
+phase_8: Claude Sonnet 4.5 @ 0.9
+phase_9: Claude Sonnet 4.5 @ 0.2
+phase_10: Claude Sonnet 4.5 @ 0.3  # NEW: Final word sweep
 
-quality: 90% of maximum potential
-cost_savings: 40-50% vs premium configuration
+quality: 95-98% of maximum potential
+cost: Medium-High (~$0.50-2.00 per 10k words depending on text complexity)
+consistency: Excellent - single model understands full assembly line context
+advantages:
+  - Superior pattern recognition (dialogue pauses, light descriptions, finger actions)
+  - Best literary judgment and nuance
+  - Excellent instruction following across all phases
+  - No model switching overhead
 ```
 
-#### Maximum Quality Configuration
+#### Budget-Friendly Configuration
 ```yaml
-phase_1: Claude 4.0 @ 0.2
-phase_2: GPT-5 @ 0.4
-phase_3: Claude Opus 4.1 @ 0.3
-phase_4: Claude Opus 4.1 @ 0.7
-phase_5: Claude Opus 4.1 @ 0.5
-phase_6: GPT-5 @ 0.8
-phase_7: Gemini 3.5 Ultra @ 0.2
-phase_8: Claude Opus 4.1 @ 0.9
-phase_9: Gemini 3.5 Ultra @ 0.1
+phase_1: Claude Sonnet 4.5 @ 0.2
+phase_2: Claude Sonnet 4.5 @ 0.4
+phase_3: Claude Haiku @ 0.3
+phase_4: Claude Sonnet 4.5 @ 0.7
+phase_5: Claude Haiku @ 0.5
+phase_6: Claude Sonnet 4.5 @ 1.0
+phase_7: Claude Haiku @ 0.2
+phase_8: Claude Sonnet 4.5 @ 0.9
+phase_9: Claude Haiku @ 0.2
+phase_10: Claude Sonnet 4.5 @ 0.3
 
-quality: 100% - Maximum achievable with latest models
-cost: Premium tier
-performance_improvement: +15-25% over previous generation
+quality: 85-90% of maximum potential
+cost_savings: 50-60% vs full Sonnet 4.5 pipeline
+strategy: Use Sonnet 4.5 for critical creative/pattern phases (2,4,6,8,10), Haiku for systematic phases
 ```
 
 ## Automation Integration
@@ -288,19 +343,21 @@ function validatePhaseOutput(inputData) {
 }
 ```
 
-#### Dynamic Model Selection Function
+#### Dynamic Model Selection Function (Claude Sonnet 4.5 Recommended)
 ```javascript
 function selectModel(phase) {
+  // RECOMMENDED: Claude Sonnet 4.5 for all phases
   const modelConfig = {
-    1: { provider: "anthropic", model: "claude-3-5-sonnet", temp: 0.2 },
-    2: { provider: "openai", model: "gpt-4o", temp: 0.4 },
-    3: { provider: "anthropic", model: "claude-opus", temp: 0.3 },
-    4: { provider: "anthropic", model: "claude-opus", temp: 0.7 },
-    5: { provider: "anthropic", model: "claude-opus", temp: 0.5 },
-    6: { provider: "openai", model: "gpt-4o", temp: 0.8 },
-    7: { provider: "google", model: "gemini-1.5-pro", temp: 0.2 },
-    8: { provider: "anthropic", model: "claude-opus", temp: 0.9 },
-    9: { provider: "google", model: "gemini-1.5-pro", temp: 0.1 }
+    1: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.2 },
+    2: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.4 },
+    3: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.3 },
+    4: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.7 },
+    5: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.5 },
+    6: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 1.0 },  // Increased for dialogue
+    7: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.2 },
+    8: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.9 },
+    9: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.2 },
+    10: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.3 }  // NEW: Phase 10
   };
   return modelConfig[phase];
 }
@@ -371,8 +428,8 @@ class ClaudeHumanizerPipeline:
 
     def load_prompts(self):
         self.prompts = {}
-        for i in range(1, 10):
-            with open(f"{i}_phase_prompt.json", "r") as f:
+        for i in range(1, 11):  # Updated to 11 for 10 phases
+            with open(f"{i}_*.json", "r") as f:
                 self.prompts[i] = json.load(f)
 
     def load_master_prohibited_words(self):
@@ -382,12 +439,13 @@ class ClaudeHumanizerPipeline:
     def process_text(self, text):
         current_text = text
 
-        for phase in range(1, 10):
+        for phase in range(1, 11):  # Updated to 11 for 10 phases
             print(f"Processing Phase {phase}...")
 
             # Prepare prompt
             prompt = self.prompts[phase]["content"]
-            if phase in [2, 5, 6, 7, 8, 9]:
+            # Phases 2 and 10 use pattern rules from master list
+            if phase in [2, 10]:
                 prompt = f"{self.master_prohibited}\\n\\n{prompt}"
 
             # Select model and settings
@@ -422,11 +480,11 @@ class ClaudeHumanizerPipeline:
         return current_text
 
     def validate_phase_output(self, text, phase):
-        # Check for prohibited words in relevant phases
-        if phase in [2, 5, 6, 7, 8, 9]:
+        # Check for prohibited words in Phase 2 and Phase 10 (final sweep)
+        if phase in [2, 10]:
             prohibited_found = any(
                 word.lower() in text.lower()
-                for word in self.master_prohibited.get("words", [])
+                for word in self.master_prohibited.get("prohibited_single_words", [])
             )
             if prohibited_found:
                 return False

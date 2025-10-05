@@ -96,9 +96,12 @@
   "processing_steps": {
     "step_1": "Carefully read the entire text to understand context and identify dialogue sections (in quotes) and titles/headings to preserve",
     "step_2": "Systematically search the text for any words or phrases from the prohibited list, focusing only on body text (skip dialogue and titles)",
-    "step_3": "Replace detected prohibited terms with natural, conversational alternatives that maintain original meaning",
-    "step_4": "Verify replacements do not introduce new AI-sounding words, sophisticated punctuation (especially no em dashes — or en dashes –), or other prohibited list terms",
-    "step_5": "Review final text to ensure dialogue and titles remain unchanged and flow is natural"
+    "step_3": "Apply dialogue_pause_pattern_rules from master_prohibited_words.json: identify ANY metaphorical descriptions of pauses/silences between dialogue and replace with 'Silence.', 'Awkward silence.', or remove entirely",
+    "step_4": "Apply light_description_pattern_rules from master_prohibited_words.json: identify ANY elaborate light descriptions using verbs like 'filtering', 'casting', 'streaming' and replace with simple phrases like 'in the moonlight', 'afternoon sun', or remove entirely",
+    "step_5": "Apply finger_hand_action_pattern_rules from master_prohibited_words.json: identify ANY elaborate finger/hand movement descriptions (e.g., 'fingers dancing', 'fingers hovering') and replace with direct action verbs like 'typing', 'touched', 'traced'",
+    "step_6": "Replace detected prohibited terms with natural, conversational alternatives that maintain original meaning",
+    "step_7": "Verify replacements do not introduce new AI-sounding words, sophisticated punctuation (especially no em dashes — or en dashes –), or other prohibited list terms",
+    "step_8": "Review final text to ensure dialogue and titles remain unchanged and flow is natural"
   },
 
   "replacement_guidelines": {
@@ -107,7 +110,10 @@
     "flow_maintenance": "Ensure replacements maintain the natural flow and readability of the text",
     "context_sensitivity": "Consider the surrounding context when selecting appropriate replacements",
     "avoid_ai_language": "Never introduce sophisticated punctuation (em/en dashes), perfect transitions, buzzwords, or overly polished language during replacement process",
-    "punctuation_restriction": "Use only simple punctuation in replacements: commas, periods, question marks, exclamation points. Never use em dashes (—) or en dashes (–)"
+    "punctuation_restriction": "Use only simple punctuation in replacements: commas, periods, question marks, exclamation points. Never use em dashes (—) or en dashes (–)",
+    "dialogue_pause_handling": "For ANY metaphorical or elaborate description of conversational pauses (e.g., 'weight of words', 'silence stretched', 'words hung'), replace with 'Silence.', 'Awkward silence.', or preferably remove entirely",
+    "light_description_handling": "For ANY elaborate light descriptions using verbs like 'filtering', 'casting', 'streaming', 'slanting' (e.g., 'sunlight filtered through', 'moonlight reflecting'), replace with simple phrases like 'in the moonlight', 'afternoon sun', or preferably remove entirely",
+    "finger_hand_action_handling": "For ANY elaborate finger/hand movement descriptions (e.g., 'fingers dancing across the keyboard', 'fingers hovering over'), replace with direct action verbs like 'typing', 'touched', 'traced'. Ask 'What is the person actually DOING?' and use that verb."
   },
 
   "output_format": {

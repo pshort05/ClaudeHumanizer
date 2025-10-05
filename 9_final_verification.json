@@ -81,38 +81,10 @@
     }
   },
 
-  "prohibited_content_database": {
-    "prohibited_words": [
-      "adept", "buzz", "buzzed", "cascade", "certainly", "costume", "crucial", "curated", "delve", "domestic", "efficiency", "elegant", "embarked", "enables", "endeavor", "Enhance", "enlightening", "esteemed", "facilitates", "glean", "groundbreaking", "hum", "hummed", "insights", "intricate", "invaluable", "leverage", "measured", "methodical", "methodically", "meticulous", "mosaic", "navigating", "paramount", "poignant", "possibility", "practiced", "precisely", "precision", "pulsed", "Relentless", "resonated", "Streamlines", "suddenly", "tapestry", "Unveiled", "yielded", "mechanical", "illuminate", "reverent",
-      "underscore", "robust", "optimize", "streamline", "facilitate", "comprehensive", "holistic", "nuanced", "multifaceted", "pivotal", "integral", "innovative", "cutting-edge", "paradigm"
-    ],
-    "prohibited_phrases": [
-      "announcements echo", "as a professional", "babbling brook", "buzzed with activity", "calm exterior", "cast eerie shadows", "casting shadows", "chest feel tight", "comfortable silence", "complex interplay", "crucial role", "deep understanding", "delve into", "door chimed", "echoed with my focus", "fell between us", "fingers are moving", "fingers hung", "fingers moving", "fingers traced", "hand brushed against", "hangs between us", "held the kind", "Highlight the importance", "hums to live", "hums with activity", "hung between us", "hung in the air between them", "hustle and bustle", "in summary", "indelible mark", "later that evening as they sat", "leaves painting", "light filtering through", "light filtered through", "loaded with implications", "loaded with possibilities", "loaded with possibility", "my chest tight", "neared the exit", "new avenue", "nuanced understanding", "phone buzzed", "practiced efficiency", "practiced movement", "quiet confidence", "regret and poor decisions", "relentless pursuit", "shed light", "shifted in my seat", "shifting in her expression", "significant role", "stark reminder", "stream of commuters", "stream of people", "stretched endlessly before", "tempered by gentle humility", "that wasâ€¦", "question hangs in the air between us", "question hung between them", "thought hits me harder than it should", "words hit me", "words hung between them", "words hung between us", "tightened my chest", "too practiced", "Unwavering commitment", "usual efficiency", "valuable insight", "voice carried the weight of", "weighing something", "weight of her words", "weight of his words", "words hung", "words settled over", "wrapped in polished charm", "wrung out", "you may want to", "something else", "uniquely him", "uniquely her", "like a physical blow", "That was...", "study her face", "for a long moment", "pressed against", "pressed to", "glancing around", "demeanor shifted", "way he transformed", "way she transformed", "crisp and authoritative", "mentally kicked myself", "she gestured", "he gestured", "polished professional", "contrast between", "something like that", "smell like lavender", "moonlight reflecting", "bastion of", "As a professional", "clarion of", "mosaic of", "fluid grace", "testament to"
-    ],
-    "context_prohibited_words": {
-      "armor": {
-        "rule": "Avoid metaphorical uses (emotional armor, wore like armor). Allow literal armor and common idioms (knight in shining armor).",
-        "detection_patterns": ["wore * like armor", "* armor against *", "emotional armor", "armor of *"]
-      },
-      "dancing": {
-        "rule": "Avoid metaphorical movement descriptions (fingers/hands dancing, light/shadows dancing). Allow actual physical dancing.",
-        "detection_patterns": ["fingers danced *", "* danced over *", "light danced *", "shadows danced *"]
-      },
-      "mask": {
-        "rule": "Avoid metaphorical concealment (mask of confidence, behind a mask). Allow literal masks (face mask, costume mask).",
-        "detection_patterns": ["* like a mask", "* was a mask", "mask of *", "behind a mask of *"]
-      }
-    },
-    "replacement_strategies": {
-      "case_sensitive_matching": "Check for exact case matches and common variations",
-      "phrase_priority": "Replace longer phrases before individual words to avoid partial replacements",
-      "context_preservation": "Ensure replacements maintain sentence flow and meaning",
-      "context_checking": "For context_prohibited_words, check surrounding context using detection_patterns. Only replace if word appears in prohibited contexts.",
-      "processing_order": "Check context_prohibited_words before prohibited_words to ensure contextual rules take precedence",
-      "punctuation_simplification": "Replace em dashes with commas/periods/parentheses, en dashes with 'to'/hyphens, favor simple punctuation over sophisticated typography",
-      "dialogue_exemption": "Never apply prohibited content filtering to dialogue or quoted speech",
-      "markdown_exemption": "Never apply prohibited content filtering to Markdown formatting elements"
-    }
+  "prohibited_content_note": {
+    "master_list_reference": "Phase 10 handles all prohibited word/phrase removal using master_prohibited_words.json",
+    "phase_9_focus": "This phase focuses on AI pattern detection, perfection syndrome, rhythm variations, and strategic imperfections only",
+    "no_word_filtering": "Phase 9 does not perform prohibited word filtering - that is handled by Phase 2 and Phase 10"
   },
 
   "enhanced_detection_frameworks": {
@@ -247,7 +219,9 @@
       "extra_spaces": "Include rare double spaces or missing spaces after periods",
       "inconsistent_oxford_commas": "Use Oxford commas sometimes but not always",
       "ellipses_variety": "Mix two-dot and three-dot ellipses",
-      "avoid_sophisticated_dashes": "Replace em dashes and en dashes with simpler punctuation (commas, periods, parentheses, or double hyphens)",
+      "em_dash_removal": "Replace all em dashes (—) with commas, periods, parentheses, or double hyphens (--)",
+      "en_dash_removal": "Replace all en dashes (–) with 'to', hyphens (-), or 'through' as appropriate",
+      "avoid_sophisticated_dashes": "Use only simple punctuation over sophisticated typography",
       "exemptions": "Preserve all punctuation in dialogue and Markdown formatting"
     },
 

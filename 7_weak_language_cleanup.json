@@ -121,6 +121,16 @@
         "description": "Casual phrases that may weaken formal or literary text",
         "examples": ["And here's the kicker", "Here's the thing", "Bottom line", "At the end of the day", "Long story short", "The truth is", "Let's be honest", "Real talk"],
         "action": "Replace with more precise language appropriate to the text's register"
+      },
+      "overused_transitions": {
+        "description": "AI overuses these predictable transition words that make text feel formulaic",
+        "examples": ["Furthermore", "Additionally", "In addition", "However", "Nevertheless", "Nonetheless", "Therefore", "Thus", "Hence", "Consequently", "Subsequently", "Ultimately", "Overall", "In conclusion"],
+        "action": "Replace with more varied, natural transitions or restructure sentences to eliminate need for formal transitions"
+      },
+      "robotic_qualifiers": {
+        "description": "Academic or AI-style throat-clearing phrases that sound robotic",
+        "examples": ["It should be emphasized", "It is worth mentioning", "One might argue", "It could be suggested", "It is widely believed", "Research indicates", "Studies show", "Experts agree", "It is generally accepted"],
+        "action": "Remove entirely and state the point directly without qualification"
       }
     },
     "justification_criteria": {

@@ -38,53 +38,233 @@
   "prohibited_phrases": [
     "announcements echo", "as a professional", "as previously mentioned", "as well as", "at its core",
     "babbling brook", "bastion of", "battle of wits", "beacon of hope", "buzzed with activity", "buzzed with energy", "buzzed with morning energy", "buzzing with activity",
-    "calm exterior", "cascade", "cast eerie shadows", "casting everything in gold", "casting golden patterns", "casting shadows", "chest feel tight", "clarion of", "comfortable silence", "complex interplay", "crucial role", "crucial role in understanding",
+    "calm exterior", "cascade", "chest feel tight", "clarion of", "complex interplay", "crucial role", "crucial role in understanding",
     "deep understanding", "delve into", "delving into", "door chimed", "due to",
-    "echoed with my focus", "even if", "even though", "fell between us",
-    "fingers are moving", "fingers dancing", "fingers danced", "fingers hung", "fingers moving", "fingers traced", "for a long moment",
+    "echoed with my focus", "even if", "even though",
     "game changer", "game-changing", "given that", "glancing around",
-    "hand brushed against", "hangs between us", "held the kind", "highlight the importance", "hung between us", "hung in the air between them", "hums to live", "hums with activity", "hustle and bustle",
+    "hand brushed against", "held the kind", "highlight the importance", "hums to live", "hums with activity", "hustle and bustle",
     "in summary", "in today's digital era", "indelible mark",
-    "later that evening as they sat", "leaves painting", "light filtered through", "light filtering through", "loaded with implications", "loaded with possibilities", "loaded with possibility",
-    "moonlight filtering through", "moonlight reflecting", "mosaic of", "my chest tight",
+    "later that evening as they sat", "leaves painting",
+    "mosaic of", "my chest tight",
     "neared the exit", "new avenue", "not only", "nuanced understanding",
     "on the other hand", "open a new avenue",
     "phone buzzed", "practiced efficiency", "practiced movement", "pressed against", "pressed to", "polished professional",
-    "question hangs in the air between us", "question hung between them", "question hung in the air between us",
     "regret and poor decisions", "relentless pursuit",
     "shed light", "shed light on", "shifted in my seat", "shifting in her expression", "significant role", "stark reminder", "stream of commuters", "stream of people", "stretched endlessly before", "study her face",
-    "tempered by gentle humility", "that being said", "that was", "that was…", "the contrast between", "the way he transformed", "the way she transformed", "thought hits me harder than it should", "tightened my chest", "too practiced",
+    "tempered by gentle humility", "that being said", "that was", "that was…", "the contrast between", "the way he transformed", "the way she transformed", "tightened my chest", "too practiced",
     "unwavering commitment", "usual efficiency",
-    "voice carried the weight of", "valuable insight",
-    "weighing something", "weight of her words", "weight of his words", "words hung", "words hung between them", "words hung between us", "words settled over", "wrapped in polished charm", "wrung out",
+    "valuable insight",
+    "weighing something", "wrapped in polished charm", "wrung out",
     "you could consider", "you may want to"
   ],
 
-  "weak_language_patterns": {
-    "puff_words": ["utilize", "commence", "expedite", "facilitate", "implement", "ascertain", "procure", "demonstrates"],
-    "empty_calorie_words": ["something", "anything", "stuff", "somewhat", "everything", "various", "certain", "aspect", "things", "elements", "numerous", "multiple", "simply"],
-    "inflation_words": ["very", "truly", "highly", "totally", "actually", "completely", "absolutely", "extremely", "really", "incredibly", "remarkably", "exceptionally"],
-    "weasel_words": ["may", "might", "could", "can", "virtually", "up to", "as much as", "help", "like", "believe", "often", "suggests", "appears"],
-    "hedge_words": ["a bit", "sort of", "kind of", "in a sense", "generally", "probably", "more or less", "somewhat", "relatively"],
-    "filter_phrases": ["he watched", "she saw", "he noticed", "she felt"],
-    "cliches_buzzwords": ["unlock the potential", "revolutionize the landscape", "dive deep", "harness the power", "game-changing", "paradigm shift", "robust", "synergy"],
-    "formal_hedging": ["it is important to note", "it's worth considering", "it may be the case that"],
-    "redundant_phrases": ["in order to", "due to the fact that", "at this point in time", "basic fundamentals", "end result"],
-    "conversational_idioms": ["and here's the kicker", "here's the thing", "bottom line", "at the end of the day", "long story short", "the truth is", "let's be honest", "real talk"]
+  "note_on_weak_language_patterns": {
+    "description": "Weak language patterns (puff words, empty calorie words, inflation words, weasel words, hedge words, filter phrases, cliches, formal hedging, redundant phrases, conversational idioms, overused transitions, and robotic qualifiers) are handled exclusively by Phase 7",
+    "reference": "See 7_weak_language_cleanup.json for complete list of weak language patterns and examples",
+    "reason_for_exclusion": "These patterns are only used by Phase 7 and are already embedded in that phase's prompt with full examples and guidance"
   },
-
-  "overused_transitions": [
-    "furthermore", "additionally", "in addition", "however", "nevertheless", "nonetheless", "therefore", "thus", "hence", "consequently", "subsequently", "ultimately", "overall", "in conclusion"
-  ],
-
-  "robotic_qualifiers": [
-    "it should be emphasized", "it is worth mentioning", "one might argue", "it could be suggested", "it is widely believed", "research indicates", "studies show", "experts agree", "it is generally accepted"
-  ],
 
   "contextual_patterns": {
     "armor_metaphors": ["wore * like armor", "* armor against *", "emotional armor", "armor of *"],
     "dancing_metaphors": ["fingers danced *", "* danced over *", "light danced *", "shadows danced *"],
     "mask_metaphors": ["* like a mask", "* was a mask", "mask of *", "behind a mask of *"]
+  },
+
+  "dialogue_pause_pattern_rules": {
+    "description": "AI over-describes pauses in dialogue with flowery metaphors. Replace with simple, direct alternatives.",
+    "detection_rule": "Any metaphorical or elaborate description of a pause, silence, or gap in conversation between characters, OR any description that suggests unspoken tension/meaning hanging in the air",
+    "common_ai_patterns": [
+      "weight of * words",
+      "words hung *",
+      "words settled *",
+      "words lingered *",
+      "words echoed *",
+      "words filled the *",
+      "silence stretched *",
+      "silence hung *",
+      "silence settled *",
+      "comfortable silence",
+      "quiet hung *",
+      "pause hung *",
+      "pause stretched *",
+      "pause filled *",
+      "beat of silence",
+      "moment hung *",
+      "air between them *",
+      "air between us *",
+      "space between them *",
+      "gap filled with *",
+      "fell between *",
+      "question * in the air *",
+      "question hung *",
+      "loaded with implications",
+      "loaded with possibilities",
+      "loaded with possibility",
+      "thought hits me *",
+      "thought hit *"
+    ],
+    "allowed_replacements_only": [
+      "Silence.",
+      "Awkward silence.",
+      "A pause.",
+      "Neither spoke.",
+      "No one said anything.",
+      "[Remove the description entirely and just continue with the next dialogue or action]"
+    ],
+    "replacement_strategy": {
+      "preferred": "Remove the pause description entirely - let the dialogue speak for itself",
+      "simple_alternative": "Use 'Silence.' or 'A pause.' only when the pause is essential to the scene",
+      "awkward_alternative": "Use 'Awkward silence.' only when the pause is specifically uncomfortable",
+      "never_use": "Any metaphorical or elaborate descriptions of silence, pauses, or conversational gaps"
+    },
+    "examples": {
+      "bad_ai_writing": [
+        "The weight of his words hung in the air between them.",
+        "Her words settled over the room like a heavy blanket.",
+        "Silence stretched between them, taut and uncomfortable.",
+        "The pause filled the space with unspoken tension.",
+        "The question hung in the air between us.",
+        "Her silence was loaded with implications.",
+        "Comfortable silence fell between them.",
+        "The thought hit me harder than it should."
+      ],
+      "good_human_writing": [
+        "Silence.",
+        "Neither spoke.",
+        "[No pause description - just continue to next dialogue]",
+        "Awkward silence.",
+        "[Simply move to next action or dialogue without describing the pause]"
+      ]
+    },
+    "pattern_matching_instruction": "Identify ANY description of a conversational pause, silence, unspoken tension, or 'things hanging in the air' that uses metaphor, personification, or elaborate language. This includes: pauses described with physical verbs (hung, stretched, settled, filled), silences given qualities (comfortable, loaded, heavy), questions or thoughts described as lingering, and anything suggesting meaning/tension floating between characters. Replace with simple alternatives or remove entirely."
+  },
+
+  "light_description_pattern_rules": {
+    "description": "AI over-describes light with elaborate filtering/casting/reflecting metaphors. Replace with simple, direct alternatives.",
+    "detection_rule": "Any description of light that uses verbs like 'filtering', 'casting', 'streaming', 'slanting', or elaborate metaphors for illumination",
+    "common_ai_patterns": [
+      "light filtered *",
+      "light filtering *",
+      "* filtering through *",
+      "* filtered through *",
+      "sunlight filtering *",
+      "sunlight streaming *",
+      "sunlight slanted *",
+      "sun filtered *",
+      "sun painted *",
+      "moonlight filtering *",
+      "moonlight reflecting *",
+      "morning light streams *",
+      "casting * shadows",
+      "cast * shadows",
+      "casting everything in gold",
+      "casting golden patterns",
+      "casting shadows",
+      "light slanted through *",
+      "afternoon light casts *"
+    ],
+    "allowed_replacements_only": [
+      "in the moonlight",
+      "in the sunlight",
+      "afternoon sun",
+      "morning sun",
+      "evening light",
+      "dim light",
+      "bright light",
+      "in the shadows",
+      "[Remove the light description entirely if not essential]"
+    ],
+    "replacement_strategy": {
+      "preferred": "Use simple prepositional phrases: 'in the [time] [light source]' (e.g., 'in the afternoon sun', 'in the moonlight')",
+      "simple_alternative": "Use direct noun phrases: 'afternoon sun', 'morning light', 'dim room'",
+      "never_use": "Verbs like filtering, streaming, slanting, casting, painting with light; elaborate metaphors for illumination"
+    },
+    "examples": {
+      "bad_ai_writing": [
+        "Sunlight filtered through the dusty window.",
+        "The afternoon light cast everything in gold.",
+        "Moonlight filtering through the curtains illuminated her face.",
+        "Light slanted through the blinds, casting golden patterns on the floor.",
+        "Morning light streamed through the window.",
+        "The sun painted the room in warm hues."
+      ],
+      "good_human_writing": [
+        "In the afternoon sun",
+        "The dusty window",
+        "In the moonlight",
+        "Morning sun",
+        "The bright room",
+        "[Remove light description - just describe the scene directly]"
+      ]
+    },
+    "pattern_matching_instruction": "Identify ANY description of light/sunlight/moonlight that uses active verbs (filtering, streaming, slanting, casting, painting) or elaborate metaphors. Replace with simple prepositional phrases like 'in the [light source]' or direct nouns like '[time] sun/light'. Prefer removal if the light description doesn't add essential information."
+  },
+
+  "finger_hand_action_pattern_rules": {
+    "description": "AI over-describes finger/hand movements with elaborate verbs instead of simply naming the action. Replace with direct action verbs.",
+    "detection_rule": "Any description of fingers/hands doing an action that focuses on the finger movement rather than the action itself (especially typing, writing, touching)",
+    "common_ai_patterns": [
+      "fingers * moving",
+      "fingers are moving",
+      "fingers moved *",
+      "fingers dancing *",
+      "fingers danced *",
+      "fingers hovering *",
+      "fingers hovered *",
+      "fingers hung *",
+      "fingers traced *",
+      "fingers flew *",
+      "fingers drummed *",
+      "fingers glided *",
+      "hands dancing *",
+      "hands danced *",
+      "hands hovering *",
+      "hands flew *",
+      "running * fingers *",
+      "running his fingers *",
+      "running her fingers *",
+      "my finger hovers *",
+      "finger hovers over *"
+    ],
+    "allowed_replacements_only": [
+      "typing",
+      "stopped typing",
+      "typed",
+      "wrote",
+      "writing",
+      "touched",
+      "traced",
+      "tapped",
+      "clicked",
+      "pressed",
+      "[Use the actual action verb directly without describing finger movement]"
+    ],
+    "replacement_strategy": {
+      "preferred": "Use the direct action verb: 'typing' instead of 'fingers moving across the keyboard'",
+      "simple_alternative": "Name the completed action: 'typed', 'wrote', 'touched', 'traced'",
+      "never_use": "Elaborate descriptions of finger/hand movements (dancing, hovering, flying, gliding, drumming). Just name the action being performed.",
+      "context_awareness": "If 'traced' is used for actual tracing (e.g., tracing a scar, tracing a map), keep it. Only replace when it's over-describing a simple action."
+    },
+    "examples": {
+      "bad_ai_writing": [
+        "My fingers danced across the keyboard.",
+        "Her fingers hovered over the keys.",
+        "His fingers flew over the laptop.",
+        "Fingers moving, I typed out a response.",
+        "I ran my fingers along the edge of the table.",
+        "My finger hovers over the send button."
+      ],
+      "good_human_writing": [
+        "I typed.",
+        "She paused.",
+        "He typed fast.",
+        "I typed a response.",
+        "I touched the table edge.",
+        "I hesitated.",
+        "My finger over the send button."
+      ]
+    },
+    "pattern_matching_instruction": "Identify ANY description that focuses on finger/hand movement instead of the actual action being performed. Ask: 'What is the person actually DOING?' Replace with the direct action verb (typing, writing, touching, clicking) without elaborating on finger movements. If the finger/hand description is the only content, replace with the action verb or remove entirely."
   },
 
   "replacement_strategy": {

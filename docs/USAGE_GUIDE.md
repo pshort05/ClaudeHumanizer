@@ -14,18 +14,20 @@ Complete step-by-step instructions for using the ClaudeHumanizer assembly line s
 
 ## Quick Start
 
+**⚠️ IMPORTANT: These prompts are optimized for Claude (Anthropic). For best results, use Claude Sonnet 4.5.**
+
 ### Minimum Viable Process
 
 1. **Download Required Files**:
-   - All 9 phase prompts (`1_grammar_foundation.json` through `9_final_verification.json`)
+   - All 10 phase prompts (`1_grammar_foundation.json` through `10_final_ai_word_sweep.json`)
    - `master_prohibited_words.json`
 
 2. **Process Your Text**:
    ```
-   Phase 1 → Phase 2 → Phase 3 → Phase 4 → Phase 5 → Phase 6 → Phase 7 → Phase 8 → Phase 9
+   Phase 1 → Phase 2 → Phase 3 → Phase 4 → Phase 5 → Phase 6 → Phase 7 → Phase 8 → Phase 9 → Phase 10
    ```
 
-3. **Include Master List**: Phases 2, 5, 6, 7, 8, and 9 require `master_prohibited_words.json`
+3. **Include Master List**: Phases 2 and 10 require `master_prohibited_words.json`
 
 4. **Use Previous Output**: Each phase processes the output from the previous phase
 
@@ -35,20 +37,23 @@ The ClaudeHumanizer operates as a **true assembly line** where each phase specia
 
 ### Domain Specialization
 - **Phase 1**: Grammar errors ONLY
-- **Phase 2**: AI-associated words ONLY
+- **Phase 2**: AI-associated words ONLY (applies pattern rules for dialogue pauses, light descriptions, finger actions)
 - **Phase 3**: Purple prose elimination ONLY
 - **Phase 4**: Flat passage enhancement ONLY
 - **Phase 5**: Obvious statement conversion ONLY
 - **Phase 6**: Dialogue content ONLY
-- **Phase 7**: Weak language patterns ONLY
+- **Phase 7**: Weak language patterns ONLY (12 categories including overused transitions and robotic qualifiers)
 - **Phase 8**: Rhythm and flow variation ONLY
-- **Phase 9**: Final AI pattern detection ONLY
+- **Phase 9**: Final AI pattern detection ONLY (no word filtering)
+- **Phase 10**: **NEW** - Final prohibited word sweep ONLY (catches words reintroduced by phases 3-9)
 
 ### Key Features
 - ✅ **No interference** - Each prompt only works in its domain
-- ✅ **Master prohibited list** - Prevents reintroduction of AI terms
+- ✅ **Master prohibited list** - Contains pattern-based rules (not just word lists)
 - ✅ **Sequential dependencies** - Later phases build on earlier work
 - ✅ **Dialogue protection** - Only Phase 6 modifies quoted speech
+- ✅ **Pattern recognition** - New intelligent rules for common AI writing patterns
+- ✅ **Final quality control** - Phase 10 ensures no prohibited words slip through
 
 ## Execution Methods
 
@@ -56,7 +61,7 @@ The ClaudeHumanizer operates as a **true assembly line** where each phase specia
 
 Copy and paste each prompt with proper dependencies:
 
-#### For Phases Requiring Master List (2, 5, 6, 7, 8, 9):
+#### For Phases Requiring Master List (2, 10):
 ```
 First, here is the master prohibited words list:
 [paste contents of master_prohibited_words.json]
@@ -68,7 +73,7 @@ Process this text:
 [paste your text or previous phase output]
 ```
 
-#### For Phases NOT Requiring Master List (1, 3, 4):
+#### For Phases NOT Requiring Master List (1, 3, 4, 5, 6, 7, 8, 9):
 ```
 [paste phase-specific JSON prompt]
 
@@ -76,26 +81,32 @@ Process this text:
 [paste your text or previous phase output]
 ```
 
-### Method 2: Claude Projects/Custom Instructions
+### Method 2: Claude Projects/Custom Instructions (RECOMMENDED)
+
+**Use Claude Sonnet 4.5 for best results.**
 
 Set up a Claude Project with these instructions:
 
 ```markdown
-You are an assembly line text processor. When I provide text:
+You are an assembly line text processor optimized for humanizing AI-generated text. When I provide text:
 
-1. Process through Phase 1 (Grammar Foundation) - no master list needed
+1. Process through Phase 1 (Grammar Foundation)
 2. Take output through Phase 2 (AI Word Cleaning) - include master_prohibited_words.json
-3. Take output through Phase 3 (Overwritten Language Reduction) - no master list needed
-4. Take output through Phase 4 (Sensory Enhancement) - no master list needed
-5. Take output through Phase 5 (Subtlety Creation) - include master_prohibited_words.json
-6. Take output through Phase 6 (Dialogue Enhancement) - include master_prohibited_words.json
-7. Take output through Phase 7 (Weak Language Cleanup) - include master_prohibited_words.json
-8. Take output through Phase 8 (Strategic Imperfections) - include master_prohibited_words.json
-9. Take output through Phase 9 (Final Verification) - include master_prohibited_words.json
-10. Return only the final Phase 9 output
+3. Take output through Phase 3 (Overwritten Language Reduction)
+4. Take output through Phase 4 (Sensory Enhancement)
+5. Take output through Phase 5 (Subtlety Creation)
+6. Take output through Phase 6 (Dialogue Enhancement) - use temperature 1.0
+7. Take output through Phase 7 (Weak Language Cleanup)
+8. Take output through Phase 8 (Strategic Imperfections)
+9. Take output through Phase 9 (Final Verification)
+10. Take output through Phase 10 (Final AI Word Sweep) - include master_prohibited_words.json
+11. Return only the final Phase 10 output
 
-Phases 2, 5, 6, 7, 8, and 9 require the master_prohibited_words.json file.
-Use the JSON prompts from the ClaudeHumanizer repository in exact order.
+IMPORTANT:
+- Phases 2 and 10 require master_prohibited_words.json (contains pattern rules)
+- Phase 6 should use higher creativity (temperature 1.0) for natural dialogue
+- Use the JSON prompts from the ClaudeHumanizer repository in exact order
+- Phase 10 is critical - it catches prohibited words reintroduced by phases 3-9
 ```
 
 ### Method 3: Automation Integration
