@@ -188,39 +188,131 @@ strategy: Use Sonnet 4.5 for critical creative/pattern phases (2,4,6,8,10), Haik
 
 ## Automation Integration
 
-### n8n Workflow Implementation
+### n8n Workflow Implementation (RECOMMENDED)
 
-#### Basic Workflow Architecture
+**Complete workflow available:** See `docs/n8n_workflow_sample.json` for a ready-to-import workflow.
+
+#### Quick Start Guide
+
+1. **Import the Workflow**
+   ```bash
+   # In n8n, go to Workflows → Import from File
+   # Select: docs/n8n_workflow_sample.json
+   ```
+
+2. **Configure File Paths**
+   - Update all "Load Phase X Prompt" nodes with your ClaudeHumanizer directory path
+   - Example: `/home/user/ClaudeHumanizer/1_grammar_foundation.json`
+
+3. **Set Up Anthropic API Credentials**
+   ```
+   Settings → Credentials → New Credential → Anthropic API
+   Add your API key from: https://console.anthropic.com/
+   ```
+
+4. **Activate and Test**
+   ```bash
+   # Activate the workflow
+   # Send test request:
+   curl -X POST https://your-n8n-instance.com/webhook/humanize-text \
+     -H "Content-Type: application/json" \
+     -d '{"text": "Your AI-generated text here..."}'
+   ```
+
+#### Architecture Overview
+
+The workflow consists of:
+- **1 Webhook Trigger** (POST endpoint)
+- **11 File Loaders** (master list + 10 phase prompts)
+- **10 Anthropic Claude Nodes** (one per phase)
+- **1 Webhook Response** (returns humanized text)
+
+**Sequential Flow:**
+```
+Webhook Input
+  ↓
+Load Master Prohibited Words + Phase Prompts
+  ↓
+Phase 1 (temp 0.2) → Phase 2 (temp 0.4, + master list)
+  ↓
+Phase 3 (temp 0.3) → Phase 4 (temp 0.7)
+  ↓
+Phase 5 (temp 0.5) → Phase 6 (temp 1.0)
+  ↓
+Phase 7 (temp 0.2) → Phase 8 (temp 0.9)
+  ↓
+Phase 9 (temp 0.2) → Phase 10 (temp 0.3, + master list)
+  ↓
+Webhook Response (JSON with humanized text)
+```
+
+#### Key Configuration Details
+
+**Phase 2 & 10 (Master List Integration):**
+```javascript
+// System message for Phase 2 and Phase 10
+systemMessage: `={{
+  JSON.parse($node['Load Master Prohibited Words'].json.data).toString() +
+  '\n\n' +
+  JSON.parse($node['Load Phase 2 Prompt'].json.data).prompt
+}}`
+```
+
+**All Other Phases (No Master List):**
+```javascript
+// System message for Phases 1, 3-9
+systemMessage: `={{
+  JSON.parse($node['Load Phase X Prompt'].json.data).prompt
+}}`
+```
+
+**Text Chaining Between Phases:**
+```javascript
+// First phase uses webhook input
+text: "={{ $json.body.text }}"
+
+// All subsequent phases use previous phase output
+text: "={{ $json.content[0].text }}"
+```
+
+#### Complete Node Configuration Example
+
 ```json
 {
-  "name": "ClaudeHumanizer Assembly Line",
-  "nodes": [
-    {
-      "name": "Input Trigger",
-      "type": "n8n-nodes-base.webhook",
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "humanize-text"
-      }
-    },
-    {
-      "name": "Load Master Prohibited Words",
-      "type": "n8n-nodes-base.readFile",
-      "parameters": {
-        "filePath": "./master_prohibited_words.json"
-      }
-    },
-    {
-      "name": "Phase 1: Grammar Foundation",
-      "type": "n8n-nodes-base.anthropic",
-      "parameters": {
-        "model": "claude-3-5-sonnet-20241022",
-        "temperature": 0.2,
-        "systemMessage": "{{ $json.grammarPrompt }}",
-        "message": "{{ $json.inputText }}"
-      }
+  "parameters": {
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "anthropicApi",
+    "resource": "message",
+    "model": "claude-sonnet-4-5-20250929",
+    "text": "={{ $json.content[0].text }}",
+    "options": {
+      "temperature": 0.4,
+      "systemMessage": "={{ JSON.parse($node['Load Master Prohibited Words'].json.data).toString() + '\\n\\n' + JSON.parse($node['Load Phase 2 Prompt'].json.data).prompt }}",
+      "maxTokens": 8192
     }
-  ]
+  },
+  "name": "Phase 2 - AI Word Cleaning",
+  "type": "n8n-nodes-base.anthropic",
+  "typeVersion": 1,
+  "position": [850, 400],
+  "credentials": {
+    "anthropicApi": {
+      "id": "1",
+      "name": "Anthropic API"
+    }
+  }
+}
+```
+
+#### Response Format
+
+```json
+{
+  "success": true,
+  "original_text": "The system leverages cutting-edge...",
+  "humanized_text": "The system uses modern...",
+  "phases_completed": 10,
+  "timestamp": "2025-10-07T10:30:00.000Z"
 }
 ```
 

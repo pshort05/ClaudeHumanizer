@@ -114,11 +114,13 @@ ClaudeHumanizer/
 ├── 7_weak_language_cleanup.json
 ├── 8_strategic_imperfections.json
 ├── 9_final_verification.json
-├── 10_final_ai_word_sweep.json        # NEW: Phase 10 final sweep
+├── 10_final_ai_word_sweep.json        # Phase 10 final sweep
 └── docs/
     ├── USAGE_GUIDE.md                 # Step-by-step instructions
     ├── TECHNICAL_REFERENCE.md         # Claude optimization & automation
-    └── CUSTOMIZATION.md               # Advanced configuration
+    ├── CUSTOMIZATION.md               # Advanced configuration
+    ├── CHANGELOG.md                   # Version history & updates
+    └── n8n_workflow_sample.json       # Ready-to-import n8n workflow
 ```
 
 ## Documentation
@@ -127,10 +129,16 @@ ClaudeHumanizer/
 Complete step-by-step instructions for processing text through the assembly line system, including troubleshooting and quality control.
 
 ### ⚙️ [Technical Reference](docs/TECHNICAL_REFERENCE.md)
-Advanced technical information including LLM optimization recommendations, automation integration guides, and API configurations.
+Advanced technical information including LLM optimization recommendations, automation integration guides (n8n, Make.com), and API configurations.
 
 ### 🎛️ [Customization Guide](docs/CUSTOMIZATION.md)
 Advanced customization options including character-specific dialogue enhancement and project-specific configurations.
+
+### 📋 [Changelog](docs/CHANGELOG.md)
+Version history, recent updates, and migration guides. See latest changes including master list consolidation and Phase 8/9 clarifications.
+
+### 🤖 [n8n Workflow](docs/n8n_workflow_sample.json)
+Ready-to-import n8n workflow for complete 10-phase automation with Claude Sonnet 4.5. Import into n8n, configure file paths and API credentials, then activate.
 
 ## Processing Flow
 
