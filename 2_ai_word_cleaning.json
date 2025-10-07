@@ -28,6 +28,12 @@
     "deliberate_planning": "Plan the editing approach systematically: first identify dialogue sections and titles to preserve, then locate all prohibited terms in body text only, create appropriate replacements, and finally output the cleaned text."
   },
 
+  "anti_hallucination_framework": {
+    "preservation_requirement": "Never alter the original meaning, tone, or author's intended voice",
+    "factual_accuracy": "Maintain all factual content exactly as presented in the original",
+    "context_sensitivity": "Preserve language that serves specific stylistic or characterization purposes"
+  },
+
   "core_instructions": {
     "dialogue_preservation": "Skip any dialogue in quotes or clearly marked as speech - leave these sections completely unchanged",
     "title_preservation": "Skip chapters, subchapters, headings, and other obvious titles - leave these sections completely unchanged",
@@ -39,59 +45,6 @@
     "no_analysis": "Do not include any information about changes made - only output the revised text"
   },
 
-  "deprecated_prohibited_list_note": "This individual list has been replaced by master_prohibited_words.json to prevent reintroduction of terms across the assembly line",
-
-  "reference_master_list": "All prohibited terms now consolidated in master_prohibited_words.json",
-
-  "old_prohibited_list": [
-    "abyssal depths", "absolutely", "acrid scent of decay", "acutely", "additionally", "adept", "admonish", "adulation", "afternoon light casts everything in gold", "affluent", "agonizing patience", "air between them crackled", "air crackled between them", "aligned", "all-encompassing", "alluring", "also", "although", "alternatively", "ambiance", "amid", "amidst", "amorphous", "amplification", "analogous", "ancient ruins", "ancient testament", "announcements echo", "apparent", "arcane", "arguably", "arduous", "armor", "as a professional", "as a reminder", "as a result", "as previously mentioned", "as well as", "aspect", "at its core",
-
-    "babbling brook", "bastion of", "battle of wits", "beacon of hope", "because", "beguiling", "bespoke", "bewildering", "blinding light", "blissfully", "bolster", "broadly speaking", "bustling", "but also", "buzz", "buzzed", "buzzed with activity", "buzzed with energy", "buzzed with morning energy", "buzzing with activity",
-
-    "calm exterior", "cascade", "casual intimacy", "cast eerie shadows", "casting everything in gold", "casting golden patterns", "casting shadows", "ceaseless cacophony", "certainly", "challenges", "chest feel tight", "chilling winds", "claiming her", "claiming him", "claiming what she wanted", "clandestine facade", "clarion of", "clicked open my laptop", "cold metallic taste", "comfortable silence", "comforting reminder of the past", "compelling", "complex interplay", "complexity", "compel", "concisely", "consequently", "contextualized", "contrast between", "costume", "crafted", "crisp and authoritative", "crumbling empire", "crucial", "crucial role", "crucial role in understanding", "crucible", "crystalline", "curated", "cutting-edge",
-
-    "dangerous allure", "dazzling", "dead silence", "deathly stillness", "deep understanding", "deliberate calm", "delve", "delve into", "delving into", "demeanor shifted", "demonstrate", "desperate tenderness", "desperation", "despite", "differentiate", "dilapidated remains", "discordant symphony", "diverse", "dive into", "domestic", "door chimed", "due to",
-
-    "echoed with my focus", "eerie silence", "efficiency", "effortlessly", "effulgence", "elegant", "elevate", "elevated", "elucidated", "embark on a journey", "embarked", "embodied", "embodies", "embraced", "empty gaze", "enable", "enables", "enchantingly", "endeavor", "endeavored", "endless horizon", "endless night", "endlessly", "enhance", "enigma", "enlightening", "enthrall", "ensure", "epitomize", "erudite", "especially", "esteemed", "essentially", "eternal struggle", "ethereal", "ethereal glow", "even if", "even though", "evocative", "exceptional", "exhilarating", "extraordinary",
-
-    "facets", "facilitates", "fanciful", "fastidious", "fell between us", "felt wrong", "finding a contribution", "findings", "fingers are moving", "fingers dancing", "fingers danced", "fingers hovering", "fingers hung", "fingers moving", "fingers quivered", "fingers traced", "firstly", "fleeting glimpse", "fleeting moment of peace", "fleetingly", "folks", "for a long moment", "foreboding gloom", "foster", "fragile hope", "from a broader perspective", "furthermore",
-
-    "galvanize", "game changer", "game-changing", "gasp", "gaze", "generally", "generally speaking", "ghostly whisper", "given that", "glancing around", "glean", "glistening", "glorious", "golden haze", "gossamer", "groundbreaking",
-
-    "hallmark", "hand brushed against", "hangs between us", "harness", "haunting", "haunting memory", "he gestured", "He smelled like", "heart-wrenching sorrow", "heighten", "held the kind", "hidden truth", "highlight", "highlight the importance", "hit me like a physical blow", "hits closer to home", "however", "hum", "hummed", "hung between us", "hung in the air between them", "hums to live", "hums with activity", "hustle and bustle",
-
-    "i'm sorry, but i'm not able to", "iconic", "idea hits me", "illuminate", "immense", "impactful", "impeccable", "impending storm", "implication hangs in the air a", "importantly", "impressive", "in conclusion", "in contrast", "in order to", "in summary", "in today's digital era", "indelible", "indelible mark", "indeed", "innovative", "insightful", "insights", "intricate", "invaluable", "iridescent beauty", "ironclad resolve", "it is important to note", "it's essential to", "it's important to note", "it's worth noting that",
-
-    "jagged edge", "jerked to a stop",
-
-    "labyrinth", "languid", "later that evening as they sat", "lavish", "leaves painting", "left an indelible mark", "legendary", "leverage", "light filtered through", "light filtering through", "light slanted through", "like a physical blow", "loaded with implications", "loaded with possibilities", "loaded with possibility", "looming shadow", "lush",
-
-    "macabre disrepair", "majestic", "marcus", "mask", "masterfully", "measured", "mentally kicked myself", "mesmerizing", "meticulous", "metamorphosis", "methodical", "methodically", "midst of chaos", "mindset", "moist", "moonlight filtered through", "moonlight reflecting", "moreover", "morning light streams through", "mosaic", "mosaic of", "most right thing", "murky depths", "my chest tight", "my finger hovers over", "my fingers traced the", "my pulse quickened", "mystical",
-
-    "navigate", "navigating", "neared the exit", "nestled", "new avenue", "nonetheless", "normalcy", "not only", "notably", "nuanced understanding",
-
-    "ominous presence", "on the other hand", "only lens", "open a new avenue", "opulent",
-
-    "palpable trepidation", "parameters", "paramount", "pesky", "phenomenal", "phone buzzed", "pivotal", "play a crucial role in determining", "play a significant role in shaping", "poignant", "polished professional", "possibility", "potential", "powerful", "practiced", "practiced calm", "practiced efficiency", "practiced grace", "practiced movement", "precisely", "precision", "present", "pressed against", "pressed to", "pristine", "profound", "promise of a better future", "promptly", "provide a valuable insight", "pulse hammer", "pulse quickened", "pulse thrummed", "pulsed", "purposeful stride",
-
-    "question hangs in the air between us", "question hung between them", "question hung in the air between us", "quiet before the storm", "quiet energy", "quiet intimacy",
-
-    "radiant", "raging fire", "real", "reaffirm", "realm", "refine", "regret and poor decisions", "relentless", "relentless pursuit", "remnant", "resonant", "resonate", "resonated", "reverberate", "reverent", "reverent attention", "revolutionize", "roaring tide", "running her fingers", "running his fingers",
-
-    "sarah", "scintillating", "scorching heat", "seamlessly", "seen", "serenity", "sharp pang of fear", "she gestured", "She smelled like", "shed light", "shed light on", "shifted in my seat", "shifting in her expression", "showcase", "showcasing", "significant", "significant role", "sights unseen", "silent sentinel", "similarly", "sinister sentinels", "slightly wrong", "smell like lavender", "something clean and earthy", "something like that", "something uniquely", "soul", "sounds unheard", "spectacular", "specifically", "spectral reminder", "spellbinding", "splendor", "stark contrast", "stark reminder", "stream of commuters", "stream of people", "streamline", "streamlines", "stretched endlessly before", "study her face", "stunning", "sublime", "subsequently", "suddenly", "suffocating atmosphere", "sun filtered through", "sun painted", "sunlight filtering through", "sunlight filters through", "sunlight streaming through", "sure", "symphony", "synergy",
-
-    "tangible reminder", "tapestry", "tasting like coffee and promises", "technological marvel", "tempered by gentle humility", "tends to", "testament to", "thank you for your question", "that being said", "that was", "that was…", "the way he transformed", "the way she transformed", "therefore", "these are...", "thick fog of uncertainty", "this underscores the importance of", "thought hit me", "thought hits me harder than it should", "thunderous applause", "thus", "tightened my chest", "timeless", "timeless beauty", "to consider", "to put it simply", "to summarize", "too practiced", "transformative", "treacherous path", "twisted fate", "typically",
-
-    "ultimately", "unbreakable bond", "underscores", "unless", "unparalleled", "unravel", "unspeakable terror", "unveiled", "unwavering commitment", "unyielding force", "uplifting", "usual efficiency", "utilize",
-
-    "valuable insight", "vibrant", "visionary", "voice carried the weight of",
-
-    "way he transformed", "way she transformed", "weighing something", "weight of her words", "weight of his words", "whimsical", "whimsical tapestry", "whispering", "whispered promises", "white-knuckled intensity", "while", "with purpose", "with want", "wonderfully", "wondrous", "words hangs between them", "words hung", "words hung between them", "words hung between us", "words hung in the air", "words hit me", "words settled over", "wrapped in polished charm", "wrung out",
-
-    "yielded", "you could consider", "you may want to",
-
-    "zeal"
-  ],
 
   "processing_steps": {
     "step_1": "Carefully read the entire text to understand context and identify dialogue sections (in quotes) and titles/headings to preserve",

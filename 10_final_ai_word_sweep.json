@@ -51,6 +51,12 @@
     "context_preservation": "Replace words without changing surrounding context, sentence structure, or meaning"
   },
 
+  "anti_hallucination_framework": {
+    "preservation_requirement": "Never alter the original meaning, tone, or author's intended voice",
+    "factual_accuracy": "Maintain all factual content exactly as presented in the original",
+    "context_sensitivity": "Preserve language that serves specific stylistic or characterization purposes"
+  },
+
   "core_instructions": {
     "dialogue_preservation": "NEVER modify any text between quotation marks - skip all dialogue completely",
     "markdown_preservation": "NEVER modify headers (#), links, code blocks, bold/italic markers, or any Markdown syntax",

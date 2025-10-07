@@ -82,37 +82,11 @@
       "flow_principle": "Structure sentences to ensure close and logical connection between words (strong dependency grammar)",
       "content_preservation": "CRITICAL: Vary structure WITHOUT changing what's being shown vs told. You may split/combine sentences and adjust word order, but NOT change action→description or description→action. Phase 5 set that boundary.",
       "rhythm_only_changes": "Your changes should be PURELY rhythmic - if you're changing the meaning or what's being shown, STOP. That's not your domain."
-    },
-    "ai_isms_limited_use": {
-      "usage_rule": "These words and phrases may be used MAXIMUM 1 time in the entire output",
-      "ai_ism_words": [
-        "Compelling", "Dazzling", "Evocative", "Exceptional", "Extraordinary",
-        "Fanciful", "Gasp", "Gaze", "Glistening", "Glorious", "Haunting",
-        "Iconic", "Immense", "Impressive", "Insightful", "Languid", "Lavish",
-        "Legendary", "Lush", "Majestic", "Mesmerizing", "Mystical", "Opulent",
-        "Phenomenal", "Powerful", "Pristine", "Profound", "Radiant",
-        "Scintillating", "Serenity", "Spectacular", "Spellbinding", "Splendor",
-        "Stunning", "Sublime", "Timeless", "Unparalleled", "Uplifting",
-        "Visionary", "Whimsical", "Wonderfully", "Wondrous", "Weave", "Woven"
-      ],
-      "ai_ism_phrases": [
-        "A bastion of", "A clarion of", "A mosaic of", "A testament to", 
-        "Beacon of hope", "Crisp and authoritative", "Delving into", 
-        "Demeanor shifted", "Embark on a journey", "For a long moment", 
-        "Glancing around", "He gestured", "Mentally kicked myself", 
-        "Moonlight reflecting", "Polished professional", "Pressed against", 
-        "Pressed to", "She gestured", "Smell like lavender", "Something like that", 
-        "Study her face", "The contrast between", "The way he transformed", 
-        "The way she transformed", "It's not just", "And here's the kicker"
-      ]
     }
   },
-  
-  "ai_detection_avoidance": {
-    "ai_isms_rule": "Overused descriptive words that can sound artificial when repeated. Limited to maximum 1 occurrence in the entire output to maintain natural variety",
-    "avoid_patterns": "Eliminate formulaic phrases, uniform paragraph structures, excessive punctuation marks, and overly consistent stylistic choices that suggest algorithmic generation"
-  },
-  
+
+  "master_prohibited_list_reference": "Uses master_prohibited_words.json as single source of truth for prohibited words and phrases. Phase 2 and Phase 10 handle all word filtering - Phase 8 focuses exclusively on rhythm and flow.",
+
   "vocabulary_guidelines": {
     "lexical_diversity": "Employ rich, diverse, and occasionally unexpected vocabulary. Avoid clichés and overused terminology",
     "repetition_avoidance": "Avoid excessive repetition of uncommon words and phrases within close proximity. Use varied vocabulary and sentence structures while maintaining natural flow. Preserve intentional repetition in dialogue and key thematic elements",
@@ -120,100 +94,6 @@
     "word_choice_priority": "Select precise, impactful words over generic alternatives",
     "avoid_adjective_overload": "Do not provide an adjective for every noun or an adverb for every verb",
     "purple_prose_prevention": "Avoid overly flowery, ornate language that prioritizes style over clarity"
-  },
-  
-  "forbidden_elements": {
-    "prohibited_words": [
-      "Acutely", "Adept", "Admonish", "Adulation", "Affluent", "Aligned", "All-encompassing",
-      "Alluring", "Ambiance", "Amid", "Amorphous", "Amplification", "Analogous", "Apparent",
-      "Arcane", "Arduous", "Armor", "Beguiling", "Bespoke", "Bewildering", "Blissfully",
-      "Bustling", "Buzz", "Buzzed", "Cascade", "Certainly", "Chen", "Concisely",
-      "Contextualized", "Costume", "Crafted", "Crucial", "Crucible", "Crystalline",
-      "Curated", "Dance", "Dancing", "Delve", "Domestic", "Effortlessly", "Efficiency",
-      "Effulgence", "Elegant", "Elevate", "Embarked", "Embodies", "Enable", "Empowering",
-      "Enchantingly", "Endeavor", "Endlessly", "Enhance", "Enigma", "Enlightening",
-      "Ensure", "Enthrall", "Epitomize", "Erudite", "Especially", "Essentially", "Esteemed",
-      "Ethereal", "Exhilarating", "Facets", "Fastidious", "Firstly", "Fleetingly",
-      "Folks", "Foster", "Galvanize", "Glean", "Gossamer", "Groundbreaking", "Hallmark",
-      "Harness", "Heighten", "Highlight", "Hum", "Hummed", "Illuminate", "Impactful",
-      "Impeccable", "Importantly", "Indelible", "Indeed", "Insights", "Intricate",
-      "Invaluable", "Labyrinth", "Leverage", "Marcus", "Mask", "Masterfully", "Measured",
-      "Meticulous", "Metamorphosis", "Methodical", "Methodically", "Mindset", "Moist",
-      "Mosaic", "Navigate", "Navigating", "Nestled", "Notably", "Paramount", "Pesky",
-      "Poignant", "Possibility", "Practiced", "Precisely", "Precision", "Promptly",
-      "Pulsed", "Reaffirm", "Relentless", "Remnant", "Resonate", "Resonant", "Resonated",
-      "Reverberate", "Revolutionize", "Sarah", "Seamlessly", "Showcase", "Soul",
-      "Specifically", "Streamlines", "Suddenly", "Sure", "Symphony", "Tapestry",
-      "Transformative", "Unveiled", "Unravel", "Vibrant", "Whispering", "Yielded", "Zeal"
-    ],
-    "prohibited_phrases": [
-      "Announcements echo", "As a professional", "As previously mentioned", "As well as",
-      "Babbling brook", "Buzzed with activity", "Calm exterior", "Cast eerie shadows",
-      "Casting shadows", "Chest feel tight", "Comfortable silence", "Complex interplay",
-      "Crucial role", "Deep understanding", "Delve into", "Dive into", "Door chimed",
-      "Echoed with my focus", "Even if", "Even though", "Fell between us",
-      "Fingers are moving", "Fingers dancing", "Fingers hung", "Fingers moving",
-      "Game changer", "Given that", "Hand brushed against", "Held the kind",
-      "Highlight the importance", "Hung between us", "Hung in the air between them",
-      "Hums to live", "Hums with activity", "Hustle and bustle", "In today's digital era",
-      "Indelible mark", "Later that evening as they sat", "Leaves painting",
-      "Light filtering through", "Loaded with possibility", "My chest tight", "Neared the exit",
-      "New avenue", "Nuanced understanding", "Phone buzzed", "Practiced efficiency",
-      "Practiced movement", "Regret and poor decisions", "Relentless pursuit",
-      "Shed light", "Shed light on", "Shifted in my seat", "Shifting in her expression",
-      "Significant role", "Sights unseen", "Sounds unheard", "Stark reminder",
-      "Stream of commuters", "Stream of people", "Stretched endlessly before",
-      "Tempered by gentle humility", "That being said", "The question hung between them",
-      "The words hung between them", "The words hung between us", "Tightened my chest",
-      "To consider", "Too practiced", "Unwavering commitment", "Usual efficiency",
-      "Valuable insight", "Voice carried the weight of", "Weighing something",
-      "Weight of her words", "Weight of his words", "Words hung", "Words settled over",
-      "Wrapped in polished charm", "Wrung out", "You could consider", "You may want to",
-      "mission parameter", "mission parameters"
-    ],
-    "language_to_minimize": {
-      "puff_words": [
-        "Utilize", "Commence", "Expedite", "Facilitate", "Implement", "Ascertain", 
-        "Procure", "Demonstrates"
-      ],
-      "empty_calorie_words": [
-        "Something", "Anything", "Stuff", "Somewhat", "Everything", "Various", 
-        "Certain", "Aspect", "Things", "Elements", "Numerous", "Multiple", "Simply"
-      ],
-      "inflation_words": [
-        "Very", "Truly", "Highly", "Totally", "Actually", "Completely", "Absolutely", 
-        "Extremely", "Really", "Incredibly", "Remarkably", "Exceptionally"
-      ],
-      "weasel_words": [
-        "May", "Might", "Could", "Can", "Virtually", "Up to", "As much as", "Help", 
-        "Like", "Believe", "Often", "Suggests", "Appears"
-      ],
-      "hedge_words": [
-        "A bit", "Sort of", "Kind of", "In a sense", "Generally", "Probably", 
-        "More or less", "Somewhat", "Relatively"
-      ],
-      "filter_phrases": [
-        "He watched", "She saw", "He noticed", "She felt"
-      ],
-      "cliches_buzzwords": [
-        "Unlock the potential", "Revolutionize the landscape", "Dive deep", 
-        "Harness the power", "Game-changing", "Paradigm shift", "Robust", "Synergy"
-      ],
-      "formal_hedging": [
-        "It is important to note", "It's worth considering", "It may be the case that"
-      ],
-      "redundant_phrases": [
-        "In order to", "Due to the fact that", "At this point in time", 
-        "Basic fundamentals", "End result"
-      ],
-      "correlative_conjunctions": [
-        "Not only", "But also", "Neither", "Either", "Nor"
-      ],
-      "conversational_idioms": [
-        "And here's the kicker", "Here's the thing", "Bottom line", "At the end of the day",
-        "Long story short", "The truth is", "Let's be honest", "Real talk"
-      ]
-    }
   },
   
   "structural_guidelines": {
@@ -251,7 +131,7 @@
   "success_criteria": [
     "User provided text to edit",
     "Output ONLY edited text in clean Markdown format",
-    "Eliminated all prohibited words/phrases and limited AI-isms to max 1 use",
+    "Applied strategic imperfections and rhythm variations WITHIN existing sentences",
     "Preserved original dialogue, meaning, and story elements",
     "Natural, human-like language with varied paragraph/sentence structure",
     "Clean formatting with minimal punctuation overuse"
@@ -285,13 +165,13 @@
   
   "editing_principles": {
     "preservation_priority": "Always preserve original dialogue, story meaning, and character development",
-    "natural_replacement": "Replace prohibited elements with natural alternatives that fit the context",
-    "flow_maintenance": "Maintain narrative flow and pacing while improving style",
-    "voice_consistency": "Keep the author's original voice while eliminating AI markers",
-    "minimal_disruption": "Make necessary changes efficiently without over-editing",
-    "human_authenticity": "Ensure final result reads as authentic human writing",
-    "structural_variety": "Create natural variation in sentence and paragraph structure",
-    "style_sophistication": "Maintain literary quality while removing artificial elements"
+    "rhythm_focus": "Add strategic imperfections and vary rhythm WITHIN existing sentences without changing meaning",
+    "flow_maintenance": "Maintain narrative flow and pacing while adding natural human variations",
+    "voice_consistency": "Keep the author's original voice while adding authentic rhythm patterns",
+    "minimal_disruption": "Make rhythm changes efficiently without over-editing content or meaning",
+    "human_authenticity": "Ensure final result reads with authentic human flow and natural imperfections",
+    "structural_variety": "Create natural variation in sentence and paragraph structure through rhythm adjustments",
+    "style_sophistication": "Maintain literary quality while adding strategic imperfections for authenticity"
   },
   
   "output_format": {
