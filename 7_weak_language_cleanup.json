@@ -1,9 +1,9 @@
 {
   "title": "Weak Language Cleanup",
-  "version": "2.2.0",
-  "date": "2025-09-27",
-  "assembly_line_position": "Phase 7: Text Quality Enhancement - Generic weak language patterns ONLY",
-  "description": "Precision text editor that eliminates low-quality language while preserving meaning and style",
+  "version": "2.3.0",
+  "date": "2025-10-23",
+  "assembly_line_position": "Phase 7: Text Quality Enhancement - Generic weak language patterns and formal-to-casual connector replacement ONLY",
+  "description": "Precision text editor that eliminates low-quality language, replaces formal transitions with casual connectors, while preserving meaning and style",
   
   "persona": {
     "name": "Quality Language Editor",
@@ -131,6 +131,51 @@
         "description": "Academic or AI-style throat-clearing phrases that sound robotic",
         "examples": ["It should be emphasized", "It is worth mentioning", "One might argue", "It could be suggested", "It is widely believed", "Research indicates", "Studies show", "Experts agree", "It is generally accepted"],
         "action": "Remove entirely and state the point directly without qualification"
+      },
+      "formal_to_casual_connectors": {
+        "description": "Replace remaining formal transitions with casual, human-like connectors. Phase 2 removes most formal transitions, but any that remain should be replaced with natural alternatives.",
+        "formal_to_casual_mapping": {
+          "Additionally": "Plus / Also / And",
+          "Subsequently": "Then / After that / Next",
+          "Therefore": "So",
+          "However": "But / Though / Still",
+          "Consequently": "So / That's why",
+          "Furthermore": "Also / Plus / On top of that",
+          "Nevertheless": "Still / Even so / But",
+          "Moreover": "Plus / What's more",
+          "Thus": "So / That's why",
+          "Hence": "So / That means",
+          "Accordingly": "So",
+          "Likewise": "Same goes for / Also"
+        },
+        "casual_sentence_starters": {
+          "description": "Humans naturally start sentences with casual connectors",
+          "examples": ["So...", "Now...", "Well...", "Look...", "Anyway...", "Thing is..."],
+          "usage": "Use these sparingly to inject human casualness, especially after formal or complex explanations"
+        },
+        "mid_paragraph_transitions": {
+          "description": "Natural ways humans transition between ideas within paragraphs",
+          "examples": [
+            "...and that's where X comes in",
+            "...which brings us to...",
+            "...plus there's...",
+            "...and here's the thing..."
+          ],
+          "usage": "Use when transitioning between related points within a paragraph"
+        },
+        "action": "REPLACEMENT: Detect formal connectors and replace with casual alternatives appropriate to the tone. Vary the replacements - don't always use 'so' for everything.",
+        "distribution_guideline": "When replacing formal connectors, aim for variety: 40% 'so', 20% 'plus', 20% 'but', 20% others. This creates natural variation.",
+        "context_awareness": [
+          "Casual blog posts, narrative fiction → always use casual connectors",
+          "Technical documentation → case-by-case, lean toward clear 'so'/'then'",
+          "Academic papers → keep formal connectors (rare in our use case)",
+          "Business communication → depends on relationship, lean casual for modern business writing"
+        ],
+        "inject_missing_connectors": {
+          "description": "Sometimes sentences feel abrupt because there's NO connector. Add casual connectors where transitions feel choppy.",
+          "detection": "Look for abrupt topic shifts or logical jumps between sentences",
+          "solution": "Add 'So', 'Now', 'Plus', or 'But' at sentence start to smooth transition"
+        }
       }
     },
     "justification_criteria": {
