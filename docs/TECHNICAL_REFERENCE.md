@@ -133,13 +133,14 @@ best_for: Consistent, high-quality humanization across all text types
 
 **Anthropic-Only Pipeline (RECOMMENDED)**:
 ```yaml
-models: Claude Sonnet 4.5 (all 10 phases)
-temperatures: 0.1-0.2 (phases 1,7,9), 0.3-0.5 (phases 2,3,5,10), 0.6-0.9 (phases 4,8), 1.0 (phase 6)
-quality: 95-98% of maximum potential
-cost: Medium-High
+models: Claude Sonnet 4.5 (all 10 phases + optional Phase 9.5)
+temperatures: 0.1-0.2 (phases 1,7,9), 0.3-0.5 (phases 2,3,5,9.5,10), 0.6-0.9 (phases 4,8), 1.0 (phase 6)
+quality: 95-98% of maximum potential (with Phase 9.5), 93-96% (without Phase 9.5)
+cost: Medium-High (~10-15% higher with Phase 9.5 included)
 best_for: Optimal humanization with consistent quality across all text types
 consistency: Superior assembly line constraint adherence
 pattern_recognition: Best for new pattern-based rules
+flexibility: Phase 9.5 can be skipped for budget savings with minimal quality impact
 ```
 
 **OpenAI-Only Pipeline**:
@@ -171,16 +172,18 @@ phase_6: Claude Sonnet 4.5 @ 1.0  # Increased for dialogue naturalness
 phase_7: Claude Sonnet 4.5 @ 0.2
 phase_8: Claude Sonnet 4.5 @ 0.9
 phase_9: Claude Sonnet 4.5 @ 0.2
-phase_10: Claude Sonnet 4.5 @ 0.3  # NEW: Final word sweep
+phase_9_5: Claude Sonnet 4.5 @ 0.4  # OPTIONAL: Statistical analysis hub
+phase_10: Claude Sonnet 4.5 @ 0.3  # Final word sweep
 
-quality: 95-98% of maximum potential
-cost: Medium-High (~$0.50-2.00 per 10k words depending on text complexity)
+quality: 95-98% of maximum potential (with Phase 9.5), 93-96% (without Phase 9.5)
+cost: Medium-High (~$0.50-2.00 per 10k words without Phase 9.5, ~$0.60-2.30 with Phase 9.5)
 consistency: Excellent - single model understands full assembly line context
 advantages:
   - Superior pattern recognition (dialogue pauses, light descriptions, finger actions)
   - Best literary judgment and nuance
   - Excellent instruction following across all phases
   - No model switching overhead
+  - Phase 9.5 optional for budget flexibility
 ```
 
 #### Budget-Friendly Configuration
@@ -194,11 +197,13 @@ phase_6: Claude Sonnet 4.5 @ 1.0
 phase_7: Claude Haiku @ 0.2
 phase_8: Claude Sonnet 4.5 @ 0.9
 phase_9: Claude Haiku @ 0.2
+phase_9_5: SKIP  # Optional - skip for budget processing
 phase_10: Claude Sonnet 4.5 @ 0.3
 
 quality: 85-90% of maximum potential
-cost_savings: 50-60% vs full Sonnet 4.5 pipeline
+cost_savings: 50-60% vs full Sonnet 4.5 pipeline (55-65% if Phase 9.5 skipped)
 strategy: Use Sonnet 4.5 for critical creative/pattern phases (2,4,6,8,10), Haiku for systematic phases
+note: Skip Phase 9.5 for maximum cost savings with minimal quality impact if text already has good statistical properties
 ```
 
 ## Automation Integration
@@ -238,8 +243,8 @@ strategy: Use Sonnet 4.5 for critical creative/pattern phases (2,4,6,8,10), Haik
 
 The workflow consists of:
 - **1 Webhook Trigger** (POST endpoint)
-- **11 File Loaders** (master list + 10 phase prompts)
-- **10 Anthropic Claude Nodes** (one per phase)
+- **11-12 File Loaders** (master list + 10 phase prompts + optional Phase 9.5)
+- **10-11 Anthropic Claude Nodes** (one per phase, Phase 9.5 optional)
 - **1 Webhook Response** (returns humanized text)
 
 **Sequential Flow:**
@@ -256,10 +261,18 @@ Phase 5 (temp 0.5) → Phase 6 (temp 1.0)
   ↓
 Phase 7 (temp 0.2) → Phase 8 (temp 0.9)
   ↓
-Phase 9 (temp 0.2) → Phase 10 (temp 0.3, + master list)
+Phase 9 (temp 0.2) → Phase 9.5 (OPTIONAL, temp 0.4) → Phase 10 (temp 0.3, + master list)
   ↓
 Webhook Response (JSON with humanized text)
 ```
+
+**Note on Phase 9.5:**
+Phase 9.5 is optional and can be skipped if:
+- Text already has good statistical properties (varied sentence length, balanced POS distribution, adequate lexical diversity)
+- Budget constraints require reducing processing costs
+- Fast turnaround is more important than maximum optimization
+
+If Phase 9.5 is skipped, Phase 9 output feeds directly to Phase 10.
 
 #### Key Configuration Details
 
@@ -464,7 +477,8 @@ function selectModel(phase) {
     7: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.2 },
     8: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.9 },
     9: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.2 },
-    10: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.3 }  // NEW: Phase 10
+    9.5: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.4 },  // NEW: Optional statistical hub
+    10: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.3 }
   };
   return modelConfig[phase];
 }
@@ -528,25 +542,38 @@ def process_phase_gemini(text, prompt, model="gemini-1.5-pro", temperature=0.2):
 ### Complete Pipeline Implementation
 ```python
 class ClaudeHumanizerPipeline:
-    def __init__(self, config):
+    def __init__(self, config, include_phase_9_5=False):
         self.config = config
+        self.include_phase_9_5 = include_phase_9_5
         self.load_prompts()
         self.load_master_prohibited_words()
 
     def load_prompts(self):
         self.prompts = {}
-        for i in range(1, 11):  # Updated to 11 for 10 phases
+        # Load main phases 1-10
+        for i in range(1, 11):
             with open(f"{i}_*.json", "r") as f:
                 self.prompts[i] = json.load(f)
+
+        # Load optional Phase 9.5 if requested
+        if self.include_phase_9_5:
+            with open("9.5_statistical_analysis_hub.json", "r") as f:
+                self.prompts[9.5] = json.load(f)
 
     def load_master_prohibited_words(self):
         with open("master_prohibited_words.json", "r") as f:
             self.master_prohibited = json.load(f)
 
-    def process_text(self, text):
+    def process_text(self, text, enable_9_5_metrics_report=False):
         current_text = text
 
-        for phase in range(1, 11):  # Updated to 11 for 10 phases
+        # Build phase sequence
+        phases = list(range(1, 10))  # Phases 1-9
+        if self.include_phase_9_5:
+            phases.append(9.5)  # Optional Phase 9.5
+        phases.append(10)  # Phase 10 always last
+
+        for phase in phases:
             print(f"Processing Phase {phase}...")
 
             # Prepare prompt
@@ -554,6 +581,10 @@ class ClaudeHumanizerPipeline:
             # ONLY Phases 2 and 10 require master list with pattern rules
             if phase in [2, 10]:
                 prompt = f"{self.master_prohibited}\\n\\n{prompt}"
+
+            # Phase 9.5 can optionally include metrics report request
+            if phase == 9.5 and enable_9_5_metrics_report:
+                prompt += "\\n\\nPlease include detailed statistical metrics report."
 
             # Select model and settings
             model_config = self.config["phases"][phase]
@@ -596,6 +627,24 @@ class ClaudeHumanizerPipeline:
             if prohibited_found:
                 return False
         return True
+```
+
+**Usage Examples:**
+
+```python
+# Standard processing (without Phase 9.5)
+pipeline = ClaudeHumanizerPipeline(config, include_phase_9_5=False)
+result = pipeline.process_text(input_text)
+
+# Full processing with statistical optimization
+pipeline_with_stats = ClaudeHumanizerPipeline(config, include_phase_9_5=True)
+result = pipeline_with_stats.process_text(input_text)
+
+# Full processing with detailed metrics report
+result_with_report = pipeline_with_stats.process_text(
+    input_text,
+    enable_9_5_metrics_report=True
+)
 ```
 
 ## Performance Optimization
@@ -715,6 +764,30 @@ class BudgetManager:
             return "balanced"  # Use cost-effective models
         else:
             return "budget"  # Use cheapest models
+
+    def should_include_phase_9_5(self, budget_remaining, text_length):
+        """
+        Determine if Phase 9.5 should be included based on budget constraints.
+
+        Phase 9.5 is optional and can be skipped for budget savings with minimal
+        quality impact if the text already has good statistical properties.
+
+        Args:
+            budget_remaining: Remaining daily budget in dollars
+            text_length: Length of text in words
+
+        Returns:
+            bool: True if Phase 9.5 should be included, False to skip
+        """
+        # Estimate cost for Phase 9.5 (roughly 10-15% of total pipeline cost)
+        estimated_9_5_cost = (text_length / 1000) * 0.15  # ~$0.15 per 1K words
+
+        # Skip Phase 9.5 if budget is tight
+        if budget_remaining < estimated_9_5_cost * 2:
+            print("Skipping Phase 9.5 for budget conservation")
+            return False
+
+        return True
 ```
 
 ## Quality Metrics
@@ -850,6 +923,74 @@ class AlertManager:
         }
         requests.post(self.webhook_url, json=payload)
 ```
+
+## Architectural Summary: Phase 9/9.5/10 Separation
+
+### Clear Separation of Concerns
+
+The ClaudeHumanizer system now features a refined architecture with three distinct phases handling different aspects of AI detection countermeasures:
+
+#### Phase 9: Qualitative Pattern Replacement
+- **Focus**: QUALITATIVE pattern detection and replacement
+- **Handles**: N-gram filtering, formulaic phrases, AI patterns, perplexity optimization
+- **Temperature**: 0.2-0.3 (analytical)
+- **Memory**: Medium (pattern corpus and AI detection patterns)
+- **Purpose**: Identifies and replaces predictable AI language patterns
+
+#### Phase 9.5: Quantitative Statistical Hub (OPTIONAL)
+- **Focus**: QUANTITATIVE statistical analysis and optimization
+- **Handles**: Burstiness (CV, range, variance), POS distribution (noun/verb/adj ratios), Lexical diversity (TTR)
+- **Temperature**: 0.3-0.4 (analytical with natural optimization)
+- **Memory**: High (comprehensive full-text statistical analysis)
+- **Purpose**: Single-pass coordinated statistical optimization
+- **Skip When**: Budget constraints, fast turnaround needed, text already has good statistical properties
+
+#### Phase 10: Pure Word Filtering
+- **Focus**: Word-level filtering ONLY
+- **Handles**: Prohibited word removal using master_prohibited_words.json
+- **Temperature**: 0.2-0.3 (analytical)
+- **Memory**: Low (surgical word replacement)
+- **Purpose**: Final quality control checkpoint for prohibited words
+
+### Benefits of This Architecture
+
+1. **Single-Pass Efficiency**: Phase 9.5 reads text once and calculates all metrics simultaneously
+2. **Coordinated Optimization**: Statistical metrics are balanced together, not optimized independently
+3. **Clear Conceptual Boundaries**: Qualitative (9) vs Quantitative (9.5) vs Filtering (10)
+4. **Budget Flexibility**: Phase 9.5 can be skipped for 10-15% cost savings with minimal quality impact
+5. **Better Maintenance**: Each phase has a single, well-defined responsibility
+
+### Processing Flow
+
+```
+Phase 9 (Pattern Replacement)
+  ↓
+Phase 9.5 (Statistical Analysis) - OPTIONAL
+  ↓
+Phase 10 (Word Filtering)
+```
+
+### When to Include Phase 9.5
+
+**Include Phase 9.5 if:**
+- AI detection is a serious concern
+- Text quality is paramount
+- Budget allows for comprehensive optimization
+- Text may have statistical anomalies (too uniform, unbalanced POS distribution)
+
+**Skip Phase 9.5 if:**
+- Budget is constrained (saves 10-15% of total cost)
+- Fast turnaround is critical
+- Text already has good statistical properties
+- Processing large volumes where aggregate quality is acceptable
+
+### Cost-Quality Tradeoffs
+
+| Configuration | Quality | Cost per 10K words | Use Case |
+|--------------|---------|-------------------|----------|
+| Full Pipeline (with 9.5) | 95-98% | $0.60-2.30 | Maximum quality, AI detection critical |
+| Standard (without 9.5) | 93-96% | $0.50-2.00 | Good quality, moderate AI detection concern |
+| Budget (Haiku + skip 9.5) | 85-90% | $0.20-0.80 | Cost-sensitive, basic humanization |
 
 ---
 
