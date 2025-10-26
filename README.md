@@ -17,10 +17,31 @@ ClaudeHumanizer employs a **domain-specialized assembly line** where each phase 
 
 ## Quick Start
 
+### ⚠️ Important Usage Considerations
+
+**Non-Native English Speaker (NNES) Bias Warning**
+AI detectors exhibit documented bias against non-native English speakers. NNES writing often features simpler sentence structures, more limited vocabulary, and reliance on common phrasings—characteristics that detectors may misclassify as AI-generated.
+
+**Important**: If you are processing text originally written by an NNES writer, be aware that:
+- The humanization process may inadvertently simplify vocabulary and sentence structures further
+- Some NNES writing patterns are naturally similar to AI patterns (limited lexical diversity, common phrases)
+- Over-processing NNES text through all phases might make it appear MORE AI-like to certain detectors
+- Consider selectively applying phases rather than the full pipeline for NNES-authored content
+
+**Hybrid Text (Human + AI) Guidance**
+AI detectors often fail catastrophically on hybrid texts containing both human and AI-generated content, frequently misclassifying them as either 100% human or 100% AI with no middle ground.
+
+**Important**: This system assumes 100% AI-generated input. If you have hybrid text:
+- Manually identify which sections are human-written vs AI-generated
+- Only process the AI-generated sections through the pipeline
+- Keep human-written sections completely untouched
+- Do NOT run mixed human/AI paragraphs through the system—process them separately
+- Consider whether detection is even a concern if substantial human contribution exists
+
 ### Basic Workflow
 
 1. **Download required files**: 10 phase prompts + `master_prohibited_words.json`
-2. **Process sequentially**: Phase 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10
+2. **Process sequentially**: Phase 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 (Phase 9.5 optional)
 3. **Include master list**: Required for phases 2 and 10 (contains pattern rules)
 4. **Use previous output**: Each phase processes the result from the previous phase
 5. **Use Claude Sonnet 4.5**: Recommended for all phases with temperature 1.0 for Phase 6 (dialogue)
@@ -51,35 +72,112 @@ Set up n8n, Make.com, or API workflows (see [Technical Reference](docs/TECHNICAL
 
 ### Core Processing Phases
 
-| Phase | File | Domain | Master List | Pattern Rules |
+| Phase | File | Domain | Master List | NEW Features |
 |-------|------|--------|-------------|---------------|
 | 1 | `1_grammar_foundation.json` | Grammar errors only | ❌ No | - |
-| 2 | `2_ai_word_cleaning.json` | AI vocabulary removal | ✅ **Required** | Dialogue pauses, Light, Finger actions |
-| 3 | `3_overwritten_language_reduction.json` | Purple prose elimination | ❌ No | - |
+| 2 | `2_ai_word_cleaning.json` | AI vocabulary removal | ✅ **Required** | Pattern rules |
+| 3 | `3_overwritten_language_reduction.json` | Purple prose + **nominalization** | ❌ No | ✨ **De-nominalization** |
 | 4 | `4_sensory_enhancement.json` | Flat passage improvement | ❌ No | - |
 | 5 | `5_subtlety_creation.json` | Obvious statement conversion | ❌ No | - |
 | 6 | `6_dialogue_enhancement.json` | Character voice (temp 1.0) | ❌ No | - |
-| 7 | `7_weak_language_cleanup.json` | Weak language (12 categories) | ❌ No | - |
-| 8 | `8_strategic_imperfections.json` | Natural rhythm variation | ❌ No | - |
-| 9 | `9_final_verification.json` | AI pattern detection | ❌ No | - |
-| 10 | `10_final_ai_word_sweep.json` | **Final word sweep** | ✅ **Required** | All pattern rules |
+| 7 | `7_weak_language_cleanup.json` | Weak language + **voice distribution** | ❌ No | ✨ **Active/passive monitoring** |
+| 8 | `8_strategic_imperfections.json` | Rhythm + **punctuation inconsistency** | ❌ No | ✨ **Enhanced imperfections** |
+| 9 | `9_final_verification.json` | **AI patterns** (N-grams + perplexity) | ❌ No | ✨ **Pattern replacement** |
+| 10 | `10_final_ai_word_sweep.json` | **Word filtering only** | ✅ **Required** | Pure prohibited word removal |
 
-### Optional Enhancement
+### Optional Enhancements
 
 **Phase 6.1**: `6.1_character_dialogue_pass.json` - Character-specific dialogue customization for targeted voice refinement (see [Customization Guide](docs/CUSTOMIZATION.md))
 
+**Phase 9.5**: `9.5_statistical_analysis_hub.json` - **COMPREHENSIVE STATISTICAL HUB** consolidating all quantitative metrics (burstiness, POS distribution, lexical diversity/TTR) into single-pass analysis. Use when AI detection is a concern or text needs statistical optimization. Provides optional detailed metrics report.
+
 ## Key Features
+
+### ✅ Architectural Clarity (NEW)
+**Clear Separation of Concerns:**
+- **Phase 9**: QUALITATIVE pattern replacement (N-grams, formulaic phrases, AI patterns)
+- **Phase 9.5**: QUANTITATIVE statistical optimization (burstiness, POS, TTR) - all metrics in one pass
+- **Phase 10**: Pure WORD FILTERING (prohibited words only)
+
+**Benefits:**
+- Single-pass statistical analysis = more efficient
+- Coordinated metric optimization = balanced results
+- Clear conceptual boundaries = easier to understand and maintain
+- Optional statistics phase = skip if text is already optimized
 
 ### ✅ Domain Specialization
 - Each phase handles exactly one improvement type
 - Clear boundaries prevent interference between phases
 - Specialized expertise for consistent results
 
-### ✅ Pattern-Based Intelligence (NEW)
+### ✅ Pattern-Based Intelligence
 - **Dialogue Pause Rules** - Eliminates "weight of words", "silence stretched", etc.
 - **Light Description Rules** - Replaces "filtering through", "casting shadows" with simple alternatives
 - **Finger Action Rules** - Converts "fingers dancing" to direct action verbs like "typing"
 - Pattern matching catches creative variations automatically
+
+### ✨ NEW: Research-Based Detection Countermeasures
+Based on academic AI detector research, ClaudeHumanizer now includes targeted countermeasures for the latest detection methods:
+
+**Phase 3 - Nominalization Conversion** (v2.4.0)
+- Converts AI's abstract nominalized constructions to direct verbal forms
+- Example: "The implementation of the solution" → "They implemented the solution"
+- Addresses HIGH-priority detection marker explicitly identified in research
+
+**Phase 8 - Punctuation Inconsistency Injection** (v4.0.0)
+- Breaks AI's "machine-like consistency" in punctuation patterns
+- Strategic Oxford comma variation, spacing inconsistencies, hyphenation variation
+- Addresses detector-specific marker: perfect punctuation consistency
+
+**Phase 8 - Enhanced Strategic Imperfections** (v4.0.0)
+- Logical leap injection (removes over-explanation)
+- Tangential thought insertion (breaks perfect linearity)
+- Awkward phrasing retention (preserves authentic human voice)
+- Minor typo injection (user-configurable for casual content)
+- Addresses "counterintuitive perfection" detection signal
+
+**Phase 9 - Cross-Document N-gram Filter** (v15.0.0)
+- Eliminates 150+ common AI n-gram patterns (2-5+ word sequences)
+- Examples: "it is important to note that", "plays a crucial role in", "in order to"
+- Addresses N-gram frequency analysis used by advanced detectors
+
+**Phase 9 - AI Pattern Detection** (v17.0.0) - REFACTORED
+- Focuses on QUALITATIVE pattern replacement (N-grams, perplexity phrases)
+- Removes formulaic expressions and predictable AI language patterns
+- Statistical metrics moved to Phase 9.5 for consolidated analysis
+
+**Phase 9.5 - Statistical Analysis Hub** (v2.0.0) - **NEW ARCHITECTURE**
+- **Consolidates ALL quantitative metrics** into single comprehensive pass
+- **Burstiness**: Sentence variation (CV, range, variance, complexity)
+- **POS Distribution**: Noun/verb/adjective ratios normalized to human baselines (18-23% nouns, 16-20% verbs, 6-9% adjectives)
+- **Lexical Diversity**: TTR calculation and vocabulary optimization (target 0.40-0.60)
+- **Single-pass efficiency**: Reads text once, calculates all metrics, makes coordinated optimizations
+- **Optional metrics report**: Detailed statistical analysis with before/after scores
+- Addresses multiple detection vectors simultaneously with balanced optimization
+
+**Phase 10 - Word Filtering Only** (v3.0.0) - SIMPLIFIED
+- Pure prohibited word removal using master_prohibited_words.json
+- No statistical analysis - focuses exclusively on word-level filtering
+- Clean separation from statistical optimization (Phase 9.5)
+
+### ✨ MEDIUM PRIORITY: Additional Detection Countermeasures
+
+**Phase 7 - Active/Passive Voice Distribution Monitor** (v2.4.0)
+- Analyzes active/passive voice ratios and normalizes to human baselines
+- Targets: 85-90% active, 10-15% passive for narrative prose
+- Prevents both excessive passive (early AI) and zero passive (over-correction)
+- Addresses syntactic feature analysis used by detectors
+
+**Phase 9 - Perplexity Optimizer** (v17.0.0)
+- Systematically identifies and replaces low-perplexity (predictable) constructions
+- Disrupts predictable collocations: "crystal clear" → "obvious", "highly effective" → "powerful"
+- Replaces 30+ common business cliches and formulaic expressions
+- Increases text unpredictability to reduce detection probability
+- Now part of qualitative pattern detection (statistical metrics moved to 9.5)
+
+**Master Prohibited Words** (updated)
+- Added "underscoring its importance/significance" variants from research
+- Expanded phrase coverage based on academic detector documentation
 
 ### ✅ Quality Assurance
 - Master prohibited words list with intelligent pattern rules
@@ -103,18 +201,20 @@ Set up n8n, Make.com, or API workflows (see [Technical Reference](docs/TECHNICAL
 ```
 ClaudeHumanizer/
 ├── README.md                           # This overview
+├── How AI Detectors Work.md            # Research basis for enhancements
 ├── master_prohibited_words.json        # Pattern rules & prohibited terms
 ├── 1_grammar_foundation.json          # Phase 1 prompt
 ├── 2_ai_word_cleaning.json            # Phase 2 prompt (with pattern rules)
-├── 3_overwritten_language_reduction.json
+├── 3_overwritten_language_reduction.json  # v2.4.0 + nominalization
 ├── 4_sensory_enhancement.json
 ├── 5_subtlety_creation.json
 ├── 6_dialogue_enhancement.json
 ├── 6.1_character_dialogue_pass.json   # Optional
-├── 7_weak_language_cleanup.json
-├── 8_strategic_imperfections.json
-├── 9_final_verification.json
-├── 10_final_ai_word_sweep.json        # Phase 10 final sweep
+├── 7_weak_language_cleanup.json       # v2.4.0 + voice distribution
+├── 8_strategic_imperfections.json     # v4.1.0 + punctuation + imperfections
+├── 9_final_verification.json          # v17.0.0 PATTERN DETECTION (qualitative)
+├── 9.5_statistical_analysis_hub.json  # v2.0.0 OPTIONAL - ALL statistics consolidated
+├── 10_final_ai_word_sweep.json        # v3.0.0 WORD FILTERING (pure)
 └── docs/
     ├── USAGE_GUIDE.md                 # Step-by-step instructions
     ├── TECHNICAL_REFERENCE.md         # Claude optimization & automation

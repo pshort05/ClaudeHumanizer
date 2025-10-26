@@ -91,26 +91,41 @@ best_for: Consistent, high-quality humanization across all text types
 - **Reasoning**: Systematic pattern detection with literary awareness
 - **Note**: Now includes overused_transitions and robotic_qualifiers
 
-#### Phase 8: Strategic Imperfections
+#### Phase 8: Strategic Imperfections & Error Injection
 - **Best Model**: Claude Sonnet 4.5
 - **Temperature**: 0.8-0.9
 - **Memory**: High (understanding of full text flow and rhythm)
 - **Reasoning**: Best understanding of authentic human writing patterns and imperfections
+- **New Features**: Punctuation inconsistency injection, enhanced imperfections, optional homophone error injection (user-configurable)
+- **Note**: Higher temperature supports natural variation in imperfection placement
 
-#### Phase 9: Final Verification
+#### Phase 9: AI Pattern Detection (REFACTORED)
 - **Best Model**: Claude Sonnet 4.5
-- **Temperature**: 0.1-0.2
-- **Memory**: Medium (AI pattern detection, perfection syndrome, rhythm variations)
-- **Reasoning**: Comprehensive AI pattern detection without word-level filtering
-- **Note**: No longer performs prohibited word removal (moved to Phase 10)
+- **Temperature**: 0.2-0.3
+- **Memory**: Medium (AI pattern detection, N-gram corpus, perplexity patterns)
+- **Reasoning**: QUALITATIVE pattern replacement only - N-grams and formulaic phrases
+- **Architecture Change**: Statistical metrics (POS, TTR, burstiness) moved to Phase 9.5
+- **Focus**: Pattern-based detection and replacement, not quantitative analysis
 
-#### Phase 10: Final AI Word Sweep (NEW)
+#### Phase 9.5: Statistical Analysis Hub (NEW OPTIONAL)
+- **Best Model**: Claude Sonnet 4.5
+- **Temperature**: 0.3-0.4
+- **Memory**: High (comprehensive statistical analysis requires full text context)
+- **Reasoning**: QUANTITATIVE metrics require precision for accurate calculations
+- **Consolidates**: Burstiness (CV, range, variance), POS distribution (noun/verb/adj ratios), Lexical diversity (TTR, word frequency)
+- **Critical**: Slightly higher temp (0.3-0.4) allows natural optimization while maintaining analytical precision
+- **Single-Pass Efficiency**: Reads text once, calculates all metrics, makes coordinated optimizations
+- **Optional**: Skip if text already has good statistical properties or for budget processing
+- **Metrics Report**: Can generate detailed before/after statistical analysis on request
+
+#### Phase 10: Final Word Filtering (SIMPLIFIED)
 - **Best Model**: Claude Sonnet 4.5
 - **Temperature**: 0.2-0.3
 - **Memory**: Low (surgical word replacement only)
-- **Reasoning**: Catches prohibited words reintroduced by phases 3-9
+- **Reasoning**: Pure word filtering - no statistical analysis
 - **Pattern Rules Applied**: All pattern rules from master_prohibited_words.json
-- **Critical Role**: Final quality control checkpoint before output
+- **Architecture Change**: Lexical diversity analysis moved to Phase 9.5
+- **Critical Role**: Final quality control for prohibited words only
 
 ### Model Family Strategies
 

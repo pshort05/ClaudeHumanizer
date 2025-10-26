@@ -1,20 +1,22 @@
 {
-  "title": "Strategic Imperfections",
-  "assembly_line_position": "Phase 8: Human Writing Editor - Strategic imperfections, rhythm variation, sentence fragments, and conversational markers ONLY",
-  "description": "Rhythm variation and strategic imperfection system that adds authentic human flow patterns, aggressive sentence fragments, and conversational markers to processed text. Works WITHIN existing sentence content without changing meaning or show-vs-tell boundaries established by Phase 5.",
-  "version": "3.3.0",
-  "date": "2025-10-23",
+  "title": "Strategic Imperfections & Punctuation Inconsistency",
+  "assembly_line_position": "Phase 8: Human Writing Editor - Strategic imperfections, punctuation inconsistency, rhythm variation, sentence fragments, and conversational markers ONLY",
+  "description": "Rhythm variation and strategic imperfection system that adds authentic human flow patterns, punctuation inconsistencies, aggressive sentence fragments, and conversational markers to processed text. Works WITHIN existing sentence content without changing meaning or show-vs-tell boundaries established by Phase 5.",
+  "version": "4.1.0",
+  "date": "2025-10-26",
 
   "domain_restrictions": {
     "only_handle": [
       "Strategic imperfections and rhythm variation WITHIN existing sentences",
+      "Punctuation inconsistency injection (critical AI detection countermeasure)",
       "Sentence flow and pacing adjustments WITHOUT changing meaning",
       "Authentic awkwardness where appropriate",
       "Sentence length variation for natural rhythm (including very short sentences and fragments)",
       "Transition and rhythm optimization",
       "Conversational markers and self-aware statements for casual/informal content",
       "Rhetorical questions as transitions",
-      "Intentional sentence fragments for emphasis"
+      "Intentional sentence fragments for emphasis",
+      "Minor grammatical imperfections for authenticity"
     ],
     "never_touch": [
       "Content meaning established by previous phases",
@@ -181,6 +183,325 @@
         "use_conversational_markers_sparingly": "Personal blogs, memoirs, casual articles",
         "avoid_conversational_markers": "Technical docs, academic papers, formal business writing, news articles, most fiction"
       }
+    }
+  },
+
+  "punctuation_inconsistency_injection": {
+    "purpose": "AI exhibits 'machine-like consistency' in punctuation patterns. This is explicitly identified as a KEY detection marker in academic research. Humans have natural punctuation inconsistencies that must be strategically injected.",
+    "detection_priority": "HIGH - Punctuation pattern consistency is a specific AI detection marker mentioned in detection research",
+    "principle": "AI uses punctuation with robotic consistency. Humans are inconsistent with Oxford commas, spacing, and other punctuation choices. Strategic inconsistency creates authenticity.",
+
+    "oxford_comma_inconsistency": {
+      "description": "Humans don't consistently use Oxford commas. AI does. Vary usage throughout the text.",
+      "detection_marker": "100% consistent Oxford comma usage (either always or never) flags AI authorship",
+      "strategy": "Use Oxford commas in approximately 60-70% of serial lists, omit in 30-40%",
+      "examples": {
+        "with_oxford": "She bought apples, oranges, and bananas.",
+        "without_oxford": "She bought apples, oranges and bananas."
+      },
+      "application": "Randomly vary Oxford comma usage across different lists in the text. No pattern - purely inconsistent.",
+      "caution": "Never modify dialogue - characters may have consistent speech patterns"
+    },
+
+    "spacing_inconsistencies": {
+      "description": "Humans occasionally make spacing errors. AI never does. Add rare, subtle spacing variations.",
+      "detection_marker": "Perfect spacing throughout entire document flags AI perfection syndrome",
+      "types": {
+        "double_space_after_period": {
+          "description": "Occasionally use double space after period (older typing convention)",
+          "frequency": "1-2 instances per 1000 words maximum",
+          "application": "Randomly insert double space after period in 0.1-0.2% of sentences"
+        },
+        "missing_space_after_comma": {
+          "description": "Occasionally omit space after comma (typo simulation)",
+          "frequency": "0-1 instances per 2000 words maximum",
+          "application": "Very rarely omit space after comma to simulate natural typo",
+          "caution": "Keep this EXTREMELY rare - too many looks sloppy, not human"
+        },
+        "extra_space_before_punctuation": {
+          "description": "Occasionally add space before punctuation mark (especially with question/exclamation)",
+          "frequency": "0-1 instances per 3000 words maximum",
+          "application": "Very rarely add space before ? or !",
+          "caution": "Use sparingly - this is a subtle imperfection"
+        }
+      },
+      "implementation_note": "Spacing inconsistencies should be VERY subtle and rare. The goal is to break perfect consistency, not to appear careless."
+    },
+
+    "quotation_mark_inconsistency": {
+      "description": "AI uses curly quotes with machine-like consistency. Humans sometimes mix straight and curly quotes, especially when typing quickly.",
+      "detection_marker": "Perfect curly quotation mark consistency throughout entire document",
+      "strategy": "If text uses curly quotes, occasionally (rarely) mix in straight quotes, especially in less formal contexts",
+      "frequency": "0-2 instances per document",
+      "caution": "This is a very subtle inconsistency - don't overuse"
+    },
+
+    "hyphenation_inconsistency": {
+      "description": "Humans are inconsistent with compound word hyphenation. AI follows strict rules.",
+      "examples": {
+        "email_e-mail": "Vary between 'email' and 'e-mail' across document",
+        "setup_set-up": "Vary between 'setup' (noun) and 'set up' (verb) inconsistently",
+        "high_quality_high-quality": "Sometimes hyphenate compound adjectives, sometimes don't"
+      },
+      "strategy": "If document contains compound words, introduce subtle inconsistency in hyphenation (1-2 instances)",
+      "caution": "Don't create grammatical errors - maintain some logic even in inconsistency"
+    },
+
+    "comma_splice_strategic_use": {
+      "description": "Humans occasionally use comma splices in informal writing. AI avoids them perfectly.",
+      "definition": "Comma splice = two independent clauses joined only by a comma (grammatically incorrect but common)",
+      "frequency": "0-1 instances per 2000 words in casual content, NEVER in formal content",
+      "examples": {
+        "correct": "The system failed. We had to restart it.",
+        "comma_splice": "The system failed, we had to restart it."
+      },
+      "application": "In very casual blog posts or creative nonfiction, occasionally use comma splice for authentic feel",
+      "caution": "SKIP entirely for formal, academic, or business writing. Only use in highly casual contexts."
+    },
+
+    "ellipses_spacing_inconsistency": {
+      "description": "Humans are inconsistent with ellipses spacing. AI follows strict typographic rules.",
+      "ai_pattern": "AI consistently uses either '...' or '. . .' throughout document",
+      "human_pattern": "Humans mix 'text...text' and 'text ... text' and 'text… text' inconsistently",
+      "strategy": "Vary ellipses spacing patterns across document if ellipses are used",
+      "frequency": "If document contains ellipses, vary the spacing in 30-40% of instances"
+    },
+
+    "implementation_guidelines": {
+      "subtlety_principle": "All punctuation inconsistencies must be SUBTLE. The goal is to break AI's perfect consistency, not to appear careless or unskilled.",
+      "frequency_control": "Less is more. A few well-placed inconsistencies are far more effective than many.",
+      "context_awareness": {
+        "formal_writing": "Minimal inconsistencies - only Oxford comma variation and perhaps hyphenation",
+        "casual_writing": "Can include spacing variations, comma splices (rare), ellipses variation",
+        "technical_writing": "Minimal - primarily Oxford comma variation",
+        "creative_writing": "Moderate inconsistencies appropriate for natural human flow"
+      },
+      "dialogue_exemption": "NEVER inject punctuation inconsistencies into dialogue - preserve character voice exactly",
+      "markdown_exemption": "NEVER modify Markdown syntax or code blocks",
+      "verification": "After injection, verify text still reads naturally and inconsistencies don't distract from meaning"
+    }
+  },
+
+  "enhanced_strategic_imperfections": {
+    "purpose": "Extend beyond current imperfections to address additional markers identified in 'How AI Detectors Work' document. AI text exhibits 'counterintuitive perfection' - flawless grammar, unnaturally smooth flow, and lack of logical leaps.",
+    "detection_priority": "HIGH - Perfection/flawlessness is described as a 'powerful signal' and 'red flag' in detection research",
+
+    "logical_leap_injection": {
+      "description": "Humans make logical leaps and don't always explain every step. AI over-explains with perfect logical progression.",
+      "detection_marker": "Every idea perfectly connected to the next with explicit transitions",
+      "strategy": "Occasionally remove transitional explanation, allowing reader to make the logical leap",
+      "examples": {
+        "ai_pattern": "The data showed a clear correlation. This correlation, therefore, indicates that the hypothesis was correct. Given this indication, we can conclude that...",
+        "human_pattern": "The data showed a clear correlation. The hypothesis was correct. We can conclude..."
+      },
+      "frequency": "1-2 instances per 1000 words",
+      "application": "Remove obvious transitional clauses that over-explain connections, especially in casual content"
+    },
+
+    "tangential_thought_insertion": {
+      "description": "Humans digress and include tangential thoughts. AI stays perfectly on topic.",
+      "detection_marker": "No digressions, no side thoughts, perfectly linear progression",
+      "strategy": "Occasionally insert brief tangential observation or side thought",
+      "examples": {
+        "main_topic": "The system architecture relies on three core components...",
+        "with_tangent": "The system architecture relies on three core components (though really, most systems these days overcomplicate this)..."
+      },
+      "frequency": "0-1 instances per 1500 words in casual content, NEVER in formal content",
+      "application": "Add brief parenthetical aside or em-dash digression that's related but slightly off-topic",
+      "caution": "Keep tangents very brief - don't derail the main point"
+    },
+
+    "awkward_phrasing_retention": {
+      "description": "Humans occasionally phrase things awkwardly. AI is perfectly polished.",
+      "detection_marker": "Zero awkward constructions, every sentence flows perfectly",
+      "strategy": "Strategically preserve or create slightly awkward (but comprehensible) phrasing",
+      "examples": {
+        "polished_ai": "The implementation process proceeded smoothly without complications.",
+        "awkward_human": "The implementation went smooth, no real issues."
+      },
+      "frequency": "1-2 instances per 2000 words",
+      "application": "Don't fix every slightly awkward construction - some authentic awkwardness is human",
+      "caution": "Must still be comprehensible - awkward but not incomprehensible"
+    },
+
+    "contraction_inconsistency": {
+      "description": "Humans inconsistently use contractions. AI either always uses them or never uses them.",
+      "detection_marker": "100% consistent contraction usage (either always 'it is' or always 'it's')",
+      "strategy": "Mix contracted and non-contracted forms throughout text",
+      "examples": {
+        "paragraph_1": "It's important to note that...",
+        "paragraph_5": "It is crucial to understand..."
+      },
+      "application": "Vary between 'it's/it is', 'don't/do not', 'can't/cannot' across different instances",
+      "frequency": "Aim for 60-70% contractions in casual content, vary throughout"
+    },
+
+    "minor_error_injection": {
+      "description": "Humans make occasional errors. AI text is flawless. CRITICAL: This is explicitly mentioned in detection research.",
+      "detection_priority": "HIGH - Absence of errors is a 'counterintuitive but powerful signal' of AI authorship",
+      "strategy": "Inject 0-2 subtle, authentic errors that humans would make",
+
+      "implementation_philosophy": {
+        "preferred_method": "HOMOPHONE AND WRONG-WORD-TYPE ERRORS are strongly preferred over character-level typos",
+        "reasoning": [
+          "LLMs operate at token/word level, not character level - word substitution is reliable",
+          "Homophone confusion is extremely common in human writing",
+          "Maintains readability while appearing human",
+          "Easier to control frequency and placement",
+          "More predictable and consistent results",
+          "Character-level typos risk creating non-words or appearing careless"
+        ],
+        "recommendation": "Use homophones/wrong-words almost exclusively. Avoid character manipulation."
+      },
+
+      "types": {
+        "homophone_confusion": {
+          "description": "Swap homophones that humans commonly confuse - PREFERRED METHOD",
+          "priority": "PRIMARY - Use this type almost exclusively",
+          "why_best": "Simple word substitution, very common human error, maintains readability, easy for LLM to implement consistently",
+          "common_pairs": {
+            "their_there_theyre": {
+              "their": "possessive (their book)",
+              "there": "location or existential (there is, over there)",
+              "they're": "contraction (they are)"
+            },
+            "your_youre": {
+              "your": "possessive (your book)",
+              "you're": "contraction (you are)"
+            },
+            "its_its": {
+              "its": "possessive (its color)",
+              "it's": "contraction (it is/it has)"
+            },
+            "to_too_two": {
+              "to": "preposition or infinitive (to go, go to)",
+              "too": "also or excessive (too much, me too)",
+              "two": "number (2)"
+            },
+            "affect_effect": {
+              "affect": "verb - to influence (will affect)",
+              "effect": "noun - result (the effect)"
+            },
+            "then_than": {
+              "then": "time sequence (first, then)",
+              "than": "comparison (better than)"
+            },
+            "lose_loose": {
+              "lose": "verb - to misplace or be defeated",
+              "loose": "adjective - not tight"
+            },
+            "accept_except": {
+              "accept": "verb - to receive or agree",
+              "except": "preposition - excluding"
+            }
+          },
+          "examples": [
+            "they're/their/there",
+            "your/you're",
+            "its/it's",
+            "to/too/two",
+            "affect/effect",
+            "then/than",
+            "lose/loose",
+            "accept/except",
+            "weather/whether",
+            "who's/whose",
+            "principal/principle",
+            "compliment/complement"
+          ],
+          "frequency": "0-1 per 2000-3000 words in casual content",
+          "application": "Randomly select ONE common homophone pair and swap it incorrectly in a natural location",
+          "implementation": "Find existing usage of target word, verify context makes the error plausible, swap to incorrect homophone",
+          "caution": "Must look like natural confusion, not random. Context should make the error believable."
+        },
+
+        "wrong_word_type": {
+          "description": "Use wrong grammatical form of word - SECONDARY METHOD",
+          "priority": "SECONDARY - Use occasionally for variety",
+          "why_good": "Also simple word substitution, common human error, maintains readability",
+          "common_errors": {
+            "adjective_vs_adverb": {
+              "incorrect": "Drive safe (should be 'safely')",
+              "incorrect": "He runs quick (should be 'quickly')"
+            },
+            "verb_form_confusion": {
+              "incorrect": "I should of gone (should be 'should have')",
+              "incorrect": "Could of been (should be 'could have')"
+            },
+            "plural_possessive": {
+              "incorrect": "The dogs tail (should be \"dog's tail\")",
+              "incorrect": "Its going well (should be \"It's going\")"
+            }
+          },
+          "frequency": "0-1 per 3000 words in casual content",
+          "application": "Select one common grammatical confusion and apply it once",
+          "caution": "Keep extremely subtle - these can look more careless than homophones"
+        },
+
+        "repeated_word": {
+          "description": "Accidentally repeat word (e.g., 'the the') - USE VERY SPARINGLY",
+          "priority": "TERTIARY - Use rarely, if at all",
+          "frequency": "0-1 per 5000+ words maximum",
+          "application": "Very rarely duplicate article or preposition in middle of sentence",
+          "caution": "EXTREMELY rare - only for very long documents, only in casual content. Easy to spot in editing, so feels less authentic."
+        },
+
+        "character_level_typos": {
+          "description": "Letter transposition/omission (e.g., 'hte' instead of 'the') - AVOID IN LLM IMPLEMENTATION",
+          "priority": "NOT RECOMMENDED - Technical limitations",
+          "why_avoid": [
+            "LLMs work at token level, not character level",
+            "Difficult to implement consistently and naturally",
+            "Risk of creating non-words or gibberish",
+            "Harder to control and verify",
+            "Less predictable results",
+            "May break readability"
+          ],
+          "recommendation": "Skip this type entirely. Use homophones instead.",
+          "note": "If you must include character typos, limit to extremely common words and extremely rare frequency (0-1 per 10,000 words)"
+        }
+      },
+
+      "implementation_critical_rules": {
+        "user_configurable": "IMPORTANT: Error injection MUST be user-configurable with clear on/off toggle",
+        "default_setting": "OFF by default - user must explicitly enable",
+        "frequency_limit": "Maximum 1 error per 2000-3000 words - any more looks unprofessional or careless",
+        "context_restriction": "NEVER inject errors in formal, academic, business, or technical writing",
+        "casual_only": "Only appropriate for personal blogs, creative writing, very casual content where authenticity matters more than polish",
+        "plausibility": "Error must be one a human would realistically make through fast typing or confusion",
+        "comprehensibility": "Error should not impede comprehension of meaning",
+        "professional_contexts_skip": "Default to NO errors unless content is very casual and user explicitly wants them",
+        "natural_placement": "Place error in middle of text, not at beginning or end where it's more noticeable",
+        "single_type": "Use only ONE type of error per document - don't mix homophone + repeated word + typo"
+      },
+
+      "user_configuration_interface": {
+        "suggested_implementation": {
+          "option_1_off": "No errors (DEFAULT) - Flawless text for professional contexts",
+          "option_2_minimal": "Minimal (1 error per 3000 words) - One subtle homophone confusion",
+          "option_3_moderate": "Moderate (1-2 errors per 2000 words) - Occasional homophones for authenticity",
+          "option_4_custom": "Custom - User specifies error type and frequency"
+        },
+        "recommended_default": "OFF - Users should opt-in for error injection",
+        "warning_to_display": "Error injection adds authenticity but reduces polish. Only enable for casual content where detection avoidance is critical."
+      },
+
+      "examples": {
+        "before_no_errors": "They're going to their house over there to get your book. It's a long drive, so you're going to be waiting a while.",
+        "after_homophone_error": "They're going to their house over there to get you're book. It's a long drive, so you're going to be waiting a while.",
+        "explanation": "Single homophone swap ('your' → 'you're') creates authentic human error without reducing readability"
+      }
+    },
+
+    "strategic_imperfection_balance": {
+      "principle": "The goal is authentic human imperfection, not sloppiness. All imperfections must enhance authenticity without reducing professionalism or clarity.",
+      "frequency_guidelines": {
+        "high_formality": "Minimal imperfections - primarily punctuation inconsistency and contraction variation",
+        "medium_formality": "Moderate - add logical leaps, awkward phrasing, tangents (rare)",
+        "low_formality": "More permissive - can include comma splices (rare), typos (very rare, user-configurable)",
+        "creative_fiction": "Full range of imperfections appropriate for natural narrative voice"
+      },
+      "quality_control": "After all imperfections injected, verify text remains professional, clear, and authentic-feeling"
     }
   },
 

@@ -1,15 +1,15 @@
 {
   "title": "Final AI Word Sweep",
-  "version": "1.0.0",
-  "last_updated": "2025-10-05",
-  "description": "Surgical final pass to remove any prohibited AI-associated words and phrases that were reintroduced during phases 3-9",
+  "version": "3.0.0",
+  "last_updated": "2025-10-26",
+  "description": "Pure word filtering phase - surgical final pass to remove any prohibited AI-associated words and phrases that were reintroduced during phases 3-9. Does NOT perform statistical analysis (Phase 9.5 handles all metrics).",
 
-  "assembly_line_position": "Phase 10: Final Quality Control - Prohibited word removal ONLY after all other processing is complete",
+  "assembly_line_position": "Phase 10: Final Word Filtering - Pure prohibited word removal ONLY after all other processing (including Phase 9.5 statistical optimization) is complete",
 
   "master_prohibited_list_reference": "Uses master_prohibited_words.json as single source of truth for all prohibited terms",
 
   "domain_restrictions": {
-    "only_replace": "AI-associated words and phrases from master_prohibited_words.json that may have been reintroduced by Phases 3-9",
+    "only_replace": "AI-associated words and phrases from master_prohibited_words.json that may have been reintroduced by Phases 3-9. NO statistical analysis or optimization.",
     "never_touch": [
       "Dialogue content (any text in quotation marks)",
       "Character speech",
@@ -96,6 +96,8 @@
     "step_8": "Verify replacements do not introduce new AI-sounding words, sophisticated punctuation, or other prohibited terms",
     "step_9": "Review final text to ensure dialogue and Markdown remain unchanged and flow is natural"
   },
+
+  "note_on_statistical_metrics": "Phase 10 does NOT perform statistical analysis (burstiness, POS distribution, TTR, lexical diversity). Phase 9.5 handles all quantitative metrics. Phase 10 focuses exclusively on word-level filtering using master_prohibited_words.json.",
 
   "replacement_guidelines": {
     "natural_alternatives": "Choose simple, direct alternatives that sound conversational and genuine",

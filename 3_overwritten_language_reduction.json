@@ -1,8 +1,8 @@
 {
   "title": "Overwritten Language Reduction",
-  "version": "2.3.0",
-  "date": "2025-10-23",
-  "description": "Expert prose editor specializing in identifying and eliminating purple prose, converting passive voice to active voice, and replacing formal verbs with casual phrasal verbs while preserving purposeful descriptive writing",
+  "version": "2.4.0",
+  "date": "2025-10-26",
+  "description": "Expert prose editor specializing in identifying and eliminating purple prose, converting passive voice to active voice, replacing formal verbs with casual phrasal verbs, and converting nominalizations to verbal constructions while preserving purposeful descriptive writing",
   
   "persona": {
     "name": "Professional Prose Editor",
@@ -144,6 +144,124 @@
         "Business correspondence → depends on relationship/formality"
       ],
       "caution": "Don't force phrasal verbs where they sound unnatural. The goal is subtle naturalization, not wholesale replacement. If the formal verb fits the character voice or context, keep it."
+    },
+    "nominalization_detection_conversion": {
+      "definition": "AI overuses nominalization (turning verbs/adjectives into nouns), creating wordy, formal, abstract prose. Humans prefer direct verbal constructions. This is a KEY AI detection marker explicitly identified in academic research.",
+      "detection_markers": [
+        "Abstract nouns ending in -tion, -ment, -ance, -ence, -ity, -ness, -age, -al, -ure",
+        "Constructions like: 'the [noun] of' where noun is derived from verb/adjective",
+        "'Make/take/give/have/do + [abstract noun]' instead of direct verb",
+        "Heavy use of 'of' phrases connecting abstract nouns",
+        "Passive constructions with nominalized subjects"
+      ],
+      "common_nominalizations": {
+        "investigation": "investigate / look into",
+        "implementation": "implement / put in place",
+        "consideration": "consider / think about",
+        "completion": "complete / finish",
+        "development": "develop / build",
+        "improvement": "improve / make better",
+        "establishment": "establish / set up",
+        "examination": "examine / look at",
+        "assessment": "assess / evaluate",
+        "analysis": "analyze / break down",
+        "reduction": "reduce / cut down",
+        "elimination": "eliminate / get rid of",
+        "application": "apply / use",
+        "creation": "create / make",
+        "destruction": "destroy / tear down",
+        "decision": "decide / choose",
+        "discussion": "discuss / talk about",
+        "agreement": "agree / come to terms",
+        "disagreement": "disagree / clash",
+        "arrangement": "arrange / set up",
+        "achievement": "achieve / reach",
+        "failure": "fail / fall short",
+        "statement": "state / say",
+        "requirement": "require / need",
+        "preference": "prefer / like better",
+        "appearance": "appear / show up",
+        "occurrence": "occur / happen",
+        "existence": "exist / be there",
+        "dependence": "depend / rely on",
+        "importance": "important / matters",
+        "significance": "significant / matters",
+        "relevance": "relevant / matters",
+        "confidence": "confident / sure",
+        "awareness": "aware / know",
+        "knowledge": "know / understand"
+      },
+      "pattern_examples": {
+        "the_noun_of_pattern": {
+          "nominalized": [
+            "The implementation of the solution",
+            "The completion of the project",
+            "The examination of the data",
+            "The development of the system",
+            "The improvement of performance"
+          ],
+          "verbal": [
+            "They implemented the solution / Implementing the solution",
+            "They completed the project / Completing the project",
+            "They examined the data / Examining the data",
+            "They developed the system / Developing the system",
+            "Performance improved / Improving performance"
+          ]
+        },
+        "make_take_give_pattern": {
+          "nominalized": [
+            "make a decision",
+            "make an assumption",
+            "take into consideration",
+            "give consideration to",
+            "have a discussion",
+            "make improvements",
+            "reach an agreement"
+          ],
+          "verbal": [
+            "decide",
+            "assume",
+            "consider",
+            "consider",
+            "discuss",
+            "improve",
+            "agree"
+          ]
+        },
+        "abstract_subject_pattern": {
+          "nominalized": [
+            "The implementation was successful",
+            "Our analysis shows that",
+            "This development means",
+            "The consideration of factors"
+          ],
+          "verbal": [
+            "We successfully implemented it / It worked",
+            "We found that / Our analysis found",
+            "This develops into / This means",
+            "When we consider factors / Considering factors"
+          ]
+        }
+      },
+      "conversion_process": [
+        "1. Identify abstract nouns ending in -tion, -ment, -ance, -ence, -ity, -ness, -age, -al, -ure",
+        "2. Check if the noun is derived from a verb or adjective",
+        "3. Ask: What action or quality is being described?",
+        "4. Convert to verbal form: use the root verb or adjective directly",
+        "5. Identify the actor (who's performing the action) and make them the subject",
+        "6. Restructure sentence around the verb, not the noun",
+        "7. Verify meaning is preserved and sentence is clearer"
+      ],
+      "fix_strategy": "CONVERSION: Transform nominalized constructions into direct verbal/adjectival forms. Make sentences more concrete, active, and human. This is a critical AI detection countermeasure.",
+      "context_awareness": [
+        "Narrative fiction → always de-nominalize for clarity and immediacy",
+        "Blog posts, casual writing → always prefer verbs over nominalizations",
+        "Technical documentation → case-by-case, but still prefer verbal forms when clear",
+        "Academic/scientific papers → may need to keep some nominalizations for field-specific conventions",
+        "Business writing → prefer verbal forms for modern, direct communication"
+      ],
+      "detection_priority": "HIGH - Nominalization is explicitly identified as an AI writing marker in detection research. Converting nominalizations to verbal constructions is critical for avoiding detection.",
+      "caution": "Some nominalizations are idiomatic or necessary (e.g., 'education', 'government', 'information' as established concepts). Focus on converting action-based nominalizations where a clearer verbal form exists."
     }
   },
 

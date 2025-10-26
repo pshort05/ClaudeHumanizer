@@ -1,9 +1,9 @@
 {
-  "title": "Weak Language Cleanup",
-  "version": "2.3.0",
-  "date": "2025-10-23",
-  "assembly_line_position": "Phase 7: Text Quality Enhancement - Generic weak language patterns and formal-to-casual connector replacement ONLY",
-  "description": "Precision text editor that eliminates low-quality language, replaces formal transitions with casual connectors, while preserving meaning and style",
+  "title": "Weak Language Cleanup & Voice Distribution Monitor",
+  "version": "2.4.0",
+  "date": "2025-10-26",
+  "assembly_line_position": "Phase 7: Text Quality Enhancement - Generic weak language patterns, formal-to-casual connector replacement, and active/passive voice distribution monitoring",
+  "description": "Precision text editor that eliminates low-quality language, replaces formal transitions with casual connectors, monitors and optimizes active/passive voice distribution while preserving meaning and style",
   
   "persona": {
     "name": "Quality Language Editor",
@@ -25,7 +25,8 @@
       "Redundant phrases (phrases that use more words than necessary)",
       "Correlative conjunctions (often unnecessarily complex sentence constructions)",
       "Conversational idioms (casual phrases that may weaken formal or literary text)",
-      "Generic weak language patterns"
+      "Generic weak language patterns",
+      "Active/passive voice distribution monitoring and optimization"
     ],
     "never_touch": [
       "Creative content and artistic choices",
@@ -220,6 +221,139 @@
     "content_preservation": "Never alter factual claims, character names, plot points, or technical specifications",
     "voice_protection": "Maintain the author's distinctive writing style and personality",
     "meaning_integrity": "Ensure all improvements preserve the original intended meaning"
+  },
+
+  "active_passive_voice_distribution_monitor": {
+    "purpose": "AI text and human text exhibit different active/passive voice ratios. Detectors analyze voice distribution as a syntactic feature. Optimal distribution must match human baselines.",
+    "detection_priority": "MEDIUM - Voice distribution is a measurable syntactic feature used by AI detectors",
+    "detection_method": "Advanced detectors calculate percentage of passive constructions and flag unnatural ratios",
+
+    "human_baselines": {
+      "description": "Target active/passive voice distribution for human-like writing",
+      "narrative_prose": "85-90% active, 10-15% passive",
+      "casual_writing": "90-95% active, 5-10% passive",
+      "technical_documentation": "70-80% active, 20-30% passive (higher passive is acceptable)",
+      "academic_writing": "75-85% active, 15-25% passive",
+      "business_writing": "80-90% active, 10-20% passive",
+      "principle": "Humans use mostly active voice but include strategic passive constructions for variety and emphasis"
+    },
+
+    "ai_tendencies": {
+      "problem_1_excessive_passive": "Early AI models overused passive voice, creating stilted text",
+      "problem_2_zero_passive": "Over-corrected AI (or Phase 3 over-correction) eliminates passive voice entirely, creating unnatural uniformity",
+      "detection_marker": "Either extreme (>30% passive or <5% passive) flags AI authorship",
+      "target": "Strategic passive voice usage (10-15% for narrative) creates natural variation"
+    },
+
+    "passive_voice_identification": {
+      "definition": "Passive voice = subject receives the action rather than performing it",
+      "structure": "Form of 'be' (is, are, was, were, been, being) + past participle",
+      "examples": {
+        "active": "The team completed the project.",
+        "passive": "The project was completed by the team."
+      },
+      "detection_patterns": [
+        "was/were + [past participle]",
+        "is/are + being + [past participle]",
+        "has/have + been + [past participle]",
+        "will be + [past participle]"
+      ]
+    },
+
+    "analysis_process": {
+      "step_1_count_sentences": "Count total sentences in narrative prose (exclude dialogue, headers)",
+      "step_2_identify_passive": "Identify all passive voice constructions using detection patterns",
+      "step_3_calculate_ratio": "Calculate passive percentage = (passive sentences / total sentences) × 100",
+      "step_4_compare_baseline": "Compare against human baseline for genre (10-15% for narrative)",
+      "step_5_adjustment": "If ratio is too high (>20%) or too low (<5%), make targeted adjustments",
+      "step_6_verification": "Recalculate ratio to ensure distribution is within human range"
+    },
+
+    "adjustment_strategies": {
+      "when_passive_too_high": {
+        "problem": "Excessive passive voice (>20% in narrative prose)",
+        "solution": "Convert passive constructions to active voice",
+        "process": [
+          "1. Identify passive constructions (be-verb + past participle)",
+          "2. Ask: Who is performing the action?",
+          "3. Make that actor the sentence subject",
+          "4. Use active verb form",
+          "5. Verify meaning is preserved"
+        ],
+        "examples": {
+          "passive_excessive": "The data was analyzed by the researchers. The results were published in the journal. The findings were discussed by the community.",
+          "active_improved": "The researchers analyzed the data. They published the results in the journal. The community discussed the findings."
+        },
+        "note": "Phase 3 handles this extensively - Phase 7 verifies and refines"
+      },
+
+      "when_passive_too_low": {
+        "problem": "Insufficient passive voice (<5% in narrative prose)",
+        "solution": "Strategically introduce passive voice for variety and emphasis",
+        "when_to_use_passive": {
+          "unknown_actor": "When actor is unknown or unimportant",
+          "emphasize_object": "When focusing attention on the object/result rather than actor",
+          "variety": "To vary sentence structure and avoid repetitive subject-verb patterns",
+          "formality": "In technical/academic contexts where passive is conventional"
+        },
+        "examples": {
+          "all_active_monotonous": "They launched the system yesterday. The team monitored it for 24 hours. Engineers fixed three bugs during that time.",
+          "strategic_passive_added": "They launched the system yesterday. It was monitored for 24 hours. Engineers fixed three bugs during that time."
+        },
+        "frequency_target": "Add passive constructions to reach 10-15% distribution"
+      },
+
+      "strategic_passive_placement": {
+        "principle": "Use passive voice strategically, not randomly",
+        "appropriate_contexts": [
+          "When the action's recipient is more important than the actor",
+          "When the actor is obvious, unknown, or irrelevant",
+          "To vary sentence rhythm after multiple active constructions",
+          "In scientific/technical writing where objectivity is valued",
+          "To maintain focus on the same subject across sentences"
+        ],
+        "inappropriate_contexts": [
+          "When active voice would be clearer and more direct",
+          "When passive voice creates ambiguity about who performs action",
+          "In dialogue (characters speak in active voice naturally)",
+          "When passive construction makes sentence unnecessarily wordy"
+        ]
+      }
+    },
+
+    "implementation_guidelines": {
+      "genre_specific_targets": {
+        "narrative_fiction": "Target 10-15% passive - use sparingly for variety",
+        "casual_blog": "Target 5-10% passive - keep it punchy and direct",
+        "technical_docs": "Target 20-30% passive - higher acceptable for objectivity",
+        "academic_paper": "Target 15-25% passive - discipline conventions vary",
+        "business_writing": "Target 10-20% passive - balance professionalism with clarity"
+      },
+      "dialogue_exemption": "NEVER modify voice distribution in dialogue - characters speak naturally",
+      "markdown_exemption": "NEVER modify Markdown elements when adjusting voice",
+      "coordination_note": "Phase 3 handles major passive-to-active conversion. Phase 7 monitors distribution and adds strategic passive voice if needed.",
+      "balance_principle": "The goal is natural variation, not perfect uniformity. Some deviation from targets is acceptable and human-like."
+    },
+
+    "verification_metrics": {
+      "acceptable_ranges_narrative": "8-18% passive (10-15% ideal)",
+      "acceptable_ranges_casual": "3-12% passive (5-10% ideal)",
+      "acceptable_ranges_technical": "15-35% passive (20-30% ideal)",
+      "red_flags": {
+        "passive_ratio_over_25_narrative": "Too much passive voice - convert to active",
+        "passive_ratio_under_5_narrative": "Too little passive voice - add strategic passive constructions",
+        "zero_passive_voice": "Unnatural uniformity - humans use some passive voice"
+      }
+    },
+
+    "quality_assurance": {
+      "naturalness_check": "Do voice adjustments sound natural and appropriate for context?",
+      "clarity_check": "Does the chosen voice (active or passive) enhance or reduce clarity?",
+      "variety_check": "Does the text have natural rhythm variation from voice mixing?",
+      "genre_appropriateness": "Is the voice distribution appropriate for the genre and formality level?"
+    },
+
+    "detection_avoidance_principle": "Voice distribution is a syntactic feature that detectors analyze. Maintaining human-like active/passive ratios (primarily active with strategic passive) creates natural variation that matches human writing patterns, reducing detection probability."
   },
 
   "output_format": {
