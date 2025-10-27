@@ -385,7 +385,7 @@ Keep versioned backups:
 
 ## Custom Phase Development
 
-For projects requiring specialized processing beyond the standard 9 phases.
+For projects requiring specialized processing beyond the standard 10 phases (plus optional phases 6.1 and 9.5).
 
 ### Creating Custom Phases
 
@@ -472,7 +472,8 @@ Create project-specific config files:
   "project_name": "Your Project Name",
   "version": "1.0",
   "configuration": {
-    "enabled_phases": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "enabled_phases": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "optional_phases": [6.1, 9.5],
     "custom_phases": ["scifi_technical"],
     "character_dialogue_enabled": true,
     "master_prohibited_words": "custom_prohibited_words.json",
@@ -519,7 +520,7 @@ Create project-specific config files:
     "preserve_technical_accuracy": true,
     "formal_tone_maintenance": true
   },
-  "enabled_phases": [1, 2, 7, 9],  // Skip creative enhancement phases
+  "enabled_phases": [1, 2, 7, 9, 10],  // Skip creative enhancement phases
   "model_preferences": {
     "temperature_override": 0.1,
     "consistency_priority": true
@@ -537,22 +538,26 @@ Process different content types with different phase combinations:
 def get_phase_configuration(content_type, text_analysis):
     if content_type == "dialogue_heavy":
         return {
-            "phases": [1, 2, 6, 6.1, 7, 9],
-            "character_focus": True
+            "phases": [1, 2, 6, 6.1, 7, 9, 10],
+            "character_focus": True,
+            "skip_9_5": True  # Skip statistical analysis for dialogue-focused content
         }
     elif content_type == "technical_description":
         return {
-            "phases": [1, 2, 3, 7, 9],
-            "preserve_precision": True
+            "phases": [1, 2, 3, 7, 9, 10],
+            "preserve_precision": True,
+            "skip_9_5": True  # Skip statistical analysis for technical content
         }
     elif content_type == "creative_narrative":
         return {
-            "phases": [1, 2, 3, 4, 5, 8, 9],
-            "enhance_creativity": True
+            "phases": [1, 2, 3, 4, 5, 8, 9, 9.5, 10],
+            "enhance_creativity": True,
+            "include_9_5": True  # Include statistical analysis for creative content
         }
     else:
         return {
-            "phases": list(range(1, 10)),  # Full pipeline
+            "phases": list(range(1, 11)),  # Full pipeline phases 1-10
+            "optional_phases": [9.5],  # Optional statistical analysis
             "standard_processing": True
         }
 ```

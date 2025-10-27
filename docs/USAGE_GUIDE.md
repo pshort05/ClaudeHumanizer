@@ -24,12 +24,90 @@ Complete step-by-step instructions for using the ClaudeHumanizer assembly line s
 
 2. **Process Your Text**:
    ```
-   Phase 1 → Phase 2 → Phase 3 → Phase 4 → Phase 5 → Phase 6 → Phase 7 → Phase 8 → Phase 9 → Phase 10
+   Phase 1 → Phase 2 → Phase 3 → Phase 4 → Phase 5 → Phase 6 → Phase 7 → Phase 8 → Phase 9 → (Phase 9.5 optional) → Phase 10
    ```
 
 3. **Include Master List**: Phases 2 and 10 require `master_prohibited_words.json`
 
-4. **Use Previous Output**: Each phase processes the output from the previous phase
+4. **Optional Phase 9.5**: Include for comprehensive statistical optimization or skip for budget savings
+
+5. **Use Previous Output**: Each phase processes the output from the previous phase
+
+## Model Selection (October 2025)
+
+### Choosing the Right LLM
+
+ClaudeHumanizer supports multiple leading LLMs. Your choice depends on priorities:
+
+| Priority | Recommended Model | Why |
+|----------|------------------|-----|
+| **Maximum Quality** | Claude Sonnet 4.5 ⭐ | "Surgical" edits, best instruction-following, natural human tone |
+| **Budget Savings** | Gemini 2.5 Pro 💰 | 40% cheaper than Claude, excellent performance |
+| **Long Texts (>100K words)** | Gemini 2.5 Pro | 1M token context vs Claude's 200K |
+| **Speed Priority** | Gemini 2.5 Pro | Fastest (372 tokens/second) |
+| **ChatGPT Subscriber** | GPT-5 🔄 | Already included in subscription (with caveats) |
+
+### Model Comparison
+
+**Claude Sonnet 4.5 (RECOMMENDED)**
+- **Pricing**: $3/1M input, $15/1M output
+- **Quality**: 95-98% of maximum potential
+- **Strengths**:
+  - Best instruction-following (respects domain boundaries)
+  - "Surgical" approach (minimal changes, precise edits)
+  - Natural human tone
+  - Most reliable for 10-phase assembly line
+- **Use when**: Quality and reliability are paramount
+
+**Gemini 2.5 Pro (BUDGET TIER)**
+- **Pricing**: $1.25-2.50/1M input, $10-15/1M output (context-dependent)
+- **Quality**: 85-92% of maximum potential (estimated)
+- **Strengths**:
+  - 40% cost savings
+  - 1M token context (5x larger than Claude)
+  - Fastest processing (372 tok/s)
+  - Top-ranked on LM Arena
+- **Use when**: Budget matters, processing long texts, or high-volume workflows
+
+**GPT-5 (ALTERNATIVE)**
+- **Pricing**: Subscription-based (ChatGPT Plus/Pro)
+- **Quality**: 80-90% of maximum potential
+- **Strengths**:
+  - Excellent literary style
+  - Good at style mimicry
+  - Widely available
+- **Limitations**: ⚠️
+  - Tends to "take over" and rewrite beyond instructions
+  - Less "surgical" than Claude (may violate domain boundaries)
+  - Requires stricter "never touch" constraints
+- **Use when**: Already have ChatGPT subscription and willing to accept potential boundary issues
+
+### Decision Tree
+
+```
+What's your primary concern?
+
+QUALITY & RELIABILITY
+  └─→ Claude Sonnet 4.5 ⭐ RECOMMENDED
+
+BUDGET
+  ├─→ Text >100K words? → Gemini 2.5 Pro (1M context advantage)
+  └─→ Text <100K words? → Gemini 2.5 Pro (40% cheaper)
+
+SPEED
+  └─→ Gemini 2.5 Pro (372 tokens/second)
+
+EXISTING SUBSCRIPTION
+  └─→ Have ChatGPT Plus/Pro? → GPT-5 (included, but less reliable)
+
+BOOK-LENGTH CONTENT
+  └─→ Gemini 2.5 Pro (1M context handles 200K+ word documents)
+```
+
+**Important Notes:**
+- All models use the same temperature settings
+- Hybrid strategies available (see [Technical Reference](TECHNICAL_REFERENCE.md))
+- For automation, n8n workflows support all three models
 
 ## Assembly Line Overview
 
@@ -38,14 +116,15 @@ The ClaudeHumanizer operates as a **true assembly line** where each phase specia
 ### Domain Specialization
 - **Phase 1**: Grammar errors ONLY
 - **Phase 2**: AI-associated words ONLY (applies pattern rules for dialogue pauses, light descriptions, finger actions)
-- **Phase 3**: Purple prose elimination ONLY
+- **Phase 3**: Purple prose elimination ONLY (includes de-nominalization)
 - **Phase 4**: Flat passage enhancement ONLY
 - **Phase 5**: Obvious statement conversion ONLY
 - **Phase 6**: Dialogue content ONLY
 - **Phase 7**: Weak language patterns ONLY (12 categories including overused transitions and robotic qualifiers)
-- **Phase 8**: Rhythm and flow variation ONLY
-- **Phase 9**: Final AI pattern detection ONLY (no word filtering)
-- **Phase 10**: **NEW** - Final prohibited word sweep ONLY (catches words reintroduced by phases 3-9)
+- **Phase 8**: Rhythm and flow variation ONLY (strategic imperfections, punctuation inconsistency)
+- **Phase 9**: AI pattern detection ONLY - QUALITATIVE (N-grams, formulaic phrases, perplexity)
+- **Phase 9.5**: Statistical optimization ONLY - QUANTITATIVE (burstiness, POS, TTR) - **OPTIONAL**
+- **Phase 10**: Word filtering ONLY (catches prohibited words reintroduced by phases 3-9)
 
 ### Key Features
 - ✅ **No interference** - Each prompt only works in its domain
@@ -99,12 +178,14 @@ You are an assembly line text processor optimized for humanizing AI-generated te
 7. Take output through Phase 7 (Weak Language Cleanup)
 8. Take output through Phase 8 (Strategic Imperfections)
 9. Take output through Phase 9 (Final Verification)
-10. Take output through Phase 10 (Final AI Word Sweep) - include master_prohibited_words.json
-11. Return only the final Phase 10 output
+10. OPTIONAL: Take output through Phase 9.5 (Statistical Analysis Hub) - for comprehensive statistical optimization
+11. Take output through Phase 10 (Final AI Word Sweep) - include master_prohibited_words.json
+12. Return only the final Phase 10 output
 
 IMPORTANT:
 - Phases 2 and 10 require master_prohibited_words.json (contains pattern rules)
 - Phase 6 should use higher creativity (temperature 1.0) for natural dialogue
+- Phase 9.5 is OPTIONAL - include for maximum quality or skip for budget savings
 - Use the JSON prompts from the ClaudeHumanizer repository in exact order
 - Phase 10 is critical - it catches prohibited words reintroduced by phases 3-9
 ```
@@ -251,18 +332,53 @@ See [Customization Guide](CUSTOMIZATION.md) for detailed setup instructions.
 ### Phase 9: Final Verification
 **File**: `9_final_verification.json`
 **Dependencies**: None
-**Purpose**: AI pattern detection and quality control
+**Purpose**: AI pattern detection and quality control (qualitative)
 
 **What it catches**:
 - Remaining AI patterns (perfection syndrome, predictable phrasing)
+- N-gram patterns (150+ common AI sequences)
 - Phrase repetition issues
 - Rhythm and flow variations needed
-- Perplexity enhancement opportunities
+- Perplexity enhancement opportunities (formulaic phrase replacement)
 
 **What it avoids**:
 - Word-level filtering (handled by Phase 10)
+- Statistical analysis (handled by Phase 9.5)
 - Major content changes
 - Redoing previous phases' work
+
+### Phase 9.5: Statistical Analysis Hub (OPTIONAL)
+**File**: `9.5_statistical_analysis_hub.json`
+**Dependencies**: None
+**Purpose**: Comprehensive quantitative statistical optimization
+**Status**: OPTIONAL - can be skipped for budget savings
+
+**When to use**:
+- AI detection is a high concern
+- Text feels monotonous or statistically uniform
+- Maximum quality optimization needed
+- Budget allows for comprehensive processing
+
+**When to skip**:
+- Text already has good statistical properties
+- Budget constraints (saves 10-15% of total cost)
+- Fast turnaround is critical
+- Processing large volumes
+
+**What it optimizes**:
+- **Burstiness**: Sentence length variation (CV, range, variance, complexity)
+- **POS Distribution**: Noun/verb/adjective ratios normalized to human baselines
+- **Lexical Diversity**: TTR (Type-Token Ratio) calculation and enhancement
+- Single-pass efficiency: Reads text once, optimizes all metrics together
+
+**What it avoids**:
+- Word filtering (handled by Phase 10)
+- Pattern replacement (handled by Phase 9)
+- Dialogue content modification
+- Meaning or factual changes
+
+**Optional features**:
+- Detailed metrics report (before/after statistics)
 
 ### Phase 10: Final AI Word Sweep
 **File**: `10_final_ai_word_sweep.json`
@@ -283,19 +399,20 @@ See [Customization Guide](CUSTOMIZATION.md) for detailed setup instructions.
 
 ### Required Files by Phase
 
-| Phase | Prompt File | Master List Required |
-|-------|-------------|---------------------|
-| 1 | `1_grammar_foundation.json` | ❌ No |
-| 2 | `2_ai_word_cleaning.json` | ✅ Yes |
-| 3 | `3_overwritten_language_reduction.json` | ❌ No |
-| 4 | `4_sensory_enhancement.json` | ❌ No |
-| 5 | `5_subtlety_creation.json` | ❌ No |
-| 6 | `6_dialogue_enhancement.json` | ❌ No |
-| 6.1 | `6.1_character_dialogue_pass.json` | ❌ No |
-| 7 | `7_weak_language_cleanup.json` | ❌ No |
-| 8 | `8_strategic_imperfections.json` | ❌ No |
-| 9 | `9_final_verification.json` | ❌ No |
-| 10 | `10_final_ai_word_sweep.json` | ✅ Yes |
+| Phase | Prompt File | Master List Required | Status |
+|-------|-------------|---------------------|--------|
+| 1 | `1_grammar_foundation.json` | ❌ No | Required |
+| 2 | `2_ai_word_cleaning.json` | ✅ Yes | Required |
+| 3 | `3_overwritten_language_reduction.json` | ❌ No | Required |
+| 4 | `4_sensory_enhancement.json` | ❌ No | Required |
+| 5 | `5_subtlety_creation.json` | ❌ No | Required |
+| 6 | `6_dialogue_enhancement.json` | ❌ No | Required |
+| 6.1 | `6.1_character_dialogue_pass.json` | ❌ No | Optional |
+| 7 | `7_weak_language_cleanup.json` | ❌ No | Required |
+| 8 | `8_strategic_imperfections.json` | ❌ No | Required |
+| 9 | `9_final_verification.json` | ❌ No | Required |
+| 9.5 | `9.5_statistical_analysis_hub.json` | ❌ No | **Optional** |
+| 10 | `10_final_ai_word_sweep.json` | ✅ Yes | Required |
 
 ### Master Prohibited Words List
 **File**: `master_prohibited_words.json`

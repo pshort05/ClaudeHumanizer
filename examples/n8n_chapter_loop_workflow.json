@@ -1,0 +1,1035 @@
+{
+  "name": "ClaudeHumanizer - Chapter Loop (Sonnet 4.5)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "claudehumanizer-chapters",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook - Receive Chapters",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "claudehumanizer-chapters",
+      "notes": "Expects JSON: {\"chapters\": [{\"number\": 1, \"title\": \"Chapter Title\", \"text\": \"Chapter text...\"}]}"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "chapters_array",
+              "name": "chapters",
+              "value": "={{ $json.body.chapters }}",
+              "type": "array"
+            },
+            {
+              "id": "total_chapters",
+              "name": "total_chapters",
+              "value": "={{ $json.body.chapters.length }}",
+              "type": "number"
+            },
+            {
+              "id": "current_chapter_index",
+              "name": "current_chapter_index",
+              "value": "=0",
+              "type": "number"
+            },
+            {
+              "id": "processed_chapters",
+              "name": "processed_chapters",
+              "value": "=[]",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "init-variables",
+      "name": "Initialize Variables",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "filePath": "/path/to/ClaudeHumanizer/master_prohibited_words.json"
+      },
+      "id": "load-master-list",
+      "name": "Load Master Prohibited Words",
+      "type": "n8n-nodes-base.readFile",
+      "typeVersion": 1,
+      "position": [650, 200],
+      "notes": "Update path to your master_prohibited_words.json location"
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "filePath": "/path/to/ClaudeHumanizer/1_grammar_foundation.json"
+      },
+      "id": "load-phase1",
+      "name": "Load Phase 1 Prompt",
+      "type": "n8n-nodes-base.readFile",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "filePath": "/path/to/ClaudeHumanizer/2_ai_word_cleaning.json"
+      },
+      "id": "load-phase2",
+      "name": "Load Phase 2 Prompt",
+      "type": "n8n-nodes-base.readFile",
+      "typeVersion": 1,
+      "position": [650, 400]
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "filePath": "/path/to/ClaudeHumanizer/3_overwritten_language_reduction.json"
+      },
+      "id": "load-phase3",
+      "name": "Load Phase 3 Prompt",
+      "type": "n8n-nodes-base.readFile",
+      "typeVersion": 1,
+      "position": [650, 500]
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "filePath": "/path/to/ClaudeHumanizer/4_sensory_enhancement.json"
+      },
+      "id": "load-phase4",
+      "name": "Load Phase 4 Prompt",
+      "type": "n8n-nodes-base.readFile",
+      "typeVersion": 1,
+      "position": [650, 600]
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "filePath": "/path/to/ClaudeHumanizer/5_subtlety_creation.json"
+      },
+      "id": "load-phase5",
+      "name": "Load Phase 5 Prompt",
+      "type": "n8n-nodes-base.readFile",
+      "typeVersion": 1,
+      "position": [650, 700]
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "filePath": "/path/to/ClaudeHumanizer/6_dialogue_enhancement.json"
+      },
+      "id": "load-phase6",
+      "name": "Load Phase 6 Prompt",
+      "type": "n8n-nodes-base.readFile",
+      "typeVersion": 1,
+      "position": [850, 200]
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "filePath": "/path/to/ClaudeHumanizer/7_weak_language_cleanup.json"
+      },
+      "id": "load-phase7",
+      "name": "Load Phase 7 Prompt",
+      "type": "n8n-nodes-base.readFile",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "filePath": "/path/to/ClaudeHumanizer/8_strategic_imperfections.json"
+      },
+      "id": "load-phase8",
+      "name": "Load Phase 8 Prompt",
+      "type": "n8n-nodes-base.readFile",
+      "typeVersion": 1,
+      "position": [850, 400]
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "filePath": "/path/to/ClaudeHumanizer/9_final_verification.json"
+      },
+      "id": "load-phase9",
+      "name": "Load Phase 9 Prompt",
+      "type": "n8n-nodes-base.readFile",
+      "typeVersion": 1,
+      "position": [850, 500]
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "filePath": "/path/to/ClaudeHumanizer/9.5_statistical_analysis_hub.json"
+      },
+      "id": "load-phase9-5",
+      "name": "Load Phase 9.5 Prompt",
+      "type": "n8n-nodes-base.readFile",
+      "typeVersion": 1,
+      "position": [850, 600]
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "filePath": "/path/to/ClaudeHumanizer/10_final_ai_word_sweep.json"
+      },
+      "id": "load-phase10",
+      "name": "Load Phase 10 Prompt",
+      "type": "n8n-nodes-base.readFile",
+      "typeVersion": 1,
+      "position": [850, 700]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "has_more_chapters",
+              "leftValue": "={{ $('Initialize Variables').item.json.current_chapter_index }}",
+              "rightValue": "={{ $('Initialize Variables').item.json.total_chapters }}",
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "check-more-chapters",
+      "name": "Has More Chapters?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "current_chapter",
+              "name": "current_chapter",
+              "value": "={{ $('Initialize Variables').item.json.chapters[$('Initialize Variables').item.json.current_chapter_index] }}",
+              "type": "object"
+            },
+            {
+              "id": "chapter_number",
+              "name": "chapter_number",
+              "value": "={{ $('Initialize Variables').item.json.chapters[$('Initialize Variables').item.json.current_chapter_index].number }}",
+              "type": "number"
+            },
+            {
+              "id": "chapter_title",
+              "name": "chapter_title",
+              "value": "={{ $('Initialize Variables').item.json.chapters[$('Initialize Variables').item.json.current_chapter_index].title }}",
+              "type": "string"
+            },
+            {
+              "id": "chapter_text",
+              "name": "chapter_text",
+              "value": "={{ $('Initialize Variables').item.json.chapters[$('Initialize Variables').item.json.current_chapter_index].text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "get-current-chapter",
+      "name": "Get Current Chapter",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [1250, 200],
+      "notes": "Extract current chapter from array"
+    },
+    {
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "anthropicApi",
+        "resource": "message",
+        "model": "claude-sonnet-4-5-20250929",
+        "text": "={{ $('Get Current Chapter').item.json.chapter_text }}",
+        "options": {
+          "temperature": 0.2,
+          "systemMessage": "={{ JSON.parse($('Load Phase 1 Prompt').item.json.data).prompt }}",
+          "maxTokens": 8192
+        }
+      },
+      "id": "phase1-grammar",
+      "name": "Phase 1 - Grammar Foundation",
+      "type": "n8n-nodes-base.anthropic",
+      "typeVersion": 1,
+      "position": [1450, 200],
+      "credentials": {
+        "anthropicApi": {
+          "id": "your-anthropic-credentials-id",
+          "name": "Anthropic API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "anthropicApi",
+        "resource": "message",
+        "model": "claude-sonnet-4-5-20250929",
+        "text": "={{ $json.content[0].text }}",
+        "options": {
+          "temperature": 0.4,
+          "systemMessage": "={{ JSON.parse($('Load Master Prohibited Words').item.json.data) }}\\n\\n{{ JSON.parse($('Load Phase 2 Prompt').item.json.data).prompt }}",
+          "maxTokens": 8192
+        }
+      },
+      "id": "phase2-ai-words",
+      "name": "Phase 2 - AI Word Cleaning",
+      "type": "n8n-nodes-base.anthropic",
+      "typeVersion": 1,
+      "position": [1650, 200],
+      "credentials": {
+        "anthropicApi": {
+          "id": "your-anthropic-credentials-id",
+          "name": "Anthropic API"
+        }
+      },
+      "notes": "Includes master_prohibited_words.json"
+    },
+    {
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "anthropicApi",
+        "resource": "message",
+        "model": "claude-sonnet-4-5-20250929",
+        "text": "={{ $json.content[0].text }}",
+        "options": {
+          "temperature": 0.3,
+          "systemMessage": "={{ JSON.parse($('Load Phase 3 Prompt').item.json.data).prompt }}",
+          "maxTokens": 8192
+        }
+      },
+      "id": "phase3-purple-prose",
+      "name": "Phase 3 - Overwritten Language",
+      "type": "n8n-nodes-base.anthropic",
+      "typeVersion": 1,
+      "position": [1850, 200],
+      "credentials": {
+        "anthropicApi": {
+          "id": "your-anthropic-credentials-id",
+          "name": "Anthropic API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "anthropicApi",
+        "resource": "message",
+        "model": "claude-sonnet-4-5-20250929",
+        "text": "={{ $json.content[0].text }}",
+        "options": {
+          "temperature": 0.7,
+          "systemMessage": "={{ JSON.parse($('Load Phase 4 Prompt').item.json.data).prompt }}",
+          "maxTokens": 8192
+        }
+      },
+      "id": "phase4-sensory",
+      "name": "Phase 4 - Sensory Enhancement",
+      "type": "n8n-nodes-base.anthropic",
+      "typeVersion": 1,
+      "position": [2050, 200],
+      "credentials": {
+        "anthropicApi": {
+          "id": "your-anthropic-credentials-id",
+          "name": "Anthropic API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "anthropicApi",
+        "resource": "message",
+        "model": "claude-sonnet-4-5-20250929",
+        "text": "={{ $json.content[0].text }}",
+        "options": {
+          "temperature": 0.5,
+          "systemMessage": "={{ JSON.parse($('Load Phase 5 Prompt').item.json.data).prompt }}",
+          "maxTokens": 8192
+        }
+      },
+      "id": "phase5-subtlety",
+      "name": "Phase 5 - Subtlety Creation",
+      "type": "n8n-nodes-base.anthropic",
+      "typeVersion": 1,
+      "position": [2250, 200],
+      "credentials": {
+        "anthropicApi": {
+          "id": "your-anthropic-credentials-id",
+          "name": "Anthropic API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "anthropicApi",
+        "resource": "message",
+        "model": "claude-sonnet-4-5-20250929",
+        "text": "={{ $json.content[0].text }}",
+        "options": {
+          "temperature": 1.0,
+          "systemMessage": "={{ JSON.parse($('Load Phase 6 Prompt').item.json.data).prompt }}",
+          "maxTokens": 8192
+        }
+      },
+      "id": "phase6-dialogue",
+      "name": "Phase 6 - Dialogue Enhancement",
+      "type": "n8n-nodes-base.anthropic",
+      "typeVersion": 1,
+      "position": [2450, 200],
+      "credentials": {
+        "anthropicApi": {
+          "id": "your-anthropic-credentials-id",
+          "name": "Anthropic API"
+        }
+      },
+      "notes": "Temperature 1.0 for natural dialogue"
+    },
+    {
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "anthropicApi",
+        "resource": "message",
+        "model": "claude-sonnet-4-5-20250929",
+        "text": "={{ $json.content[0].text }}",
+        "options": {
+          "temperature": 0.2,
+          "systemMessage": "={{ JSON.parse($('Load Phase 7 Prompt').item.json.data).prompt }}",
+          "maxTokens": 8192
+        }
+      },
+      "id": "phase7-weak-language",
+      "name": "Phase 7 - Weak Language Cleanup",
+      "type": "n8n-nodes-base.anthropic",
+      "typeVersion": 1,
+      "position": [2650, 200],
+      "credentials": {
+        "anthropicApi": {
+          "id": "your-anthropic-credentials-id",
+          "name": "Anthropic API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "anthropicApi",
+        "resource": "message",
+        "model": "claude-sonnet-4-5-20250929",
+        "text": "={{ $json.content[0].text }}",
+        "options": {
+          "temperature": 0.9,
+          "systemMessage": "={{ JSON.parse($('Load Phase 8 Prompt').item.json.data).prompt }}",
+          "maxTokens": 8192
+        }
+      },
+      "id": "phase8-imperfections",
+      "name": "Phase 8 - Strategic Imperfections",
+      "type": "n8n-nodes-base.anthropic",
+      "typeVersion": 1,
+      "position": [2850, 200],
+      "credentials": {
+        "anthropicApi": {
+          "id": "your-anthropic-credentials-id",
+          "name": "Anthropic API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "anthropicApi",
+        "resource": "message",
+        "model": "claude-sonnet-4-5-20250929",
+        "text": "={{ $json.content[0].text }}",
+        "options": {
+          "temperature": 0.2,
+          "systemMessage": "={{ JSON.parse($('Load Phase 9 Prompt').item.json.data).prompt }}",
+          "maxTokens": 8192
+        }
+      },
+      "id": "phase9-verification",
+      "name": "Phase 9 - Final Verification",
+      "type": "n8n-nodes-base.anthropic",
+      "typeVersion": 1,
+      "position": [3050, 200],
+      "credentials": {
+        "anthropicApi": {
+          "id": "your-anthropic-credentials-id",
+          "name": "Anthropic API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "include_phase_9_5",
+              "leftValue": "={{ $('Webhook - Receive Chapters').item.json.body.include_phase_9_5 }}",
+              "rightValue": "=true",
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "check-phase9-5",
+      "name": "Include Phase 9.5?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [3250, 200],
+      "notes": "Optional statistical analysis phase"
+    },
+    {
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "anthropicApi",
+        "resource": "message",
+        "model": "claude-sonnet-4-5-20250929",
+        "text": "={{ $('Phase 9 - Final Verification').item.json.content[0].text }}",
+        "options": {
+          "temperature": 0.4,
+          "systemMessage": "={{ JSON.parse($('Load Phase 9.5 Prompt').item.json.data).prompt }}",
+          "maxTokens": 8192
+        }
+      },
+      "id": "phase9-5-statistical",
+      "name": "Phase 9.5 - Statistical Analysis",
+      "type": "n8n-nodes-base.anthropic",
+      "typeVersion": 1,
+      "position": [3450, 100],
+      "credentials": {
+        "anthropicApi": {
+          "id": "your-anthropic-credentials-id",
+          "name": "Anthropic API"
+        }
+      },
+      "notes": "OPTIONAL - Comprehensive statistical optimization"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "text_for_phase10",
+              "name": "text_for_phase10",
+              "value": "={{ $json.content[0].text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "merge-phase9-5-path",
+      "name": "Merge Phase 9.5 Paths",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [3650, 200],
+      "notes": "Combines both paths (with/without Phase 9.5)"
+    },
+    {
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "anthropicApi",
+        "resource": "message",
+        "model": "claude-sonnet-4-5-20250929",
+        "text": "={{ $json.text_for_phase10 }}",
+        "options": {
+          "temperature": 0.3,
+          "systemMessage": "={{ JSON.parse($('Load Master Prohibited Words').item.json.data) }}\\n\\n{{ JSON.parse($('Load Phase 10 Prompt').item.json.data).prompt }}",
+          "maxTokens": 8192
+        }
+      },
+      "id": "phase10-final-sweep",
+      "name": "Phase 10 - Final AI Word Sweep",
+      "type": "n8n-nodes-base.anthropic",
+      "typeVersion": 1,
+      "position": [3850, 200],
+      "credentials": {
+        "anthropicApi": {
+          "id": "your-anthropic-credentials-id",
+          "name": "Anthropic API"
+        }
+      },
+      "notes": "Includes master_prohibited_words.json - Final cleanup"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "processed_chapter",
+              "name": "processed_chapter",
+              "value": "={{ { \"number\": $('Get Current Chapter').item.json.chapter_number, \"title\": $('Get Current Chapter').item.json.chapter_title, \"original_text\": $('Get Current Chapter').item.json.chapter_text, \"humanized_text\": $json.content[0].text, \"processed_at\": $now.toISO() } }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "package-result",
+      "name": "Package Chapter Result",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [4050, 200]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Add processed chapter to results array\nconst initVars = $('Initialize Variables').first().json;\nconst processedChapter = $input.first().json.processed_chapter;\n\n// Create updated processed_chapters array\nconst updatedProcessedChapters = [...(initVars.processed_chapters || []), processedChapter];\n\n// Increment chapter index\nconst nextIndex = initVars.current_chapter_index + 1;\n\n// Return updated state\nreturn {\n  chapters: initVars.chapters,\n  total_chapters: initVars.total_chapters,\n  current_chapter_index: nextIndex,\n  processed_chapters: updatedProcessedChapters,\n  progress: `${nextIndex}/${initVars.total_chapters} chapters completed`\n};"
+      },
+      "id": "update-state",
+      "name": "Update Loop State",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [4250, 200],
+      "notes": "Increment counter and add to results"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "has_more",
+              "leftValue": "={{ $json.current_chapter_index }}",
+              "rightValue": "={{ $json.total_chapters }}",
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "check-continue-loop",
+      "name": "Continue Loop?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [4450, 200]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ { \"status\": \"processing\", \"progress\": $json.progress, \"next_chapter\": $json.current_chapter_index + 1 } }}",
+        "options": {}
+      },
+      "id": "loop-back",
+      "name": "Loop Back to Next Chapter",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [4650, 100],
+      "notes": "This routes back to 'Get Current Chapter' node"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "final_result",
+              "name": "final_result",
+              "value": "={{ { \"status\": \"completed\", \"total_chapters\": $json.total_chapters, \"processed_chapters\": $json.processed_chapters, \"completed_at\": $now.toISO() } }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "prepare-final-response",
+      "name": "Prepare Final Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [4650, 300],
+      "notes": "All chapters completed"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json.final_result }}",
+        "options": {}
+      },
+      "id": "send-final-response",
+      "name": "Send Final Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [4850, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"status\": \"no_chapters\", \"message\": \"No chapters to process\" } }}",
+        "options": {}
+      },
+      "id": "no-chapters-response",
+      "name": "No Chapters Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1250, 400]
+    }
+  ],
+  "connections": {
+    "Webhook - Receive Chapters": {
+      "main": [
+        [
+          {
+            "node": "Initialize Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Initialize Variables": {
+      "main": [
+        [
+          {
+            "node": "Load Master Prohibited Words",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Load Phase 1 Prompt",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Load Phase 2 Prompt",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Load Phase 3 Prompt",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Load Phase 4 Prompt",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Load Phase 5 Prompt",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Load Phase 6 Prompt",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Load Phase 7 Prompt",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Load Phase 8 Prompt",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Load Phase 9 Prompt",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Load Phase 9.5 Prompt",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Load Phase 10 Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Phase 10 Prompt": {
+      "main": [
+        [
+          {
+            "node": "Has More Chapters?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has More Chapters?": {
+      "main": [
+        [
+          {
+            "node": "Get Current Chapter",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Chapters Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Current Chapter": {
+      "main": [
+        [
+          {
+            "node": "Phase 1 - Grammar Foundation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phase 1 - Grammar Foundation": {
+      "main": [
+        [
+          {
+            "node": "Phase 2 - AI Word Cleaning",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phase 2 - AI Word Cleaning": {
+      "main": [
+        [
+          {
+            "node": "Phase 3 - Overwritten Language",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phase 3 - Overwritten Language": {
+      "main": [
+        [
+          {
+            "node": "Phase 4 - Sensory Enhancement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phase 4 - Sensory Enhancement": {
+      "main": [
+        [
+          {
+            "node": "Phase 5 - Subtlety Creation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phase 5 - Subtlety Creation": {
+      "main": [
+        [
+          {
+            "node": "Phase 6 - Dialogue Enhancement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phase 6 - Dialogue Enhancement": {
+      "main": [
+        [
+          {
+            "node": "Phase 7 - Weak Language Cleanup",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phase 7 - Weak Language Cleanup": {
+      "main": [
+        [
+          {
+            "node": "Phase 8 - Strategic Imperfections",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phase 8 - Strategic Imperfections": {
+      "main": [
+        [
+          {
+            "node": "Phase 9 - Final Verification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phase 9 - Final Verification": {
+      "main": [
+        [
+          {
+            "node": "Include Phase 9.5?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Include Phase 9.5?": {
+      "main": [
+        [
+          {
+            "node": "Phase 9.5 - Statistical Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge Phase 9.5 Paths",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phase 9.5 - Statistical Analysis": {
+      "main": [
+        [
+          {
+            "node": "Merge Phase 9.5 Paths",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Phase 9.5 Paths": {
+      "main": [
+        [
+          {
+            "node": "Phase 10 - Final AI Word Sweep",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phase 10 - Final AI Word Sweep": {
+      "main": [
+        [
+          {
+            "node": "Package Chapter Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Package Chapter Result": {
+      "main": [
+        [
+          {
+            "node": "Update Loop State",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Loop State": {
+      "main": [
+        [
+          {
+            "node": "Continue Loop?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Continue Loop?": {
+      "main": [
+        [
+          {
+            "node": "Get Current Chapter",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Prepare Final Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Final Response": {
+      "main": [
+        [
+          {
+            "node": "Send Final Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-26T00:00:00.000Z",
+  "versionId": "1"
+}

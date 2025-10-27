@@ -1,6 +1,6 @@
 # ClaudeHumanizer
 
-**⚠️ Optimized for Claude (Anthropic) - Best results with Claude Sonnet 4.5**
+**⚠️ Optimized for Claude Sonnet 4.5 (Recommended) | Also supports: Gemini 2.5 Pro, GPT-5**
 
 A professional AI text humanization system using a specialized 10-phase assembly line to transform AI-generated content into natural, human-like writing while preserving meaning and voice.
 
@@ -38,13 +38,29 @@ AI detectors often fail catastrophically on hybrid texts containing both human a
 - Do NOT run mixed human/AI paragraphs through the system—process them separately
 - Consider whether detection is even a concern if substantial human contribution exists
 
+### Model Selection (October 2025)
+
+**Choose your LLM based on priorities:**
+
+| Model | Best For | Cost | Key Advantage |
+|-------|----------|------|---------------|
+| **Claude Sonnet 4.5** ⭐ | Maximum quality | $3-15/1M tokens | "Surgical" edits, natural human tone, best instruction-following |
+| **Gemini 2.5 Pro** 💰 | Budget/Long texts | $1.25-15/1M tokens | 40% cheaper, 1M context, fastest (372 tok/s) |
+| **GPT-5** 🔄 | ChatGPT users | Subscription | Literary style, widely available (requires stricter prompting) |
+
+**Quick Decision:**
+- **Quality priority?** → Claude Sonnet 4.5 (recommended)
+- **Budget priority or text >100K words?** → Gemini 2.5 Pro
+- **Already have ChatGPT Plus?** → GPT-5 (with cautions)
+
 ### Basic Workflow
 
 1. **Download required files**: 10 phase prompts + `master_prohibited_words.json`
-2. **Process sequentially**: Phase 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 (Phase 9.5 optional)
-3. **Include master list**: Required for phases 2 and 10 (contains pattern rules)
-4. **Use previous output**: Each phase processes the result from the previous phase
-5. **Use Claude Sonnet 4.5**: Recommended for all phases with temperature 1.0 for Phase 6 (dialogue)
+2. **Select your model**: Claude Sonnet 4.5 (recommended), Gemini 2.5 Pro (budget), or GPT-5
+3. **Process sequentially**: Phase 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → (9.5 optional) → 10
+4. **Include master list**: Required for phases 2 and 10 (contains pattern rules)
+5. **Use previous output**: Each phase processes the result from the previous phase
+6. **Temperature settings**: Use temperature 1.0 for Phase 6 (dialogue), standard temps for others
 
 ### Execution Methods
 
@@ -62,8 +78,14 @@ For phases 1, 3, 4, 5, 6, 7, 8, 9:
 [input text]
 ```
 
-#### Claude Project Setup (RECOMMENDED)
+#### Claude Project Setup (RECOMMENDED for Claude users)
 Configure custom instructions for automated sequential processing using Claude Sonnet 4.5 (see [Usage Guide](docs/USAGE_GUIDE.md))
+
+#### ChatGPT Project Setup (For GPT-5 users)
+Configure custom GPT or use Projects feature with GPT-5 model selection (see [Usage Guide](docs/USAGE_GUIDE.md))
+
+#### Google AI Studio (For Gemini 2.5 Pro users)
+Use Google AI Studio with Gemini 2.5 Pro for automated processing (see [Technical Reference](docs/TECHNICAL_REFERENCE.md))
 
 #### Automation Integration
 Set up n8n, Make.com, or API workflows (see [Technical Reference](docs/TECHNICAL_REFERENCE.md))
@@ -124,12 +146,12 @@ Based on academic AI detector research, ClaudeHumanizer now includes targeted co
 - Example: "The implementation of the solution" → "They implemented the solution"
 - Addresses HIGH-priority detection marker explicitly identified in research
 
-**Phase 8 - Punctuation Inconsistency Injection** (v4.0.0)
+**Phase 8 - Punctuation Inconsistency Injection** (v4.1.0)
 - Breaks AI's "machine-like consistency" in punctuation patterns
 - Strategic Oxford comma variation, spacing inconsistencies, hyphenation variation
 - Addresses detector-specific marker: perfect punctuation consistency
 
-**Phase 8 - Enhanced Strategic Imperfections** (v4.0.0)
+**Phase 8 - Enhanced Strategic Imperfections** (v4.1.0)
 - Logical leap injection (removes over-explanation)
 - Tangential thought insertion (breaks perfect linearity)
 - Awkward phrasing retention (preserves authentic human voice)
@@ -280,10 +302,13 @@ Ready-to-import n8n workflow for complete 10-phase automation with Claude Sonnet
 
 ## Requirements
 
-- **Claude Sonnet 4.5** (strongly recommended) or compatible LLM
+- **LLM Access**: One of the following (see Model Selection above)
+  - **Claude Sonnet 4.5** (recommended) - Best quality, most reliable
+  - **Gemini 2.5 Pro** - Budget-friendly, excellent for long texts (1M context)
+  - **GPT-5** - Good alternative for ChatGPT Plus/Pro users
 - All 10 phase prompt files + master prohibited words list
 - Sequential processing capability (manual or automated)
-- Temperature 1.0 for Phase 6 (dialogue enhancement)
+- Temperature 1.0 for Phase 6 (dialogue enhancement) across all models
 
 ## Getting Started
 
@@ -299,5 +324,5 @@ For advanced users, see the [Technical Reference](docs/TECHNICAL_REFERENCE.md) f
 ---
 
 **Version**: 3.0 Pattern-Based Architecture with Phase 10
-**Last Updated**: 2025-10-05
+**Last Updated**: 2025-10-26
 **Optimized For**: Claude Sonnet 4.5

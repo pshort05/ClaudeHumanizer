@@ -1,6 +1,74 @@
-# ClaudeHumanizer Pipeline Configuration Examples
+# ClaudeHumanizer Examples & Workflows
 
-This directory contains sample YAML configuration files for different ClaudeHumanizer assembly line setups. Each configuration represents a different optimization strategy balancing quality, cost, and specific model ecosystem preferences.
+This directory contains ready-to-use n8n workflows and pipeline configuration files for automating the ClaudeHumanizer assembly line.
+
+---
+
+## n8n Workflows (RECOMMENDED)
+
+### Chapter Loop Workflow ⭐ NEW - Best for Books
+
+**Files:**
+- `n8n_chapter_loop_workflow.json` - Ready-to-import n8n workflow
+- `N8N_CHAPTER_LOOP_GUIDE.md` - Complete setup and usage documentation
+
+**Description:**
+Automatically processes entire books chapter-by-chapter through all 10 phases. Loops through each chapter sequentially until complete.
+
+**Key Features:**
+- ✅ Automatic looping through all chapters
+- ✅ Claude Sonnet 4.5 for all phases
+- ✅ Optional Phase 9.5 (statistical analysis)
+- ✅ Progress tracking
+- ✅ Returns original + humanized text for each chapter
+- ✅ ~3-4 minutes per chapter
+- ✅ ~$1.00-1.20 per chapter
+
+**Best For:**
+- Novels and book-length manuscripts
+- Processing 5-50+ chapters in one request
+- Automated end-to-end book humanization
+
+**Quick Start:**
+```bash
+# Import n8n_chapter_loop_workflow.json into n8n
+# Configure file paths and Anthropic API credentials
+# Send POST request:
+curl -X POST https://your-n8n-instance.com/webhook/claudehumanizer-chapters \
+  -H "Content-Type: application/json" \
+  -d '{
+    "chapters": [
+      {"number": 1, "title": "Chapter One", "text": "..."},
+      {"number": 2, "title": "Chapter Two", "text": "..."}
+    ],
+    "include_phase_9_5": false
+  }'
+```
+
+**Full Documentation:** See `N8N_CHAPTER_LOOP_GUIDE.md`
+
+---
+
+### Single Text Workflow
+
+**File:** `n8n_workflow_sample.json`
+
+**Description:**
+Processes a single text document through all 10 phases sequentially. Simple linear flow.
+
+**Best For:**
+- Articles
+- Short stories
+- Single chapters
+- Testing and experimentation
+
+**Documentation:** See `docs/TECHNICAL_REFERENCE.md`
+
+---
+
+## YAML Pipeline Configurations
+
+This directory also contains sample YAML configuration files for different ClaudeHumanizer assembly line setups. Each configuration represents a different optimization strategy balancing quality, cost, and specific model ecosystem preferences.
 
 ## Available Configurations
 
@@ -63,24 +131,27 @@ This directory contains sample YAML configuration files for different ClaudeHuma
 ## Universal Features
 
 ### All Configurations Include:
-- ✅ **Complete 9-phase assembly line** (Phases 1-9)
-- ✅ **Optional Phase 6.5** (Character-specific dialogue enhancement)
-- ✅ **Master prohibited words list integration** for phases requiring it
+- ✅ **Complete 10-phase assembly line** (Phases 1-10)
+- ✅ **Optional Phase 6.1** (Character-specific dialogue enhancement)
+- ✅ **Optional Phase 9.5** (Statistical analysis hub)
+- ✅ **Master prohibited words list integration** for phases requiring it (2 and 10)
 - ✅ **Proper temperature and parameter optimization** for each phase
 - ✅ **Cost and quality metadata** for easy comparison
 - ✅ **Usage tracking** for cost monitoring
 
-### Phase Breakdown (All Configurations):
-1. **Grammar Foundation** - Critical grammar fixes
+### Phase Breakdown (Current Architecture):
+1. **Grammar Foundation** - Critical grammar fixes only
 2. **AI Word Cleaning** - Remove AI-associated vocabulary (requires master list)
-3. **Overwritten Language Reduction** - Eliminate purple prose
+3. **Overwritten Language Reduction** - Eliminate purple prose and nominalization
 4. **Sensory Enhancement** - Add vivid details to flat passages
-5. **Subtlety Creation** - Convert obvious statements to sophisticated implications (requires master list)
-6. **Dialogue Enhancement** - Improve character voices (requires master list)
-7. **Phase 6.5: Character-Specific Dialogue** - Targeted character voice refinement (requires master list)
-8. **Weak Language Cleanup** - Remove hedge words and filler (requires master list)
-9. **Strategic Imperfections** - Add authentic human rhythm and flow (requires master list)
-10. **Final Verification** - Quality control and AI pattern detection (requires master list)
+5. **Subtlety Creation** - Convert obvious statements to sophisticated implications
+6. **Dialogue Enhancement** - Improve character voices (temperature 1.0)
+7. **Phase 6.1: Character-Specific Dialogue** (OPTIONAL) - Targeted character voice refinement
+8. **Weak Language Cleanup** - Remove 12 categories of weak language patterns
+9. **Strategic Imperfections** - Add authentic human rhythm and punctuation variation
+10. **Phase 9: Final Verification** - AI pattern detection (qualitative)
+11. **Phase 9.5: Statistical Analysis Hub** (OPTIONAL) - Quantitative metrics optimization
+12. **Phase 10: Final AI Word Sweep** - Prohibited word filtering (requires master list)
 
 ## How to Use These Configurations
 
@@ -160,9 +231,11 @@ These configurations are designed to work with:
 ## Prerequisites
 
 ### Required Files:
-- All phase JSON prompt files (1-9, plus 6.5)
+- All phase JSON prompt files (1-10)
+- Optional: `6.1_character_dialogue_pass.json`
+- Optional: `9.5_statistical_analysis_hub.json`
 - `master_prohibited_words.json`
-- Input text file
+- Input text file(s) or chapter array
 
 ### Environment Setup:
 - OpenRouter API key configured
@@ -187,4 +260,7 @@ These configurations are designed to work with:
 
 These configurations are maintained alongside the main ClaudeHumanizer project. For the latest model recommendations and pricing updates, refer to the main README.md file's LLM Optimization Guide appendix.
 
-**Last Updated:** 2025-09-27 - Complete configuration examples with Phase 6.5 integration
+**Last Updated:** 2025-10-26
+- Added n8n Chapter Loop Workflow for automated book processing
+- Updated to 10-phase architecture with optional Phase 9.5
+- Updated phase breakdown and prerequisites

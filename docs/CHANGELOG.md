@@ -1,5 +1,59 @@
 # ClaudeHumanizer Changelog
 
+## Version 3.0.0 - 2025-10-26
+
+### Major Updates
+
+#### Phase Version Updates
+- **Phase 8 (Strategic Imperfections)**: v4.1.0 (2025-10-26)
+- **Phase 9 (Final Verification)**: v17.0.0 (2025-10-26) - REFACTORED
+- **Phase 9.5 (Statistical Analysis Hub)**: v2.0.0 (2025-10-26) - NEW ARCHITECTURE
+- **Phase 10 (Final AI Word Sweep)**: v3.0.0 (2025-10-26) - SIMPLIFIED
+
+#### Architectural Refinements
+
+**Phase 9/9.5/10 Separation of Concerns:**
+
+The system now features clear separation between three distinct types of processing:
+
+| Phase | Focus | Type | Purpose |
+|-------|-------|------|---------|
+| Phase 9 | Pattern Replacement | QUALITATIVE | N-grams, formulaic phrases, AI patterns |
+| Phase 9.5 | Statistical Optimization | QUANTITATIVE | Burstiness, POS distribution, TTR |
+| Phase 10 | Word Filtering | FILTERING | Prohibited words only |
+
+**Phase 9 (v17.0.0) - Qualitative Pattern Detection:**
+- Focuses EXCLUSIVELY on qualitative pattern replacement
+- N-gram filtering (150+ common AI n-gram patterns)
+- Perplexity optimization (formulaic phrase replacement)
+- AI perfection syndrome detection
+- Phrase repetition detection and variation
+- NO statistical analysis (moved to Phase 9.5)
+- NO word filtering (handled by Phase 10)
+
+**Phase 9.5 (v2.0.0) - Statistical Analysis Hub:**
+- NEW ARCHITECTURE: Consolidated single-pass statistical analysis
+- Measures ALL quantitative metrics together: burstiness, POS distribution, lexical diversity (TTR)
+- Single-pass efficiency: reads text once, calculates all metrics, makes coordinated optimizations
+- Optional detailed metrics report available
+- OPTIONAL phase: can be skipped for budget savings (10-15% cost reduction)
+- Skip when: text already has good statistical properties, budget constraints, fast turnaround needed
+
+**Phase 10 (v3.0.0) - Pure Word Filtering:**
+- SIMPLIFIED: Now focuses EXCLUSIVELY on word-level filtering
+- Uses master_prohibited_words.json with pattern rules
+- NO statistical analysis (moved to Phase 9.5)
+- Final quality control checkpoint for prohibited words
+
+**Benefits of This Architecture:**
+1. **Single-Pass Efficiency**: Phase 9.5 calculates all metrics simultaneously instead of multiple passes
+2. **Coordinated Optimization**: Statistical metrics balanced together, not independently optimized
+3. **Clear Boundaries**: Qualitative (9) vs Quantitative (9.5) vs Filtering (10)
+4. **Budget Flexibility**: Phase 9.5 optional for 10-15% cost savings
+5. **Better Maintenance**: Each phase has single, well-defined responsibility
+
+---
+
 ## Version 2.5.0 - 2025-10-07
 
 ### Major Architecture Changes

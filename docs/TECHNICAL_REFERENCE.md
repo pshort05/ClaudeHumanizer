@@ -42,6 +42,41 @@ best_for: Consistent, high-quality humanization across all text types
 
 ## LLM Optimization
 
+### Model Selection Guide (October 2025)
+
+**Current LLM Landscape:**
+
+The ClaudeHumanizer system supports multiple leading LLMs, each with distinct strengths:
+
+| Model | Best For | Pricing (per 1M tokens) | Key Advantage |
+|-------|----------|------------------------|---------------|
+| **Claude Sonnet 4.5** ⭐ | Maximum quality, reliable boundaries | $3 in / $15 out | "Surgical" edits, natural human tone, best instruction-following |
+| **Gemini 2.5 Pro** 💰 | Budget-conscious, long texts | $1.25-2.50 in / $10-15 out | 40% cheaper, 1M context, fastest (372 tok/s) |
+| **GPT-5** 🔄 | ChatGPT Plus users | Subscription-based | Literary style, widely available |
+
+**Decision Tree:**
+
+```
+Is budget the primary concern?
+  ├─ Yes + Text >100K words? → Gemini 2.5 Pro (1M context advantage)
+  ├─ Yes + Text <100K words? → Gemini 2.5 Pro or Hybrid Strategy
+  └─ No (quality priority)? → Claude Sonnet 4.5 ⭐ RECOMMENDED
+
+Already have ChatGPT Plus/Pro?
+  ├─ Yes → Consider GPT-5 (with stricter prompting)
+  └─ No → Claude Sonnet 4.5 or Gemini 2.5 Pro
+
+Processing book-length content (>200K words)?
+  └─ → Gemini 2.5 Pro (1M context window)
+```
+
+**Why Claude Sonnet 4.5 Remains Our Top Recommendation:**
+- **"Surgical" approach**: Makes minimal, precise changes respecting domain boundaries
+- **Most aligned frontier model**: Best at following complex multi-constraint prompts
+- **Natural human tone**: Users report it "writes like a human" better than alternatives
+- **Superior agent capabilities**: Ideal for sequential 10-phase processing
+- **Proven pattern recognition**: Reliably applies dialogue pause, light, and finger action rules
+
 ### Optimal Model Selection by Phase
 
 **Note:** The 10-phase system now includes a final AI word sweep (Phase 10) to catch any prohibited words reintroduced during phases 3-9.
@@ -127,11 +162,26 @@ best_for: Consistent, high-quality humanization across all text types
 - **Architecture Change**: Lexical diversity analysis moved to Phase 9.5
 - **Critical Role**: Final quality control for prohibited words only
 
+### Pricing Comparison (October 2025)
+
+| Model | Input Cost | Output Cost | Est. 10K Word Processing | Notes |
+|-------|-----------|-------------|--------------------------|-------|
+| Claude Sonnet 4.5 | $3/1M | $15/1M | $0.50-2.00 | Premium quality, best reliability |
+| Gemini 2.5 Pro (≤200K) | $1.25/1M | $10/1M | $0.30-1.30 | Budget tier, excellent for most content |
+| Gemini 2.5 Pro (>200K) | $2.50/1M | $15/1M | $0.50-1.80 | Book-length content with 1M context |
+| GPT-5 | Subscription | Subscription | Included | ChatGPT Plus/Pro users |
+| Claude Haiku 3.5 | $0.25/1M | $1.25/1M | $0.05-0.25 | Ultra-budget option |
+
+**Cost Savings Analysis:**
+- Gemini 2.5 Pro vs Claude Sonnet 4.5: ~40% savings (short contexts)
+- Hybrid strategy (Gemini + Claude): ~25-40% savings
+- Full Haiku pipeline: ~85% savings (significant quality reduction)
+
 ### Model Family Strategies
 
 #### Single-Family Approaches
 
-**Anthropic-Only Pipeline (RECOMMENDED)**:
+**Premium Tier - Anthropic-Only Pipeline (RECOMMENDED)**:
 ```yaml
 models: Claude Sonnet 4.5 (all 10 phases + optional Phase 9.5)
 temperatures: 0.1-0.2 (phases 1,7,9), 0.3-0.5 (phases 2,3,5,9.5,10), 0.6-0.9 (phases 4,8), 1.0 (phase 6)
@@ -143,25 +193,93 @@ pattern_recognition: Best for new pattern-based rules
 flexibility: Phase 9.5 can be skipped for budget savings with minimal quality impact
 ```
 
-**OpenAI-Only Pipeline**:
+**Budget Tier - Google-Only Pipeline (NEW for 2025)**:
 ```yaml
-models: GPT-4 Turbo (1,3,7,9,10) + GPT-4o (2,4,5,6,8)
+models: Gemini 2.5 Pro (all 10 phases + optional Phase 9.5)
+temperatures: Same as Claude configuration (0.1-1.0 by phase)
+quality: 85-92% of maximum potential (estimated)
+cost: ~40% less than Claude Sonnet 4.5
+best_for: Budget-conscious users, long texts (1M context), speed priority
+advantages:
+  - 1M token context window (vs Claude's 200K)
+  - Fastest processing (372 tokens/second)
+  - Significantly lower cost
+  - Excellent for book-length content (>200K words)
+limitations:
+  - Less proven for literary judgment
+  - May require more iteration for optimal results
+  - Instruction-following may be less precise than Claude
+```
+
+**Alternative - OpenAI Pipeline (GPT-5)**:
+```yaml
+models: GPT-5 (all 10 phases + optional Phase 9.5)
+temperatures: Same as Claude configuration
+quality: 80-90% of maximum potential
+cost: Subscription-based (ChatGPT Plus/Pro)
+best_for: Users already on ChatGPT subscription
+advantages:
+  - Excellent literary style and creative flair
+  - Good at style mimicry
+  - 45% less hallucination than GPT-4o
+  - Widely available
+limitations:
+  - "Takes over" narrative - tries to rewrite beyond instructions ⚠️
+  - Aggressive refactoring - less "surgical" than Claude ⚠️
+  - May violate domain boundaries without stricter prompting ⚠️
+  - Requires enhanced "never touch" constraints in prompts
+WARNING: GPT-5 tends to make larger, more aggressive changes. For ClaudeHumanizer's
+domain-isolated architecture, this can cause phases to interfere with each other.
+Use only if willing to accept potential boundary violations.
+```
+
+#### Hybrid Strategies (Cost Optimization)
+
+**Cost-Optimized Hybrid:**
+```yaml
+phases_1-3: Gemini 2.5 Pro @ standard temps (systematic cleanup)
+phases_4-6: Claude Sonnet 4.5 @ standard temps (creative/literary - where quality matters most)
+phases_7-10: Gemini 2.5 Pro @ standard temps (systematic cleanup)
+optional_9_5: Gemini 2.5 Pro @ 0.4 (statistical analysis)
+
+quality: 90-94% of maximum potential
+cost_savings: ~40% vs full Claude Sonnet 4.5 pipeline
+best_for: Balance of quality and cost
+rationale: Use premium Claude only where literary judgment is critical (Phases 4-6)
+```
+
+**Quality-Optimized Hybrid:**
+```yaml
+phases_1-2: Gemini 2.5 Pro @ standard temps (systematic phases)
+phases_3-6: Claude Sonnet 4.5 @ standard temps (literary/creative phases)
+phase_7: Gemini 2.5 Pro @ 0.2 (systematic patterns)
+phase_8: Claude Sonnet 4.5 @ 0.9 (rhythm variation - critical)
+phase_9: Gemini 2.5 Pro @ 0.2 (pattern detection)
+optional_9_5: Gemini 2.5 Pro @ 0.4 (statistical analysis)
+phase_10: Gemini 2.5 Pro @ 0.3 (final cleanup)
+
+quality: 93-96% of maximum potential
+cost_savings: ~25% vs full Claude Sonnet 4.5 pipeline
+best_for: Near-premium quality with moderate cost savings
+rationale: Use Claude for all creative/literary work, Gemini for systematic processing
+```
+
+**Ultra-Budget Hybrid:**
+```yaml
+phases_1-2: Claude Haiku 3.5 @ standard temps
+phases_3-6: Gemini 2.5 Pro @ standard temps
+phases_7-10: Claude Haiku 3.5 @ standard temps
+optional_9_5: SKIP (cost savings)
+
 quality: 80-85% of maximum potential
-cost: Medium-High
-best_for: Single-vendor relationship
-limitations: Less effective at pattern recognition and literary judgment
+cost_savings: ~70% vs full Claude Sonnet 4.5 pipeline
+best_for: Maximum cost reduction, high-volume processing
+trade-offs: Lower quality, may need manual review
 ```
 
-**Google-Only Pipeline**:
-```yaml
-models: Gemini 1.5 Pro (all 10 phases)
-quality: 70-75% of maximum potential
-cost: Medium
-best_for: Systematic consistency over creativity
-limitations: Weaker at nuanced literary decisions
-```
+#### Configuration Details
 
-#### Optimal Claude Sonnet 4.5 Configuration (RECOMMENDED)
+**Premium Configuration - Claude Sonnet 4.5 (RECOMMENDED)**
 ```yaml
 phase_1: Claude Sonnet 4.5 @ 0.2
 phase_2: Claude Sonnet 4.5 @ 0.4
@@ -186,31 +304,151 @@ advantages:
   - Phase 9.5 optional for budget flexibility
 ```
 
-#### Budget-Friendly Configuration
+**Budget Configuration - Gemini 2.5 Pro (NEW for 2025)**
+```yaml
+phase_1: Gemini 2.5 Pro @ 0.2
+phase_2: Gemini 2.5 Pro @ 0.4
+phase_3: Gemini 2.5 Pro @ 0.3
+phase_4: Gemini 2.5 Pro @ 0.7
+phase_5: Gemini 2.5 Pro @ 0.5
+phase_6: Gemini 2.5 Pro @ 1.0  # Dialogue naturalness
+phase_7: Gemini 2.5 Pro @ 0.2
+phase_8: Gemini 2.5 Pro @ 0.9
+phase_9: Gemini 2.5 Pro @ 0.2
+phase_9_5: Gemini 2.5 Pro @ 0.4  # OPTIONAL
+phase_10: Gemini 2.5 Pro @ 0.3
+
+quality: 85-92% of maximum potential (estimated)
+cost: $0.30-1.50 per 10K words (≤200K context), $0.50-1.80 (>200K context)
+savings: ~40% vs Claude Sonnet 4.5
+special_advantages:
+  - 1M token context window (perfect for books >200K words)
+  - Fastest processing (372 tokens/second)
+  - Excellent for batch processing large volumes
+  - Top-ranked on LM Arena (general performance)
+best_for: Budget-conscious users, long-form content, speed priority
+```
+
+**Budget Configuration - Claude Haiku/Sonnet Mix**
 ```yaml
 phase_1: Claude Sonnet 4.5 @ 0.2
 phase_2: Claude Sonnet 4.5 @ 0.4
-phase_3: Claude Haiku @ 0.3
+phase_3: Claude Haiku 3.5 @ 0.3
 phase_4: Claude Sonnet 4.5 @ 0.7
-phase_5: Claude Haiku @ 0.5
+phase_5: Claude Haiku 3.5 @ 0.5
 phase_6: Claude Sonnet 4.5 @ 1.0
-phase_7: Claude Haiku @ 0.2
+phase_7: Claude Haiku 3.5 @ 0.2
 phase_8: Claude Sonnet 4.5 @ 0.9
-phase_9: Claude Haiku @ 0.2
+phase_9: Claude Haiku 3.5 @ 0.2
 phase_9_5: SKIP  # Optional - skip for budget processing
 phase_10: Claude Sonnet 4.5 @ 0.3
 
 quality: 85-90% of maximum potential
-cost_savings: 50-60% vs full Sonnet 4.5 pipeline (55-65% if Phase 9.5 skipped)
+cost_savings: 50-60% vs full Sonnet 4.5 pipeline
 strategy: Use Sonnet 4.5 for critical creative/pattern phases (2,4,6,8,10), Haiku for systematic phases
-note: Skip Phase 9.5 for maximum cost savings with minimal quality impact if text already has good statistical properties
+note: Stays within Anthropic ecosystem for consistency
 ```
 
 ## Automation Integration
 
 ### n8n Workflow Implementation (RECOMMENDED)
 
-**Complete workflow available:** See `docs/n8n_workflow_sample.json` for a ready-to-import workflow.
+**Two workflow options available:**
+
+1. **Single Text Processing** (`examples/n8n_workflow_sample.json`)
+   - Process one text through all 10 phases
+   - Best for: Single documents, articles, short stories
+   - Simple linear flow
+
+2. **Chapter Loop Processing** (`examples/n8n_chapter_loop_workflow.json`) ⭐ **NEW**
+   - Process entire books chapter-by-chapter
+   - Automatic looping through chapter array
+   - Best for: Novels, book-length manuscripts
+   - Returns all chapters when complete
+   - **See**: `examples/N8N_CHAPTER_LOOP_GUIDE.md` for complete documentation
+
+### n8n Chapter Loop Workflow (Book Processing)
+
+**Workflow file**: `examples/n8n_chapter_loop_workflow.json`
+**Complete guide**: `examples/N8N_CHAPTER_LOOP_GUIDE.md`
+
+This workflow processes entire books by looping through chapters sequentially, processing each through all 10 phases automatically.
+
+#### Quick Start - Chapter Loop
+
+**1. Input Format:**
+```json
+{
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Chapter One: The Beginning",
+      "text": "Your AI-generated chapter text..."
+    },
+    {
+      "number": 2,
+      "title": "Chapter Two: The Journey",
+      "text": "Your AI-generated chapter text..."
+    }
+  ],
+  "include_phase_9_5": false
+}
+```
+
+**2. Send Request:**
+```bash
+curl -X POST https://your-n8n-instance.com/webhook/claudehumanizer-chapters \
+  -H "Content-Type: application/json" \
+  -d @chapters.json
+```
+
+**3. Receive Results:**
+```json
+{
+  "status": "completed",
+  "total_chapters": 2,
+  "processed_chapters": [
+    {
+      "number": 1,
+      "title": "Chapter One: The Beginning",
+      "original_text": "Original AI text...",
+      "humanized_text": "Humanized text after 10 phases...",
+      "processed_at": "2025-10-26T14:30:00.000Z"
+    },
+    {
+      "number": 2,
+      "title": "Chapter Two: The Journey",
+      "original_text": "Original AI text...",
+      "humanized_text": "Humanized text after 10 phases...",
+      "processed_at": "2025-10-26T14:35:00.000Z"
+    }
+  ],
+  "completed_at": "2025-10-26T14:35:00.000Z"
+}
+```
+
+**Key Features:**
+- ✅ Automatic looping through all chapters
+- ✅ Sequential processing (one chapter at a time)
+- ✅ Progress tracking (current/total)
+- ✅ Preserves original + humanized text
+- ✅ Optional Phase 9.5 (statistical analysis)
+- ✅ Claude Sonnet 4.5 for all phases
+- ✅ Correct temperature settings per phase
+
+**Performance:**
+- ~3-4 minutes per chapter (without Phase 9.5)
+- ~$1.00-1.20 per chapter (Claude Sonnet 4.5)
+- Processes chapters sequentially (not parallel)
+- Example: 20-chapter book = ~60-80 minutes, ~$20-25
+
+**See full documentation**: `examples/N8N_CHAPTER_LOOP_GUIDE.md`
+
+---
+
+### n8n Single Text Workflow (Original)
+
+**Complete workflow available:** See `examples/n8n_workflow_sample.json` for a ready-to-import workflow.
 
 #### Quick Start Guide
 
@@ -311,7 +549,7 @@ text: "={{ $json.content[0].text }}"
     "authentication": "predefinedCredentialType",
     "nodeCredentialType": "anthropicApi",
     "resource": "message",
-    "model": "claude-sonnet-4-5-20250929",
+    "model": "claude-sonnet-4-5-20250929",  // Current recommended Claude Sonnet 4.5 model
     "text": "={{ $json.content[0].text }}",
     "options": {
       "temperature": 0.4,
@@ -344,29 +582,31 @@ text: "={{ $json.content[0].text }}"
 }
 ```
 
-#### Multi-Model Node Configuration
+#### Multi-Model Node Configuration (For Reference - Claude Sonnet 4.5 Recommended for All Phases)
 ```json
 {
   "phase1": {
     "node": "Anthropic Claude",
-    "model": "claude-3-5-sonnet-20241022",
+    "model": "claude-sonnet-4-5-20250929",
     "temperature": 0.2,
     "systemPrompt": "{{ $env.GRAMMAR_PROMPT }}"
   },
   "phase2": {
-    "node": "OpenAI GPT",
-    "model": "gpt-4o",
+    "node": "Anthropic Claude",
+    "model": "claude-sonnet-4-5-20250929",
     "temperature": 0.4,
     "systemPrompt": "{{ $env.MASTER_PROHIBITED_WORDS }}\\n\\n{{ $env.AI_CLEANING_PROMPT }}"
   },
   "phase3": {
     "node": "Anthropic Claude",
-    "model": "claude-3-opus-20240229",
+    "model": "claude-sonnet-4-5-20250929",
     "temperature": 0.3,
     "systemPrompt": "{{ $env.PURPLE_PROSE_PROMPT }}"
   }
 }
 ```
+
+**Note:** While the system can use different LLM providers, Claude Sonnet 4.5 is strongly recommended for all phases for optimal results.
 
 #### Error Handling and Retry Logic
 ```javascript
@@ -422,7 +662,7 @@ function validatePhaseOutput(inputData) {
       {
         "module": "anthropic:send-message",
         "parameters": {
-          "model": "claude-3-5-sonnet-20241022",
+          "model": "claude-sonnet-4-5-20250929",
           "temperature": 0.2,
           "system": "{{ phase1Prompt }}",
           "message": "{{ 2.inputText }}"
@@ -463,25 +703,79 @@ function validatePhaseOutput(inputData) {
 }
 ```
 
-#### Dynamic Model Selection Function (Claude Sonnet 4.5 Recommended)
+#### Dynamic Model Selection Function (October 2025)
 ```javascript
-function selectModel(phase) {
-  // RECOMMENDED: Claude Sonnet 4.5 for all phases
-  const modelConfig = {
-    1: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.2 },
-    2: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.4 },
-    3: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.3 },
-    4: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.7 },
-    5: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.5 },
-    6: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 1.0 },  // Increased for dialogue
-    7: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.2 },
-    8: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.9 },
-    9: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.2 },
-    9.5: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.4 },  // NEW: Optional statistical hub
-    10: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.3 }
+function selectModel(phase, strategy = "premium") {
+  // Strategy options: "premium", "budget", "hybrid_cost", "hybrid_quality"
+
+  const strategies = {
+    premium: {
+      // Claude Sonnet 4.5 - Best quality, most reliable
+      1: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.2 },
+      2: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.4 },
+      3: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.3 },
+      4: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.7 },
+      5: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.5 },
+      6: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 1.0 },
+      7: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.2 },
+      8: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.9 },
+      9: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.2 },
+      9.5: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.4 },
+      10: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.3 }
+    },
+
+    budget: {
+      // Gemini 2.5 Pro - 40% cheaper, 1M context, fastest
+      1: { provider: "google", model: "gemini-2.5-pro", temp: 0.2 },
+      2: { provider: "google", model: "gemini-2.5-pro", temp: 0.4 },
+      3: { provider: "google", model: "gemini-2.5-pro", temp: 0.3 },
+      4: { provider: "google", model: "gemini-2.5-pro", temp: 0.7 },
+      5: { provider: "google", model: "gemini-2.5-pro", temp: 0.5 },
+      6: { provider: "google", model: "gemini-2.5-pro", temp: 1.0 },
+      7: { provider: "google", model: "gemini-2.5-pro", temp: 0.2 },
+      8: { provider: "google", model: "gemini-2.5-pro", temp: 0.9 },
+      9: { provider: "google", model: "gemini-2.5-pro", temp: 0.2 },
+      9.5: { provider: "google", model: "gemini-2.5-pro", temp: 0.4 },
+      10: { provider: "google", model: "gemini-2.5-pro", temp: 0.3 }
+    },
+
+    hybrid_cost: {
+      // Cost-optimized hybrid: Gemini for systematic, Claude for creative
+      1: { provider: "google", model: "gemini-2.5-pro", temp: 0.2 },
+      2: { provider: "google", model: "gemini-2.5-pro", temp: 0.4 },
+      3: { provider: "google", model: "gemini-2.5-pro", temp: 0.3 },
+      4: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.7 },  // Creative
+      5: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.5 },  // Creative
+      6: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 1.0 },  // Creative
+      7: { provider: "google", model: "gemini-2.5-pro", temp: 0.2 },
+      8: { provider: "google", model: "gemini-2.5-pro", temp: 0.9 },
+      9: { provider: "google", model: "gemini-2.5-pro", temp: 0.2 },
+      9.5: { provider: "google", model: "gemini-2.5-pro", temp: 0.4 },
+      10: { provider: "google", model: "gemini-2.5-pro", temp: 0.3 }
+    },
+
+    hybrid_quality: {
+      // Quality-optimized hybrid: Claude for literary, Gemini for systematic
+      1: { provider: "google", model: "gemini-2.5-pro", temp: 0.2 },
+      2: { provider: "google", model: "gemini-2.5-pro", temp: 0.4 },
+      3: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.3 },  // Literary
+      4: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.7 },  // Literary
+      5: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.5 },  // Literary
+      6: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 1.0 },  // Literary
+      7: { provider: "google", model: "gemini-2.5-pro", temp: 0.2 },
+      8: { provider: "anthropic", model: "claude-sonnet-4-5-20250929", temp: 0.9 },  // Rhythm critical
+      9: { provider: "google", model: "gemini-2.5-pro", temp: 0.2 },
+      9.5: { provider: "google", model: "gemini-2.5-pro", temp: 0.4 },
+      10: { provider: "google", model: "gemini-2.5-pro", temp: 0.3 }
+    }
   };
-  return modelConfig[phase];
+
+  return strategies[strategy][phase];
 }
+
+// Usage example:
+// const config = selectModel(6, "premium");  // Returns Claude Sonnet 4.5 @ temp 1.0
+// const config = selectModel(6, "budget");   // Returns Gemini 2.5 Pro @ temp 1.0
 ```
 
 ## API Configurations
@@ -492,7 +786,7 @@ import anthropic
 
 client = anthropic.Anthropic(api_key="your-api-key")
 
-def process_phase_anthropic(text, prompt, model="claude-3-5-sonnet-20241022", temperature=0.2):
+def process_phase_anthropic(text, prompt, model="claude-sonnet-4-5-20250929", temperature=0.2):
     response = client.messages.create(
         model=model,
         max_tokens=4096,
@@ -503,40 +797,81 @@ def process_phase_anthropic(text, prompt, model="claude-3-5-sonnet-20241022", te
     return response.content[0].text
 ```
 
-### OpenAI GPT API
+### OpenAI GPT API (GPT-5 - August 2025)
 ```python
 import openai
 
 client = openai.OpenAI(api_key="your-api-key")
 
-def process_phase_openai(text, prompt, model="gpt-4o", temperature=0.4):
+def process_phase_openai(text, prompt, model="gpt-5", temperature=0.4):
+    """
+    Process text through GPT-5.
+
+    Args:
+        text: Input text to process
+        prompt: Phase-specific system prompt
+        model: Model identifier (default: gpt-5)
+        temperature: Sampling temperature
+
+    Returns:
+        Processed text from the model
+
+    Note: GPT-5 released August 2025. Now default model in ChatGPT.
+          Available variants: gpt-5, gpt-5-mini, gpt-5-nano
+    """
     response = client.chat.completions.create(
         model=model,
         temperature=temperature,
         messages=[
             {"role": "system", "content": prompt},
             {"role": "user", "content": text}
-        ]
+        ],
+        max_tokens=16384  # GPT-5 supports longer outputs
     )
     return response.choices[0].message.content
+
+# WARNING for ClaudeHumanizer:
+# GPT-5 tends to make aggressive changes and may violate domain boundaries.
+# Consider adding stricter "never touch" constraints to prompts when using GPT-5.
+# For best results with domain isolation, use Claude Sonnet 4.5 or Gemini 2.5 Pro.
 ```
 
-### Google Gemini API
+### Google Gemini API (Gemini 2.5 Pro - October 2025)
 ```python
 import google.generativeai as genai
 
 genai.configure(api_key="your-api-key")
 
-def process_phase_gemini(text, prompt, model="gemini-1.5-pro", temperature=0.2):
-    model = genai.GenerativeModel(model)
-    response = model.generate_content(
-        f"{prompt}\\n\\n{text}",
+def process_phase_gemini(text, prompt, model="gemini-2.5-pro", temperature=0.2):
+    """
+    Process text through Gemini 2.5 Pro.
+
+    Args:
+        text: Input text to process
+        prompt: Phase-specific system prompt
+        model: Model identifier (default: gemini-2.5-pro)
+        temperature: Sampling temperature
+
+    Returns:
+        Processed text from the model
+    """
+    model_instance = genai.GenerativeModel(
+        model_name=model,
+        system_instruction=prompt  # System instruction for better prompt adherence
+    )
+
+    response = model_instance.generate_content(
+        text,
         generation_config=genai.types.GenerationConfig(
             temperature=temperature,
-            max_output_tokens=4096
+            max_output_tokens=8192,  # Increased for long outputs
+            candidate_count=1
         )
     )
     return response.text
+
+# Note: Gemini 2.5 Pro supports up to 1M token context window
+# Pricing: $1.25/1M input (≤200K), $2.50/1M input (>200K), $10-15/1M output
 ```
 
 ### Complete Pipeline Implementation
@@ -877,22 +1212,22 @@ class PerformanceMonitor:
 #### Development Environment
 ```yaml
 dev_config:
-  models: ["claude-3-5-sonnet", "gpt-4o-mini", "gemini-1.5-flash"]
+  models: ["claude-sonnet-4-5-20250929"]  # Use same model as production for consistency
   cost_limit_per_day: "$10"
   quality_threshold: "80%"
   enable_detailed_logging: true
-  mock_expensive_models: true
+  mock_expensive_models: false  # Test with actual model for accurate results
 ```
 
 #### Production Environment
 ```yaml
 prod_config:
-  models: ["claude-opus", "gpt-4o", "gemini-1.5-pro"]
+  models: ["claude-sonnet-4-5-20250929"]  # Recommended: Claude Sonnet 4.5 for all phases
   cost_limit_per_day: "$500"
   quality_threshold: "95%"
   enable_monitoring: true
   alert_on_quality_drop: true
-  backup_models: ["claude-3-5-sonnet", "gpt-4-turbo"]
+  backup_models: ["claude-3-5-sonnet-20241022"]  # Fallback if Sonnet 4.5 unavailable
 ```
 
 ### Monitoring and Alerting
