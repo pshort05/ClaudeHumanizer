@@ -183,82 +183,81 @@
       "detection_priority": "HIGH - N-gram analysis is explicitly identified in academic research as a key AI detection method",
       "detection_method": "Advanced detectors compare n-gram frequency patterns against corpuses of known human and AI writing",
 
-      "common_ai_bigrams_trigrams": {
-        "description": "2-3 word sequences that appear disproportionately in AI text",
-        "patterns": [
-          "it's important", "it's worth", "it's crucial", "it's essential", "it's vital",
-          "should be noted", "should be mentioned", "should be emphasized", "should be considered",
-          "can be seen", "can be found", "can be understood", "can be achieved",
-          "has been shown", "has been demonstrated", "has been proven", "has been established",
-          "is characterized by", "is defined by", "is known for", "is recognized as",
-          "plays a role", "plays a part", "plays an important", "serves as a",
-          "serves to illustrate", "serves to demonstrate", "serves to highlight",
-          "tends to be", "tends to have", "tends to occur", "tends to focus",
-          "allows for greater", "allows for better", "allows for more", "allows us to",
-          "enables us to", "helps us understand", "helps to explain", "helps to clarify",
-          "in the context", "in the sense", "in the way", "in the process",
-          "on the other", "on the contrary", "on the whole", "on the surface",
-          "at the same", "at the heart", "at the core", "at the center",
-          "with respect to", "with regard to", "with reference to", "in regard to",
-          "in terms of", "in light of", "in view of", "in spite of",
-          "as a result", "as a consequence", "as a means", "as a way",
-          "such as those", "such as these", "such as this", "one of the",
-          "some of the", "many of the", "most of the", "all of the",
-          "as well as", "in addition to", "along with the", "together with"
-        ]
-      },
-
-      "common_ai_four_grams": {
-        "description": "4-word sequences that are AI markers",
-        "patterns": [
-          "it is important to", "it is worth noting", "it is essential to", "it is crucial to",
-          "it should be noted", "it should be mentioned", "it should be emphasized",
-          "it can be seen", "it can be argued", "it can be said", "it can be understood",
-          "it has been shown", "it has been proven", "it has been demonstrated",
-          "this is because of", "this is due to", "this is a result", "this is an example",
-          "one of the most", "some of the most", "many of the same", "all of the above",
-          "in order to achieve", "in order to understand", "in order to ensure", "in order to provide",
-          "as a result of", "as a consequence of", "as a means of", "as a way to",
-          "with respect to the", "with regard to the", "in terms of the", "in light of the",
-          "at the same time", "at the heart of", "at the core of", "on the other hand",
-          "plays a crucial role", "plays an important role", "plays a significant role", "plays a key role",
-          "serves as a reminder", "serves as an example", "serves as evidence", "serves as a testament",
-          "allows for a better", "allows for a more", "allows for greater understanding",
-          "in the context of", "in the case of", "in the presence of", "in the absence of",
-          "as well as the", "in addition to the", "along with the fact", "together with the fact",
-          "it is clear that", "it is evident that", "it is obvious that", "it is apparent that",
-          "this suggests that the", "this indicates that the", "this demonstrates that the", "this shows that the",
-          "can be used to", "can be seen as", "can be understood as", "can be defined as",
-          "has the potential to", "has the ability to", "has the capacity to", "has the power to",
-          "tends to be more", "tends to be associated", "tends to focus on", "tends to occur when",
-          "is one of the", "is some of the", "is part of the", "is based on the"
-        ]
-      },
-
-      "common_ai_five_grams_plus": {
-        "description": "5+ word sequences that are strong AI indicators",
-        "patterns": [
-          "it is important to note that", "it is worth noting that the", "it should be noted that the",
-          "it is essential to understand that", "it is crucial to recognize that",
-          "one of the most important aspects", "one of the most significant factors", "one of the key elements",
-          "in order to better understand the", "in order to fully appreciate the", "in order to effectively address",
-          "as a result of this process", "as a result of these factors", "as a consequence of the fact",
-          "with respect to the question of", "with regard to the issue of", "in terms of the overall",
-          "it can be seen that the", "it can be argued that the", "it can be said that the",
-          "this is due to the fact that", "this is because of the fact that", "this is a result of the fact",
-          "plays a crucial role in the", "plays an important role in the", "serves as a reminder that",
-          "allows for a better understanding of", "allows for a more comprehensive view", "allows for greater insight into",
-          "at the same time it is", "on the other hand it is", "in addition to this there",
-          "it has been shown that the", "it has been demonstrated that the", "it has been proven that the",
-          "in the context of the current", "in the case of the present", "in light of the recent",
-          "as well as the fact that", "in addition to the fact that", "along with the fact that the",
-          "it is clear that there is", "it is evident that there are", "it is apparent that the",
-          "this suggests that there is a", "this indicates that there is a", "this demonstrates that there is",
-          "can be used to illustrate the", "can be seen as an example", "can be understood as a way",
-          "has the potential to significantly impact", "has the ability to transform the", "has the capacity to change",
-          "is one of the most important", "is one of the most significant", "is part of the larger",
-          "tends to be more common in", "tends to be associated with the", "tends to occur more frequently"
-        ]
+      "common_ai_n_grams": {
+        "description": "Hierarchical n-gram pattern families that appear disproportionately in AI text. Scan for longest matches first.",
+        "pattern_families": {
+          "it_is_family": [
+            "it is/it's important [to/to note that]",
+            "it is/it's worth [noting/noting that the]",
+            "it is/it's crucial/essential/vital [to/to note that/to understand that]",
+            "it is clear/evident/obvious/apparent that [the]",
+            "it should be noted/mentioned/emphasized [that the]",
+            "it can be seen/argued/said/understood [that the/as]",
+            "it has been shown/proven/demonstrated [that the]"
+          ],
+          "plays_serves_family": [
+            "plays a role/part/crucial role/important role/significant role/key role [in the]",
+            "serves as a/an [reminder/example/evidence/testament]",
+            "serves to illustrate/demonstrate/highlight"
+          ],
+          "one_some_most_family": [
+            "one of the [most/key] [important/significant] [aspects/factors/elements]",
+            "some/many/most/all of the [most/same/above]"
+          ],
+          "in_order_to_family": [
+            "in order to [achieve/understand/ensure/provide/better understand/fully appreciate/effectively address]"
+          ],
+          "result_consequence_family": [
+            "as a result/consequence/means/way [of/to/of this process/of these factors/of the fact]",
+            "this is because/due to [of/the fact that]",
+            "this is a result [of the fact]"
+          ],
+          "with_respect_regard_family": [
+            "with respect/regard/reference to [the/the question of/the issue of]",
+            "in regard to",
+            "in terms of [the/the overall]",
+            "in light/view/spite of [the/the recent]"
+          ],
+          "allows_enables_helps_family": [
+            "allows for [greater/better/more/a better/a more/greater understanding/greater insight into]",
+            "allows us to",
+            "enables us to",
+            "helps us understand/to explain/to clarify"
+          ],
+          "tends_to_family": [
+            "tends to be/have/occur/focus [more/associated/on/when/more common in/associated with the/more frequently]"
+          ],
+          "has_been_has_the_family": [
+            "has been shown/demonstrated/proven/established [that the]",
+            "has the potential/ability/capacity/power to [significantly impact/transform the/change]"
+          ],
+          "at_on_in_preposition_family": [
+            "at the same [time/time it is]/at the heart/core/center [of]",
+            "on the other [hand/hand it is]/on the contrary/whole/surface",
+            "in the context/case/presence/absence [of/of the current/of the present]",
+            "in the sense/way/process",
+            "in addition to [the/the fact that/this there]"
+          ],
+          "suggests_indicates_demonstrates_family": [
+            "this suggests/indicates/demonstrates/shows that [the/there is/there is a]"
+          ],
+          "can_be_used_seen_family": [
+            "can be used/seen/understood/defined [to/as/to illustrate the/as an example/as a way]"
+          ],
+          "is_characterized_defined_family": [
+            "is characterized/defined/known/recognized [by/as]",
+            "is one/some/part/based [of the/of the most important/of the most significant/of the larger/on the]"
+          ],
+          "as_well_along_together_family": [
+            "as well as [the/the fact that]",
+            "along with [the/the fact/the fact that the]",
+            "together with [the fact/the fact that]"
+          ],
+          "such_as_family": [
+            "such as those/these/this"
+          ]
+        },
+        "usage_note": "Patterns show [optional extensions] in brackets. Match longest sequence first, then shorter variants."
       },
 
       "replacement_strategy": {

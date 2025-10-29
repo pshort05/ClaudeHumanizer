@@ -205,66 +205,36 @@
 
     "spacing_inconsistencies": {
       "description": "Humans occasionally make spacing errors. AI never does. Add rare, subtle spacing variations.",
-      "detection_marker": "Perfect spacing throughout entire document flags AI perfection syndrome",
-      "types": {
-        "double_space_after_period": {
-          "description": "Occasionally use double space after period (older typing convention)",
-          "frequency": "1-2 instances per 1000 words maximum",
-          "application": "Randomly insert double space after period in 0.1-0.2% of sentences"
-        },
-        "missing_space_after_comma": {
-          "description": "Occasionally omit space after comma (typo simulation)",
-          "frequency": "0-1 instances per 2000 words maximum",
-          "application": "Very rarely omit space after comma to simulate natural typo",
-          "caution": "Keep this EXTREMELY rare - too many looks sloppy, not human"
-        },
-        "extra_space_before_punctuation": {
-          "description": "Occasionally add space before punctuation mark (especially with question/exclamation)",
-          "frequency": "0-1 instances per 3000 words maximum",
-          "application": "Very rarely add space before ? or !",
-          "caution": "Use sparingly - this is a subtle imperfection"
-        }
+      "types_and_frequency": {
+        "double_space_after_period": "1-2 per 1000 words (older typing convention)",
+        "missing_space_after_comma": "0-1 per 2000 words (typo simulation, EXTREMELY rare)",
+        "extra_space_before_punctuation": "0-1 per 3000 words (before ? or !, very subtle)"
       },
-      "implementation_note": "Spacing inconsistencies should be VERY subtle and rare. The goal is to break perfect consistency, not to appear careless."
+      "implementation_note": "VERY subtle and rare. Goal is to break perfect consistency, not appear careless."
     },
 
     "quotation_mark_inconsistency": {
-      "description": "AI uses curly quotes with machine-like consistency. Humans sometimes mix straight and curly quotes, especially when typing quickly.",
-      "detection_marker": "Perfect curly quotation mark consistency throughout entire document",
-      "strategy": "If text uses curly quotes, occasionally (rarely) mix in straight quotes, especially in less formal contexts",
-      "frequency": "0-2 instances per document",
-      "caution": "This is a very subtle inconsistency - don't overuse"
+      "strategy": "If text uses curly quotes, occasionally mix in straight quotes in less formal contexts",
+      "frequency": "0-2 instances per document"
     },
 
     "hyphenation_inconsistency": {
       "description": "Humans are inconsistent with compound word hyphenation. AI follows strict rules.",
-      "examples": {
-        "email_e-mail": "Vary between 'email' and 'e-mail' across document",
-        "setup_set-up": "Vary between 'setup' (noun) and 'set up' (verb) inconsistently",
-        "high_quality_high-quality": "Sometimes hyphenate compound adjectives, sometimes don't"
-      },
-      "strategy": "If document contains compound words, introduce subtle inconsistency in hyphenation (1-2 instances)",
-      "caution": "Don't create grammatical errors - maintain some logic even in inconsistency"
+      "examples": "email/e-mail, setup/set up, high quality/high-quality",
+      "strategy": "Introduce subtle inconsistency (1-2 instances) if document contains compound words",
+      "caution": "Don't create grammatical errors - maintain some logic"
     },
 
     "comma_splice_strategic_use": {
-      "description": "Humans occasionally use comma splices in informal writing. AI avoids them perfectly.",
-      "definition": "Comma splice = two independent clauses joined only by a comma (grammatically incorrect but common)",
-      "frequency": "0-1 instances per 2000 words in casual content, NEVER in formal content",
-      "examples": {
-        "correct": "The system failed. We had to restart it.",
-        "comma_splice": "The system failed, we had to restart it."
-      },
-      "application": "In very casual blog posts or creative nonfiction, occasionally use comma splice for authentic feel",
-      "caution": "SKIP entirely for formal, academic, or business writing. Only use in highly casual contexts."
+      "definition": "Two independent clauses joined only by a comma (grammatically incorrect but common in casual writing)",
+      "frequency": "0-1 per 2000 words in casual content, NEVER in formal content",
+      "example": "'The system failed, we had to restart it.' vs 'The system failed. We had to restart it.'",
+      "caution": "SKIP for formal, academic, or business writing. Only use in highly casual contexts."
     },
 
     "ellipses_spacing_inconsistency": {
-      "description": "Humans are inconsistent with ellipses spacing. AI follows strict typographic rules.",
-      "ai_pattern": "AI consistently uses either '...' or '. . .' throughout document",
-      "human_pattern": "Humans mix 'text...text' and 'text ... text' and 'text… text' inconsistently",
-      "strategy": "Vary ellipses spacing patterns across document if ellipses are used",
-      "frequency": "If document contains ellipses, vary the spacing in 30-40% of instances"
+      "description": "Humans mix 'text...text' and 'text ... text' inconsistently. AI follows strict patterns.",
+      "strategy": "Vary ellipses spacing in 30-40% of instances if document contains ellipses"
     },
 
     "implementation_guidelines": {

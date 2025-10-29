@@ -1329,5 +1329,193 @@ Phase 10 (Word Filtering)
 
 ---
 
+## Prompt Development & Standardization
+
+**NEW in v3.1.0**: ClaudeHumanizer now includes a comprehensive standardization system for maintaining consistent, high-quality phase prompts.
+
+### Standardization Overview
+
+All phase prompts follow a standardized structure to ensure:
+- **Consistency** across all phases
+- **Maintainability** for easier updates
+- **Quality** through automated validation
+- **Clarity** for developers and LLMs
+
+### Key Files
+
+| File | Purpose |
+|------|---------|
+| `PROMPT_TEMPLATE.json` | Master template with all sections tagged as [REQUIRED], [OPTIONAL], or [PHASE-SPECIFIC] |
+| `PROMPT_STANDARDS.md` | Human-readable documentation of standardization rules |
+| `STANDARDIZATION_SUMMARY.md` | Overview of the standardization system |
+| `validate_prompt.py` | Automated validation script |
+
+### Standard Prompt Structure
+
+Every phase prompt follows this exact order:
+
+```
+1. HEADER BLOCK
+   - title, version, date
+   - assembly_line_position (line 4)
+   - description
+
+2. DOMAIN RESTRICTIONS
+   - only_handle
+   - never_touch (must include 4 standard items)
+   - respect_assembly_line
+
+3. PERSONA & FRAMEWORK
+   - persona (4 fields: name, background, expertise, philosophy)
+   - agent_directives (3 fields: persistence, tool_usage, deliberate_planning)
+   - anti_hallucination_framework (3 fields: real_world_facts, fictional_world_building, fallback_strategy)
+
+4. SPECIAL NOTES (optional)
+   - master_prohibited_list_reference (Phases 2, 6.1, 7, 10)
+   - note_on_word_filtering (Phases 5, 6, 8, 9)
+   - note_on_statistical_metrics (Phases 9, 10)
+
+5. PHASE-SPECIFIC CONTENT (variable)
+   - Use standardized naming conventions
+   - processing_instructions (not "core_instructions")
+   - detection_criteria or detection_framework
+   - enhancement_techniques or optimization_strategies
+
+6. OUTPUT FORMAT (standardized)
+   - Identical across all phases except [bracketed] placeholders
+
+7. CRITICAL_FINAL_INSTRUCTION (standardized)
+   - Last line of every prompt
+```
+
+### Creating a New Phase Prompt
+
+1. **Copy the template:**
+   ```bash
+   cp PROMPT_TEMPLATE.json new_phase.json
+   ```
+
+2. **Replace placeholders:**
+   - Change all `[bracketed content]` to phase-specific values
+   - Update version and date
+   - Add phase-specific sections
+
+3. **Remove template guidance:**
+   - Delete all `COMMENT_` fields
+   - Remove `_TEMPLATE_INSTRUCTIONS`, `_SECTION_TAGS`, etc.
+   - Remove `OPTIONAL_` fields that don't apply
+
+4. **Validate:**
+   ```bash
+   python validate_prompt.py new_phase.json
+   ```
+
+5. **Test:**
+   - Verify phase works correctly in isolation
+   - Test integration in full pipeline
+
+### Modifying Existing Phase Prompts
+
+1. **Read the phase prompt** to understand domain boundaries
+2. **Make your changes** while maintaining standard structure
+3. **Update version number** using semantic versioning:
+   - MAJOR: Breaking changes
+   - MINOR: New functionality
+   - PATCH: Bug fixes, clarifications
+4. **Update date field** to current date (YYYY-MM-DD)
+5. **Validate changes:**
+   ```bash
+   python validate_prompt.py <phase_file>.json
+   ```
+6. **Test domain isolation** - ensure phase only affects its domain
+7. **Test sequential integration** - run full pipeline
+
+### Validation Script Usage
+
+**Check single file:**
+```bash
+python validate_prompt.py 3_overwritten_language_reduction.json
+```
+
+**Check all phase files:**
+```bash
+python validate_prompt.py --all
+```
+
+**Output interpretation:**
+- ✗ **ERROR** (red): Critical issue, must fix
+- ⚠ **WARNING** (yellow): Should fix for consistency
+- ℹ **INFO** (blue): Suggestion or minor issue
+
+### Standardized Components
+
+**Required in all phases:**
+- `never_touch` list must include these 4 items:
+  - "Dialogue content (text in quotation marks)"
+  - "Markdown formatting (headers, links, code blocks, etc.)"
+  - "Character speech patterns"
+  - "Work completed by previous phases"
+
+- `agent_directives` must have exactly 3 fields:
+  - `persistence`: When to conclude work
+  - `tool_usage`: Guidance on tools vs guessing
+  - `deliberate_planning`: Planning approach
+
+- `anti_hallucination_framework` must have exactly 3 fields:
+  - `real_world_facts`: How to handle factual content
+  - `fictional_world_building`: How to handle creative content
+  - `fallback_strategy`: What to do when uncertain
+
+- `output_format`: Entire block should be identical across phases except for [bracketed] placeholders
+
+### Naming Conventions
+
+Use these standardized names in phase-specific sections:
+
+| Concept | Use This | Avoid |
+|---------|----------|-------|
+| Step-by-step instructions | `processing_instructions` | "core_instructions", "processing_steps" |
+| Issue identification | `detection_criteria` or `detection_framework` | "identification_rules" |
+| Improvement strategies | `enhancement_techniques` or `optimization_strategies` | "improvement_methods" |
+| Replacement rules | `replacement_guidelines` or `conversion_strategies` | "replacement_rules" |
+| Quality metrics | `quality_standards` or `quality_assurance` | "quality_checks" |
+
+### Benefits of Standardization
+
+**For Development:**
+- Easier to create new phases (copy template, fill placeholders)
+- Faster updates (know exactly where to find each instruction type)
+- Better diffs (changes easier to spot in version control)
+- Reduced errors (less chance of omitting critical instructions)
+
+**For Maintenance:**
+- Quick audits (run validator on all prompts)
+- Consistent updates (change once, apply everywhere)
+- Clear structure (anyone can understand prompt organization)
+
+**For LLMs:**
+- Predictable context (same structure aids comprehension)
+- Consistent priming (standard order ensures critical context comes early)
+- Better parsing (well-structured prompts easier to process)
+
+### Optimization Best Practices
+
+**When optimizing prompts:**
+1. **Remove redundancy** - Consolidate duplicate instructions
+2. **Use compact formats** - Tables and hierarchical lists over verbose prose
+3. **Keep functionality** - Never remove essential instructions
+4. **Maintain clarity** - Shorter is better only if equally clear
+5. **Validate changes** - Run validator and test the phase
+
+**Recent optimizations (v3.1.0):**
+- Phase 3: Consolidated passive voice and nominalization sections (~122 lines saved)
+- Phase 9: Hierarchical N-gram pattern families (improved clarity)
+- Phase 8: Streamlined punctuation inconsistency examples (~47 lines saved)
+- Phase 9.5: Compact genre target format (~17 lines saved)
+
+Total: ~200 lines reduced across 6 phases with improved maintainability.
+
+---
+
 For usage instructions and workflow guides, see the [Usage Guide](USAGE_GUIDE.md).
 For customization and character-specific configurations, see the [Customization Guide](CUSTOMIZATION.md).

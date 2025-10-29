@@ -306,30 +306,13 @@
   },
 
   "genre_specific_targets": {
-    "narrative_fiction": {
-      "burstiness": {"cv": "60-75%", "range": "35-50+", "variance": "100-150"},
-      "pos": {"nouns": "18-22%", "verbs": "17-20%", "adjectives": "7-10%"},
-      "lexical": {"ttr": "0.45-0.60", "max_frequency": "3 per 1000"}
-    },
-    "casual_blog": {
-      "burstiness": {"cv": "55-70%", "range": "30-45", "variance": "90-140"},
-      "pos": {"nouns": "19-23%", "verbs": "16-19%", "adjectives": "6-9%"},
-      "lexical": {"ttr": "0.40-0.55", "max_frequency": "3 per 1000"}
-    },
-    "business_writing": {
-      "burstiness": {"cv": "45-60%", "range": "25-40", "variance": "70-110"},
-      "pos": {"nouns": "20-24%", "verbs": "15-18%", "adjectives": "5-8%"},
-      "lexical": {"ttr": "0.45-0.60", "max_frequency": "4 per 1000"}
-    },
-    "technical_documentation": {
-      "burstiness": {"cv": "40-55%", "range": "20-35", "variance": "60-100"},
-      "pos": {"nouns": "22-26%", "verbs": "14-17%", "adjectives": "4-7%"},
-      "lexical": {"ttr": "0.50-0.70", "max_frequency": "5 per 1000"}
-    },
-    "academic_writing": {
-      "burstiness": {"cv": "45-60%", "range": "25-40", "variance": "75-120"},
-      "pos": {"nouns": "21-25%", "verbs": "15-18%", "adjectives": "5-8%"},
-      "lexical": {"ttr": "0.55-0.75", "max_frequency": "4 per 1000"}
+    "note": "Format: Genre | CV% | Range | Variance | Nouns% | Verbs% | Adj% | TTR | MaxFreq",
+    "targets": {
+      "narrative_fiction": "60-75% | 35-50+ | 100-150 | 18-22% | 17-20% | 7-10% | 0.45-0.60 | 3/1k",
+      "casual_blog": "55-70% | 30-45 | 90-140 | 19-23% | 16-19% | 6-9% | 0.40-0.55 | 3/1k",
+      "business_writing": "45-60% | 25-40 | 70-110 | 20-24% | 15-18% | 5-8% | 0.45-0.60 | 4/1k",
+      "technical_documentation": "40-55% | 20-35 | 60-100 | 22-26% | 14-17% | 4-7% | 0.50-0.70 | 5/1k",
+      "academic_writing": "45-60% | 25-40 | 75-120 | 21-25% | 15-18% | 5-8% | 0.55-0.75 | 4/1k"
     }
   },
 

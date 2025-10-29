@@ -34,27 +34,13 @@
     "context_sensitivity": "Preserve language that serves specific stylistic or characterization purposes"
   },
 
-  "core_instructions": {
-    "dialogue_preservation": "Skip any dialogue in quotes or clearly marked as speech - leave these sections completely unchanged",
-    "title_preservation": "Skip chapters, subchapters, headings, and other obvious titles - leave these sections completely unchanged",
-    "term_identification": "Reference master_prohibited_words.json and identify/replace all words and phrases from the consolidated list in body text only",
-    "replacement_strategy": "Replace with natural, grounded alternatives that maintain the original meaning",
-    "anti_ai_replacement": "Use simple punctuation (commas, periods) not sophisticated dashes; avoid buzzwords, perfect transitions, or overly polished language in replacements",
-    "assembly_line_step": "PHASE 2: AI word cleaning only - preserve Phase 1 grammar fixes, leave enhancement work for later phases",
-    "output_format": "Provide only the cleaned text in Markdown format without commentary or explanations",
-    "no_analysis": "Do not include any information about changes made - only output the revised text"
-  },
-
-
-  "processing_steps": {
-    "step_1": "Carefully read the entire text to understand context and identify dialogue sections (in quotes) and titles/headings to preserve",
-    "step_2": "Systematically search the text for any words or phrases from the prohibited list, focusing only on body text (skip dialogue and titles)",
-    "step_3": "Apply dialogue_pause_pattern_rules from master_prohibited_words.json: identify ANY metaphorical descriptions of pauses/silences between dialogue and replace with 'Silence.', 'Awkward silence.', or remove entirely",
-    "step_4": "Apply light_description_pattern_rules from master_prohibited_words.json: identify ANY elaborate light descriptions using verbs like 'filtering', 'casting', 'streaming' and replace with simple phrases like 'in the moonlight', 'afternoon sun', or remove entirely",
-    "step_5": "Apply finger_hand_action_pattern_rules from master_prohibited_words.json: identify ANY elaborate finger/hand movement descriptions (e.g., 'fingers dancing', 'fingers hovering') and replace with direct action verbs like 'typing', 'touched', 'traced'",
-    "step_6": "Replace detected prohibited terms with natural, conversational alternatives that maintain original meaning",
-    "step_7": "Verify replacements do not introduce new AI-sounding words, sophisticated punctuation (especially no em dashes — or en dashes –), or other prohibited list terms",
-    "step_8": "Review final text to ensure dialogue and titles remain unchanged and flow is natural"
+  "processing_instructions": {
+    "step_1": "Identify and preserve dialogue (in quotes) and titles/headings - leave completely unchanged",
+    "step_2": "Search body text for prohibited words/phrases from master_prohibited_words.json",
+    "step_3": "Apply pattern rules: dialogue_pause_pattern (replace metaphorical pause descriptions with 'Silence.' or remove), light_description_pattern (replace elaborate light verbs with simple phrases or remove), finger_hand_action_pattern (replace elaborate movements with direct action verbs)",
+    "step_4": "Replace prohibited terms with natural, conversational alternatives maintaining original meaning",
+    "step_5": "Verify replacements don't introduce new AI-sounding words or sophisticated punctuation (no em/en dashes)",
+    "output_requirements": "Provide only cleaned text in Markdown format without commentary. This is PHASE 2: preserve Phase 1 grammar fixes, leave enhancements for later phases"
   },
 
   "replacement_guidelines": {

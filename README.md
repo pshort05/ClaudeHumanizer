@@ -223,8 +223,11 @@ Based on academic AI detector research, ClaudeHumanizer now includes targeted co
 ```
 ClaudeHumanizer/
 ├── README.md                           # This overview
+├── CLAUDE.md                           # Instructions for Claude Code
 ├── How AI Detectors Work.md            # Research basis for enhancements
 ├── master_prohibited_words.json        # Pattern rules & prohibited terms
+│
+├── Phase Prompts (JSON)
 ├── 1_grammar_foundation.json          # Phase 1 prompt
 ├── 2_ai_word_cleaning.json            # Phase 2 prompt (with pattern rules)
 ├── 3_overwritten_language_reduction.json  # v2.4.0 + nominalization
@@ -237,6 +240,13 @@ ClaudeHumanizer/
 ├── 9_final_verification.json          # v17.0.0 PATTERN DETECTION (qualitative)
 ├── 9.5_statistical_analysis_hub.json  # v2.0.0 OPTIONAL - ALL statistics consolidated
 ├── 10_final_ai_word_sweep.json        # v3.0.0 WORD FILTERING (pure)
+│
+├── Prompt Development (NEW)
+├── PROMPT_TEMPLATE.json               # Master template for creating/updating prompts
+├── PROMPT_STANDARDS.md                # Standardization rules and guidelines
+├── STANDARDIZATION_SUMMARY.md         # Overview of standardization system
+├── validate_prompt.py                 # Automated prompt validation script
+│
 └── docs/
     ├── USAGE_GUIDE.md                 # Step-by-step instructions
     ├── TECHNICAL_REFERENCE.md         # Claude optimization & automation
@@ -246,6 +256,8 @@ ClaudeHumanizer/
 ```
 
 ## Documentation
+
+### For Users
 
 ### 📖 [Usage Guide](docs/USAGE_GUIDE.md)
 Complete step-by-step instructions for processing text through the assembly line system, including troubleshooting and quality control.
@@ -261,6 +273,20 @@ Version history, recent updates, and migration guides. See latest changes includ
 
 ### 🤖 [n8n Workflow](docs/n8n_workflow_sample.json)
 Ready-to-import n8n workflow for complete 10-phase automation with Claude Sonnet 4.5. Import into n8n, configure file paths and API credentials, then activate.
+
+### For Developers (NEW)
+
+### 🛠️ [Prompt Template](PROMPT_TEMPLATE.json)
+Master template for creating or updating phase prompts. All sections tagged as [REQUIRED], [OPTIONAL], or [PHASE-SPECIFIC] with inline guidance.
+
+### 📐 [Prompt Standards](PROMPT_STANDARDS.md)
+Standardization rules, naming conventions, and quality guidelines for maintaining consistency across all phase prompts.
+
+### 📊 [Standardization Summary](STANDARDIZATION_SUMMARY.md)
+Overview of the prompt standardization system including benefits, implementation details, and usage instructions.
+
+### ✅ [Validation Script](validate_prompt.py)
+Automated validation tool to check prompt conformance. Run `python validate_prompt.py --all` to audit all phase prompts.
 
 ## Processing Flow
 
@@ -323,6 +349,6 @@ For advanced users, see the [Technical Reference](docs/TECHNICAL_REFERENCE.md) f
 
 ---
 
-**Version**: 3.0 Pattern-Based Architecture with Phase 10
-**Last Updated**: 2025-10-26
+**Version**: 3.1 Optimized & Standardized
+**Last Updated**: 2025-10-28
 **Optimized For**: Claude Sonnet 4.5

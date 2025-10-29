@@ -99,6 +99,21 @@ All phase files follow this structure:
 - `assembly_line_position`: Reinforces sequential processing
 - `output_format`: Always specifies Markdown output, no JSON/commentary
 
+## Prompt Standardization
+
+All phase prompts follow a standardized structure for consistency and maintainability:
+
+- **`PROMPT_TEMPLATE.json`** - Master template with all sections tagged as [REQUIRED], [OPTIONAL], or [PHASE-SPECIFIC]
+- **`PROMPT_STANDARDS.md`** - Human-readable documentation of standardization rules
+- **`validate_prompt.py`** - Automated validation script to check conformance
+- **`STANDARDIZATION_SUMMARY.md`** - Overview of the standardization system
+
+**Quick validation:**
+```bash
+python validate_prompt.py <phase_file.json>  # Check single file
+python validate_prompt.py --all              # Check all phases
+```
+
 ## Common Development Tasks
 
 ### Modifying Phase Prompts
@@ -107,10 +122,21 @@ When editing a phase JSON file:
 
 1. **Read the entire prompt first** to understand domain boundaries
 2. **Check `never_touch` rules** - do not violate domain isolation
-3. **Update version number** using semantic versioning
-4. **Update date field** to current date
-5. **Test domain isolation** - ensure phase only affects its designated domain
-6. **Test sequential integration** - run through full pipeline to verify no breaking changes
+3. **Update version number** using semantic versioning (MAJOR.MINOR.PATCH)
+4. **Update date field** to current date (YYYY-MM-DD)
+5. **Maintain standard structure** - sections should follow template order
+6. **Validate changes** - run `python validate_prompt.py <file>.json`
+7. **Test domain isolation** - ensure phase only affects its designated domain
+8. **Test sequential integration** - run through full pipeline to verify no breaking changes
+
+### Creating New Phase Prompts
+
+1. **Copy `PROMPT_TEMPLATE.json`** as starting point
+2. **Replace all [bracketed placeholders]** with phase-specific content
+3. **Remove template guidance fields** (COMMENT_, _TEMPLATE_INSTRUCTIONS, etc.)
+4. **Add phase-specific sections** using standardized naming conventions
+5. **Validate** - run `python validate_prompt.py new_phase.json`
+6. **Test** - verify phase works correctly in isolation and in pipeline
 
 ### Adding Terms to Master Prohibited Words
 

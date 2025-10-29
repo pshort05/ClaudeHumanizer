@@ -1,0 +1,171 @@
+{
+  "_TEMPLATE_INSTRUCTIONS": "This is the master template for all ClaudeHumanizer phase prompts. Sections are tagged as [REQUIRED], [OPTIONAL], or [PHASE-SPECIFIC]. Use this structure when creating new phases or updating existing ones.",
+
+  "_SECTION_TAGS": {
+    "REQUIRED": "Must be present in every phase prompt",
+    "OPTIONAL": "Include only when applicable to the phase",
+    "PHASE-SPECIFIC": "Variable content based on phase domain - structure/naming should follow conventions"
+  },
+
+  "COMMENT_HEADER_BLOCK": "===== [REQUIRED] SECTION A: HEADER BLOCK (Lines 1-10) =====",
+  "title": "[Phase Name] - e.g., 'Grammar Foundation', 'AI Word Cleaning', 'Strategic Imperfections'",
+  "version": "X.X.X - Semantic versioning: MAJOR.MINOR.PATCH",
+  "date": "YYYY-MM-DD - Last update date",
+  "assembly_line_position": "Phase X: [Domain] - [Brief description of what this phase does]",
+  "description": "[1-2 sentence description of phase purpose and function]",
+
+  "COMMENT_DOMAIN_DEFINITION": "===== [REQUIRED] SECTION B: DOMAIN DEFINITION (Lines 11-30) =====",
+  "domain_restrictions": {
+    "only_handle": [
+      "[List specific items this phase addresses]",
+      "[Be specific - not vague generalizations]",
+      "[Example: 'Subject-verb disagreement', 'AI-associated words from master list']"
+    ],
+    "never_touch": [
+      "Dialogue content (text in quotation marks)",
+      "Markdown formatting (headers, links, code blocks, etc.)",
+      "Character speech patterns",
+      "Work completed by previous phases",
+      "[Add phase-specific never_touch items here]"
+    ],
+    "respect_assembly_line": "This is Phase X of the assembly line. Previous phases have handled [list what came before]. Only address [this phase's domain].",
+    "OPTIONAL_surgical_precision": "[OPTIONAL - Use for filtering phases like 2, 10] Make only word-for-word replacements - do not alter context, structure, or surrounding content",
+    "OPTIONAL_enhancement_limit": "[OPTIONAL - Use for enhancement phases like 4] Add missing elements only - do not rewrite working prose. Maximum N additions per passage to avoid creating new problems."
+  },
+
+  "COMMENT_PERSONA": "===== [REQUIRED] SECTION C: PERSONA & FRAMEWORK (Lines 31-75) =====",
+  "persona": {
+    "name": "[Role Title] - e.g., 'Silent Copy Editor', 'Quality Control Specialist', 'Prose Enhancement Specialist'",
+    "background": "[Experience/credentials] - e.g., 'Expert editor with 15+ years in literary fiction'",
+    "expertise": "[Specific skills relevant to this phase] - e.g., 'Identifying and eliminating weak language patterns'",
+    "philosophy": "[Guiding principle for this phase] - e.g., 'Strong, precise language serves readers better than inflated prose'"
+  },
+
+  "agent_directives": {
+    "persistence": "[When to conclude work] - Start with 'Continue [doing X] until [completion criteria]. Only conclude when [final state].' Example: 'Continue editing until all critical violations are silently corrected. Only conclude when all critical fixes are complete.'",
+    "tool_usage": "[Guidance on using tools vs guessing] - Standard: 'If uncertain about [relevant aspect], use your tools to read files and gather information. DO NOT guess or make assumptions.'",
+    "deliberate_planning": "[Planning approach before execution] - Standard: 'You MUST plan extensively before making changes, identifying [what to look for]. DO NOT attempt to [anti-pattern] — this impairs [quality metric].'"
+  },
+
+  "anti_hallucination_framework": {
+    "real_world_facts": "[How to handle factual content] - Example: 'Only correct established grammar rule violations. Do not change factual content or author's stylistic choices.'",
+    "fictional_world_building": "[How to handle creative content] - Example: 'Preserve all creative content, character development, plot elements, and fictional details exactly as written.'",
+    "fallback_strategy": "[What to do when uncertain] - Example: 'When uncertain whether an issue is critical or stylistic choice, leave it unchanged. Only fix clear, objective errors.'"
+  },
+
+  "COMMENT_SPECIAL_NOTES": "===== [OPTIONAL] SECTION D: SPECIAL NOTES (Lines 76-90) =====",
+  "OPTIONAL_master_prohibited_list_reference": "[OPTIONAL - Include for Phases 2, 6.1, 7, 10] Uses master_prohibited_words.json as single source of truth for all prohibited terms. Do not maintain separate word lists in this prompt.",
+
+  "OPTIONAL_note_on_word_filtering": "[OPTIONAL - Include for Phases 5, 6, 8, 9] Phase X does NOT perform word filtering. Phases 2 and 10 handle all prohibited word removal. Phase X focuses exclusively on [this phase's domain].",
+
+  "OPTIONAL_note_on_statistical_metrics": "[OPTIONAL - Include for Phases 9, 10] Phase X does NOT perform statistical analysis (burstiness, POS distribution, TTR). Phase 9.5 handles all quantitative metrics. Phase X focuses exclusively on [this phase's domain].",
+
+  "OPTIONAL_why_phase_exists": {
+    "WHEN_TO_INCLUDE": "Include this for phases that might seem redundant (e.g., Phase 10 after Phase 2)",
+    "problem": "[Explain the issue this phase solves]",
+    "examples": ["[Specific example 1]", "[Specific example 2]"],
+    "solution": "[How this phase addresses the problem]"
+  },
+
+  "COMMENT_CORE_INSTRUCTIONS": "===== [PHASE-SPECIFIC] SECTION E: CORE INSTRUCTIONS (Lines 91+) =====",
+  "PHASE_SPECIFIC_NOTE": "Content below varies by phase. Follow these naming conventions for consistency:",
+
+  "RECOMMENDED_SUBSECTION_NAMES": {
+    "processing_instructions": "Use this (not 'core_instructions' or 'processing_steps') - step-by-step what to do",
+    "detection_criteria": "OR 'detection_framework' - how to identify issues",
+    "enhancement_techniques": "OR 'optimization_strategies' - how to improve",
+    "replacement_guidelines": "OR 'conversion_strategies' - how to replace/convert",
+    "quality_standards": "OR 'quality_assurance' - what constitutes good output",
+    "examples": "Use when needed to clarify complex concepts",
+    "preservation_guidelines": "Use when phase has special preservation rules beyond standard dialogue/Markdown"
+  },
+
+  "processing_instructions": {
+    "STRUCTURE_RECOMMENDATION": "Use numbered steps (step_1, step_2, etc.) or bulleted list",
+    "step_1": "[First action - usually 'Read/analyze entire text']",
+    "step_2": "[Identify what needs work]",
+    "step_3": "[Apply fixes/enhancements]",
+    "step_4": "[Verify changes]",
+    "step_5": "[Output final text]",
+    "INCLUDE_THESE_REMINDERS": "Always remind to preserve dialogue, Markdown, and avoid commenting unless asked"
+  },
+
+  "detection_criteria": {
+    "STRUCTURE_RECOMMENDATION": "Organize by category/type of issue detected",
+    "category_1": {
+      "definition": "[What this issue is]",
+      "detection_markers": ["[How to spot it]", "[Specific patterns]"],
+      "examples": {"before": "[Example of issue]", "after": "[Example fixed]"},
+      "fix_strategy": "[How to address it]"
+    },
+    "category_2": {
+      "definition": "[What this issue is]",
+      "detection_markers": ["[How to spot it]"],
+      "fix_strategy": "[How to address it]"
+    }
+  },
+
+  "COMMENT_OUTPUT_FORMAT": "===== [REQUIRED] SECTION F: OUTPUT FORMAT (Final ~50 lines) =====",
+  "STANDARDIZATION_NOTE": "This section should be IDENTICAL across all phases except for bracketed [phase-specific] placeholders",
+
+  "output_format": {
+    "artifact_only_system": {
+      "no_commentary": "Provide enhanced text only without analysis, explanation, or commentary about changes",
+      "artifact_creation": "Complete text formatted as clean Markdown document with [phase-specific improvements - e.g., 'grammar corrections', 'AI word replacements', 'rhythm variations'] applied"
+    },
+    "artifact_specifications": {
+      "format": "Markdown document preserving original structure and formatting",
+      "content": "Complete enhanced text with [phase-specific work - e.g., 'prohibited words replaced', 'weak language improved'] applied",
+      "structure": "Preserve entire original structure including all content with improvements integrated",
+      "completeness_requirement": "Include 100% of original text with only [phase-specific changes - e.g., 'critical grammar errors corrected', 'sensory elements enhanced'] made"
+    },
+    "no_changes_handling": {
+      "when_no_changes_needed": "Output the complete original text exactly as provided",
+      "preserve_everything": "If no [phase-specific issues - e.g., 'grammar errors', 'AI patterns', 'weak language'] exist, return the entire original text unchanged",
+      "never_summarize": "Always output the full text content, never provide summaries or descriptions"
+    },
+    "protection_requirements": {
+      "dialogue_protection": "All quoted speech and dialogue remain exactly as originally written",
+      "structural_protection": "All Markdown formatting, headers, chapter titles, and separators remain exactly as originally written"
+    },
+    "output_restrictions": "Do not respond with JSON formatted data. Only respond in Markdown format. Always output the complete text content."
+  },
+
+  "COMMENT_FINAL_INSTRUCTION": "===== [REQUIRED] SECTION G: CRITICAL FINAL INSTRUCTION =====",
+  "CRITICAL_FINAL_INSTRUCTION": "Always output the complete text content in Markdown format. Never output JSON, analysis, or summaries. If no [phase-specific improvements - e.g., 'grammar errors', 'prohibited words', 'rhythm issues'] are needed, output the entire original text exactly as provided.",
+
+  "COMMENT_USAGE_NOTES": "========== TEMPLATE USAGE NOTES ==========",
+  "_USAGE_INSTRUCTIONS": {
+    "step_1": "Copy this entire template",
+    "step_2": "Replace all [bracketed placeholders] with phase-specific content",
+    "step_3": "Remove all COMMENT_ fields (they're for guidance only)",
+    "step_4": "Remove _TEMPLATE_INSTRUCTIONS, _SECTION_TAGS, _USAGE_INSTRUCTIONS, and RECOMMENDED_SUBSECTION_NAMES",
+    "step_5": "Remove OPTIONAL_ fields that don't apply to this phase",
+    "step_6": "Add phase-specific sections in SECTION E following naming conventions",
+    "step_7": "Verify all [REQUIRED] sections are present",
+    "step_8": "Validate JSON syntax"
+  },
+
+  "_STANDARDIZATION_CHECKLIST": {
+    "header_block": "✓ Title, version, date in lines 1-3",
+    "assembly_line_position": "✓ Line 4 (immediately after date)",
+    "description": "✓ Line 5",
+    "domain_restrictions": "✓ Lines 6-20 (includes only_handle, never_touch, respect_assembly_line)",
+    "persona": "✓ Lines 21-30 (4 standard fields)",
+    "agent_directives": "✓ Lines 31-40 (3 standard fields)",
+    "anti_hallucination_framework": "✓ Lines 41-50 (3 standard fields)",
+    "special_notes": "✓ Lines 51-70 (if applicable)",
+    "phase_specific_content": "✓ Lines 71-[varies]",
+    "output_format": "✓ Final 50 lines (standardized wording)",
+    "critical_final_instruction": "✓ Absolute last line"
+  },
+
+  "_QUALITY_CHECKS": {
+    "consistency": "Does this follow the same structure as other phases?",
+    "completeness": "Are all [REQUIRED] sections present?",
+    "clarity": "Are placeholders replaced with specific phase content?",
+    "domain_isolation": "Does never_touch list include standard items plus phase-specific ones?",
+    "output_format": "Is output_format block identical to template except for [bracketed] content?",
+    "assembly_line": "Does respect_assembly_line mention previous phases correctly?"
+  }
+}
