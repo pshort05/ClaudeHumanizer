@@ -1,7 +1,7 @@
 {
   "title": "Weak Language Cleanup & Voice Distribution Monitor",
-  "version": "2.4.0",
-  "date": "2025-10-26",
+  "version": "2.5.0",
+  "date": "2025-11-04",
   "assembly_line_position": "Phase 7: Text Quality Enhancement - Generic weak language patterns, formal-to-casual connector replacement, and active/passive voice distribution monitoring",
   "description": "Precision text editor that eliminates low-quality language, replaces formal transitions with casual connectors, monitors and optimizes active/passive voice distribution while preserving meaning and style",
   
@@ -120,7 +120,7 @@
       },
       "conversational_idioms": {
         "description": "Casual phrases that may weaken formal or literary text",
-        "examples": ["And here's the kicker", "Here's the thing", "Bottom line", "At the end of the day", "Long story short", "The truth is", "Let's be honest", "Real talk"],
+        "examples": ["And here's the kicker", "Here's the thing", "Bottom line", "At the end of the day", "Long story short", "The truth is", "Let's be honest", "Real talk", "how it works → how it functions / the mechanics / the system", "grasp right away → understand quickly / get it fast / see immediately", "not just another X → more than just X / beyond a typical X / different from X"],
         "action": "Replace with more precise language appropriate to the text's register"
       },
       "overused_transitions": {

@@ -1,9 +1,10 @@
 {
   "title": "Master Prohibited Words List",
-  "version": "1.3.0",
-  "date": "2025-10-26",
+  "version": "1.4.0",
+  "date": "2025-11-04",
   "description": "Consolidated prohibited language list for all ClaudeHumanizer prompts to prevent reintroduction of AI-associated terms",
   "changelog": {
+    "1.4.0": "Added meta_analytical_pattern_rules to detect and remove academic rhetorical analysis language (builds trust by, uses logic by, appeal comes through)",
     "1.3.0": "Added new words and phrases from Forbidden Words List.md",
     "1.2.0": "Added AI-associated transitional phrases and buzzword terms commonly overused in AI-generated text",
     "1.1.0": "Added 700+ new AI-associated terms from ai-isms.txt source file - significantly expanded coverage of formal, flowery, and AI-typical language patterns",
@@ -1583,6 +1584,56 @@
       ]
     },
     "pattern_matching_instruction": "Identify ANY description that focuses on finger/hand movement instead of the actual action being performed. Ask: 'What is the person actually DOING?' Replace with the direct action verb (typing, writing, touching, clicking) without elaborating on finger movements. If the finger/hand description is the only content, replace with the action verb or remove entirely."
+  },
+  "meta_analytical_pattern_rules": {
+    "description": "AI generates academic rhetorical analysis language that sounds formulaic and detached. Replace with direct, active descriptions.",
+    "detection_rule": "Any meta-analytical description of communication techniques, rhetorical devices, or persuasive strategies using academic terminology",
+    "common_ai_patterns": [
+      "builds/build [trust/credibility/ethos/rapport] by [verb]ing",
+      "[He/She/They] uses/use [logic/reason/emotion/pathos/ethos/logos] by [verb]ing",
+      "[possessive] [emotional/logical/rational] appeal comes through [verb]ing",
+      "appeals to [pathos/logos/ethos/emotion/logic/reason] by [verb]ing",
+      "establishes [trust/credibility/authority] through [verb]ing",
+      "creates [connection/rapport/bond] by [verb]ing",
+      "demonstrates [skill/expertise/knowledge] through [verb]ing",
+      "conveys [meaning/message/idea] through [verb]ing",
+      "achieves [effect/impact/result] by [verb]ing"
+    ],
+    "allowed_replacements_only": [
+      "Use direct, active verbs showing the action",
+      "Replace 'builds trust by showing confidence' with 'shows confidence'",
+      "Replace 'uses logic by explaining' with 'explains' or 'breaks down'",
+      "Replace 'appeal comes through presenting' with 'presents'",
+      "Replace 'achieves impact by demonstrating' with 'demonstrates'",
+      "Remove the meta-analytical framing entirely and just describe the action"
+    ],
+    "replacement_strategy": {
+      "preferred": "Remove the meta-analytical framing and use only the direct action verb",
+      "simple_alternative": "Replace 'X by doing Y' with just 'does Y'",
+      "never_use": "Academic rhetorical terminology (ethos, pathos, logos, appeal, builds credibility, establishes authority). Just show the action directly.",
+      "context_awareness": "This pattern is extremely common in rhetorical analysis essays and AI-generated content analysis. Always simplify to direct action."
+    },
+    "examples": {
+      "bad_ai_writing": [
+        "He builds trust by showing confidence in the technology.",
+        "She uses logic by explaining technical features in simple terms.",
+        "His emotional appeal comes through presenting the iPhone as life-changing.",
+        "Jobs appeals to pathos by positioning the product as transformative.",
+        "The speaker establishes credibility through demonstrating expertise.",
+        "She creates rapport by sharing personal anecdotes.",
+        "He achieves persuasive impact by combining facts with emotion."
+      ],
+      "good_human_writing": [
+        "He shows confidence in the technology.",
+        "She explains technical features in simple terms.",
+        "He presents the iPhone as life-changing.",
+        "Jobs positions the product as transformative.",
+        "The speaker demonstrates expertise.",
+        "She shares personal anecdotes.",
+        "He combines facts with emotion."
+      ]
+    },
+    "pattern_matching_instruction": "Identify ANY meta-analytical rhetorical analysis language that describes communication techniques using academic frameworks. Common patterns: 'builds X by Y-ing', 'uses X by Y-ing', 'appeal comes through Y-ing', 'establishes X through Y-ing'. Always replace with the direct action verb only - remove all meta-analytical framing."
   },
   "replacement_strategy": {
     "primary_approach": "Replace with simpler, more natural alternatives",

@@ -1,9 +1,9 @@
 {
   "title": "Strategic Imperfections & Punctuation Inconsistency",
   "assembly_line_position": "Phase 8: Human Writing Editor - Strategic imperfections, punctuation inconsistency, rhythm variation, sentence fragments, and conversational markers ONLY",
-  "description": "Rhythm variation and strategic imperfection system that adds authentic human flow patterns, punctuation inconsistencies, aggressive sentence fragments, and conversational markers to processed text. Works WITHIN existing sentence content without changing meaning or show-vs-tell boundaries established by Phase 5.",
-  "version": "4.1.0",
-  "date": "2025-10-26",
+  "description": "Rhythm variation and strategic imperfection system that adds authentic human flow patterns, punctuation inconsistencies, aggressive sentence fragments, and conversational markers to processed text. Works WITHIN existing sentence content without changing meaning or show-vs-tell boundaries established by Phase 5. Removes Oxford commas, converts lists to narrative, and normalizes roman numerals.",
+  "version": "4.2.0",
+  "date": "2025-11-04",
 
   "domain_restrictions": {
     "only_handle": [
@@ -191,15 +191,15 @@
     "detection_priority": "HIGH - Punctuation pattern consistency is a specific AI detection marker mentioned in detection research",
     "principle": "AI uses punctuation with robotic consistency. Humans are inconsistent with Oxford commas, spacing, and other punctuation choices. Strategic inconsistency creates authenticity.",
 
-    "oxford_comma_inconsistency": {
-      "description": "Humans don't consistently use Oxford commas. AI does. Vary usage throughout the text.",
-      "detection_marker": "100% consistent Oxford comma usage (either always or never) flags AI authorship",
-      "strategy": "Use Oxford commas in approximately 60-70% of serial lists, omit in 30-40%",
+    "oxford_comma_removal": {
+      "description": "Remove all Oxford commas. Humans often omit Oxford commas in casual writing.",
+      "detection_marker": "Consistent Oxford comma usage can flag AI authorship",
+      "strategy": "Remove Oxford commas from all serial lists (0% usage)",
       "examples": {
-        "with_oxford": "She bought apples, oranges, and bananas.",
-        "without_oxford": "She bought apples, oranges and bananas."
+        "before": "She bought apples, oranges, and bananas.",
+        "after": "She bought apples, oranges and bananas."
       },
-      "application": "Randomly vary Oxford comma usage across different lists in the text. No pattern - purely inconsistent.",
+      "application": "Systematically remove the comma before 'and' or 'or' in all serial lists",
       "caution": "Never modify dialogue - characters may have consistent speech patterns"
     },
 
@@ -491,7 +491,27 @@
       "avoid_uniformity": "Break away from gradeschool AP style uniform paragraph lengths"
     },
     "formatting_rules": {
-      "lists": "Use bulleted or numbered lists only when it feels completely natural and necessary for clarity",
+      "lists": "Remove all bulleted and numbered lists. Convert list items into narrative prose using natural transitions and connectors. Bullet lists are an AI detection marker - humans write in flowing narrative.",
+      "list_conversion_strategy": {
+        "description": "Transform list structures into natural narrative flow",
+        "method": "Convert bullet/numbered items into complete sentences connected with transitions",
+        "examples": {
+          "before": "Key features:\n• Fast processing\n• Low cost\n• Easy to use",
+          "after": "The system offers fast processing, low cost and ease of use."
+        },
+        "transitions": "Use natural connectors: 'also', 'plus', 'and', 'in addition' to link converted list items",
+        "caution": "Maintain clarity when converting - ensure the narrative version communicates the same information effectively"
+      },
+      "numeral_normalization": {
+        "description": "Convert all roman numerals to standard Arabic numbers",
+        "strategy": "Replace roman numerals (I, II, III, IV, V, etc.) with Arabic equivalents (1, 2, 3, 4, 5, etc.)",
+        "examples": {
+          "before": "Chapter IV: The Discovery",
+          "after": "Chapter 4: The Discovery"
+        },
+        "scope": "Apply to all contexts: chapter numbers, list items, dates, volume numbers, etc.",
+        "exceptions": "Preserve roman numerals in proper names, historical references, or technical citations where they are conventional (e.g., 'World War II', 'Pope John Paul II')"
+      },
       "dashes": "Never use em-dashes (—) or en-dashes (–). Use commas, colons, periods, or ellipses instead. Absolutely avoid bracketed em dashes [—like this—]",
       "punctuation_preference": "Favor standard punctuation over specialized marks",
       "semicolon_usage": "Use semicolons sparingly; prefer periods, commas, or conjunctions",

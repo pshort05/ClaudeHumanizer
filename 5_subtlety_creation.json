@@ -1,7 +1,7 @@
 {
   "title": "Subtlety Creation",
-  "version": "2.2.0",
-  "date": "2025-10-05",
+  "version": "2.3.0",
+  "date": "2025-11-04",
   "assembly_line_position": "Phase 5: On the Nose Editor - Convert obvious statements to subtle/implied meaning",
   "description": "Expert editor that silently identifies and fixes on-the-nose prose, returning only the improved text without commentary or analysis.",
   
@@ -82,6 +82,14 @@
     "meaning_over_explanation": {
       "detect": ["Symbolic explanations", "Metaphor interpretations", "Direct meaning statements"],
       "fix": "Present symbolic elements without interpretation, let readers infer meaning"
+    },
+    "meta_analytical_exposition": {
+      "detect": ["Academic rhetorical analysis language", "'X by Y-ing' explanatory structures", "Meta-descriptions of communication techniques", "Rhetorical device naming (ethos, pathos, logos, appeals to emotion)", "Builds/establishes/creates X by/through Y-ing patterns"],
+      "fix": "Remove the meta-analytical framing and show the action directly. Replace 'builds trust by showing' with 'shows'. Replace 'uses logic by explaining' with 'explains'. Replace 'appeal comes through presenting' with 'presents'.",
+      "examples": {
+        "bad": ["He builds trust by showing confidence in the technology.", "She uses logic by explaining technical features in simple terms.", "His emotional appeal comes through presenting the iPhone as life-changing.", "The speaker establishes credibility through demonstrating expertise."],
+        "good": ["He shows confidence in the technology.", "She explains technical features in simple terms.", "He presents the iPhone as life-changing.", "The speaker demonstrates expertise."]
+      }
     }
   },
 
@@ -99,7 +107,8 @@
       "Direct emotion statements (angry, sad, happy, etc.)",
       "Explicit theme statements and moral lessons",
       "Obvious character motivation explanations",
-      "Direct relationship dynamic descriptions"
+      "Direct relationship dynamic descriptions",
+      "Meta-analytical rhetorical analysis language (builds X by Y-ing, uses X by Y-ing, appeal comes through)"
     ],
     "important_fixes": [
       "Atmosphere announcements and mood statements",
@@ -146,6 +155,7 @@
     "Identify all instances of on-the-nose writing using detection criteria",
     "Never modify titles, headers, subtitles, or any markdown formatting elements",
     "Only address on-the-nose writing - do not duplicate work from previous phases",
+    "Detect and remove meta-analytical language: 'builds X by Y-ing', 'uses X by Y-ing', 'appeal comes through' - replace with direct action verbs only",
     "Apply appropriate fixes to eliminate obviousness while preserving meaning",
     "Implement all critical and important improvements seamlessly",
     "Focus exclusively on show-don't-tell conversions - Phase 10 handles word filtering",

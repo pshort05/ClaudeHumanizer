@@ -1,7 +1,7 @@
 {
   "title": "AI Word Cleaning",
-  "version": "2.1.0",
-  "last_updated": "2025-09-26",
+  "version": "2.2.0",
+  "last_updated": "2025-11-04",
   "description": "Professional text editor that replaces AI-associated words and phrases with natural, grounded alternatives while preserving dialogue",
   
   "assembly_line_position": "Phase 2: Content Cleaning - AI-associated word removal only",
@@ -37,7 +37,7 @@
   "processing_instructions": {
     "step_1": "Identify and preserve dialogue (in quotes) and titles/headings - leave completely unchanged",
     "step_2": "Search body text for prohibited words/phrases from master_prohibited_words.json",
-    "step_3": "Apply pattern rules: dialogue_pause_pattern (replace metaphorical pause descriptions with 'Silence.' or remove), light_description_pattern (replace elaborate light verbs with simple phrases or remove), finger_hand_action_pattern (replace elaborate movements with direct action verbs)",
+    "step_3": "Apply pattern rules: dialogue_pause_pattern (replace metaphorical pause descriptions with 'Silence.' or remove), light_description_pattern (replace elaborate light verbs with simple phrases or remove), finger_hand_action_pattern (replace elaborate movements with direct action verbs), meta_analytical_pattern (replace academic rhetorical analysis with direct action verbs)",
     "step_4": "Replace prohibited terms with natural, conversational alternatives maintaining original meaning",
     "step_5": "Verify replacements don't introduce new AI-sounding words or sophisticated punctuation (no em/en dashes)",
     "output_requirements": "Provide only cleaned text in Markdown format without commentary. This is PHASE 2: preserve Phase 1 grammar fixes, leave enhancements for later phases"
@@ -52,7 +52,8 @@
     "punctuation_restriction": "Use only simple punctuation in replacements: commas, periods, question marks, exclamation points. Never use em dashes (—) or en dashes (–)",
     "dialogue_pause_handling": "For ANY metaphorical or elaborate description of conversational pauses (e.g., 'weight of words', 'silence stretched', 'words hung'), replace with 'Silence.', 'Awkward silence.', or preferably remove entirely",
     "light_description_handling": "For ANY elaborate light descriptions using verbs like 'filtering', 'casting', 'streaming', 'slanting' (e.g., 'sunlight filtered through', 'moonlight reflecting'), replace with simple phrases like 'in the moonlight', 'afternoon sun', or preferably remove entirely",
-    "finger_hand_action_handling": "For ANY elaborate finger/hand movement descriptions (e.g., 'fingers dancing across the keyboard', 'fingers hovering over'), replace with direct action verbs like 'typing', 'touched', 'traced'. Ask 'What is the person actually DOING?' and use that verb."
+    "finger_hand_action_handling": "For ANY elaborate finger/hand movement descriptions (e.g., 'fingers dancing across the keyboard', 'fingers hovering over'), replace with direct action verbs like 'typing', 'touched', 'traced'. Ask 'What is the person actually DOING?' and use that verb.",
+    "meta_analytical_handling": "For ANY meta-analytical rhetorical analysis language (e.g., 'builds trust by showing', 'uses logic by explaining', 'appeal comes through'), remove the analytical framing and use only the direct action verb. Replace 'builds X by Y-ing' with just 'Y-s'."
   },
 
   "output_format": {
