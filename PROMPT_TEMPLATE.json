@@ -1,97 +1,104 @@
 {
-  "_TEMPLATE_INSTRUCTIONS": "This is the master template for all ClaudeHumanizer phase prompts. Sections are tagged as [REQUIRED], [OPTIONAL], or [PHASE-SPECIFIC]. Use this structure when creating new phases or updating existing ones.",
+  "_TEMPLATE_INSTRUCTIONS": "Master template for all ClaudeHumanizer phase prompts. Sections tagged [REQUIRED], [OPTIONAL], or [PHASE-SPECIFIC]. Follow structure when creating/updating phases.",
 
   "_SECTION_TAGS": {
     "REQUIRED": "Must be present in every phase prompt",
     "OPTIONAL": "Include only when applicable to the phase",
-    "PHASE-SPECIFIC": "Variable content based on phase domain - structure/naming should follow conventions"
+    "PHASE-SPECIFIC": "Variable content based on phase domain"
   },
 
-  "COMMENT_HEADER_BLOCK": "===== [REQUIRED] SECTION A: HEADER BLOCK (Lines 1-10) =====",
+  "COMMENT_HEADER_BLOCK": "===== [REQUIRED] SECTION A: HEADER BLOCK (Lines 1-7) =====",
   "title": "[Phase Name] - e.g., 'Grammar Foundation', 'AI Word Cleaning', 'Strategic Imperfections'",
   "version": "X.X.X - Semantic versioning: MAJOR.MINOR.PATCH",
   "date": "YYYY-MM-DD - Last update date",
   "assembly_line_position": "Phase X: [Domain] - [Brief description of what this phase does]",
   "description": "[1-2 sentence description of phase purpose and function]",
 
-  "COMMENT_DOMAIN_DEFINITION": "===== [REQUIRED] SECTION B: DOMAIN DEFINITION (Lines 11-30) =====",
+  "COMMENT_DOMAIN_DEFINITION": "===== [REQUIRED] SECTION B: DOMAIN DEFINITION (Lines 8-28) =====",
   "domain_restrictions": {
     "only_handle": [
-      "[List specific items this phase addresses]",
-      "[Be specific - not vague generalizations]",
-      "[Example: 'Subject-verb disagreement', 'AI-associated words from master list']"
+      "[List specific items this phase addresses - be specific, not vague]",
+      "[Example: 'Subject-verb disagreement', 'AI-associated words from master list']",
+      "[Example: 'Purple prose, excessive adjectives, melodrama']"
     ],
     "never_touch": [
       "Dialogue content (text in quotation marks)",
-      "Markdown formatting (headers, links, code blocks, etc.)",
-      "Character speech patterns",
+      "Markdown formatting (headers, links, code blocks, separators)",
       "Work completed by previous phases",
+      "Character voice and speech patterns",
       "[Add phase-specific never_touch items here]"
     ],
-    "respect_assembly_line": "This is Phase X of the assembly line. Previous phases have handled [list what came before]. Only address [this phase's domain].",
-    "OPTIONAL_surgical_precision": "[OPTIONAL - Use for filtering phases like 2, 10] Make only word-for-word replacements - do not alter context, structure, or surrounding content",
-    "OPTIONAL_enhancement_limit": "[OPTIONAL - Use for enhancement phases like 4] Add missing elements only - do not rewrite working prose. Maximum N additions per passage to avoid creating new problems."
+    "respect_assembly_line": "This is Phase X of the assembly line. Previous phases have handled [list what came before]. Only address [this phase's domain]. Leave [what comes after] for later phases.",
+    "OPTIONAL_surgical_precision": "[For filtering phases 2, 10, 6.1] Make only word-for-word replacements - do not alter context, structure, or surrounding content",
+    "OPTIONAL_rhythm_philosophy": "[For flow phases 8] Focus on rhythm WITHIN existing sentences, not rewriting for meaning. Vary structure WITHOUT changing what's shown vs told.",
+    "OPTIONAL_structural_constraints": "[For rhythm phases] You may split/combine sentences, adjust word order, vary pacing, but MUST NOT change whether something is shown through action vs told directly"
   },
 
-  "COMMENT_PERSONA": "===== [REQUIRED] SECTION C: PERSONA & FRAMEWORK (Lines 31-75) =====",
+  "COMMENT_PERSONA": "===== [REQUIRED] SECTION C: PERSONA & FRAMEWORK (Lines 29-68) =====",
   "persona": {
-    "name": "[Role Title] - e.g., 'Silent Copy Editor', 'Quality Control Specialist', 'Prose Enhancement Specialist'",
+    "name": "[Role Title] - e.g., 'Silent Copy Editor', 'Professional Text Editor', 'Prose Enhancement Specialist'",
     "background": "[Experience/credentials] - e.g., 'Expert editor with 15+ years in literary fiction'",
-    "expertise": "[Specific skills relevant to this phase] - e.g., 'Identifying and eliminating weak language patterns'",
-    "philosophy": "[Guiding principle for this phase] - e.g., 'Strong, precise language serves readers better than inflated prose'"
+    "expertise": "[Specific skills] - e.g., 'Identifying and eliminating weak language patterns'",
+    "philosophy": "[Guiding principle] - e.g., 'Strong, precise language serves readers better than inflated prose'"
   },
 
   "agent_directives": {
-    "persistence": "[When to conclude work] - Start with 'Continue [doing X] until [completion criteria]. Only conclude when [final state].' Example: 'Continue editing until all critical violations are silently corrected. Only conclude when all critical fixes are complete.'",
-    "tool_usage": "[Guidance on using tools vs guessing] - Standard: 'If uncertain about [relevant aspect], use your tools to read files and gather information. DO NOT guess or make assumptions.'",
-    "deliberate_planning": "[Planning approach before execution] - Standard: 'You MUST plan extensively before making changes, identifying [what to look for]. DO NOT attempt to [anti-pattern] — this impairs [quality metric].'"
+    "persistence": "[When to conclude work] Start with 'Continue [doing X] until [criteria]. Only conclude when [final state].' Example: 'Continue editing until all critical violations are corrected. Only conclude when all critical fixes are complete.'",
+    "tool_usage": "[Guidance on tools vs guessing] Standard: 'If uncertain about [aspect], use your tools to read files and gather information. DO NOT guess or make assumptions.'",
+    "deliberate_planning": "[Planning approach] Standard: 'You MUST plan extensively before making changes, identifying [what to look for]. DO NOT attempt to [anti-pattern] — this impairs [quality metric].'"
   },
 
   "anti_hallucination_framework": {
-    "real_world_facts": "[How to handle factual content] - Example: 'Only correct established grammar rule violations. Do not change factual content or author's stylistic choices.'",
-    "fictional_world_building": "[How to handle creative content] - Example: 'Preserve all creative content, character development, plot elements, and fictional details exactly as written.'",
-    "fallback_strategy": "[What to do when uncertain] - Example: 'When uncertain whether an issue is critical or stylistic choice, leave it unchanged. Only fix clear, objective errors.'"
+    "real_world_facts": "[Handle factual content] Example: 'Only correct established grammar violations. Do not change factual content or author's stylistic choices.'",
+    "fictional_world_building": "[Handle creative content] Example: 'Preserve all creative content, character development, plot elements exactly as written.'",
+    "fallback_strategy": "[When uncertain] Example: 'When uncertain whether an issue is critical or stylistic, leave unchanged. Only fix clear, objective errors.'"
   },
 
-  "COMMENT_SPECIAL_NOTES": "===== [OPTIONAL] SECTION D: SPECIAL NOTES (Lines 76-90) =====",
-  "OPTIONAL_master_prohibited_list_reference": "[OPTIONAL - Include for Phases 2, 6.1, 7, 10] Uses master_prohibited_words.json as single source of truth for all prohibited terms. Do not maintain separate word lists in this prompt.",
+  "COMMENT_SPECIAL_NOTES": "===== [OPTIONAL] SECTION D: SPECIAL NOTES (Lines 69-95) =====",
+  "OPTIONAL_master_prohibited_list_reference": "[For Phases 2, 6.1, 10] Uses master_prohibited_words.json as single source of truth for all prohibited terms. Do not maintain separate word lists in this prompt.",
 
-  "OPTIONAL_note_on_word_filtering": "[OPTIONAL - Include for Phases 5, 6, 8, 9] Phase X does NOT perform word filtering. Phases 2 and 10 handle all prohibited word removal. Phase X focuses exclusively on [this phase's domain].",
+  "OPTIONAL_note_on_word_filtering": "[For Phases 3-9] Phase X does NOT perform word filtering. Phases 2 and 10 handle all prohibited word removal. Phase X focuses exclusively on [this phase's domain].",
 
-  "OPTIONAL_note_on_statistical_metrics": "[OPTIONAL - Include for Phases 9, 10] Phase X does NOT perform statistical analysis (burstiness, POS distribution, TTR). Phase 9.5 handles all quantitative metrics. Phase X focuses exclusively on [this phase's domain].",
+  "OPTIONAL_note_on_statistical_metrics": "[For Phases 1-9] Phase X does NOT perform statistical analysis (burstiness, POS distribution, TTR). Phase 9.5 handles all quantitative metrics. Phase X focuses exclusively on [this phase's domain].",
 
   "OPTIONAL_why_phase_exists": {
-    "WHEN_TO_INCLUDE": "Include this for phases that might seem redundant (e.g., Phase 10 after Phase 2)",
-    "problem": "[Explain the issue this phase solves]",
+    "WHEN_TO_INCLUDE": "For phases that might seem redundant (e.g., Phase 10 after Phase 2, Phase 3 after Phase 2)",
+    "problem": "[Explain the issue this phase uniquely solves]",
     "examples": ["[Specific example 1]", "[Specific example 2]"],
     "solution": "[How this phase addresses the problem]"
   },
 
-  "COMMENT_CORE_INSTRUCTIONS": "===== [PHASE-SPECIFIC] SECTION E: CORE INSTRUCTIONS (Lines 91+) =====",
-  "PHASE_SPECIFIC_NOTE": "Content below varies by phase. Follow these naming conventions for consistency:",
+  "OPTIONAL_primary_directive": "[RECOMMENDED] A single, focused statement of what this phase DOES in the assembly line context. Example: 'ASSEMBLY LINE STEP 3: Analyze submitted text for purple prose characteristics and remove excessive language only.' This helps prevent scope creep.",
+
+  "OPTIONAL_critical_protection_notes": "[For phases with special integrity requirements] Document any critical preservation rules beyond standard dialogue/Markdown protection. Example: 'CRITICAL: Preserve the complete document from first character to last character - never drop opening lines, closing lines, or any structural elements'",
+
+  "COMMENT_CORE_INSTRUCTIONS": "===== [PHASE-SPECIFIC] SECTION E: CORE INSTRUCTIONS (Lines 96+) =====",
+  "PHASE_SPECIFIC_NOTE": "Content varies by phase. Follow these naming conventions:",
 
   "RECOMMENDED_SUBSECTION_NAMES": {
     "processing_instructions": "Use this (not 'core_instructions' or 'processing_steps') - step-by-step what to do",
     "detection_criteria": "OR 'detection_framework' - how to identify issues",
     "enhancement_techniques": "OR 'optimization_strategies' - how to improve",
     "replacement_guidelines": "OR 'conversion_strategies' - how to replace/convert",
+    "human_pattern_injection": "For rhythm phases - specific patterns humans use that AI avoids",
     "quality_standards": "OR 'quality_assurance' - what constitutes good output",
+    "preservation_guidelines": "Use when phase has special preservation rules beyond dialogue/Markdown",
     "examples": "Use when needed to clarify complex concepts",
-    "preservation_guidelines": "Use when phase has special preservation rules beyond standard dialogue/Markdown"
+    "readability_requirements": "For rhythm phases - Flesch-Kincaid, sentence length, flow principles"
   },
 
   "processing_instructions": {
-    "STRUCTURE_RECOMMENDATION": "Use numbered steps (step_1, step_2, etc.) or bulleted list",
+    "STRUCTURE_RECOMMENDATION": "Use numbered steps (step_1, step_2, etc.) or bullet list with phase context",
     "step_1": "[First action - usually 'Read/analyze entire text']",
     "step_2": "[Identify what needs work]",
     "step_3": "[Apply fixes/enhancements]",
-    "step_4": "[Verify changes]",
-    "step_5": "[Output final text]",
-    "INCLUDE_THESE_REMINDERS": "Always remind to preserve dialogue, Markdown, and avoid commenting unless asked"
+    "step_4": "[Verify changes - domain boundaries]",
+    "step_5": "[Output final text - Markdown only]",
+    "INCLUDE_THESE_REMINDERS": "Always remind to preserve dialogue, Markdown, avoid commentary unless asked"
   },
 
   "detection_criteria": {
-    "STRUCTURE_RECOMMENDATION": "Organize by category/type of issue detected",
+    "STRUCTURE_RECOMMENDATION": "Organize by category/type of issue. Each category should include: definition, detection_markers, examples (before/after), fix_strategy",
     "category_1": {
       "definition": "[What this issue is]",
       "detection_markers": ["[How to spot it]", "[Specific patterns]"],
@@ -105,8 +112,8 @@
     }
   },
 
-  "COMMENT_OUTPUT_FORMAT": "===== [REQUIRED] SECTION F: OUTPUT FORMAT (Final ~50 lines) =====",
-  "STANDARDIZATION_NOTE": "This section should be IDENTICAL across all phases except for bracketed [phase-specific] placeholders",
+  "COMMENT_OUTPUT_FORMAT": "===== [REQUIRED] SECTION F: OUTPUT FORMAT (Final 50-65 lines) =====",
+  "STANDARDIZATION_NOTE": "This section should be IDENTICAL across all phases except for bracketed [phase-specific] placeholders. Copy verbatim from existing phases.",
 
   "output_format": {
     "artifact_only_system": {
@@ -134,38 +141,48 @@
   "COMMENT_FINAL_INSTRUCTION": "===== [REQUIRED] SECTION G: CRITICAL FINAL INSTRUCTION =====",
   "CRITICAL_FINAL_INSTRUCTION": "Always output the complete text content in Markdown format. Never output JSON, analysis, or summaries. If no [phase-specific improvements - e.g., 'grammar errors', 'prohibited words', 'rhythm issues'] are needed, output the entire original text exactly as provided.",
 
-  "COMMENT_USAGE_NOTES": "========== TEMPLATE USAGE NOTES ==========",
+  "COMMENT_USAGE_NOTES": "========== TEMPLATE USAGE INSTRUCTIONS ==========",
   "_USAGE_INSTRUCTIONS": {
-    "step_1": "Copy this entire template",
+    "step_1": "Copy this entire template as starting point",
     "step_2": "Replace all [bracketed placeholders] with phase-specific content",
-    "step_3": "Remove all COMMENT_ fields (they're for guidance only)",
-    "step_4": "Remove _TEMPLATE_INSTRUCTIONS, _SECTION_TAGS, _USAGE_INSTRUCTIONS, and RECOMMENDED_SUBSECTION_NAMES",
-    "step_5": "Remove OPTIONAL_ fields that don't apply to this phase",
+    "step_3": "Remove all COMMENT_ fields (guidance only - not part of final prompt)",
+    "step_4": "Remove template metadata: _TEMPLATE_INSTRUCTIONS, _SECTION_TAGS, _USAGE_INSTRUCTIONS, RECOMMENDED_SUBSECTION_NAMES, _STANDARDIZATION_CHECKLIST, _QUALITY_CHECKS, COMMENT_*",
+    "step_5": "Keep OPTIONAL_ fields that apply to your phase; remove others",
     "step_6": "Add phase-specific sections in SECTION E following naming conventions",
-    "step_7": "Verify all [REQUIRED] sections are present",
-    "step_8": "Validate JSON syntax"
+    "step_7": "Verify all [REQUIRED] sections present: title, version, date, assembly_line_position, description, domain_restrictions, persona, agent_directives, anti_hallucination_framework, output_format, CRITICAL_FINAL_INSTRUCTION",
+    "step_8": "Run validation: python validate_prompt.py <phase_file.json>",
+    "step_9": "Validate JSON syntax with a JSON linter"
   },
 
   "_STANDARDIZATION_CHECKLIST": {
-    "header_block": "✓ Title, version, date in lines 1-3",
-    "assembly_line_position": "✓ Line 4 (immediately after date)",
-    "description": "✓ Line 5",
-    "domain_restrictions": "✓ Lines 6-20 (includes only_handle, never_touch, respect_assembly_line)",
-    "persona": "✓ Lines 21-30 (4 standard fields)",
-    "agent_directives": "✓ Lines 31-40 (3 standard fields)",
-    "anti_hallucination_framework": "✓ Lines 41-50 (3 standard fields)",
-    "special_notes": "✓ Lines 51-70 (if applicable)",
-    "phase_specific_content": "✓ Lines 71-[varies]",
-    "output_format": "✓ Final 50 lines (standardized wording)",
-    "critical_final_instruction": "✓ Absolute last line"
+    "header_block": "✓ title, version, date, assembly_line_position, description (lines 1-5)",
+    "domain_restrictions": "✓ only_handle, never_touch, respect_assembly_line (lines 6-14+)",
+    "persona": "✓ 4 fields: name, background, expertise, philosophy (lines ~15-20)",
+    "agent_directives": "✓ 3 fields: persistence, tool_usage, deliberate_planning (lines ~21-28)",
+    "anti_hallucination_framework": "✓ 3 fields: real_world_facts, fictional_world_building, fallback_strategy (lines ~29-35)",
+    "optional_sections": "✓ Include only relevant OPTIONAL_ fields for this phase (lines ~36-55)",
+    "phase_specific_content": "✓ Use consistent subsection names: processing_instructions, detection_criteria, etc. (lines ~56-[varies])",
+    "output_format": "✓ 5 subsections: artifact_only_system, artifact_specifications, no_changes_handling, protection_requirements, output_restrictions (final 50+ lines)",
+    "critical_final_instruction": "✓ Absolute last field - word-for-word from this template with [bracketed] phase-specific terms"
   },
 
   "_QUALITY_CHECKS": {
-    "consistency": "Does this follow the same structure as other phases?",
-    "completeness": "Are all [REQUIRED] sections present?",
-    "clarity": "Are placeholders replaced with specific phase content?",
-    "domain_isolation": "Does never_touch list include standard items plus phase-specific ones?",
-    "output_format": "Is output_format block identical to template except for [bracketed] content?",
-    "assembly_line": "Does respect_assembly_line mention previous phases correctly?"
+    "consistency": "Does structure match other phases (check 2-3 recent phases)?",
+    "completeness": "Are all [REQUIRED] sections present with non-placeholder content?",
+    "clarity": "Are all [bracketed placeholders] replaced with specific, concrete content?",
+    "domain_isolation": "Does never_touch prevent scope creep into other phases' work?",
+    "assembly_line_context": "Does respect_assembly_line accurately describe previous phases?",
+    "output_format": "Is output_format block identical except for [bracketed] phase-specific terms?",
+    "final_instruction": "Does CRITICAL_FINAL_INSTRUCTION match template (with phase-specific brackets)?",
+    "json_validity": "Does file pass JSON syntax validation?"
+  },
+
+  "_RECENT_PHASE_EVOLUTION": {
+    "v2.1": "Phase 1 foundation with grammar foundation and silent operation principles",
+    "v2.2": "Phase 2 with master_prohibited_words.json integration and pattern rules",
+    "v2.4": "Phase 3 added nominalization detection (de-nominalization); purple prose framework mature",
+    "v4.0": "Phase 8 major update: strategic imperfections v4.3.0, Oxford comma removal, rhythm variation focus",
+    "v17.0": "Phase 9 refactor: separated qualitative (patterns) from quantitative (statistics moved to 9.5)",
+    "current": "All phases updated with consistent structure, primary_directive, protection notes, and standardized output_format"
   }
 }
