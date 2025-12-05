@@ -48,5 +48,19 @@ The workflow is a visual representation of the 4-stage pipeline. Each node in th
 5.  **Run the workflow:** Execute the workflow.
 6.  **Retrieve output:** The final humanized text will be written to `output_humanized_gemini.md` in the same directory as your `input_text.md`.
 
+### OpenRouter Integration (Advanced)
+
+For users who wish to leverage OpenRouter for accessing Gemini models, a dedicated n8n workflow, `n8n_gemini_openrouter_workflow.json`, is provided. This allows routing requests through OpenRouter, potentially offering access to different Gemini model versions or unified API management.
+
+**Setup Instructions:**
+1.  **Follow steps 1-2 from the Automated Usage with n8n instructions above.**
+2.  **Configure OpenRouter API credentials:** In your n8n instance, set up your credentials for the OpenRouter API. This is typically done under the "Credentials" section of n8n, and you will likely need to create a credential of type "Generic Credential" or "API Key" and name it `openRouterApi` (or adjust the workflow's API key reference accordingly). The workflow expects an `accessToken` field.
+3.  **Import the OpenRouter workflow:** Import `n8n_gemini_openrouter_workflow.json` into your n8n instance.
+4.  **Run the workflow:** Execute the workflow.
+5.  **Retrieve output:** The final humanized text will be written to `output_humanized_gemini_openrouter.md` in the same directory as your `input_text.md`.
+
+**Model Used via OpenRouter:**
+*   `google/gemini-flash-1.5` (or other Gemini models available through OpenRouter).
+
 ### Model Used:
 *   `gemini-1.5-pro-latest` (or an equivalent powerful Gemini model suitable for text generation and complex instruction following).
