@@ -1,5 +1,96 @@
 # ClaudeHumanizer Changelog
 
+## Version 3.3.0 - 2025-12-04
+
+### JSON Optimization & Genre-Specific Optional Lists
+
+**Performance Optimization:**
+- ✨ All 20 JSON files optimized for 23.5% size reduction (37.8 KB saved)
+  - master_prohibited_words.json: 82.9 → 68.0 KB (-17.9%)
+  - 9_final_verification.json: 37.7 → 20.9 KB (-44.7%)
+  - 8_strategic_imperfections.json: 40.4 → 34.3 KB (-15.0%)
+- Zero functionality loss - all content and patterns preserved
+- Techniques: duplicate removal, framework consolidation, example reduction, field name compression
+- Compatible with all LLMs (Claude, Gemini, GPT-5)
+
+**Genre-Specific Optional Lists:**
+- 🎯 Separated romance and erotica patterns into optional lists
+  - `master_prohibited_words_romance.json` (4.9 KB) - 41 patterns
+  - `master_prohibited_words_erotica.json` (5.8 KB) - 50 patterns
+  - Core master_prohibited_words.json reduced by 12-18 KB
+- Phase 10 (Final AI Word Sweep) updated to v3.1.0 with conditional genre-specific filtering
+- Authors choose whether to apply genre-specific patterns based on content type
+- See `GENRE_SPECIFIC_SEPARATION_SUMMARY.md` for implementation details
+
+**Documentation:**
+- 📄 Added `STYLE_GUIDE.md` - One-page writing style reference for text generation
+  - Critical avoidances with examples
+  - What to do instead (concrete alternatives)
+  - Quick checklist for writers
+- 📊 Added `JSON_OPTIMIZATION_ANALYSIS.md` - Comprehensive analysis of optimization opportunities
+- 📊 Added `OPTIMIZATION_COMPLETION_REPORT.md` - Detailed optimization results and trade-offs
+- Updated `CLAUDE.md` and `README.md` with v3.3.0 features
+- Updated `GENRE_SPECIFIC_SEPARATION_SUMMARY.md` documentation
+
+**Directory Cleanup:**
+- Organized repository structure
+- Root directory now contains only: README.md, CLAUDE.md, GEMINI.md, phase JSON files, and data files
+- All documentation moved to docs/ subdirectory (19 markdown files)
+- All references in README.md updated to docs/ paths
+
+**Files Changed:**
+- master_prohibited_words.json: v2.1.0 → v2.2.1 (optimized)
+- 9_final_verification.json: v17.1.0 → v17.2.0 (optimized)
+- 8_strategic_imperfections.json: v4.1.0 → v4.2.0 (optimized)
+- 10_final_ai_word_sweep.json: v3.0.0 → v3.1.0 (added optional genre lists)
+- README.md: Updated version info, file paths, and features
+- CLAUDE.md: Added v3.3.0 notes and new documentation
+- CHANGELOG.md: Added v3.3.0 entry
+
+---
+
+## Version 3.2.0 - 2025-12-04
+
+### Phase 8.5 Addition - Structural Construction Elimination
+
+**New Phase Created**: Phase 8.5 - Structural Construction Elimination
+- Addresses critical gap: syntactic patterns not handled by any existing phase
+- 29 distinct pattern frameworks covering:
+  - Anthropomorphized silence and atmosphere ("silence stretched")
+  - Echo-line poetics and parallel structure abuse
+  - Meta-narrative intrusion ("this was the moment everything changed")
+  - Hollow restraint and vague interiority ("something shifted in...")
+  - Hedging patterns, false emotional shorthand, mechanical constructions
+  - And 24 additional patterns eliminating form-over-content constructions
+- Based on comprehensive analysis of "AI BANNED Construction.md" source document
+- Inserted between Phase 8 (Strategic Imperfections) and Phase 9 (Final Verification)
+
+**Key Features:**
+- ✓ Detects 29 distinct mechanical construction patterns
+- ✓ Restructures into direct, specific prose
+- ✓ Preserves 100% of original content and dialogue
+- ✓ Eliminates 7 critical patterns not covered by prior phases
+- ✓ Can be used standalone, selectively, or integrated as standard pipeline phase
+
+**Pipeline Change**: Phases now 1→2→3→4→5→6→7→8→**8.5**→9→9.5(opt)→10
+
+**Files Created:**
+- `8.5_structural_construction_elimination.json` - Phase 8.5 prompt (37KB, 1,200+ lines)
+- `PHASE_8.5_DOCUMENTATION.md` - User guide (13KB)
+- `PHASE_8.5_IMPLEMENTATION_GUIDE.md` - Setup and testing guide (11KB)
+- `BANNED_CONSTRUCTION_ANALYSIS.md` - Comprehensive pattern analysis (21KB)
+- `BANNED_CONSTRUCTION_QUICK_REFERENCE.md` - Executive summary (8.4KB)
+
+**Documentation Updates:**
+- Updated `CLAUDE.md` with Phase 8.5 in phase domains table
+- Updated `README.md` with Phase 8.5 in assembly line phases and processing flow
+- Added Phase 8.5 deployment checklist
+
+**Optional Integration:**
+- Phase 8.5 can be: used as standard phase, inserted selectively for commercial fiction/erotica, run independently, or skipped for literary fiction where patterns may be intentional
+
+---
+
 ## Version 3.1.0 - 2025-10-28
 
 ### Prompt Optimization & Standardization

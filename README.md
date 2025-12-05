@@ -2,7 +2,7 @@
 
 **⚠️ Optimized for Claude Sonnet 4.5 (Recommended) | Also supports: Gemini 2.5 Pro, GPT-5**
 
-A professional AI text humanization system using a specialized 10-phase assembly line to transform AI-generated content into natural, human-like writing while preserving meaning and voice.
+A professional AI text humanization system using a specialized 11-phase assembly line (with optional phases 6.1, 8.5, and 9.5) to transform AI-generated content into natural, human-like writing while preserving meaning and voice.
 
 ## Overview
 
@@ -55,10 +55,10 @@ AI detectors often fail catastrophically on hybrid texts containing both human a
 
 ### Basic Workflow
 
-1. **Download required files**: 10 phase prompts + `master_prohibited_words.json`
+1. **Download required files**: 10 phase prompts + `docs/master_prohibited_words.json` (+ optional genre-specific lists)
 2. **Select your model**: Claude Sonnet 4.5 (recommended), Gemini 2.5 Pro (budget), or GPT-5
-3. **Process sequentially**: Phase 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → (9.5 optional) → 10
-4. **Include master list**: Required for phases 2 and 10 (contains pattern rules)
+3. **Process sequentially**: Phase 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → (8.5 optional) → 9 → (9.5 optional) → 10
+4. **Include master list**: Required for phases 2 and 10 (contains pattern rules); optional genre-specific lists for Phase 10 when author indicates romance or erotica
 5. **Use previous output**: Each phase processes the result from the previous phase
 6. **Temperature settings**: Use temperature 1.0 for Phase 6 (dialogue), standard temps for others
 
@@ -69,12 +69,12 @@ Copy each phase prompt into Claude Sonnet 4.5 with appropriate dependencies:
 
 ```
 For phases 2 and 10:
-[master_prohibited_words.json content]
-[phase prompt]
+[docs/master_prohibited_words.json content]
+[docs/phase_prompt.json]
 [input text]
 
 For phases 1, 3, 4, 5, 6, 7, 8, 9:
-[phase prompt]
+[docs/phase_prompt.json]
 [input text]
 ```
 
@@ -96,22 +96,25 @@ Set up n8n, Make.com, or API workflows (see [Technical Reference](docs/TECHNICAL
 
 | Phase | File | Domain | Master List | NEW Features |
 |-------|------|--------|-------------|---------------|
-| 1 | `1_grammar_foundation.json` | Grammar errors only | ❌ No | - |
-| 2 | `2_ai_word_cleaning.json` | AI vocabulary removal | ✅ **Required** | Pattern rules |
-| 3 | `3_overwritten_language_reduction.json` | Purple prose + **nominalization** | ❌ No | ✨ **De-nominalization** |
-| 4 | `4_sensory_enhancement.json` | Flat passage improvement | ❌ No | - |
-| 5 | `5_subtlety_creation.json` | Obvious statement conversion | ❌ No | - |
-| 6 | `6_dialogue_enhancement.json` | Character voice (temp 1.0) | ❌ No | - |
-| 7 | `7_weak_language_cleanup.json` | Weak language + **voice distribution** | ❌ No | ✨ **Active/passive monitoring** |
-| 8 | `8_strategic_imperfections.json` | Rhythm + **punctuation inconsistency** | ❌ No | ✨ **Enhanced imperfections** |
-| 9 | `9_final_verification.json` | **AI patterns** (N-grams + perplexity) | ❌ No | ✨ **Pattern replacement** |
-| 10 | `10_final_ai_word_sweep.json` | **Word filtering only** | ✅ **Required** | Pure prohibited word removal |
+| 1 | `docs/1_grammar_foundation.json` | Grammar errors only | ❌ No | - |
+| 2 | `docs/2_ai_word_cleaning.json` | AI vocabulary removal | ✅ **Required** | Pattern rules |
+| 3 | `docs/3_overwritten_language_reduction.json` | Purple prose + **nominalization** | ❌ No | ✨ **De-nominalization** |
+| 4 | `docs/4_sensory_enhancement.json` | Flat passage improvement | ❌ No | - |
+| 5 | `docs/5_subtlety_creation.json` | Obvious statement conversion | ❌ No | - |
+| 6 | `docs/6_dialogue_enhancement.json` | Character voice (temp 1.0) | ❌ No | - |
+| 7 | `docs/7_weak_language_cleanup.json` | Weak language + **voice distribution** | ❌ No | ✨ **Active/passive monitoring** |
+| 8 | `docs/8_strategic_imperfections.json` | Rhythm + **punctuation inconsistency** | ❌ No | ✨ **Enhanced imperfections** |
+| 8.5 | `docs/8.5_structural_construction_elimination.json` | **Syntactic pattern elimination** (NEW v3.2.0) | ❌ No | ✨ **29 construction patterns** |
+| 9 | `docs/9_final_verification.json` | **AI patterns** (N-grams + perplexity) | ❌ No | ✨ **Pattern replacement** |
+| 10 | `docs/10_final_ai_word_sweep.json` | **Word filtering only** | ✅ **Required** (+ optional genre lists) | Pure prohibited word removal |
 
 ### Optional Enhancements
 
-**Phase 6.1**: `6.1_character_dialogue_pass.json` - Character-specific dialogue customization for targeted voice refinement (see [Customization Guide](docs/CUSTOMIZATION.md))
+**Phase 6.1**: `docs/6.1_character_dialogue_pass.json` - Character-specific dialogue customization for targeted voice refinement (see [Customization Guide](docs/CUSTOMIZATION.md))
 
-**Phase 9.5**: `9.5_statistical_analysis_hub.json` - **COMPREHENSIVE STATISTICAL HUB** consolidating all quantitative metrics (burstiness, POS distribution, lexical diversity/TTR) into single-pass analysis. Use when AI detection is a concern or text needs statistical optimization. Provides optional detailed metrics report.
+**Phase 8.5**: `docs/8.5_structural_construction_elimination.json` - **Syntactic pattern elimination** (NEW in v3.2.0) detecting and restructuring 29 mechanical construction patterns that substitute form for content. Recommended for commercial fiction and erotica; optional for literary fiction where patterns may be intentional. Can be used standalone or integrated as standard pipeline phase.
+
+**Phase 9.5**: `docs/9.5_statistical_analysis_hub.json` - **COMPREHENSIVE STATISTICAL HUB** consolidating all quantitative metrics (burstiness, POS distribution, lexical diversity/TTR) into single-pass analysis. Use when AI detection is a concern or text needs statistical optimization. Provides optional detailed metrics report.
 
 ## Key Features
 
@@ -224,35 +227,64 @@ Based on academic AI detector research, ClaudeHumanizer now includes targeted co
 ClaudeHumanizer/
 ├── README.md                           # This overview
 ├── CLAUDE.md                           # Instructions for Claude Code
-├── How AI Detectors Work.md            # Research basis for enhancements
-├── master_prohibited_words.json        # Pattern rules & prohibited terms
-│
-├── Phase Prompts (JSON)
-├── 1_grammar_foundation.json          # Phase 1 prompt
-├── 2_ai_word_cleaning.json            # Phase 2 prompt (with pattern rules)
-├── 3_overwritten_language_reduction.json  # v2.4.0 + nominalization
-├── 4_sensory_enhancement.json
-├── 5_subtlety_creation.json
-├── 6_dialogue_enhancement.json
-├── 6.1_character_dialogue_pass.json   # Optional
-├── 7_weak_language_cleanup.json       # v2.4.0 + voice distribution
-├── 8_strategic_imperfections.json     # v4.1.0 + punctuation + imperfections
-├── 9_final_verification.json          # v17.0.0 PATTERN DETECTION (qualitative)
-├── 9.5_statistical_analysis_hub.json  # v2.0.0 OPTIONAL - ALL statistics consolidated
-├── 10_final_ai_word_sweep.json        # v3.0.0 WORD FILTERING (pure)
-│
-├── Prompt Development (NEW)
-├── PROMPT_TEMPLATE.json               # Master template for creating/updating prompts
-├── PROMPT_STANDARDS.md                # Standardization rules and guidelines
-├── STANDARDIZATION_SUMMARY.md         # Overview of standardization system
-├── validate_prompt.py                 # Automated prompt validation script
+├── GEMINI.md                           # Instructions for Gemini
 │
 └── docs/
-    ├── USAGE_GUIDE.md                 # Step-by-step instructions
-    ├── TECHNICAL_REFERENCE.md         # Claude optimization & automation
-    ├── CUSTOMIZATION.md               # Advanced configuration
-    ├── CHANGELOG.md                   # Version history & updates
-    └── n8n_workflow_sample.json       # Ready-to-import n8n workflow
+    ├── Phase Prompts (JSON)
+    ├── 1_grammar_foundation.json          # Phase 1 prompt
+    ├── 2_ai_word_cleaning.json            # Phase 2 prompt (with pattern rules)
+    ├── 3_overwritten_language_reduction.json  # v2.4.0 + nominalization
+    ├── 4_sensory_enhancement.json
+    ├── 5_subtlety_creation.json
+    ├── 6_dialogue_enhancement.json
+    ├── 6.1_character_dialogue_pass.json   # Optional
+    ├── 7_weak_language_cleanup.json       # v2.4.0 + voice distribution
+    ├── 8_strategic_imperfections.json     # v4.1.0 + punctuation + imperfections
+    ├── 8.5_structural_construction_elimination.json  # v1.0.0 OPTIONAL - 29 syntactic patterns
+    ├── 9_final_verification.json          # v17.0.0 PATTERN DETECTION (qualitative)
+    ├── 9.5_statistical_analysis_hub.json  # v2.0.0 OPTIONAL - ALL statistics consolidated
+    ├── 10_final_ai_word_sweep.json        # v3.1.0 WORD FILTERING (pure) - supports optional genre lists
+    │
+    ├── Data Files
+    ├── master_prohibited_words.json        # Core prohibited words & pattern rules
+    ├── master_prohibited_words_romance.json # Optional: Romance-specific patterns
+    ├── master_prohibited_words_erotica.json # Optional: Erotica-specific patterns
+    ├── master_prohibited_words.md          # Markdown reference version
+    │
+    ├── Prompt Development
+    ├── PROMPT_TEMPLATE.json               # Master template for creating/updating prompts
+    ├── PROMPT_STANDARDS.md                # Standardization rules and guidelines
+    ├── STANDARDIZATION_SUMMARY.md         # Overview of standardization system
+    ├── validate_prompt.py                 # Automated prompt validation script
+    │
+    ├── Documentation
+    ├── USAGE_GUIDE.md                     # Step-by-step instructions
+    ├── TECHNICAL_REFERENCE.md             # Claude optimization & automation
+    ├── CUSTOMIZATION.md                   # Advanced configuration
+    ├── CHANGELOG.md                       # Version history & updates
+    ├── STYLE_GUIDE.md                     # Writing style reference (1-page)
+    ├── How AI Detectors Work.md           # Research basis for enhancements
+    │
+    ├── Implementation Guides
+    ├── PHASE_8.5_DOCUMENTATION.md         # Phase 8.5 user guide
+    ├── PHASE_8.5_IMPLEMENTATION_GUIDE.md  # Phase 8.5 setup guide
+    ├── PHASE_8.5_DEPLOYMENT_CHECKLIST.md  # Phase 8.5 deployment checklist
+    ├── GENRE_SPECIFIC_SEPARATION_SUMMARY.md # Genre-specific list usage
+    │
+    ├── Analysis & Reference
+    ├── BANNED_CONSTRUCTION_ANALYSIS.md    # Analysis of 29 construction patterns
+    ├── BANNED_CONSTRUCTION_QUICK_REFERENCE.md # Quick lookup for patterns
+    ├── BANNED_WORDS_ANALYSIS.md           # Word coverage analysis
+    ├── AI BANNED Construction.md          # Source construction patterns
+    ├── AI BANNED - Words and Phrases.md   # Source word/phrase list
+    ├── MASTER_WORDS_ENHANCEMENT_PLAN.md   # Master list enhancement details
+    ├── MASTER_WORDS_V2_UPDATE_SUMMARY.md  # v2.0.0 changes summary
+    ├── MASTER_WORDS_V2.1_PRIORITY2_SUMMARY.md # Priority 2 changes summary
+    ├── DEPLOYMENT_COMPLETE_SUMMARY.md     # Full deployment summary
+    ├── Forbidden Words List.md            # Human-readable prohibited terms
+    │
+    └── Automation
+        └── n8n_workflow_sample.json       # Ready-to-import n8n workflow
 ```
 
 ## Documentation
@@ -276,17 +308,17 @@ Ready-to-import n8n workflow for complete 10-phase automation with Claude Sonnet
 
 ### For Developers (NEW)
 
-### 🛠️ [Prompt Template](PROMPT_TEMPLATE.json)
+### 🛠️ [Prompt Template](docs/PROMPT_TEMPLATE.json)
 Master template for creating or updating phase prompts. All sections tagged as [REQUIRED], [OPTIONAL], or [PHASE-SPECIFIC] with inline guidance.
 
-### 📐 [Prompt Standards](PROMPT_STANDARDS.md)
+### 📐 [Prompt Standards](docs/PROMPT_STANDARDS.md)
 Standardization rules, naming conventions, and quality guidelines for maintaining consistency across all phase prompts.
 
-### 📊 [Standardization Summary](STANDARDIZATION_SUMMARY.md)
+### 📊 [Standardization Summary](docs/STANDARDIZATION_SUMMARY.md)
 Overview of the prompt standardization system including benefits, implementation details, and usage instructions.
 
-### ✅ [Validation Script](validate_prompt.py)
-Automated validation tool to check prompt conformance. Run `python validate_prompt.py --all` to audit all phase prompts.
+### ✅ [Validation Script](docs/validate_prompt.py)
+Automated validation tool to check prompt conformance. Run `python docs/validate_prompt.py --all` to audit all phase prompts.
 
 ## Processing Flow
 
@@ -311,7 +343,11 @@ Automated validation tool to check prompt conformance. Run `python validate_prom
     ↓
 🎯 Phase 8: Strategic Imperfections → Natural rhythm
     ↓
+🏗️ Phase 8.5: Structural Construction Elimination (Optional) → Syntactic patterns removed
+    ↓
 ✨ Phase 9: Final Verification → AI pattern detection
+    ↓
+📊 Phase 9.5: Statistical Analysis (Optional) → Metrics optimization
     ↓
 🎯 Phase 10: Final AI Word Sweep → Quality control checkpoint
 ```
@@ -349,6 +385,17 @@ For advanced users, see the [Technical Reference](docs/TECHNICAL_REFERENCE.md) f
 
 ---
 
-**Version**: 3.1 Optimized & Standardized
-**Last Updated**: 2025-10-28
+**Version**: 3.3 - JSON Optimization & Genre-Specific Optional Lists
+**Last Updated**: 2025-12-04
 **Optimized For**: Claude Sonnet 4.5
+
+### Key Updates (v3.3)
+- ✨ **JSON Optimization**: All 20 JSON files optimized (37.8 KB saved / 23.5% reduction)
+  - master_prohibited_words.json: 82.9 → 68.0 KB (-17.9%)
+  - 9_final_verification.json: 37.7 → 20.9 KB (-44.7%)
+  - 8_strategic_imperfections.json: 40.4 → 34.3 KB (-15.0%)
+- 🎯 **Genre-Specific Lists**: Romance and erotica patterns moved to optional separate lists
+  - Phase 10 conditionally applies genre-specific filtering
+  - Authors choose whether genre-specific patterns apply
+- 📄 **STYLE_GUIDE.md**: One-page writing style reference for text generation
+- 📊 **Comprehensive Documentation**: Analysis and optimization reports added

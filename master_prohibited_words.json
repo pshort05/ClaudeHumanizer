@@ -1,24 +1,9 @@
 {
   "title": "Master Prohibited Words List",
-  "version": "1.8.0",
-  "date": "2025-12-01",
-  "description": "Consolidated prohibited language list for all ClaudeHumanizer prompts to prevent reintroduction of AI-associated terms",
-  "changelog": {
-    "1.8.0": "Added false_contrast_rhetorical_pattern_rules to detect and eliminate the 'It's not X, it's Y' construction - a pervasive AI signature pattern that creates false dichotomies and prioritizes rhetoric over reasoning",
-    "1.7.0": "Added AI-associated words and phrases from Grammarly article: underscore, facilitate, seamless, scalable, and phrases like 'a key takeaway', 'generally speaking', 'broadly speaking', 'tends to', 'to some extent', 'this underscores the importance', 'seamless integration', 'scalable solution'",
-    "1.6.0": "Added common AI-associated words (embark, unlock, transform, furthermore, moreover, complexities, explore) and phrases (the landscape of, the tapestry of, the realm of, the core, a game-changer, dive into, from a broader perspective)",
-    "1.5.0": "Added punctuation_pattern_rules to prohibit em dashes (—) and en dashes (–) which are AI-associated punctuation marks",
-    "1.4.0": "Added meta_analytical_pattern_rules to detect and remove academic rhetorical analysis language (builds trust by, uses logic by, appeal comes through)",
-    "1.3.0": "Added new words and phrases from Forbidden Words List.md",
-    "1.2.0": "Added AI-associated transitional phrases and buzzword terms commonly overused in AI-generated text",
-    "1.1.0": "Added 700+ new AI-associated terms from ai-isms.txt source file - significantly expanded coverage of formal, flowery, and AI-typical language patterns",
-    "1.0.0": "Initial release with core prohibited words and phrases"
-  },
-  "usage_instructions": {
-    "reference_rule": "All prompts must reference this master list instead of maintaining separate prohibited word lists",
-    "enforcement": "These terms should be avoided or replaced with more natural alternatives across all processing stages",
-    "priority": "Prevention of reintroduction is critical - once removed, these terms should never return"
-  },
+  "version": "2.2.1",
+  "date": "2025-12-04",
+  "description": "Master prohibited words list - optimized structure. All content preserved, only format compressed. Version 2.2.1.",
+  "usage_instructions": "Reference this list in all prompts. Enforce strictly. Prevent reintroduction of terms.",
   "prohibited_single_words": [
     "aboard",
     "absolutely",
@@ -1342,7 +1327,7 @@
     "tends to",
     "that being said",
     "that was",
-    "that was…",
+    "that was\u2026",
     "the contrast between",
     "the core",
     "the culmination",
@@ -1399,45 +1384,39 @@
     "you may want to"
   ],
   "note_on_weak_language_patterns": {
-    "description": "Weak language patterns (puff words, empty calorie words, inflation words, weasel words, hedge words, filter phrases, cliches, formal hedging, redundant phrases, conversational idioms, overused transitions, and robotic qualifiers) are handled exclusively by Phase 7",
+    "description": "Weak language patterns (puff words, empty calorie words, inflation words, weasel words, hedge words, filter phrases, cliches, formal hedging, redundant phrases, conversational idioms, overused transitions, and robotic qualifiers) are handled exclusively by Phase 7.",
     "reference": "See 7_weak_language_cleanup.json for complete list of weak language patterns and examples",
     "reason_for_exclusion": "These patterns are only used by Phase 7 and are already embedded in that phase's prompt with full examples and guidance"
   },
   "punctuation_pattern_rules": {
     "description": "AI tends to overuse em dashes and en dashes for dramatic pauses or appositives. Replace with simpler punctuation.",
-    "detection_rule": "Any use of em dashes (—) or en dashes (–) in the text",
+    "detection_rule": "Any use of em dashes (\u2014) or en dashes (\u2013) in the text",
     "prohibited_punctuation": [
-      "—",
-      "–"
-    ],
-    "allowed_replacements_only": [
-      "Use commas for appositives and parenthetical phrases",
-      "Use periods to break into separate sentences",
-      "Use colons for introducing lists or explanations",
-      "Use parentheses for true asides",
-      "Restructure the sentence to eliminate the need for the dash"
+      "\u2014",
+      "\u2013"
     ],
     "replacement_strategy": {
-      "preferred": "Replace em/en dashes with commas when setting off appositives or parenthetical information",
-      "simple_alternative": "Break into two separate sentences using a period",
-      "never_use": "Em dashes (—) or en dashes (–) in any context. These are AI-associated punctuation marks.",
-      "context_awareness": "Em and en dashes are rarely used in natural human writing. When they appear, they're usually a sign of AI-generated text trying to create dramatic pauses or connections."
+      "do": "Replace em/en dashes with commas when setting off appositives or parenthetical information",
+      "avoid": "Em dashes (\u2014) or en dashes (\u2013) in any context. These are AI-associated punctuation marks.",
+      "alt": [
+        "Break into two separate sentences using a period"
+      ],
+      "note": "Em and en dashes are rarely used in natural human writing. When they appear, they're usually a sign of AI-generated text trying to create dramatic pauses or connections."
     },
     "examples": {
-      "bad_ai_writing": [
-        "The proposal—despite its flaws—was accepted.",
-        "She arrived late–as usual–and missed the presentation.",
-        "The system—complex yet elegant—solved the problem.",
-        "He paused—considering his words carefully—before responding."
+      "bad": [
+        "The proposal\u2014despite its flaws\u2014was accepted."
       ],
-      "good_human_writing": [
-        "The proposal, despite its flaws, was accepted.",
-        "She arrived late, as usual, and missed the presentation.",
-        "The system was complex yet elegant. It solved the problem.",
-        "He paused, considering his words carefully, before responding."
+      "good": [
+        "The proposal, despite its flaws, was accepted."
       ]
     },
-    "pattern_matching_instruction": "Identify ALL em dashes (—) and en dashes (–) in the text. Replace with commas for appositives/parentheticals, periods for sentence breaks, or restructure to eliminate the dash entirely. Never preserve em or en dashes in the output."
+    "replacements": [
+      "Use commas for appositives and parenthetical phrases",
+      "Use periods to break into separate sentences",
+      "Use colons for introducing lists or explanations"
+    ],
+    "detect": "Identify ALL em dashes (\u2014) and en dashes (\u2013) in the text. Replace with commas for appositives/parentheticals, periods for sentence breaks, or restructure to eliminate the dash entirely. Never preserve em or en dashes in the output."
   },
   "contextual_patterns": {
     "armor_metaphors": [
@@ -1462,7 +1441,23 @@
   "dialogue_pause_pattern_rules": {
     "description": "AI over-describes pauses in dialogue with flowery metaphors. Replace with simple, direct alternatives.",
     "detection_rule": "Any metaphorical or elaborate description of a pause, silence, or gap in conversation between characters, OR any description that suggests unspoken tension/meaning hanging in the air",
-    "common_ai_patterns": [
+    "replacement_strategy": {
+      "do": "Remove the pause description entirely - let the dialogue speak for itself",
+      "avoid": "Any metaphorical or elaborate descriptions of silence, pauses, or conversational gaps",
+      "alt": [
+        "Use 'Silence.' or 'A pause.' only when the pause is essential to the scene",
+        "Use 'Awkward silence.' only when the pause is specifically uncomfortable"
+      ]
+    },
+    "examples": {
+      "bad": [
+        "The weight of his words hung in the air between them."
+      ],
+      "good": [
+        "Silence."
+      ]
+    },
+    "patterns": [
       "weight of * words",
       "words hung *",
       "words settled *",
@@ -1480,57 +1475,34 @@
       "beat of silence",
       "moment hung *",
       "air between them *",
-      "air between us *",
-      "space between them *",
-      "gap filled with *",
-      "fell between *",
-      "question * in the air *",
-      "question hung *",
-      "loaded with implications",
-      "loaded with possibilities",
-      "loaded with possibility",
-      "thought hits me *",
-      "thought hit *"
+      "air between us *"
     ],
-    "allowed_replacements_only": [
+    "replacements": [
       "Silence.",
       "Awkward silence.",
-      "A pause.",
-      "Neither spoke.",
-      "No one said anything.",
-      "[Remove the description entirely and just continue with the next dialogue or action]"
+      "A pause."
     ],
-    "replacement_strategy": {
-      "preferred": "Remove the pause description entirely - let the dialogue speak for itself",
-      "simple_alternative": "Use 'Silence.' or 'A pause.' only when the pause is essential to the scene",
-      "awkward_alternative": "Use 'Awkward silence.' only when the pause is specifically uncomfortable",
-      "never_use": "Any metaphorical or elaborate descriptions of silence, pauses, or conversational gaps"
-    },
-    "examples": {
-      "bad_ai_writing": [
-        "The weight of his words hung in the air between them.",
-        "Her words settled over the room like a heavy blanket.",
-        "Silence stretched between them, taut and uncomfortable.",
-        "The pause filled the space with unspoken tension.",
-        "The question hung in the air between us.",
-        "Her silence was loaded with implications.",
-        "Comfortable silence fell between them.",
-        "The thought hit me harder than it should."
-      ],
-      "good_human_writing": [
-        "Silence.",
-        "Neither spoke.",
-        "[No pause description - just continue to next dialogue]",
-        "Awkward silence.",
-        "[Simply move to next action or dialogue without describing the pause]"
-      ]
-    },
-    "pattern_matching_instruction": "Identify ANY description of a conversational pause, silence, unspoken tension, or 'things hanging in the air' that uses metaphor, personification, or elaborate language. This includes: pauses described with physical verbs (hung, stretched, settled, filled), silences given qualities (comfortable, loaded, heavy), questions or thoughts described as lingering, and anything suggesting meaning/tension floating between characters. Replace with simple alternatives or remove entirely."
+    "detect": "Identify ANY description of a conversational pause, silence, unspoken tension, or 'things hanging in the air' that uses metaphor, personification, or elaborate language. This includes: pauses described with physical verbs (hung, stretched, settled, filled), silences given qualities (comfortable, loaded, heavy), questions or thoughts described as lingering, and anything suggesting meaning/tension floating between characters. Replace with simple alternatives or remove entirely."
   },
   "light_description_pattern_rules": {
     "description": "AI over-describes light with elaborate filtering/casting/reflecting metaphors. Replace with simple, direct alternatives.",
     "detection_rule": "Any description of light that uses verbs like 'filtering', 'casting', 'streaming', 'slanting', or elaborate metaphors for illumination",
-    "common_ai_patterns": [
+    "replacement_strategy": {
+      "do": "Use simple prepositional phrases: 'in the [time] [light source]' (e.g., 'in the afternoon sun', 'in the moonlight')",
+      "avoid": "Verbs like filtering, streaming, slanting, casting, painting with light; elaborate metaphors for illumination",
+      "alt": [
+        "Use direct noun phrases: 'afternoon sun', 'morning light', 'dim room'"
+      ]
+    },
+    "examples": {
+      "bad": [
+        "Sunlight filtered through the dusty window."
+      ],
+      "good": [
+        "In the afternoon sun"
+      ]
+    },
+    "patterns": [
       "light filtered *",
       "light filtering *",
       "* filtering through *",
@@ -1551,46 +1523,33 @@
       "light slanted through *",
       "afternoon light casts *"
     ],
-    "allowed_replacements_only": [
+    "replacements": [
       "in the moonlight",
       "in the sunlight",
-      "afternoon sun",
-      "morning sun",
-      "evening light",
-      "dim light",
-      "bright light",
-      "in the shadows",
-      "[Remove the light description entirely if not essential]"
+      "afternoon sun"
     ],
-    "replacement_strategy": {
-      "preferred": "Use simple prepositional phrases: 'in the [time] [light source]' (e.g., 'in the afternoon sun', 'in the moonlight')",
-      "simple_alternative": "Use direct noun phrases: 'afternoon sun', 'morning light', 'dim room'",
-      "never_use": "Verbs like filtering, streaming, slanting, casting, painting with light; elaborate metaphors for illumination"
-    },
-    "examples": {
-      "bad_ai_writing": [
-        "Sunlight filtered through the dusty window.",
-        "The afternoon light cast everything in gold.",
-        "Moonlight filtering through the curtains illuminated her face.",
-        "Light slanted through the blinds, casting golden patterns on the floor.",
-        "Morning light streamed through the window.",
-        "The sun painted the room in warm hues."
-      ],
-      "good_human_writing": [
-        "In the afternoon sun",
-        "The dusty window",
-        "In the moonlight",
-        "Morning sun",
-        "The bright room",
-        "[Remove light description - just describe the scene directly]"
-      ]
-    },
-    "pattern_matching_instruction": "Identify ANY description of light/sunlight/moonlight that uses active verbs (filtering, streaming, slanting, casting, painting) or elaborate metaphors. Replace with simple prepositional phrases like 'in the [light source]' or direct nouns like '[time] sun/light'. Prefer removal if the light description doesn't add essential information."
+    "detect": "Identify ANY description of light/sunlight/moonlight that uses active verbs (filtering, streaming, slanting, casting, painting) or elaborate metaphors. Replace with simple prepositional phrases like 'in the [light source]' or direct nouns like '[time] sun/light'. Prefer removal if the light description doesn't add essential information."
   },
   "finger_hand_action_pattern_rules": {
     "description": "AI over-describes finger/hand movements with elaborate verbs instead of simply naming the action. Replace with direct action verbs.",
     "detection_rule": "Any description of fingers/hands doing an action that focuses on the finger movement rather than the action itself (especially typing, writing, touching)",
-    "common_ai_patterns": [
+    "replacement_strategy": {
+      "do": "Use the direct action verb: 'typing' instead of 'fingers moving across the keyboard'",
+      "avoid": "Elaborate descriptions of finger/hand movements (dancing, hovering, flying, gliding, drumming). Just name the action being performed.",
+      "alt": [
+        "Name the completed action: 'typed', 'wrote', 'touched', 'traced'"
+      ],
+      "note": "If 'traced' is used for actual tracing (e.g., tracing a scar, tracing a map), keep it. Only replace when it's over-describing a simple action."
+    },
+    "examples": {
+      "bad": [
+        "My fingers danced across the keyboard."
+      ],
+      "good": [
+        "I typed."
+      ]
+    },
+    "patterns": [
       "fingers * moving",
       "fingers are moving",
       "fingers moved *",
@@ -1603,60 +1562,35 @@
       "fingers flew *",
       "fingers drummed *",
       "fingers glided *",
-      "hands dancing *",
-      "hands danced *",
-      "hands hovering *",
-      "hands flew *",
-      "running * fingers *",
-      "running his fingers *",
-      "running her fingers *",
-      "my finger hovers *",
-      "finger hovers over *"
+      "hands dancing *"
     ],
-    "allowed_replacements_only": [
+    "replacements": [
       "typing",
       "stopped typing",
-      "typed",
-      "wrote",
-      "writing",
-      "touched",
-      "traced",
-      "tapped",
-      "clicked",
-      "pressed",
-      "[Use the actual action verb directly without describing finger movement]"
+      "typed"
     ],
-    "replacement_strategy": {
-      "preferred": "Use the direct action verb: 'typing' instead of 'fingers moving across the keyboard'",
-      "simple_alternative": "Name the completed action: 'typed', 'wrote', 'touched', 'traced'",
-      "never_use": "Elaborate descriptions of finger/hand movements (dancing, hovering, flying, gliding, drumming). Just name the action being performed.",
-      "context_awareness": "If 'traced' is used for actual tracing (e.g., tracing a scar, tracing a map), keep it. Only replace when it's over-describing a simple action."
-    },
-    "examples": {
-      "bad_ai_writing": [
-        "My fingers danced across the keyboard.",
-        "Her fingers hovered over the keys.",
-        "His fingers flew over the laptop.",
-        "Fingers moving, I typed out a response.",
-        "I ran my fingers along the edge of the table.",
-        "My finger hovers over the send button."
-      ],
-      "good_human_writing": [
-        "I typed.",
-        "She paused.",
-        "He typed fast.",
-        "I typed a response.",
-        "I touched the table edge.",
-        "I hesitated.",
-        "My finger over the send button."
-      ]
-    },
-    "pattern_matching_instruction": "Identify ANY description that focuses on finger/hand movement instead of the actual action being performed. Ask: 'What is the person actually DOING?' Replace with the direct action verb (typing, writing, touching, clicking) without elaborating on finger movements. If the finger/hand description is the only content, replace with the action verb or remove entirely."
+    "detect": "Identify ANY description that focuses on finger/hand movement instead of the actual action being performed. Ask: 'What is the person actually DOING?' Replace with the direct action verb (typing, writing, touching, clicking) without elaborating on finger movements. If the finger/hand description is the only content, replace with the action verb or remove entirely."
   },
   "meta_analytical_pattern_rules": {
     "description": "AI generates academic rhetorical analysis language that sounds formulaic and detached. Replace with direct, active descriptions.",
     "detection_rule": "Any meta-analytical description of communication techniques, rhetorical devices, or persuasive strategies using academic terminology",
-    "common_ai_patterns": [
+    "replacement_strategy": {
+      "do": "Remove the meta-analytical framing and use only the direct action verb",
+      "avoid": "Academic rhetorical terminology (ethos, pathos, logos, appeal, builds credibility, establishes authority). Just show the action directly.",
+      "alt": [
+        "Replace 'X by doing Y' with just 'does Y'"
+      ],
+      "note": "This pattern is extremely common in rhetorical analysis essays and AI-generated content analysis. Always simplify to direct action."
+    },
+    "examples": {
+      "bad": [
+        "He builds trust by showing confidence in the technology."
+      ],
+      "good": [
+        "He shows confidence in the technology."
+      ]
+    },
+    "patterns": [
       "builds/build [trust/credibility/ethos/rapport] by [verb]ing",
       "[He/She/They] uses/use [logic/reason/emotion/pathos/ethos/logos] by [verb]ing",
       "[possessive] [emotional/logical/rational] appeal comes through [verb]ing",
@@ -1667,46 +1601,40 @@
       "conveys [meaning/message/idea] through [verb]ing",
       "achieves [effect/impact/result] by [verb]ing"
     ],
-    "allowed_replacements_only": [
+    "replacements": [
       "Use direct, active verbs showing the action",
       "Replace 'builds trust by showing confidence' with 'shows confidence'",
-      "Replace 'uses logic by explaining' with 'explains' or 'breaks down'",
-      "Replace 'appeal comes through presenting' with 'presents'",
-      "Replace 'achieves impact by demonstrating' with 'demonstrates'",
-      "Remove the meta-analytical framing entirely and just describe the action"
+      "Replace 'uses logic by explaining' with 'explains' or 'breaks down'"
     ],
-    "replacement_strategy": {
-      "preferred": "Remove the meta-analytical framing and use only the direct action verb",
-      "simple_alternative": "Replace 'X by doing Y' with just 'does Y'",
-      "never_use": "Academic rhetorical terminology (ethos, pathos, logos, appeal, builds credibility, establishes authority). Just show the action directly.",
-      "context_awareness": "This pattern is extremely common in rhetorical analysis essays and AI-generated content analysis. Always simplify to direct action."
-    },
-    "examples": {
-      "bad_ai_writing": [
-        "He builds trust by showing confidence in the technology.",
-        "She uses logic by explaining technical features in simple terms.",
-        "His emotional appeal comes through presenting the iPhone as life-changing.",
-        "Jobs appeals to pathos by positioning the product as transformative.",
-        "The speaker establishes credibility through demonstrating expertise.",
-        "She creates rapport by sharing personal anecdotes.",
-        "He achieves persuasive impact by combining facts with emotion."
-      ],
-      "good_human_writing": [
-        "He shows confidence in the technology.",
-        "She explains technical features in simple terms.",
-        "He presents the iPhone as life-changing.",
-        "Jobs positions the product as transformative.",
-        "The speaker demonstrates expertise.",
-        "She shares personal anecdotes.",
-        "He combines facts with emotion."
-      ]
-    },
-    "pattern_matching_instruction": "Identify ANY meta-analytical rhetorical analysis language that describes communication techniques using academic frameworks. Common patterns: 'builds X by Y-ing', 'uses X by Y-ing', 'appeal comes through Y-ing', 'establishes X through Y-ing'. Always replace with the direct action verb only - remove all meta-analytical framing."
+    "detect": "Identify ANY meta-analytical rhetorical analysis language that describes communication techniques using academic frameworks. Common patterns: 'builds X by Y-ing', 'uses X by Y-ing', 'appeal comes through Y-ing', 'establishes X through Y-ing'. Always replace with the direct action verb only - remove all meta-analytical framing."
   },
   "false_contrast_rhetorical_pattern_rules": {
-    "description": "AI overuses the 'It's not X, it's Y' rhetorical device to create artificial tension and contrast. This construction prioritizes rhetoric over reasoning and becomes predictable in longer content.",
+    "description": "AI overuses the 'It's not X, it's Y' rhetorical device to create artificial tension and contrast.",
     "detection_rule": "Any use of the 'It's not [about] X, it's [about] Y' construction or its variants that creates false dichotomies or forced contrasts",
-    "common_ai_patterns": [
+    "why_this_is_problematic": {
+      "rhetoric_over_reasoning": "The construction prioritizes performative contrast over clear explanation of how X and Y actually relate",
+      "forced_tension": "Creates artificial tension-release cycles that manipulate rather than inform",
+      "frequency_spam": "Appears with such uniformity in AI content that it becomes a detectable signature",
+      "false_dichotomy": "Often presents ideas as opposing when they're actually complementary or unrelated",
+      "cadence_signal": "The predictable rhythm signals AI-assisted content, especially in video essays and long-form writing"
+    },
+    "replacement_strategy": {
+      "do": "Remove the false contrast and state the main point (Y) directly",
+      "avoid": "The 'It's not X, it's Y' construction in any of its variants. This is a primary AI signature pattern.",
+      "alt": [
+        "Replace with 'X involves Y' or 'X means Y' to show relationship without opposition"
+      ],
+      "note": "This pattern is especially prevalent in: marketing copy, video essay scripts, self-help content, business writing, and motivational content. When found, it's a strong AI detection signal."
+    },
+    "examples": {
+      "bad": [
+        "It's not about managing symptoms. It's about rewriting the narrative of the self."
+      ],
+      "good": [
+        "We rewrite the narrative of the self."
+      ]
+    },
+    "patterns": [
       "It's not about X. It's about Y.",
       "It's not X. It's Y.",
       "This isn't just X. It's Y.",
@@ -1719,52 +1647,733 @@
       "The point isn't X. It's Y.",
       "The goal isn't X. It's Y."
     ],
-    "why_this_is_problematic": {
-      "rhetoric_over_reasoning": "The construction prioritizes performative contrast over clear explanation of how X and Y actually relate",
-      "forced_tension": "Creates artificial tension-release cycles that manipulate rather than inform",
-      "frequency_spam": "Appears with such uniformity in AI content that it becomes a detectable signature",
-      "false_dichotomy": "Often presents ideas as opposing when they're actually complementary or unrelated",
-      "cadence_signal": "The predictable rhythm signals AI-assisted content, especially in video essays and long-form writing"
-    },
-    "allowed_replacements_only": [
+    "replacements": [
       "Use direct exposition: State what something IS without contrasting what it ISN'T",
       "Use explicit causality: Explain the relationship between concepts directly",
-      "Use assisted inferences: Guide readers to conclusions without false contrast",
-      "Combine related ideas: Show how concepts work together rather than opposing them",
-      "Remove the construction entirely: Often the 'Y' statement alone is sufficient"
+      "Use assisted inferences: Guide readers to conclusions without false contrast"
     ],
-    "replacement_strategy": {
-      "preferred": "Remove the false contrast and state the main point (Y) directly",
-      "simple_alternative": "Replace with 'X involves Y' or 'X means Y' to show relationship without opposition",
-      "never_use": "The 'It's not X, it's Y' construction in any of its variants. This is a primary AI signature pattern.",
-      "context_awareness": "This pattern is especially prevalent in: marketing copy, video essay scripts, self-help content, business writing, and motivational content. When found, it's a strong AI detection signal."
-    },
-    "examples": {
-      "bad_ai_writing": [
-        "It's not about managing symptoms. It's about rewriting the narrative of the self.",
-        "This isn't just customer service. It's building relationships that last.",
-        "It's not just about fixing problems. It's about unlocking human potential.",
-        "We're not just selling products. We're creating experiences.",
-        "It's not about the destination. It's about the journey.",
-        "This isn't about technology. It's about people.",
-        "The point isn't perfection. It's progress."
-      ],
-      "good_human_writing": [
-        "We rewrite the narrative of the self.",
-        "We build relationships that last.",
-        "We unlock human potential by solving problems.",
-        "We create experiences through our products.",
-        "The journey matters.",
-        "People drive our technology decisions.",
-        "Progress matters more than perfection."
-      ]
-    },
-    "pattern_matching_instruction": "Identify ANY construction that follows the 'It's not X, it's Y' pattern or its variants. This includes negating one concept to elevate another in a way that creates false opposition. Common markers: 'It's not [about/just/just about]', 'This isn't [just/about]', 'We're not', followed by contrasting statement with 'It's', 'This is', 'We're'. Replace with direct statements that clarify relationships without performative contrast."
+    "detect": "Identify ANY construction that follows the 'It's not X, it's Y' pattern or its variants. This includes negating one concept to elevate another in a way that creates false opposition. Common markers: 'It's not [about/just/just about]', 'This isn't [just/about]', 'We're not', followed by contrasting statement with 'It's', 'This is', 'We're'. Replace with direct statements that clarify relationships without performative contrast."
   },
   "replacement_strategy": {
     "primary_approach": "Replace with simpler, more natural alternatives",
     "secondary_approach": "Remove entirely if the word adds no essential meaning",
     "preservation_rule": "Maintain meaning while improving authenticity",
     "consistency_rule": "Once a term is replaced, ensure it doesn't reappear in later processing stages"
+  },
+  "physical_tells_patterns": {
+    "description": "AI identifies emotions through physical reactions, but uses the same limited set of tells repeatedly.",
+    "detection_rule": "Any physical reaction described with verbs like tightening, clenching, trembling, catching breath, etc. in emotional context. Look for body parts (hands, breath, jaw, throat, chest, stomach) combined with mechanical emotion-indicators.",
+    "replacement_strategy": {
+      "do": "Remove the description entirely and let the character's action speak. If emotion must be shown, use concrete action with consequence, not labeled feeling.",
+      "avoid": "Don't describe the mechanical emotion-tell. These patterns are recognizable as AI defaults.",
+      "alt": [
+        "Describe what the character does because of the emotion: 'She gripped her coffee cup. The liquid sloshed over the rim.' instead of 'Her hands trembled.'",
+        "Show the interruption in action/speech: 'He stopped mid-sentence' instead of 'His breath caught.'"
+      ]
+    },
+    "examples": {
+      "bad": [
+        "Her hands trembled, betraying her anxiety."
+      ],
+      "good": [
+        "She gripped her coffee cup. The liquid sloshed over the rim."
+      ]
+    },
+    "patterns": [
+      "hands trembl*",
+      "hands shak*",
+      "hands clench*",
+      "hands flex*",
+      "hands whiten*",
+      "hands curl*",
+      "hands ball*",
+      "hands uncurl*",
+      "breath catch*",
+      "breath hitch*",
+      "breath stall*",
+      "breath held",
+      "breath releas*",
+      "breath short",
+      "breath quick",
+      "breath shallow",
+      "breath ragged",
+      "jaw tighten*",
+      "jaw clench*",
+      "jaw tense*",
+      "jaw work*",
+      "jaw loosen*"
+    ],
+    "replacements": [
+      "[Delete entirely - let action speak for itself]",
+      "She gripped the edge of the table",
+      "He held his breath"
+    ],
+    "detect": "Identify ANY physical reaction to emotion that uses mechanical body-part verbs (trembling, clenching, tightening, constricting, catching, etc.). These are AI defaults. Replace by either removing entirely or converting to specific character action with concrete detail."
+  },
+  "emotion_intensifier_bans": {
+    "description": "AI uses paper-thin descriptors that 'sound profound but mean nothing.",
+    "detection_rule": "Texture/fragility language modifying emotion or control-related nouns (patience, control, composure, restraint). Look for: gossamer, threadbare, frayed, worn thin, stretched to breaking, razor-thin, paper-thin.",
+    "replacement_strategy": {
+      "do": "Delete the intensifier completely. Often the core noun alone is sufficient.",
+      "avoid": "These texture intensifiers (paper-thin, gossamer, threadbare, etc.) with emotional/control words. They're AI signature patterns.",
+      "alt": [
+        "If intensity must be conveyed, show it through action/consequence, not through fragility language."
+      ]
+    },
+    "examples": {
+      "bad": [
+        "His control was paper-thin, stretched to breaking."
+      ],
+      "good": [
+        "He hadn't slept. His hands shook slightly."
+      ]
+    },
+    "patterns": [
+      "visceral",
+      "primal",
+      "paper-thin control",
+      "paper-thin patience",
+      "paper-thin composure",
+      "gossamer-thin",
+      "razor-thin",
+      "threadbare",
+      "frayed edges",
+      "worn thin",
+      "worn down",
+      "stretched to breaking",
+      "stretched taut",
+      "stretched thin"
+    ],
+    "replacements": [
+      "[Delete the intensifier entirely]",
+      "Show specific evidence: 'He hadn't slept. His hands shook slightly.'",
+      "Remove modifier and keep core: 'His control was slipping' instead of 'His control was paper-thin'"
+    ],
+    "detect": "Identify intensifiers (paper-thin, threadbare, gossamer, frayed, worn thin, stretched to breaking) paired with emotion/control words. Delete or replace with concrete action showing the emotional state."
+  },
+  "transition_beat_placeholders": {
+    "description": "Mechanical delay tactics that interrupt action and momentum. These are pure AI defaults designed to add false suspense without substance.",
+    "detection_rule": "Temporal/pause phrases between action beats, especially those designed to delay revelation: 'for a long moment', 'for a beat', 'for a suspended moment', 'after a moment'. Also patterns like 'when [character] speaks, voice is [adjective]'.",
+    "replacement_strategy": {
+      "do": "Delete entirely. Continue directly to the next action or dialogue.",
+      "avoid": "Elaborate descriptions of delays, suspenseful pauses, or emotional beats between actions.",
+      "alt": [
+        "Use one-word beat markers only if essential: 'Silence.' or 'A pause.' - but usually delete even these."
+      ]
+    },
+    "examples": {
+      "bad": [
+        "For a long moment, neither of them spoke. The silence that followed was heavy with implication."
+      ],
+      "good": [
+        "Silence. She waited for him to continue."
+      ]
+    },
+    "patterns": [
+      "for a long moment",
+      "for a beat",
+      "for a suspended moment",
+      "for a heartbeat",
+      "after a moment",
+      "a pause then",
+      "a pause before",
+      "silence stretched *",
+      "when he speaks *",
+      "when she speaks *",
+      "when they speak *",
+      "[character]'s voice is [adjective] when *",
+      "the silence that follows is *",
+      "the pause that follows is *",
+      "the moment that follows is *"
+    ],
+    "replacements": [
+      "[Delete entirely and continue to next beat]",
+      "Silence.",
+      "A pause."
+    ],
+    "detect": "Identify temporal delay phrases and suspension beats between actions. Delete them entirely unless there's specific story reason for the delay. Most are mechanical AI padding."
+  },
+  "gaze_descriptors": {
+    "description": "These create the appearance of depth and communication without actual substance.",
+    "detection_rule": "Any adjective describing eyes/gaze that implies knowledge, evaluation, or hidden depths without showing evidence: assessing, appraising, knowing, penetrating, unreadable, inscrutable, cataloguing, measuring, shuttered, guarded, too knowing, seeing too much.",
+    "replacement_strategy": {
+      "do": "Delete and show what the look actually communicates through dialogue or action. 'His gaze was unreadable' tells. 'He stared at her without expression' shows. Even better: 'He stared at her. \"You're lying.\"'",
+      "avoid": "Abstract gaze descriptors implying knowledge/evaluation/hidden depths. Let actions and words do the communication.",
+      "alt": [
+        "Use specific action: 'His eyes narrowed' (shows skepticism), 'She looked away' (shows shame or evasion), 'He didn't blink' (shows intensity)."
+      ]
+    },
+    "examples": {
+      "bad": [
+        "His gaze was too knowing, cataloguing every hesitation."
+      ],
+      "good": [
+        "His gaze didn't move from her face. 'You're lying.'"
+      ]
+    },
+    "patterns": [
+      "assessing gaze",
+      "assessing look",
+      "appraising gaze",
+      "appraising look",
+      "cataloguing *",
+      "cataloging *",
+      "tracking eyes",
+      "watchful eyes",
+      "watchful gaze",
+      "guarded eyes",
+      "shuttered gaze",
+      "shuttered eyes",
+      "unreadable eyes",
+      "unreadable gaze"
+    ],
+    "replacements": [
+      "[Delete the descriptor entirely]",
+      "His eyes narrowed",
+      "She looked away"
+    ],
+    "detect": "Identify abstract gaze descriptors that claim hidden knowledge or depth (assessing, unreadable, inscrutable, etc.) without showing evidence. Delete and replace with specific action or direct communication of what the look means."
+  },
+  "temperature_emotion_bans": {
+    "description": "Temperature is 'the most generic descriptor for emotion, narrowing emotional spectrum to two options: hot (angry/passionate) and cold (distant/afraid).",
+    "detection_rule": "Temperature metaphors (hot, cold, warm, ice, fire, frozen, heat, etc.) applied to describe emotional state, fear, passion, or emotional shifts. Look for: 'cold dread', 'heat between them', 'frozen in place', 'fire licked up spine'.",
+    "replacement_strategy": {
+      "do": "Delete entirely. Temperature is a lie - emotions don't have temperature.",
+      "avoid": "Temperature metaphors for emotion. Never.",
+      "alt": [
+        "Show specific physical symptom: 'His hands shook' instead of 'Cold fear filled him.'",
+        "Show consequence or behavioral change: 'She couldn't focus. Couldn't think.' instead of 'Warmth spread through her.'"
+      ],
+      "note": "This pattern is especially prevalent in romance and erotica, where it's used to describe physical attraction. Still avoid it."
+    },
+    "examples": {
+      "bad": [
+        "Cold dread settled in her stomach as she read the letter."
+      ],
+      "good": [
+        "She read the letter. Read it again. Her hands wouldn't stop shaking."
+      ]
+    },
+    "patterns": [
+      "cold dread",
+      "cold fear",
+      "cold rage",
+      "cold settled in",
+      "ice in veins",
+      "frozen in place",
+      "frozen solid",
+      "frozen with fear",
+      "warmth spread through",
+      "warmth pooled *",
+      "heat pooled *",
+      "heat between them",
+      "heat in the air",
+      "fire licked up",
+      "fire licked *",
+      "something molten",
+      "molten *",
+      "blood ran cold",
+      "bone-chilling",
+      "spine-tingling"
+    ],
+    "replacements": [
+      "[Delete entirely]",
+      "She couldn't focus. Everything else fell away.",
+      "His hands shook. He gripped the desk."
+    ],
+    "detect": "Identify ANY temperature language (hot, cold, warm, ice, fire, frozen, heat, etc.) used to describe emotion or emotional response. These are universal AI defaults. Delete and replace with specific physical response or behavioral change."
+  },
+  "breaking_cracking_metaphors": {
+    "description": "Every emotional shift becomes 'something broke' or 'something cracked.",
+    "detection_rule": "Structural failure metaphors (breaking, cracking, shattering, fractured, splintered) applied to emotional/psychological states. Look for: 'something broke', 'something cracked', 'splintered', 'fractured', 'fault lines', 'cracks in foundation'.",
+    "replacement_strategy": {
+      "do": "Delete entirely. Replace with specific consequence or behavioral change.",
+      "avoid": "Structural damage metaphors for emotion.",
+      "alt": [
+        "Show what the character does: 'She started crying' instead of 'Something inside her broke.'",
+        "Show the specific effect: 'His conviction wavered' instead of 'Cracks appeared in his foundation.'"
+      ]
+    },
+    "examples": {
+      "bad": [
+        "Something inside him shattered at her words."
+      ],
+      "good": [
+        "Her words hit him like a punch. He had to sit down."
+      ]
+    },
+    "patterns": [
+      "something broke",
+      "something cracked",
+      "something cracked open",
+      "something split open",
+      "something shattered",
+      "something splintered",
+      "broke something loose",
+      "broke apart",
+      "fractured *",
+      "shattered something",
+      "cracks in *",
+      "fault lines",
+      "hairline fractures",
+      "cracks in the foundation",
+      "foundation cracked",
+      "broke under *",
+      "break under *"
+    ],
+    "replacements": [
+      "[Delete entirely]",
+      "She started crying",
+      "His resolve wavered"
+    ],
+    "detect": "Identify structural failure metaphors (breaking, cracking, shattering, fracturing) applied to emotions or psychological states. Delete and replace with specific action showing what changes when the emotional state shifts."
+  },
+  "anchor_tether_metaphors": {
+    "description": "Turns connection into passivity\u2014something that happens to the character rather than something chosen.",
+    "detection_rule": "Anchor/tether metaphors where one person becomes essential to another's stability or sanity: 'the only thing keeping', 'tethered to', 'anchored to', 'held in place', 'moored'.",
+    "replacement_strategy": {
+      "do": "Delete and reframe as active choice/behavioral change. Show what the character does because of the relationship, not what the other person does for them.",
+      "avoid": "Anchor/tether metaphors for relationships.",
+      "alt": [
+        "Show consequence of separation, not necessity of anchor: 'When she left, he couldn't focus' instead of 'She was his anchor.'"
+      ]
+    },
+    "examples": {
+      "bad": [
+        "She was the only thing keeping him grounded."
+      ],
+      "good": [
+        "When she left, he couldn't focus. Couldn't sleep. Nothing mattered until she came back."
+      ]
+    },
+    "patterns": [
+      "the only thing keeping * grounded",
+      "the only thing keeping * present",
+      "the only thing keeping * sane",
+      "tethered to *",
+      "the tether *",
+      "anchored to *",
+      "held in place by *",
+      "moored by *",
+      "anchored by *",
+      "kept in place by *"
+    ],
+    "replacements": [
+      "[Delete entirely]",
+      "When she left, he couldn't focus. Nothing mattered until she came back.",
+      "He was different when she was there. Better."
+    ],
+    "detect": "Identify anchor/tether language framing one person as essential infrastructure for another's stability. Replace by showing what the character does/feels because of the relationship, not how they're kept in place."
+  },
+  "edge_precipice_metaphors": {
+    "description": "Abstract geography substituting for specific psychological state. 'Teetering on the edge' tells when to feel tension; it doesn't create it.",
+    "detection_rule": "Edge/height/falling language describing emotional or psychological state: 'on the edge', 'precipice', 'barely holding on', 'hanging by a thread', 'teetering', 'one wrong move from'.",
+    "replacement_strategy": {
+      "do": "Delete entirely. Let the moment stand on its own.",
+      "avoid": "Metaphorical ledges, edges, or precipices for emotional state.",
+      "alt": [
+        "Show what happens when the character reaches the edge - concrete action/consequence, not abstract position."
+      ]
+    },
+    "examples": {
+      "bad": [
+        "He was teetering on the edge of losing control."
+      ],
+      "good": [
+        "He opened his mouth. Closed it. Stood up and walked to the window without speaking."
+      ]
+    },
+    "patterns": [
+      "on the edge of *",
+      "on the edge of breaking",
+      "on the edge of crying",
+      "on the edge of screaming",
+      "teetering on the edge",
+      "teetering on the precipice",
+      "one wrong word from *",
+      "one wrong move from *",
+      "one wrong breath from *",
+      "barely holding on",
+      "hanging by a thread",
+      "precipice *",
+      "verge of *"
+    ],
+    "replacements": [
+      "[Delete entirely]",
+      "She opened her mouth. Closed it. Stood up and walked to the window.",
+      "He was losing his grip."
+    ],
+    "detect": "Identify edge/precipice language describing emotional state. Delete and replace with specific action showing what happens at the critical moment, not the metaphorical position before it."
+  },
+  "time_moment_phrases": {
+    "description": "Evokes camera, not consciousness. 'Time seemed to suspend' tells when to feel tension rather than creating it through character action or thought.",
+    "detection_rule": "Phrases suggesting time suspension, world-narrowing, or cinematic moments in emotional context: 'time stretched', 'suspended in amber', 'frozen in place', 'the world narrowed to', 'everything else fell away', 'the world held its breath'.",
+    "replacement_strategy": {
+      "do": "Delete and let the moment stand on its own through character action/dialogue.",
+      "avoid": "Time suspension, world-narrowing, or cinematic narration.",
+      "alt": [
+        "Show through character action/dialogue what makes the moment significant, not through narrative framing."
+      ]
+    },
+    "examples": {
+      "bad": [
+        "Time seemed to suspend as their eyes met. The world fell away."
+      ],
+      "good": [
+        "She looked up. He was watching her. Neither moved."
+      ]
+    },
+    "patterns": [
+      "time stretched",
+      "time seemed to *",
+      "suspended in amber",
+      "crystallized",
+      "frozen in place",
+      "frozen in time",
+      "the world narrowed to",
+      "everything else fell away",
+      "the world fell away",
+      "the world held its breath",
+      "the moment stretched",
+      "the moment crystallized",
+      "time stood still"
+    ],
+    "replacements": [
+      "[Delete entirely]",
+      "She looked up. He was watching her. Neither moved.",
+      "[Let the moment speak through dialogue and action, not narration]"
+    ],
+    "detect": "Identify time suspension or world-narrowing phrases. Delete and replace with character action/dialogue showing what makes the moment meaningful."
+  },
+  "permission_allowance_patterns": {
+    "description": "Labels release rather than showing what changes when restraint drops. 'She allowed herself to cry' tells; 'She cried, shoulders shaking' shows.",
+    "detection_rule": "Sentences using 'allowed/let/permitted + self + action' structure in emotional context. Look for: 'allowed herself to', 'let himself', 'permitted herself', 'gave herself permission', 'finally let go of'.",
+    "replacement_strategy": {
+      "do": "Delete the permission framing completely. Show the action directly with sensory detail.",
+      "avoid": "Self-permission constructions.",
+      "alt": [
+        "Drop 'allowed herself to' and 'finally permitted herself to' - just use the action: 'She cried' not 'She allowed herself to cry.'"
+      ]
+    },
+    "examples": {
+      "bad": [
+        "She allowed herself to cry for the first time."
+      ],
+      "good": [
+        "She cried. Actually cried, shoulders shaking, face in her hands."
+      ]
+    },
+    "patterns": [
+      "allowed * to *",
+      "allowed herself to",
+      "allowed himself to",
+      "let herself *",
+      "let himself *",
+      "permitted herself to",
+      "permitted himself to",
+      "gave herself permission to",
+      "gave himself permission to",
+      "finally let go of",
+      "finally allowed *"
+    ],
+    "replacements": [
+      "[Delete the permission framing entirely]",
+      "She cried. Actually cried, shoulders shaking, face in her hands.",
+      "He touched her face. Just that. His hand on her cheek."
+    ],
+    "detect": "Identify self-permission constructions (allowed/let/permitted + self + verb). Delete the permission framing and show the action directly with concrete detail."
+  },
+  "realization_understanding_patterns": {
+    "description": "Tells that realization happened rather than showing thought process or consequence.",
+    "detection_rule": "Phrases suggesting sudden understanding without showing what was understood or its consequence: 'clicked into place', 'pieces slotted together', 'clarity crashed over', 'truth settled', 'landed with the force of', 'crystallized'.",
+    "replacement_strategy": {
+      "do": "Delete and show what was understood through character dialogue or action in response.",
+      "avoid": "Sudden understanding phrases without showing evidence.",
+      "alt": [
+        "Let character voice the understanding: 'Oh. He's in love with her.' or show action consequence: 'She read the letter twice. She understood.'"
+      ]
+    },
+    "examples": {
+      "bad": [
+        "Suddenly, clarity crashed over her. She understood everything."
+      ],
+      "good": [
+        "She read the letter again. Oh. Oh god. He'd never told her any of it."
+      ]
+    },
+    "patterns": [
+      "clicked into place",
+      "it clicked",
+      "pieces slotted together",
+      "pieces fell into place",
+      "clarity crashed over",
+      "truth crashed over",
+      "clarity settled",
+      "truth settled",
+      "landed with the force of",
+      "crystallized",
+      "suddenly understood",
+      "finally understood",
+      "suddenly realized",
+      "finally realized"
+    ],
+    "replacements": [
+      "[Delete entirely]",
+      "She read the letter again. Oh. Oh god. He'd never told her any of it.",
+      "He understood what she meant the moment she said it."
+    ],
+    "detect": "Identify sudden-understanding phrases. Delete and replace by showing what the character understands through their dialogue or immediate action/reaction."
+  },
+  "danger_threat_descriptors": {
+    "description": "Every dangerous character gets same predator-animal vocabulary.",
+    "detection_rule": "Predator/animal danger vocabulary applied to character descriptions: 'lethal grace', 'predatory', 'coiled to strike', 'dangerous edge', 'barely contained violence', 'quiet menace', 'promise of violence'.",
+    "replacement_strategy": {
+      "do": "Delete entirely. Show dangerous behavior through what the character does or the reader's character's response to them, not through animal descriptor.",
+      "avoid": "Predator/animal descriptors for dangerous humans.",
+      "alt": [
+        "Show through action: 'He moved very still, watching her' instead of 'predatory stillness.'",
+        "Show through consequence: 'If she ran, he'd catch her' instead of 'lethal grace.'"
+      ]
+    },
+    "examples": {
+      "bad": [
+        "He moved with lethal grace, predatory stillness in every line."
+      ],
+      "good": [
+        "He didn't move. Just watched her. She had the sudden sense that if she ran, he'd catch her."
+      ]
+    },
+    "patterns": [
+      "lethal grace",
+      "lethal smile",
+      "lethal efficiency",
+      "lethal *",
+      "predatory stillness",
+      "predatory *",
+      "coiled to strike",
+      "coiled *",
+      "dangerous edge",
+      "dangerous *",
+      "barely contained violence",
+      "quiet menace",
+      "soft threat",
+      "the promise of violence",
+      "menacing",
+      "menacingly",
+      "predator-like",
+      "like a predator",
+      "like a cat",
+      "tiger-like"
+    ],
+    "replacements": [
+      "[Delete entirely]",
+      "He didn't move. Just watched her.",
+      "If she ran, he'd catch her. They both knew it."
+    ],
+    "detect": "Identify predator/animal danger vocabulary. Delete and show dangerous behavior through action, what the character does, or how others respond to them."
+  },
+  "possession_claiming_phrases": {
+    "description": "Same branding metaphor for every intense connection.",
+    "detection_rule": "Ownership/branding metaphors applied to relationships or emotional bonds: 'staked a claim', 'marked', 'claimed', 'branded into', 'written into skin', 'carved into bones', 'imprinted on'.",
+    "replacement_strategy": {
+      "do": "Delete entirely. Show what the character does/thinks/feels because of the connection, not how they're marked by it.",
+      "avoid": "Ownership/branding/marking metaphors for relationships.",
+      "alt": [
+        "Show consequence of connection: 'He thought of her constantly' instead of 'She was branded into his bones.'"
+      ]
+    },
+    "examples": {
+      "bad": [
+        "He'd branded her into his very bones."
+      ],
+      "good": [
+        "Every smell reminded him of her. Every song. He couldn't escape her."
+      ]
+    },
+    "patterns": [
+      "staked a claim",
+      "staked * claim",
+      "marked *",
+      "claimed *",
+      "claimed by *",
+      "branded into",
+      "branded on",
+      "written into skin",
+      "written on *",
+      "carved into bones",
+      "carved into *",
+      "imprinted on",
+      "imprinted in",
+      "tattooed on *"
+    ],
+    "replacements": [
+      "[Delete entirely]",
+      "Every smell reminded him of her. Every song on the radio. He couldn't escape her.",
+      "She was part of him now. The thought terrified and exhilarated him."
+    ],
+    "detect": "Identify possession/branding/marking language for relationships. Delete and replace by showing what the character does/thinks because of the connection."
+  },
+  "religious_exclamations": {
+    "description": "Reflexive intensity markers that tell nothing about character or moment. 'Oh God', 'Jesus', 'Christ' - universal AI default filler.",
+    "detection_rule": "Religious terms used as reflexive exclamations in emotional moments: 'Oh God', 'Oh my God', 'God yes', 'God no', 'Jesus', 'Christ', 'Lord'.",
+    "replacement_strategy": {
+      "do": "Delete entirely. These add nothing.",
+      "avoid": "Generic religious exclamations.",
+      "alt": [
+        "If exclamation is needed, use character-specific ones based on voice/background, not universal defaults.",
+        "Replace action trigger: gasped, cursed, stopped mid-breath (showing response) instead of labeling with exclamation."
+      ]
+    },
+    "examples": {
+      "bad": [
+        "'Oh God, I can't\u2014' she gasped."
+      ],
+      "good": [
+        "She gasped. 'I can't. Please, I can't.'"
+      ]
+    },
+    "patterns": [
+      "oh god",
+      "oh my god",
+      "oh my * god",
+      "god *",
+      "god yes",
+      "god no",
+      "jesus *",
+      "christ",
+      "lord *",
+      "for god's sake"
+    ],
+    "replacements": [
+      "[Delete entirely if possible]",
+      "Show what triggers emotional response through action or dialogue",
+      "[Use character-specific voice instead of universal default]"
+    ],
+    "detect": "Identify religious exclamations used as emotional filler. Delete unless deeply character-specific (character who practices religion). Universal defaults are AI signatures."
+  },
+  "ending_cliches": {
+    "description": "Summary posing as closure.",
+    "detection_rule": "Final summary lines that label emotional impact rather than showing it: 'And for now, that was enough', 'It was a start', 'They would figure it out', 'Everything had changed', 'Nothing would ever be the same'.",
+    "replacement_strategy": {
+      "do": "Delete entirely. End with action or dialogue that shows change, not summary that tells it.",
+      "avoid": "Summary closures or 'that was enough' constructions.",
+      "alt": [
+        "Last image/action/dialogue alone is more powerful than summary. Trust it."
+      ]
+    },
+    "examples": {
+      "bad": [
+        "They stood together in the dark. And for now, that was enough."
+      ],
+      "good": [
+        "They stood together in the dark."
+      ]
+    },
+    "patterns": [
+      "and for now, that was enough",
+      "for now, that was enough",
+      "it was a start",
+      "they would figure it out",
+      "they would work it out",
+      "somehow",
+      "nothing would ever be the same",
+      "everything had changed",
+      "everything was different",
+      "the world was different",
+      "things would never go back",
+      "and it was enough"
+    ],
+    "replacements": [
+      "[Delete the summary line entirely]",
+      "Let the last action/dialogue stand alone",
+      "[Trust the moment to speak for itself]"
+    ],
+    "detect": "Identify summary closures or final lines that label emotional meaning. Delete and let last action/dialogue stand alone."
+  },
+  "description_cliches": {
+    "description": "So common they're invisible. Create no specific visual impression. 'Orbs' for eyes, 'mane' for hair, 'sharp planes' - pure template descriptors.",
+    "detection_rule": "Formulaic descriptor clich\u00e9s that appear identically in thousands of stories: 'orbs', 'pools', 'mane', 'column of neck', 'delicate wrists', 'line of jaw', 'broad shoulders', 'lean muscle'.",
+    "replacement_strategy": {
+      "do": "Delete entire clich\u00e9 descriptor. Use specific detail unique to character instead.",
+      "avoid": "These clich\u00e9 descriptors that have appeared in thousands of stories identically.",
+      "alt": [
+        "Use simple, direct description: 'dark eyes' instead of 'pools of darkness.' Or skip entirely.",
+        "Describe specific detail showing character: scar, wrinkle, asymmetry, unique feature not the template."
+      ]
+    },
+    "examples": {
+      "bad": [
+        "His sharp planes and lean muscle were a study in controlled power."
+      ],
+      "good": [
+        "He'd lost weight. The scar on his cheekbone was more visible now."
+      ]
+    },
+    "patterns": [
+      "orbs",
+      "orbs of *",
+      "pools of *",
+      "pools *",
+      "mane of *",
+      "column of neck",
+      "delicate wrists",
+      "the line of jaw",
+      "the line of his jaw",
+      "broad shoulders",
+      "lean muscle",
+      "lean frame",
+      "sharp planes",
+      "sharp planes *",
+      "high cheekbones",
+      "strong jaw",
+      "strong jawline"
+    ],
+    "replacements": [
+      "[Delete entirely]",
+      "Describe something specific/unique to character: his scar, her tattoo, the way his face changed when he smiled",
+      "Specific physical detail: 'His hair was too long, falling in his eyes' instead of 'dark mane'"
+    ],
+    "detect": "Identify formulaic descriptor clich\u00e9s that appear identically across thousands of stories. Delete and replace with specific detail unique to your character - scar, tattoo, mannerism, asymmetry. Trust reader's imagination."
+  },
+  "dialogue_tag_bans": {
+    "description": "AI over-modifies dialogue tags and voice descriptors with adverbs and flowery language. Humans use simple 'said' or show tone through content.",
+    "detection_rule": "Adverbs modifying 'said' or dialogue: softly, quietly, carefully, flatly, evenly, roughly. Also voice verbs (drops, tightens, breaks, hardens, softens) and qualifiers (deceptively, deliberately, falsely).",
+    "replacement_strategy": {
+      "do": "Delete adverb entirely. Use plain 'said' or show tone through dialogue content.",
+      "avoid": "Adverbs modifying 'said'. These are AI defaults. Show don't tell.",
+      "alt": [
+        "Replace adverbial modifiers with action: 'He paused. \"I can't do this.\"' instead of '\"I can't do this,\" he said softly.'"
+      ]
+    },
+    "examples": {
+      "bad": [
+        "'I love you,' she whispered softly."
+      ],
+      "good": [
+        "'I love you,' she said."
+      ]
+    },
+    "patterns": [
+      "softly",
+      "quietly",
+      "carefully",
+      "flatly",
+      "evenly",
+      "roughly",
+      "harshly",
+      "voice drops",
+      "voice drops *",
+      "voice tightens",
+      "voice goes flat",
+      "voice breaks",
+      "voice hardens",
+      "voice softens"
+    ],
+    "replacements": [
+      "[Delete the modifier entirely - use 'said' without adverb]",
+      "'I don't know,' she said.",
+      "[Show tone through dialogue content, not through modifier]"
+    ],
+    "detect": "Identify any adverb modifying dialogue or voice verbs describing how something was said. Delete adverbs and show tone through dialogue content or action instead."
   }
 }

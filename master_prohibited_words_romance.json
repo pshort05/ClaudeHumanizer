@@ -1,0 +1,95 @@
+{
+  "title": "Romance-Specific Prohibited Words List",
+  "version": "1.0.0",
+  "date": "2025-12-04",
+  "description": "Genre-specific prohibited patterns for romance fiction. Use this list ONLY when processing romance content where emotional authenticity is critical. These patterns address AI defaults in romance: generic emotional escalation, relationship arc clich\u00e9s, and mechanical attraction language.",
+  "usage_note": "This list is OPTIONAL - include only when the author has explicitly indicated this is romance fiction and wants genre-specific pattern detection.",
+  "when_to_use": [
+    "Author is writing contemporary romance, paranormal romance, or historical romance",
+    "Author requests genre-specific AI pattern detection",
+    "Emotional intimacy and relationship authenticity are priorities",
+    "Author wants to avoid mechanical emotional escalation patterns"
+  ],
+  "when_to_skip": [
+    "Literary fiction with intentional emotional escalation",
+    "Character-specific voice that may include these patterns naturally",
+    "Author has not indicated this is romance fiction"
+  ],
+  "romance_specific_bans": {
+    "description": "Romance fiction has specific AI defaults that appear with mechanical repetition. These patterns undermine emotional authenticity by substituting generic descriptor for specific character moment.",
+    "detection_rule": "Patterns specific to romance writing: generic emotion escalation ('need', 'want' used repeatedly without specificity), physical attraction defaults (chemistry, electricity, magnetic), emotional vulnerability clich\u00e9s ('walls coming down', 'defenses crumbling'), possession language, and relationship-arc predictability patterns.",
+    "common_ai_patterns": [
+      "need crashed over",
+      "need unfurled",
+      "need pooled *",
+      "need coiled *",
+      "want *ed through",
+      "want *ed over",
+      "chemistry between them",
+      "the chemistry between",
+      "electricity *",
+      "electric *",
+      "magnetic *",
+      "drawn to him like *",
+      "drawn to her like *",
+      "walls tumbled down",
+      "walls came crashing down",
+      "walls crumbled",
+      "walls shattered",
+      "defenses crumbling",
+      "defenses shattered",
+      "barriers fell",
+      "barriers crumbled",
+      "he made her feel *",
+      "she made him feel *",
+      "something dark * in",
+      "something dangerous * in",
+      "his touch ignited",
+      "her touch set * on fire",
+      "the kiss *ed [everything/him/her/them]",
+      "changed everything",
+      "nothing would ever be the same",
+      "she was his",
+      "he was hers",
+      "she was undone",
+      "he was undone",
+      "completion * with",
+      "completed by",
+      "unraveled at *",
+      "falling apart at",
+      "came undone",
+      "couldn't deny * anymore",
+      "couldn't fight * anymore"
+    ],
+    "allowed_replacements_only": [
+      "[Delete entirely - show attraction through action/dialogue]",
+      "She wanted him. Wanted to know what he tasted like, what his hands felt like on bare skin.",
+      "The tension between them was thick enough to cut.",
+      "He looked at her and she forgot what she was saying.",
+      "[Show specific consequence of attraction, not generic emotional state]"
+    ],
+    "replacement_strategy": {
+      "preferred": "Delete generic escalation. Show specific consequence: what she does, what changes in their interaction, concrete sensory moment.",
+      "simple_alternative": "Replace 'need crashed over her' with 'She wanted him. Specifically his mouth, his hands, his certainty.'",
+      "alternative_2": "Replace 'walls crumbled' with specific behavior change: 'She stopped keeping him at arm's length. Stopped protecting herself.'",
+      "never_use": "These clich\u00e9d emotional escalators. They're identical across all AI romance."
+    },
+    "examples": {
+      "bad_ai_writing": [
+        "Need crashed over her as he pulled her close.",
+        "The chemistry between them was undeniable.",
+        "Her walls came crashing down at his touch.",
+        "He made her feel alive for the first time in years.",
+        "His kiss changed everything."
+      ],
+      "good_human_writing": [
+        "She wanted him. Specifically his mouth, his hands, the certainty in his voice.",
+        "When he spoke to her, she couldn't think about anything else.",
+        "She'd spent three years keeping men at a distance. Not him. Not anymore.",
+        "He touched her and she felt herself shifting, becoming someone else.",
+        "'When did this happen?' she asked, and he smiled: 'For me? The first day.'"
+      ]
+    },
+    "pattern_matching_instruction": "Identify generic emotional escalation and relationship-arc clich\u00e9s specific to romance: walls/defenses crumbling, chemistry/electricity language, 'changed everything', possession language, emotional undoing. Replace with specific character action or moment showing what attraction looks like for these particular characters."
+  }
+}

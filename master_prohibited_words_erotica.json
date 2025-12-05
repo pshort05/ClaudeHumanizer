@@ -1,0 +1,107 @@
+{
+  "title": "Erotica-Specific Prohibited Words List",
+  "version": "1.0.0",
+  "date": "2025-12-04",
+  "description": "Genre-specific prohibited patterns for erotica fiction. Use this list ONLY when processing explicit sexual content where specificity and directness are essential. These patterns address AI defaults in erotica: euphemism overload, generic sensation language, and emotional distance in sex scenes.",
+  "usage_note": "This list is OPTIONAL - include only when the author has explicitly indicated content is erotica and wants genre-specific pattern detection.",
+  "when_to_use": [
+    "Author is writing erotica or explicit sexual content",
+    "Author requests genre-specific AI pattern detection",
+    "Authentic detail about sexual sensation is a priority",
+    "Author wants to avoid euphemisms and generic sensation language"
+  ],
+  "when_to_skip": [
+    "Fade-to-black romance scenes",
+    "Literary fiction using euphemism intentionally",
+    "Author has not indicated content is erotica",
+    "Character-specific voice that uses euphemism naturally"
+  ],
+  "erotica_specific_bans": {
+    "description": "Erotica has distinct AI defaults that undermine the genre's core purpose: specificity and directness. Generic physical sensation language, euphemism overload, and mechanical escalation patterns drain authentic erotic tension.",
+    "detection_rule": "Patterns specific to erotica writing: generic physical sensation (heat, wetness, throbbing without specificity), euphemism escalation (breasts, core, opening, passage, heat, folds), mechanical action verbs (thrust, plunged, buried, drove), emotional distance in sex (separating emotion from physical), reciprocal action without power dynamics.",
+    "common_ai_patterns": [
+      "heat * between them",
+      "heat bloomed",
+      "heat pooled low",
+      "wetness * between",
+      "slick with *",
+      "throbbing *",
+      "throbbed with *",
+      "breasts *",
+      "her breasts heaving",
+      "his breasts *",
+      "core ached",
+      "core clenched",
+      "inner walls *",
+      "velvety *",
+      "silken *",
+      "tight heat",
+      "hot and tight",
+      "thrust *",
+      "plunged *",
+      "buried * in",
+      "drove * into",
+      "sheathed",
+      "sheathing",
+      "the kiss * lower",
+      "moved lower",
+      "worked lower",
+      "descended",
+      "descended between",
+      "his mouth on *",
+      "her mouth on *",
+      "brought her to *",
+      "brought him to *",
+      "unraveled",
+      "came undone",
+      "climax washed over",
+      "climax crashed",
+      "climax rippled",
+      "pleasure *ed through",
+      "ecstasy *",
+      "satisfaction *",
+      "relief flooded",
+      "felt * watching him",
+      "felt * watching her",
+      "power of watching",
+      "power in *",
+      "couldn't help *",
+      "couldn't stop *",
+      "as if they were alone",
+      "tunnel vision",
+      "nothing else mattered"
+    ],
+    "allowed_replacements_only": [
+      "[Delete entirely and use specific anatomical or sensory language]",
+      "His cock was hard. She wrapped her hand around it, felt him shudder.",
+      "She came. Her cunt clenched around him as she came, and he lost it.",
+      "He wanted to taste her. Wanted to know what she tasted like, how she sounded when he did.",
+      "[Use specific body parts and direct sensory language - erotica demands specificity]"
+    ],
+    "replacement_strategy": {
+      "preferred": "Delete euphemisms entirely. Use specific anatomical language (cock, cunt, ass, hole, breasts, lips). Erotica's power comes from directness and specificity.",
+      "simple_alternative": "Replace 'heat pooled low' with specific sensation: 'Her clit throbbed. She wanted his mouth there.'",
+      "alternative_2": "Replace mechanical action verbs with specific descriptions: 'He pushed into her slowly. She felt every inch.' instead of 'He buried himself in her heat.'",
+      "alternative_3": "Show power dynamics and perspective shifts explicitly rather than generic shared emotion.",
+      "never_use": "Euphemisms, generic sensation language, mechanical action verbs. Erotica is destroyed by coyness and vagueness."
+    },
+    "examples": {
+      "bad_ai_writing": [
+        "Heat pooled between her thighs as he kissed lower.",
+        "Her breasts heaved as he moved into her, filling her with his length.",
+        "Pleasure rippled through her as she came undone beneath him.",
+        "He felt the power of watching her fall apart for him.",
+        "Nothing else mattered but the feeling of him inside her."
+      ],
+      "good_human_writing": [
+        "He kissed between her thighs and she felt it everywhere\u2014the specific pressure of his mouth, the certainty of what he wanted.",
+        "She pulled him into her. He was thick, he filled her, and she clenched around him as he bottomed out.",
+        "She came hard. Her cunt contracted around his cock and she made a sound she didn't recognize.",
+        "He watched her face\u2014that moment when she tipped over, when pleasure took over thought\u2014and he fucked her harder because of it.",
+        "His cock was inside her. That was the universe. Everything else could burn."
+      ]
+    },
+    "context_awareness": "Erotica requires MAXIMUM specificity and directness. The genre's entire power comes from authentic detail and unshying away from explicit language. AI defaults toward euphemism and emotional distance in sex - exactly what undermines erotica. These patterns drain authenticity.",
+    "pattern_matching_instruction": "Identify generic sensation language (heat, wetness, throbbing without specificity), euphemisms (core, passage, opening, folds), mechanical action verbs, and emotional distance in sex. Replace with specific anatomical language, direct action description showing what's actually happening, and authentic character perspective on sensation and power."
+  }
+}

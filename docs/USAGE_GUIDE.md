@@ -24,7 +24,7 @@ Complete step-by-step instructions for using the ClaudeHumanizer assembly line s
 
 2. **Process Your Text**:
    ```
-   Phase 1 → Phase 2 → Phase 3 → Phase 4 → Phase 5 → Phase 6 → Phase 7 → Phase 8 → Phase 9 → (Phase 9.5 optional) → Phase 10
+   Phase 1 → Phase 2 → Phase 3 → Phase 4 → Phase 5 → Phase 6 → Phase 7 → Phase 8 → (Phase 8.5 optional) → Phase 9 → (Phase 9.5 optional) → Phase 10
    ```
 
 3. **Include Master List**: Phases 2 and 10 require `master_prohibited_words.json`
@@ -122,6 +122,7 @@ The ClaudeHumanizer operates as a **true assembly line** where each phase specia
 - **Phase 6**: Dialogue content ONLY
 - **Phase 7**: Weak language patterns ONLY (12 categories including overused transitions and robotic qualifiers)
 - **Phase 8**: Rhythm and flow variation ONLY (strategic imperfections, punctuation inconsistency)
+- **Phase 8.5**: Syntactic pattern elimination ONLY (mechanical constructions that substitute form for content) - **OPTIONAL**
 - **Phase 9**: AI pattern detection ONLY - QUALITATIVE (N-grams, formulaic phrases, perplexity)
 - **Phase 9.5**: Statistical optimization ONLY - QUANTITATIVE (burstiness, POS, TTR) - **OPTIONAL**
 - **Phase 10**: Word filtering ONLY (catches prohibited words reintroduced by phases 3-9)
@@ -177,10 +178,11 @@ You are an assembly line text processor optimized for humanizing AI-generated te
 6. Take output through Phase 6 (Dialogue Enhancement) - use temperature 1.0
 7. Take output through Phase 7 (Weak Language Cleanup)
 8. Take output through Phase 8 (Strategic Imperfections)
-9. Take output through Phase 9 (Final Verification)
-10. OPTIONAL: Take output through Phase 9.5 (Statistical Analysis Hub) - for comprehensive statistical optimization
-11. Take output through Phase 10 (Final AI Word Sweep) - include master_prohibited_words.json
-12. Return only the final Phase 10 output
+9. OPTIONAL: Take output through Phase 8.5 (Structural Construction Elimination) - for syntactic pattern elimination
+10. Take output through Phase 9 (Final Verification)
+11. OPTIONAL: Take output through Phase 9.5 (Statistical Analysis Hub) - for comprehensive statistical optimization
+12. Take output through Phase 10 (Final AI Word Sweep) - include master_prohibited_words.json
+13. Return only the final Phase 10 output
 
 IMPORTANT:
 - Phases 2 and 10 require master_prohibited_words.json (contains pattern rules)
@@ -329,6 +331,46 @@ See [Customization Guide](CUSTOMIZATION.md) for detailed setup instructions.
 - Breaking established character voices
 - Introducing errors
 
+### Phase 8.5: Structural Construction Elimination (OPTIONAL - NEW in v3.2.0)
+**File**: `8.5_structural_construction_elimination.json`
+**Dependencies**: None
+**Purpose**: Eliminate syntactic patterns that substitute form for content
+**Status**: OPTIONAL - can be integrated, used selectively, or skipped
+
+**When to use**:
+- Processing commercial fiction or erotica
+- Maximum clarity and directness needed
+- Mechanical construction patterns need elimination
+- Pattern-style choices are not intentional
+
+**When to skip**:
+- Literary fiction where patterns may be intentional stylistic choices
+- Text already clear and direct
+- Author wants to preserve all original patterns
+- Budget constraints (Phase 8.5 adds ~30-60 seconds processing)
+
+**What it detects and restructures**:
+- Anthropomorphized silence and atmosphere ("silence stretched")
+- Echo-line poetics (parallel structure repetition)
+- Meta-narrative intrusion ("this was the moment everything changed")
+- Hollow restraint ("held it together")
+- Vague interiority ("something shifted in...")
+- Hedged reactions and constructions
+- And 23 additional mechanical patterns (29 total)
+
+**What it preserves**:
+- 100% of original content
+- All dialogue (preserved exactly)
+- Markdown formatting
+- Character voice
+- Work from previous phases
+
+**What it avoids**:
+- Grammar changes (Phase 1's domain)
+- Vocabulary filtering (Phases 2/10's domain)
+- Word-level changes
+- Dialogue modifications
+
 ### Phase 9: Final Verification
 **File**: `9_final_verification.json`
 **Dependencies**: None
@@ -410,6 +452,7 @@ See [Customization Guide](CUSTOMIZATION.md) for detailed setup instructions.
 | 6.1 | `6.1_character_dialogue_pass.json` | ❌ No | Optional |
 | 7 | `7_weak_language_cleanup.json` | ❌ No | Required |
 | 8 | `8_strategic_imperfections.json` | ❌ No | Required |
+| 8.5 | `8.5_structural_construction_elimination.json` | ❌ No | **Optional** |
 | 9 | `9_final_verification.json` | ❌ No | Required |
 | 9.5 | `9.5_statistical_analysis_hub.json` | ❌ No | **Optional** |
 | 10 | `10_final_ai_word_sweep.json` | ✅ Yes | Required |
@@ -487,7 +530,9 @@ After each phase, verify:
 **After Phase 6**: Character voices distinct and authentic
 **After Phase 7**: Weak language eliminated
 **After Phase 8**: Natural rhythm and imperfections present
+**After Phase 8.5** (optional): Mechanical construction patterns eliminated, direct prose achieved
 **After Phase 9**: AI patterns detected, rhythm variations applied
+**After Phase 9.5** (optional): Statistical metrics optimized
 **After Phase 10**: All prohibited words eliminated, ready for publication
 
 ### Final Validation
