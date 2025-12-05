@@ -38,6 +38,16 @@ AI detectors often fail catastrophically on hybrid texts containing both human a
 - Do NOT run mixed human/AI paragraphs through the system—process them separately
 - Consider whether detection is even a concern if substantial human contribution exists
 
+## ✨ Gemini-Optimized Workflow (NEW)
+
+For users who prefer to use the Google Gemini API, a new, optimized 4-stage workflow is available. This workflow consolidates the 11+ Claude phases into four powerful "mega-prompts" that leverage Gemini's large context window and advanced instruction-following capabilities.
+
+This approach significantly reduces the number of API calls, leading to faster processing and lower costs, while still providing a comprehensive humanization process.
+
+### 📖 [View the Gemini Humanizer Workflow Guide](gemini/README.md)
+
+For full details on the 4-stage approach and instructions on how to use the Gemini prompts and the provided `n8n_gemini_workflow.json`, please refer to the documentation in the `gemini` directory.
+
 ### Model Selection (October 2025)
 
 **Choose your LLM based on priorities:**

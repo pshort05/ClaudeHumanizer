@@ -1,0 +1,296 @@
+{
+  "name": "GeminiHumanizer - 4-Phase Optimized Workflow",
+  "description": "Optimized humanization pipeline for Google Gemini API, consolidating 11+ Claude phases into 4 efficient stages. Reads from local input file and writes final output to markdown.",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "readFile",
+        "fileSelector": "input_text.md"
+      },
+      "name": "Read Input File",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [250, 200],
+      "notes": "Reads input_text.md from current working directory. Place your text here before running workflow."
+    },
+    {
+      "parameters": {
+        "filePath": "./master_prohibited_words.json",
+        "options": {}
+      },
+      "name": "Load Master Prohibited Words",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "filePath": "./master_prohibited_words_romance.json",
+        "options": {}
+      },
+      "name": "Load Romance Genre List",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [250, 400]
+    },
+    {
+      "parameters": {
+        "filePath": "./master_prohibited_words_erotica.json",
+        "options": {}
+      },
+      "name": "Load Erotica Genre List",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [250, 500]
+    },
+    {
+      "parameters": {
+        "filePath": "./gemini/1_foundational_cleanup.json",
+        "options": {}
+      },
+      "name": "Load Gemini Phase 1 Prompt",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [450, 0]
+    },
+    {
+      "parameters": {
+        "filePath": "./gemini/2_stylistic_narrative_enhancement.json",
+        "options": {}
+      },
+      "name": "Load Gemini Phase 2 Prompt",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [450, 100]
+    },
+    {
+      "parameters": {
+        "filePath": "./gemini/3_advanced_structural_statistical_humanization.json",
+        "options": {}
+      },
+      "name": "Load Gemini Phase 3 Prompt",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [450, 200]
+    },
+    {
+      "parameters": {
+        "filePath": "./gemini/4_dialogue_refinement.json",
+        "options": {}
+      },
+      "name": "Load Gemini Phase 4 Prompt",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleGenerativeAiApi",
+        "resource": "chat",
+        "model": "gemini-1.5-pro-latest",
+        "text": "={{ $node['Read Input File'].data.toString() }}",
+        "options": {
+          "temperature": 0.2,
+          "systemMessage": "={{ JSON.parse($node['Load Gemini Phase 1 Prompt'].json.data).persona + '\n\n' + JSON.stringify(JSON.parse($node['Load Gemini Phase 1 Prompt'].json.data).instructions) + '\n\nMaster Prohibited Words:\n' + JSON.parse($node['Load Master Prohibited Words'].json.data).toString() + '\n\nRomance Prohibited Words (Optional):\n' + JSON.parse($node['Load Romance Genre List'].json.data).toString() + '\n\nErotica Prohibited Words (Optional):\n' + JSON.parse($node['Load Erotica Genre List'].json.data).toString() }}",
+          "maxTokens": 32768
+        }
+      },
+      "name": "Gemini Phase 1 - Foundational Cleanup",
+      "type": "n8n-nodes-base.googleGenerativeAi",
+      "typeVersion": 1,
+      "position": [650, 0]
+    },
+    {
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleGenerativeAiApi",
+        "resource": "chat",
+        "model": "gemini-1.5-pro-latest",
+        "text": "={{ $json.content.text }}",
+        "options": {
+          "temperature": 0.5,
+          "systemMessage": "={{ JSON.parse($node['Load Gemini Phase 2 Prompt'].json.data).persona + '\n\n' + JSON.stringify(JSON.parse($node['Load Gemini Phase 2 Prompt'].json.data).instructions) }}",
+          "maxTokens": 32768
+        }
+      },
+      "name": "Gemini Phase 2 - Stylistic & Narrative Enhancement",
+      "type": "n8n-nodes-base.googleGenerativeAi",
+      "typeVersion": 1,
+      "position": [650, 100]
+    },
+    {
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleGenerativeAiApi",
+        "resource": "chat",
+        "model": "gemini-1.5-pro-latest",
+        "text": "={{ $json.content.text }}",
+        "options": {
+          "temperature": 0.8,
+          "systemMessage": "={{ JSON.parse($node['Load Gemini Phase 3 Prompt'].json.data).persona + '\n\n' + JSON.stringify(JSON.parse($node['Load Gemini Phase 3 Prompt'].json.data).instructions) }}",
+          "maxTokens": 32768
+        }
+      },
+      "name": "Gemini Phase 3 - Advanced Structural & Statistical Humanization",
+      "type": "n8n-nodes-base.googleGenerativeAi",
+      "typeVersion": 1,
+      "position": [650, 200]
+    },
+    {
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleGenerativeAiApi",
+        "resource": "chat",
+        "model": "gemini-1.5-pro-latest",
+        "text": "={{ $json.content.text }}",
+        "options": {
+          "temperature": 1.0,
+          "systemMessage": "={{ JSON.parse($node['Load Gemini Phase 4 Prompt'].json.data).persona + '\n\n' + JSON.stringify(JSON.parse($node['Load Gemini Phase 4 Prompt'].json.data).instructions) }}",
+          "maxTokens": 32768
+        }
+      },
+      "name": "Gemini Phase 4 - Dialogue Refinement",
+      "type": "n8n-nodes-base.googleGenerativeAi",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "fileNameProperty": "filename",
+        "dataPropertyName": "data",
+        "options": {}
+      },
+      "name": "Write Output File",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "notes": "Writes final humanized text to output_humanized_gemini.md in current working directory"
+    },
+    {
+      "parameters": {
+        "responseBody": "={{ { \"success\": true, \"input_file\": \"input_text.md\", \"output_file\": \"output_humanized_gemini.md\", \"phases_completed\": 4, \"timestamp\": $now, \"message\": \"Gemini Humanizer pipeline completed successfully\" } }}"
+      },
+      "name": "Completion Summary",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    }
+  ],
+  "connections": {
+    "Read Input File": {
+      "main": [
+        [
+          {
+            "node": "Gemini Phase 1 - Foundational Cleanup",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Phase 1 - Foundational Cleanup": {
+      "main": [
+        [
+          {
+            "node": "Gemini Phase 2 - Stylistic & Narrative Enhancement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Phase 2 - Stylistic & Narrative Enhancement": {
+      "main": [
+        [
+          {
+            "node": "Gemini Phase 3 - Advanced Structural & Statistical Humanization",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Phase 3 - Advanced Structural & Statistical Humanization": {
+      "main": [
+        [
+          {
+            "node": "Gemini Phase 4 - Dialogue Refinement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Phase 4 - Dialogue Refinement": {
+      "main": [
+        [
+          {
+            "node": "Write Output File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Output File": {
+      "main": [
+        [
+          {
+            "node": "Completion Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "instanceId": "your-instance-id",
+    "version": "1.0.0",
+    "lastModified": "2025-12-04"
+  },
+  "tags": [
+    {
+      "name": "GeminiHumanizer",
+      "id": "1"
+    },
+    {
+      "name": "Text Processing",
+      "id": "2"
+    },
+    {
+      "name": "File I/O",
+      "id": "3"
+    },
+    {
+      "name": "Assembly Line",
+      "id": "4"
+    }
+  ],
+  "documentation": {
+    "setup_instructions": "1. Create input_text.md in the n8n execution directory with your AI-generated text\n2. Ensure all 4 Gemini phase JSON files are in the 'gemini/' subdirectory\n3. Ensure master_prohibited_words.json, master_prohibited_words_romance.json, and master_prohibited_words_erotica.json are in the root directory.\n4. Configure Google Generative AI API credentials in n8n\n5. Run the workflow\n6. Output will be written to output_humanized_gemini.md in the current working directory",
+    "files_required": [
+      "input_text.md (your AI-generated text - create manually)",
+      "master_prohibited_words.json",
+      "master_prohibited_words_romance.json (optional, loaded but used only if author requests)",
+      "master_prohibited_words_erotica.json (optional, loaded but used only if author requests)",
+      "gemini/1_foundational_cleanup.json",
+      "gemini/2_stylistic_narrative_enhancement.json",
+      "gemini/3_advanced_structural_statistical_humanization.json",
+      "gemini/4_dialogue_refinement.json"
+    ],
+    "models_used": "Google Gemini 1.5 Pro Latest (gemini-1.5-pro-latest) - Optimal for text humanization",
+    "workflow_notes": "This workflow consolidates the 11+ Claude phases into 4 optimized stages for the Google Gemini API. All phases chain sequentially with each phase output feeding into the next phase input. Prohibited word lists are passed to Gemini Phase 1, which integrates their functionality.",
+    "temperature_settings": {
+      "gemini_phase_1": 0.2,
+      "gemini_phase_2": 0.5,
+      "gemini_phase_3": 0.8,
+      "gemini_phase_4": 1.0
+    }
+  }
+}

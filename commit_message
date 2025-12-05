@@ -1,0 +1,14 @@
+feat: Implement Gemini-optimized 4-stage humanizer workflow
+
+This commit introduces a new, optimized 4-stage humanization pipeline specifically designed for the Google Gemini API. This new workflow consolidates the existing 11+ Claude phases into a more efficient, cost-effective, and powerful system leveraging Gemini's capabilities.
+
+Key changes include:
+- **New `gemini/` directory:** Created to house all Gemini-specific files.
+- **Consolidated prompt files:**
+    - `gemini/1_foundational_cleanup.json`: Combines grammar foundation, AI word cleaning, weak language cleanup, and final AI word sweep.
+    - `gemini/2_stylistic_narrative_enhancement.json`: Consolidates overwritten language reduction, sensory enhancement, and subtlety creation.
+    - `gemini/3_advanced_structural_statistical_humanization.json`: Integrates strategic imperfections, structural construction elimination, AI pattern detection, and statistical analysis.
+    - `gemini/4_dialogue_refinement.json`: Combines dialogue enhancement and character-specific dialogue pass.
+- **Gemini n8n workflow:** `gemini/n8n_gemini_workflow.json` created to orchestrate the new 4-stage pipeline.
+- **Gemini workflow documentation:** `gemini/README.md` provides a comprehensive guide to the Gemini-optimized approach, usage instructions, and n8n integration.
+- **Main README update:** The root `README.md` has been updated with a new section linking to the Gemini workflow documentation.
