@@ -1,12 +1,29 @@
 {
   "title": "Final AI Word Sweep",
-  "version": "3.0.0",
-  "last_updated": "2025-10-26",
-  "description": "Pure word filtering phase - surgical final pass to remove any prohibited AI-associated words and phrases that were reintroduced during phases 3-9. Does NOT perform statistical analysis (Phase 9.5 handles all metrics).",
+  "version": "3.2.0",
+  "last_updated": "2025-12-04",
+  "description": "Pure word filtering phase - surgical final pass to remove any prohibited AI-associated words and phrases that were reintroduced during phases 3-9. Uses master_prohibited_words.json (required) plus optional genre-specific lists (master_prohibited_words_romance.json, master_prohibited_words_erotica.json) when author indicates content type. Does NOT perform statistical analysis (Phase 9.5 handles all metrics).",
 
   "assembly_line_position": "Phase 10: Final Word Filtering - Pure prohibited word removal ONLY after all other processing (including Phase 9.5 statistical optimization) is complete",
 
-  "master_prohibited_list_reference": "Uses master_prohibited_words.json as single source of truth for all prohibited terms",
+  "master_prohibited_list_reference": "Uses master_prohibited_words.json (REQUIRED - always include) plus optional genre-specific lists based on author's content type",
+
+  "optional_genre_specific_lists": {
+    "when_to_use": "Include additional lists ONLY when the author has explicitly indicated their content type and wants genre-specific pattern detection",
+    "romance_specific": {
+      "file": "master_prohibited_words_romance.json",
+      "when_to_apply": "Author indicates content is romance fiction (contemporary, paranormal, historical, etc.)",
+      "patterns": "Emotional escalation clichés, generic attraction language, mechanical relationship arc patterns",
+      "note": "Optional - skip if author has not indicated romance fiction or prefers not to use genre-specific filtering"
+    },
+    "erotica_specific": {
+      "file": "master_prohibited_words_erotica.json",
+      "when_to_apply": "Author indicates content is erotica or contains explicit sexual content",
+      "patterns": "Euphemism overload, generic sensation language, emotional distance in sex scenes",
+      "note": "Optional - skip if author has not indicated erotica/explicit content or prefers not to use genre-specific filtering"
+    },
+    "decision_rule": "Author choice determines which optional lists to include. If author does not explicitly request genre-specific filtering, use only master_prohibited_words.json"
+  },
 
   "domain_restrictions": {
     "only_replace": "AI-associated words and phrases from master_prohibited_words.json that may have been reintroduced by Phases 3-9. NO statistical analysis or optimization.",
@@ -72,32 +89,56 @@
   },
 
   "master_list_integration": {
-    "reference_file": "master_prohibited_words.json",
-    "categories_to_check": [
+    "required_reference_file": "master_prohibited_words.json",
+    "optional_reference_files": [
+      "master_prohibited_words_romance.json (include only if author requests romance-specific filtering)",
+      "master_prohibited_words_erotica.json (include only if author requests erotica-specific filtering)"
+    ],
+    "field_name_mapping": {
+      "detection_patterns": "'patterns' field in each rule",
+      "detailed_detection_guidance": "'detect' field in each rule",
+      "replacement_terms": "'replacements' field in each rule",
+      "alternative_replacements": "'alt' field in each rule",
+      "bad_examples": "'bad' field in examples",
+      "good_examples": "'good' field in examples"
+    },
+    "categories_to_check_from_master": [
       "prohibited_single_words",
       "prohibited_phrases",
       "contextual_patterns",
-      "dialogue_pause_pattern_rules",
-      "light_description_pattern_rules",
-      "finger_hand_action_pattern_rules"
+      "dialogue_pause_pattern_rules (use 'patterns' field for detection, 'detect' field for detailed guidance, 'replacements' field for alternatives)",
+      "light_description_pattern_rules (use 'patterns' field for detection, 'detect' field for detailed guidance, 'replacements' field for alternatives)",
+      "finger_hand_action_pattern_rules (use 'patterns' field for detection, 'detect' field for detailed guidance, 'replacements' field for alternatives)"
     ],
-    "processing_priority": "Check phrases first (longest to shortest), then individual words, then contextual patterns, then dialogue pause patterns, then light description patterns, then finger/hand action patterns",
+    "categories_to_check_if_romance_selected": [
+      "romance_specific_bans (only if author explicitly indicated romance content)"
+    ],
+    "categories_to_check_if_erotica_selected": [
+      "erotica_specific_bans (only if author explicitly indicated erotica content)"
+    ],
+    "processing_priority": "Check phrases first (longest to shortest), then individual words, then contextual patterns. For pattern rules, use the 'detect' field for detailed detection instructions and 'replacements' field for alternatives. Only include optional genre-specific patterns if author has selected them.",
+    "author_choice_requirement": "CRITICAL: Do NOT include optional genre-specific lists unless the author has explicitly indicated they are writing romance or erotica and has requested genre-specific filtering.",
     "note": "Weak language patterns (puff words, empty calorie words, etc.) are handled by Phase 7 and not included in final sweep"
   },
 
   "processing_steps": {
+    "step_0": "BEFORE PROCESSING: Determine which word lists to use. Always use master_prohibited_words.json. ONLY include optional genre-specific lists (romance/erotica) if author has explicitly indicated content type and requested genre-specific filtering.",
     "step_1": "Carefully read the entire text and identify all dialogue sections (text in quotation marks) and Markdown elements (headers, links, code blocks, etc.) to preserve",
-    "step_2": "Systematically scan body text (excluding dialogue and Markdown) for words and phrases from master_prohibited_words.json",
-    "step_3": "Apply dialogue_pause_pattern_rules: identify ANY metaphorical or elaborate descriptions of conversational pauses and replace with 'Silence.', 'Awkward silence.', or preferably remove entirely",
-    "step_4": "Apply light_description_pattern_rules: identify ANY elaborate light descriptions using verbs like 'filtering', 'casting', 'streaming' and replace with simple phrases like 'in the moonlight', 'afternoon sun', or preferably remove entirely",
-    "step_5": "Apply finger_hand_action_pattern_rules: identify ANY elaborate finger/hand movement descriptions and replace with direct action verbs like 'typing', 'touched', 'traced'",
-    "step_6": "For each detected prohibited term, select a natural, contextually appropriate replacement",
-    "step_7": "Replace prohibited terms surgically - change only the word/phrase itself, not surrounding context",
-    "step_8": "Verify replacements do not introduce new AI-sounding words, sophisticated punctuation, or other prohibited terms",
-    "step_9": "Review final text to ensure dialogue and Markdown remain unchanged and flow is natural"
+    "step_2": "Systematically scan body text (excluding dialogue and Markdown) for words and phrases from master_prohibited_words.json (REQUIRED)",
+    "step_3": "IF author selected romance filtering: Also scan for words and phrases from master_prohibited_words_romance.json. OTHERWISE skip this step.",
+    "step_4": "IF author selected erotica filtering: Also scan for words and phrases from master_prohibited_words_erotica.json. OTHERWISE skip this step.",
+    "step_5": "Apply dialogue_pause_pattern_rules: identify ANY metaphorical or elaborate descriptions of conversational pauses and replace with 'Silence.', 'Awkward silence.', or preferably remove entirely",
+    "step_6": "Apply light_description_pattern_rules: identify ANY elaborate light descriptions using verbs like 'filtering', 'casting', 'streaming' and replace with simple phrases like 'in the moonlight', 'afternoon sun', or preferably remove entirely",
+    "step_7": "Apply finger_hand_action_pattern_rules: identify ANY elaborate finger/hand movement descriptions and replace with direct action verbs like 'typing', 'touched', 'traced'",
+    "step_8": "For each detected prohibited term, select a natural, contextually appropriate replacement",
+    "step_9": "Replace prohibited terms surgically - change only the word/phrase itself, not surrounding context",
+    "step_10": "Verify replacements do not introduce new AI-sounding words, sophisticated punctuation, or other prohibited terms",
+    "step_11": "Review final text to ensure dialogue and Markdown remain unchanged and flow is natural"
   },
 
-  "note_on_statistical_metrics": "Phase 10 does NOT perform statistical analysis (burstiness, POS distribution, TTR, lexical diversity). Phase 9.5 handles all quantitative metrics. Phase 10 focuses exclusively on word-level filtering using master_prohibited_words.json.",
+  "note_on_statistical_metrics": "Phase 10 does NOT perform statistical analysis (burstiness, POS distribution, TTR, lexical diversity). Phase 9.5 handles all quantitative metrics. Phase 10 focuses exclusively on word-level filtering using master_prohibited_words.json (required) plus optional genre-specific lists if author requests them.",
+
+  "critical_author_choice_note": "The optional genre-specific lists (romance and erotica) are ONLY included when the author explicitly indicates they are writing in these genres and wants genre-specific pattern detection. If the author has not made this explicit request, use master_prohibited_words.json exclusively. This gives authors full control over whether genre-specific filtering applies to their content.",
 
   "replacement_guidelines": {
     "natural_alternatives": "Choose simple, direct alternatives that sound conversational and genuine",
@@ -107,9 +148,10 @@
     "avoid_ai_language": "Never introduce sophisticated punctuation (em/en dashes), perfect transitions, buzzwords, or overly polished language",
     "punctuation_restriction": "Use only simple punctuation: commas, periods, question marks, exclamation points",
     "one_for_one_replacement": "Replace prohibited words with natural alternatives - do not rephrase entire sentences",
-    "dialogue_pause_handling": "For ANY metaphorical or elaborate description of conversational pauses (e.g., 'weight of words', 'silence stretched', 'words hung', 'air between them'), replace with 'Silence.', 'Awkward silence.', or preferably remove entirely. Never use flowery descriptions of pauses.",
-    "light_description_handling": "For ANY elaborate light descriptions using verbs like 'filtering', 'casting', 'streaming', 'slanting' (e.g., 'sunlight filtered through', 'moonlight reflecting', 'casting golden patterns'), replace with simple phrases like 'in the moonlight', 'afternoon sun', or preferably remove entirely. Never use active verbs with light.",
-    "finger_hand_action_handling": "For ANY elaborate finger/hand movement descriptions (e.g., 'fingers dancing across the keyboard', 'fingers hovering over', 'hands flew'), replace with direct action verbs like 'typing', 'touched', 'traced'. Ask 'What is the person actually DOING?' and use that verb. Never use elaborate movement descriptions for simple actions."
+    "pattern_rule_application": "For each pattern rule in master_prohibited_words.json: use the 'detect' field for detailed identification guidance, check the 'patterns' field for what to look for, apply replacements from the 'replacements' field, or use alternatives from the 'alt' field",
+    "dialogue_pause_handling": "For dialogue_pause_pattern_rules: use the 'detect' field guidance to identify metaphorical/elaborate pause descriptions, replace with terms from 'replacements' field (Silence./Awkward silence./A pause.) or remove entirely. Never use flowery descriptions of pauses.",
+    "light_description_handling": "For light_description_pattern_rules: use the 'detect' field guidance to identify elaborate light descriptions with verbs like filtering/casting/streaming, replace with simple phrases from 'replacements' field like 'in the moonlight', 'afternoon sun', or remove entirely. Never use active verbs with light.",
+    "finger_hand_action_handling": "For finger_hand_action_pattern_rules: use the 'detect' field guidance to identify elaborate finger/hand movements, replace with direct action verbs from 'replacements' field like 'typing', 'touched', 'traced'. Ask 'What is the person actually DOING?' and use that verb. Never use elaborate movement descriptions for simple actions."
   },
 
   "contextual_awareness": {
