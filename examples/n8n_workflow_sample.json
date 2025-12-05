@@ -1,152 +1,190 @@
 {
-  "name": "ClaudeHumanizer - Complete 11-Phase Assembly Line (Updated)",
+  "name": "ClaudeHumanizer - Complete 11-Phase Assembly Line (v3.3.0 - File I/O)",
+  "description": "Full humanization pipeline reading from local input file and writing final output to markdown. All phases chained sequentially with phase output feeding into next phase input.",
   "nodes": [
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "humanize-text",
-        "responseMode": "responseNode",
-        "options": {}
+        "operation": "readFile",
+        "fileSelector": "input_text.md"
       },
-      "name": "Webhook - Input Trigger",
-      "type": "n8n-nodes-base.webhook",
+      "name": "Read Input File",
+      "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
-      "position": [250, 300]
+      "position": [250, 300],
+      "notes": "Reads input_text.md from current working directory. Place your text here before running workflow."
     },
     {
       "parameters": {
-        "filePath": "../master_prohibited_words.json",
+        "filePath": "./master_prohibited_words.json",
         "options": {}
       },
       "name": "Load Master Prohibited Words",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [250, 400]
+    },
+    {
+      "parameters": {
+        "filePath": "./master_prohibited_words_romance.json",
+        "options": {}
+      },
+      "name": "Load Romance Genre List",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [250, 500]
+    },
+    {
+      "parameters": {
+        "filePath": "./master_prohibited_words_erotica.json",
+        "options": {}
+      },
+      "name": "Load Erotica Genre List",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [250, 600]
+    },
+    {
+      "parameters": {
+        "filePath": "./1_grammar_foundation.json",
+        "options": {}
+      },
+      "name": "Load Phase 1 Prompt",
       "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
       "position": [450, 0]
     },
     {
       "parameters": {
-        "filePath": "../1_grammar_foundation.json",
+        "filePath": "./2_ai_word_cleaning.json",
         "options": {}
       },
-      "name": "Load Phase 1 Prompt",
+      "name": "Load Phase 2 Prompt",
       "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
       "position": [450, 100]
     },
     {
       "parameters": {
-        "filePath": "../2_ai_word_cleaning.json",
+        "filePath": "./3_overwritten_language_reduction.json",
         "options": {}
       },
-      "name": "Load Phase 2 Prompt",
+      "name": "Load Phase 3 Prompt",
       "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
       "position": [450, 200]
     },
     {
       "parameters": {
-        "filePath": "../3_overwritten_language_reduction.json",
+        "filePath": "./4_sensory_enhancement.json",
         "options": {}
       },
-      "name": "Load Phase 3 Prompt",
+      "name": "Load Phase 4 Prompt",
       "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
       "position": [450, 300]
     },
     {
       "parameters": {
-        "filePath": "../4_sensory_enhancement.json",
+        "filePath": "./5_subtlety_creation.json",
         "options": {}
       },
-      "name": "Load Phase 4 Prompt",
+      "name": "Load Phase 5 Prompt",
       "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
       "position": [450, 400]
     },
     {
       "parameters": {
-        "filePath": "../5_subtlety_creation.json",
+        "filePath": "./6_dialogue_enhancement.json",
         "options": {}
       },
-      "name": "Load Phase 5 Prompt",
+      "name": "Load Phase 6 Prompt",
       "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
       "position": [450, 500]
     },
     {
       "parameters": {
-        "filePath": "../6_dialogue_enhancement.json",
+        "filePath": "./7_weak_language_cleanup.json",
         "options": {}
       },
-      "name": "Load Phase 6 Prompt",
+      "name": "Load Phase 7 Prompt",
       "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
       "position": [450, 600]
     },
     {
       "parameters": {
-        "filePath": "../7_weak_language_cleanup.json",
+        "filePath": "./8_strategic_imperfections.json",
         "options": {}
       },
-      "name": "Load Phase 7 Prompt",
+      "name": "Load Phase 8 Prompt",
       "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
       "position": [450, 700]
     },
     {
       "parameters": {
-        "filePath": "../8_strategic_imperfections.json",
+        "filePath": "./9_final_verification.json",
         "options": {}
       },
-      "name": "Load Phase 8 Prompt",
+      "name": "Load Phase 9 Prompt",
       "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
       "position": [450, 800]
     },
     {
       "parameters": {
-        "filePath": "../9_final_verification.json",
+        "filePath": "./9.5_statistical_analysis_hub.json",
         "options": {}
       },
-      "name": "Load Phase 9 Prompt",
+      "name": "Load Phase 9.5 Prompt",
       "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
       "position": [450, 900]
     },
     {
       "parameters": {
-        "filePath": "../9.5_statistical_analysis_hub.json",
+        "filePath": "./10_final_ai_word_sweep.json",
         "options": {}
       },
-      "name": "Load Phase 9.5 Prompt",
+      "name": "Load Phase 10 Prompt",
       "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
       "position": [450, 1000]
     },
     {
       "parameters": {
-        "filePath": "../10_final_ai_word_sweep.json",
-        "options": {}
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "anthropicApi",
+        "resource": "message",
+        "model": "claude-sonnet-4-5-20250929",
+        "text": "={{ $node['Read Input File'].data.toString() }}",
+        "options": {
+          "temperature": 0.2,
+          "systemMessage": "={{ JSON.parse($node['Load Phase 1 Prompt'].json.data).persona ? JSON.parse($node['Load Phase 1 Prompt'].json.data).persona + '\\n\\n' + JSON.stringify(JSON.parse($node['Load Phase 1 Prompt'].json.data).instructions) : JSON.stringify(JSON.parse($node['Load Phase 1 Prompt'].json.data)) }}",
+          "maxTokens": 8192
+        }
       },
-      "name": "Load Phase 10 Prompt",
-      "type": "n8n-nodes-base.readBinaryFile",
+      "name": "Phase 1 - Grammar Foundation",
+      "type": "n8n-nodes-base.anthropic",
       "typeVersion": 1,
-      "position": [450, 1100]
+      "position": [650, 0]
     },
     {
       "parameters": {
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "anthropicApi",
         "resource": "message",
-        "model": "claude-3-5-sonnet-20240620",
-        "text": "={{ $json.body.text }}",
+        "model": "claude-sonnet-4-5-20250929",
+        "text": "={{ $json.content[0].text }}",
         "options": {
           "temperature": 0.2,
-          "systemMessage": "={{ JSON.parse($node['Load Phase 1 Prompt'].json.data).prompt }}",
+          "systemMessage": "={{ JSON.parse($node['Load Master Prohibited Words'].json.data).toString() + '\\n\\n' + JSON.stringify(JSON.parse($node['Load Phase 2 Prompt'].json.data)) }}",
           "maxTokens": 8192
         }
       },
-      "name": "Phase 1 - Grammar Foundation",
+      "name": "Phase 2 - AI Word Cleaning",
       "type": "n8n-nodes-base.anthropic",
       "typeVersion": 1,
       "position": [650, 100]
@@ -156,15 +194,15 @@
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "anthropicApi",
         "resource": "message",
-        "model": "claude-3-5-sonnet-20240620",
+        "model": "claude-sonnet-4-5-20250929",
         "text": "={{ $json.content[0].text }}",
         "options": {
-          "temperature": 0.4,
-          "systemMessage": "={{ JSON.parse($node['Load Master Prohibited Words'].json.data).toString() + '\n\n' + JSON.parse($node['Load Phase 2 Prompt'].json.data).prompt }}",
+          "temperature": 0.3,
+          "systemMessage": "={{ JSON.stringify(JSON.parse($node['Load Phase 3 Prompt'].json.data)) }}",
           "maxTokens": 8192
         }
       },
-      "name": "Phase 2 - AI Word Cleaning",
+      "name": "Phase 3 - Purple Prose Reduction",
       "type": "n8n-nodes-base.anthropic",
       "typeVersion": 1,
       "position": [650, 200]
@@ -174,15 +212,15 @@
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "anthropicApi",
         "resource": "message",
-        "model": "claude-3-5-sonnet-20240620",
+        "model": "claude-sonnet-4-5-20250929",
         "text": "={{ $json.content[0].text }}",
         "options": {
-          "temperature": 0.3,
-          "systemMessage": "={{ JSON.parse($node['Load Phase 3 Prompt'].json.data).prompt }}",
+          "temperature": 0.7,
+          "systemMessage": "={{ JSON.stringify(JSON.parse($node['Load Phase 4 Prompt'].json.data)) }}",
           "maxTokens": 8192
         }
       },
-      "name": "Phase 3 - Purple Prose Reduction",
+      "name": "Phase 4 - Sensory Enhancement",
       "type": "n8n-nodes-base.anthropic",
       "typeVersion": 1,
       "position": [650, 300]
@@ -192,15 +230,15 @@
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "anthropicApi",
         "resource": "message",
-        "model": "claude-3-5-sonnet-20240620",
+        "model": "claude-sonnet-4-5-20250929",
         "text": "={{ $json.content[0].text }}",
         "options": {
-          "temperature": 0.7,
-          "systemMessage": "={{ JSON.parse($node['Load Phase 4 Prompt'].json.data).prompt }}",
+          "temperature": 0.5,
+          "systemMessage": "={{ JSON.stringify(JSON.parse($node['Load Phase 5 Prompt'].json.data)) }}",
           "maxTokens": 8192
         }
       },
-      "name": "Phase 4 - Sensory Enhancement",
+      "name": "Phase 5 - Subtlety Creation",
       "type": "n8n-nodes-base.anthropic",
       "typeVersion": 1,
       "position": [650, 400]
@@ -210,15 +248,15 @@
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "anthropicApi",
         "resource": "message",
-        "model": "claude-3-5-sonnet-20240620",
+        "model": "claude-sonnet-4-5-20250929",
         "text": "={{ $json.content[0].text }}",
         "options": {
-          "temperature": 0.5,
-          "systemMessage": "={{ JSON.parse($node['Load Phase 5 Prompt'].json.data).prompt }}",
+          "temperature": 1,
+          "systemMessage": "={{ JSON.stringify(JSON.parse($node['Load Phase 6 Prompt'].json.data)) }}",
           "maxTokens": 8192
         }
       },
-      "name": "Phase 5 - Subtlety Creation",
+      "name": "Phase 6 - Dialogue Enhancement",
       "type": "n8n-nodes-base.anthropic",
       "typeVersion": 1,
       "position": [650, 500]
@@ -228,15 +266,15 @@
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "anthropicApi",
         "resource": "message",
-        "model": "claude-3-5-sonnet-20240620",
+        "model": "claude-sonnet-4-5-20250929",
         "text": "={{ $json.content[0].text }}",
         "options": {
-          "temperature": 1,
-          "systemMessage": "={{ JSON.parse($node['Load Phase 6 Prompt'].json.data).prompt }}",
+          "temperature": 0.2,
+          "systemMessage": "={{ JSON.stringify(JSON.parse($node['Load Phase 7 Prompt'].json.data)) }}",
           "maxTokens": 8192
         }
       },
-      "name": "Phase 6 - Dialogue Enhancement",
+      "name": "Phase 7 - Weak Language Cleanup",
       "type": "n8n-nodes-base.anthropic",
       "typeVersion": 1,
       "position": [650, 600]
@@ -246,15 +284,15 @@
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "anthropicApi",
         "resource": "message",
-        "model": "claude-3-5-sonnet-20240620",
+        "model": "claude-sonnet-4-5-20250929",
         "text": "={{ $json.content[0].text }}",
         "options": {
-          "temperature": 0.2,
-          "systemMessage": "={{ JSON.parse($node['Load Phase 7 Prompt'].json.data).prompt }}",
+          "temperature": 0.9,
+          "systemMessage": "={{ JSON.stringify(JSON.parse($node['Load Phase 8 Prompt'].json.data)) }}",
           "maxTokens": 8192
         }
       },
-      "name": "Phase 7 - Weak Language Cleanup",
+      "name": "Phase 8 - Strategic Imperfections",
       "type": "n8n-nodes-base.anthropic",
       "typeVersion": 1,
       "position": [650, 700]
@@ -264,15 +302,15 @@
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "anthropicApi",
         "resource": "message",
-        "model": "claude-3-5-sonnet-20240620",
+        "model": "claude-sonnet-4-5-20250929",
         "text": "={{ $json.content[0].text }}",
         "options": {
-          "temperature": 0.9,
-          "systemMessage": "={{ JSON.parse($node['Load Phase 8 Prompt'].json.data).prompt }}",
+          "temperature": 0.2,
+          "systemMessage": "={{ JSON.stringify(JSON.parse($node['Load Phase 9 Prompt'].json.data)) }}",
           "maxTokens": 8192
         }
       },
-      "name": "Phase 8 - Strategic Imperfections",
+      "name": "Phase 9 - Final Verification",
       "type": "n8n-nodes-base.anthropic",
       "typeVersion": 1,
       "position": [650, 800]
@@ -282,15 +320,15 @@
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "anthropicApi",
         "resource": "message",
-        "model": "claude-3-5-sonnet-20240620",
+        "model": "claude-sonnet-4-5-20250929",
         "text": "={{ $json.content[0].text }}",
         "options": {
-          "temperature": 0.2,
-          "systemMessage": "={{ JSON.parse($node['Load Phase 9 Prompt'].json.data).prompt }}",
+          "temperature": 0.4,
+          "systemMessage": "={{ JSON.stringify(JSON.parse($node['Load Phase 9.5 Prompt'].json.data)) }}",
           "maxTokens": 8192
         }
       },
-      "name": "Phase 9 - Final Verification",
+      "name": "Phase 9.5 - Statistical Analysis",
       "type": "n8n-nodes-base.anthropic",
       "typeVersion": 1,
       "position": [650, 900]
@@ -300,50 +338,43 @@
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "anthropicApi",
         "resource": "message",
-        "model": "claude-3-5-sonnet-20240620",
+        "model": "claude-sonnet-4-5-20250929",
         "text": "={{ $json.content[0].text }}",
         "options": {
-          "temperature": 0.4,
-          "systemMessage": "={{ JSON.parse($node['Load Phase 9.5 Prompt'].json.data).prompt }}",
-          "maxTokens": 8192
-        }
-      },
-      "name": "Phase 9.5 - Statistical Analysis",
-      "type": "n8n-nodes-base.anthropic",
-      "typeVersion": 1,
-      "position": [650, 1000]
-    },
-    {
-      "parameters": {
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "anthropicApi",
-        "resource": "message",
-        "model": "claude-3-5-sonnet-20240620",
-        "text": "={{ $json.content[0].text }}",
-        "options": {
-          "temperature": 0.3,
-          "systemMessage": "={{ JSON.parse($node['Load Master Prohibited Words'].json.data).toString() + '\n\n' + JSON.parse($node['Load Phase 10 Prompt'].json.data).prompt }}",
+          "temperature": 0.2,
+          "systemMessage": "={{ JSON.parse($node['Load Master Prohibited Words'].json.data).toString() + '\\n\\n' + JSON.stringify(JSON.parse($node['Load Phase 10 Prompt'].json.data)) }}",
           "maxTokens": 8192
         }
       },
       "name": "Phase 10 - Final AI Word Sweep",
       "type": "n8n-nodes-base.anthropic",
       "typeVersion": 1,
-      "position": [650, 1100]
+      "position": [650, 1000]
     },
     {
       "parameters": {
-        "respondWith": "json",
-        "responseBody": "={{ { \"success\": true, \"original_text\": $node[\"Webhook - Input Trigger\"].json.body.text, \"humanized_text\": $json.content[0].text, \"phases_completed\": 11, \"timestamp\": $now } }}"
+        "fileNameProperty": "filename",
+        "dataPropertyName": "data",
+        "options": {}
       },
-      "name": "Webhook Response",
+      "name": "Write Output File",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [850, 1000],
+      "notes": "Writes final humanized text to output_humanized.md in current working directory"
+    },
+    {
+      "parameters": {
+        "responseBody": "={{ { \"success\": true, \"input_file\": \"input_text.md\", \"output_file\": \"output_humanized.md\", \"phases_completed\": 11, \"timestamp\": $now, \"message\": \"ClaudeHumanizer pipeline completed successfully\" } }}"
+      },
+      "name": "Completion Summary",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
-      "position": [850, 1100]
+      "position": [1050, 1000]
     }
   ],
   "connections": {
-    "Webhook - Input Trigger": {
+    "Read Input File": {
       "main": [
         [
           {
@@ -468,7 +499,18 @@
       "main": [
         [
           {
-            "node": "Webhook Response",
+            "node": "Write Output File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Output File": {
+      "main": [
+        [
+          {
+            "node": "Completion Summary",
             "type": "main",
             "index": 0
           }
@@ -481,7 +523,9 @@
   },
   "staticData": null,
   "meta": {
-    "instanceId": "your-instance-id"
+    "instanceId": "your-instance-id",
+    "version": "3.3.0",
+    "lastModified": "2025-12-04"
   },
   "tags": [
     {
@@ -491,6 +535,40 @@
     {
       "name": "Text Processing",
       "id": "2"
+    },
+    {
+      "name": "File I/O",
+      "id": "3"
+    },
+    {
+      "name": "Assembly Line",
+      "id": "4"
     }
-  ]
+  ],
+  "documentation": {
+    "setup_instructions": "1. Create input_text.md in the n8n execution directory with your AI-generated text\n2. Ensure all phase JSON files are in the same directory as the input file\n3. Configure Anthropic API credentials in n8n\n4. Run the workflow\n5. Output will be written to output_humanized.md in the same directory",
+    "files_required": [
+      "input_text.md (your AI-generated text - create manually)",
+      "master_prohibited_words.json",
+      "master_prohibited_words_romance.json (optional, loaded but used only if author requests)",
+      "master_prohibited_words_erotica.json (optional, loaded but used only if author requests)",
+      "1_grammar_foundation.json through 10_final_ai_word_sweep.json",
+      "9.5_statistical_analysis_hub.json"
+    ],
+    "models_used": "Claude Sonnet 4.5 (claude-sonnet-4-5-20250929) - Optimal for text humanization",
+    "workflow_notes": "v3.3.0 Update: Optimized JSON files with 23.5% size reduction. Genre-specific lists are optional and loaded but only applied when author explicitly requests genre-specific filtering. All phases chain sequentially with each phase output feeding into the next phase input.",
+    "temperature_settings": {
+      "phase_1": 0.2,
+      "phase_2": 0.2,
+      "phase_3": 0.3,
+      "phase_4": 0.7,
+      "phase_5": 0.5,
+      "phase_6": 1.0,
+      "phase_7": 0.2,
+      "phase_8": 0.9,
+      "phase_9": 0.2,
+      "phase_9_5": 0.4,
+      "phase_10": 0.2
+    }
+  }
 }
