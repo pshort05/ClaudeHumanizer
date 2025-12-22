@@ -1,7 +1,75 @@
-feat: Add OpenRouter n8n workflow for Gemini and update docs
+Implement Chaos Method humanization patterns across Phases 4, 5, and 8.5
 
-This commit introduces a new n8n workflow that allows users to access Gemini models via OpenRouter, providing an alternative for integration and model access.
+Integrated key AI detection avoidance techniques from "Humanizing AI Writing &
+The Chaos Method" document into the ClaudeHumanizer pipeline. These updates
+address statistically measurable AI writing patterns that were not previously
+detected by the system.
 
-Key changes include:
-- **New n8n workflow:** `gemini/n8n_gemini_openrouter_workflow.json` has been created, adapting the existing Gemini workflow to use OpenRouter's API endpoint.
-- **Updated Gemini documentation:** The `gemini/README.md` file has been updated to include a new section detailing the OpenRouter integration, its setup instructions, and model usage.
+Phase 8.5 (Structural Construction Elimination): v1.0.0 → v1.1.0
+- Added Pattern #30: Rule of Three Symmetry detection
+  * AI defaults to three-item lists for artificial symmetry
+  * HIGH priority detection marker - statistically measurable
+  * Converts to 2, 4, or 5 items to break AI's symmetry preference
+  * If keeping 3 items, makes third item awkward/unexpected
+  * Examples: "fast, efficient, and reliable" → "fast and reliable" (2 items)
+    or "fast, efficient, reliable, and surprisingly intuitive" (4 items)
+
+- Added Pattern #31: Insecure Paragraph Summary detection
+  * AI ends paragraphs by restating what was just said
+  * MEDIUM-HIGH priority - clear AI authorship signal
+  * Removes "Thus...", "Therefore...", "In conclusion..." endings
+  * Principle: End when the point is made. Trust the reader.
+  * Deletes redundant recap sentences that add no new information
+
+- Updated pattern count from 29 to 31 throughout file
+- Updated agent_directives, processing_instructions, quality_standards
+
+Phase 4 (Sensory Enhancement): v2.2.0 → v2.3.0
+- Added Extreme Specificity Strategy (new detection framework #5)
+  * Replaces generic nouns with hyper-specific details
+  * AI defaults to safe, generic descriptions (vehicle, building, phone)
+  * Humans use specific make/model/year/condition/color
+  * Examples:
+    - "vehicle" → "rusted 1998 Honda Civic with a cracked windshield"
+    - "building" → "three-story brick Victorian with chipped green shutters"
+    - "phone" → "cracked iPhone 12 with a Star Wars case"
+  * MEDIUM priority - generic nouns signal AI's vague universality
+  * Forces creative hallucination that lowers AI detection rates
+
+- Updated step_3_targeted_enhancement to include specificity guidance
+- Applied only when enhancing flat passages (respects assembly line)
+
+Phase 5 (Subtlety Creation): v2.3.0 → v2.4.0
+- Added Redundant Paragraph Summaries detection pattern
+  * CRITICAL priority - AI habitually adds insecure summaries
+  * Detects final sentences that restate previous content
+  * Removes sentences ending with transition words that signal recap
+  * Comprehensive examples showing before/after transformations
+  * Principle: Never end paragraphs/scenes/chapters with summaries
+
+- Added to critical_fixes priority list
+- Updated operational_instructions with deletion guidance
+- Emphasizes trusting the reader vs. over-explaining
+
+Technical Details:
+- All version numbers updated with semantic versioning (MINOR bump)
+- All dates updated to 2025-12-22
+- Changes maintain backward compatibility with existing pipeline
+- No modifications to master_prohibited_words.json required
+- All updates respect assembly line domain isolation principles
+
+Coverage Analysis:
+The system now implements ALL key concepts from the Chaos Method:
+✓ Vocabulary blacklist (master_prohibited_words.json)
+✓ Burstiness/sentence variation (Phase 8)
+✓ Rule of Three elimination (Phase 8.5 - NEW)
+✓ Paragraph summary deletion (Phases 5 & 8.5 - NEW)
+✓ Extreme specificity (Phase 4 - NEW)
+✓ Formal transition replacement (Phase 7)
+✓ Strategic imperfections (Phase 8)
+✓ Perplexity optimization (Phase 9)
+
+Files Modified:
+- 8.5_structural_construction_elimination.json
+- 4_sensory_enhancement.json
+- 5_subtlety_creation.json

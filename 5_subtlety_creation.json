@@ -1,7 +1,7 @@
 {
   "title": "Subtlety Creation",
-  "version": "2.3.0",
-  "date": "2025-11-04",
+  "version": "2.4.0",
+  "date": "2025-12-22",
   "assembly_line_position": "Phase 5: On the Nose Editor - Convert obvious statements to subtle/implied meaning",
   "description": "Expert editor that silently identifies and fixes on-the-nose prose, returning only the improved text without commentary or analysis.",
   
@@ -90,6 +90,27 @@
         "bad": ["He builds trust by showing confidence in the technology.", "She uses logic by explaining technical features in simple terms.", "His emotional appeal comes through presenting the iPhone as life-changing.", "The speaker establishes credibility through demonstrating expertise."],
         "good": ["He shows confidence in the technology.", "She explains technical features in simple terms.", "He presents the iPhone as life-changing.", "The speaker demonstrates expertise."]
       }
+    },
+    "redundant_paragraph_summaries": {
+      "detect": [
+        "Final sentence of paragraph that restates previous sentences without adding new information",
+        "Paragraph ending with 'Thus...', 'Therefore...', 'In conclusion...', 'In summary...', 'This shows that...'",
+        "Summary sentence that could be deleted without losing any meaning",
+        "Sentence that explains 'what we just learned' or 'what this demonstrates'",
+        "Paragraph closer that functions as an unnecessary recap",
+        "Ending that tells reader what they should have understood from the paragraph"
+      ],
+      "fix": "Delete the summary sentence entirely. End when the point is made. Trust the reader to understand what you've shown them. If the paragraph feels incomplete without the summary, the problem is earlier sentences being unclear—strengthen those instead of adding a redundant recap.",
+      "examples": {
+        "bad_explicit_summary": "The data showed clear trends. Users preferred the new interface. Adoption rates doubled in Q3. Thus, the evidence suggests strong user acceptance.",
+        "good": "The data showed clear trends. Users preferred the new interface. Adoption rates doubled in Q3.",
+        "bad_restatement": "She turned away. He reached for her but stopped. The distance between them had become impossible to bridge. They had lost each other.",
+        "good": "She turned away. He reached for her but stopped. The distance between them had become impossible to bridge.",
+        "bad_explanatory_ending": "The software's modularity allows rapid updates. Each component operates independently. Changes can be deployed without system-wide testing. This architectural approach enables unprecedented development speed.",
+        "good": "The software's modularity allows rapid updates. Each component operates independently. Changes can be deployed without system-wide testing."
+      },
+      "detection_priority": "CRITICAL - AI habitually adds insecure paragraph summaries. Humans trust readers and end when the point is made. This is a measurable AI writing pattern.",
+      "principle": "Never end paragraphs, scenes, or chapters with summary sentences. Just stop writing when the point is made. Trust the reader."
     }
   },
 
@@ -108,7 +129,8 @@
       "Explicit theme statements and moral lessons",
       "Obvious character motivation explanations",
       "Direct relationship dynamic descriptions",
-      "Meta-analytical rhetorical analysis language (builds X by Y-ing, uses X by Y-ing, appeal comes through)"
+      "Meta-analytical rhetorical analysis language (builds X by Y-ing, uses X by Y-ing, appeal comes through)",
+      "Redundant paragraph summaries (Thus..., Therefore..., In conclusion..., sentences that restate what was just said)"
     ],
     "important_fixes": [
       "Atmosphere announcements and mood statements",
@@ -156,6 +178,7 @@
     "Never modify titles, headers, subtitles, or any markdown formatting elements",
     "Only address on-the-nose writing - do not duplicate work from previous phases",
     "Detect and remove meta-analytical language: 'builds X by Y-ing', 'uses X by Y-ing', 'appeal comes through' - replace with direct action verbs only",
+    "Delete redundant paragraph summaries: Remove sentences ending with 'Thus...', 'Therefore...', 'In conclusion...', or any sentence that restates what was just said. End when the point is made. Trust the reader.",
     "Apply appropriate fixes to eliminate obviousness while preserving meaning",
     "Implement all critical and important improvements seamlessly",
     "Focus exclusively on show-don't-tell conversions - Phase 10 handles word filtering",

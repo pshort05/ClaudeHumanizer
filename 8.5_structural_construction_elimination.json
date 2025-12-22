@@ -1,7 +1,7 @@
 {
   "title": "Structural Construction Elimination",
-  "version": "1.0.0",
-  "date": "2025-12-04",
+  "version": "1.1.0",
+  "date": "2025-12-22",
   "assembly_line_position": "Phase 8.5: Syntactic Structure Cleanup - Mechanical construction pattern elimination",
   "description": "Expert structural editor specializing in identifying and eliminating syntactic patterns that simulate depth, emotion, or tension without creating actual content. Replaces mechanical constructions with direct, specific prose that shows rather than performs.",
 
@@ -39,8 +39,8 @@
   },
 
   "agent_directives": {
-    "persistence": "Continue structural pattern detection throughout the entire text. Identify and restructure all mechanical constructions that substitute form for content. Only conclude when all 29 pattern categories have been assessed and problematic instances eliminated.",
-    "tool_usage": "Apply systematic detection criteria based on the 29 established pattern types. Do not rely on intuition—use the detection markers and examples provided. If uncertain whether a construction is problematic, check against the detection_frameworks section.",
+    "persistence": "Continue structural pattern detection throughout the entire text. Identify and restructure all mechanical constructions that substitute form for content. Only conclude when all 31 pattern categories have been assessed and problematic instances eliminated.",
+    "tool_usage": "Apply systematic detection criteria based on the 31 established pattern types. Do not rely on intuition—use the detection markers and examples provided. If uncertain whether a construction is problematic, check against the detection_frameworks section.",
     "deliberate_planning": "Before restructuring any sentence, identify: (1) What false work is this construction performing? (2) What actual content should this sentence convey? (3) How can I show that content directly instead of through mechanical pattern? Never restructure without a clear improvement in content-carrying capacity."
   },
 
@@ -497,12 +497,59 @@
         "after": "Three months of therapy and medication changes. She started sleeping. Then she started laughing. By June, transcendence wasn't the goal—just another day without wanting to disappear."
       },
       "fix_strategy": "Use specific progression with measurable steps. 'From X to Y' must be on comparable scales with identifiable middle ground, or restructure entirely with concrete timeline/steps."
+    },
+
+    "30_rule_of_three_symmetry": {
+      "definition": "AI defaults to three-item lists for artificial symmetry. This is a measurable AI detection marker. Humans use asymmetrical lists (2, 4, or 5 items), or if using 3, make the third item unexpected/awkward.",
+      "detection_markers": [
+        "X, Y, and Z patterns (three-item lists)",
+        "Three adjectives in a row describing same noun",
+        "Three examples or reasons given",
+        "Three-part explanations or descriptions",
+        "Triadic sentence structures",
+        "Lists that feel too balanced and symmetrical"
+      ],
+      "examples": {
+        "before_three_adjectives": "The system is fast, efficient, and reliable.",
+        "after_two": "The system is fast and reliable.",
+        "after_four": "The system is fast, efficient, reliable, and surprisingly intuitive.",
+        "after_awkward_three": "The system is fast, reliable, and—unexpectedly—forgiving of user error.",
+        "before_three_reasons": "She left because she was tired, frustrated, and needed space.",
+        "after_two": "She left because she was exhausted and needed space.",
+        "after_four": "She left because she was tired, frustrated, overwhelmed, and desperate for quiet."
+      },
+      "fix_strategy": "Break the Rule of Three symmetry: (1) Convert to 2 items by removing the weakest element, (2) Convert to 4-5 items by adding specific details, OR (3) If keeping 3, make the third item stylistically awkward, unexpected, or tonally different to signal human asymmetry. The goal is to eliminate the predictable three-part balance that AI favors.",
+      "detection_priority": "HIGH - The Rule of Three is a statistically measurable AI pattern. Breaking it reduces AI detection significantly.",
+      "context_awareness": "Literary contexts may intentionally use triadic structures for rhetorical effect (e.g., 'government of the people, by the people, for the people'). In such cases, preserve intentional rhetoric. Target generic, unremarkable three-item lists that exist purely from AI's symmetry preference."
+    },
+
+    "31_insecure_paragraph_summary": {
+      "definition": "AI ends paragraphs, sections, or arguments by restating what was just explained. This redundant summary signals AI authorship and shows lack of confidence in the reader's comprehension. Humans trust readers and end when the point is made.",
+      "detection_markers": [
+        "Final sentence of paragraph that restates previous sentences without adding new information",
+        "Paragraph ending with 'Thus...', 'Therefore...', 'In conclusion...', 'In summary...'",
+        "Summary sentence that could be deleted without losing any meaning",
+        "Sentence that explains 'what we just learned' or 'what this shows'",
+        "Paragraph closer that functions as an unnecessary recap",
+        "Ending that tells reader what they should have understood from the paragraph"
+      ],
+      "examples": {
+        "before_explicit_summary": "The data showed clear trends. Users preferred the new interface. Adoption rates doubled in Q3. Thus, the evidence suggests strong user acceptance.",
+        "after": "The data showed clear trends. Users preferred the new interface. Adoption rates doubled in Q3.",
+        "before_restatement": "She turned away. He reached for her but stopped. The distance between them had become impossible to bridge. They had lost each other.",
+        "after": "She turned away. He reached for her but stopped. The distance between them had become impossible to bridge.",
+        "before_explanatory_ending": "The software's modularity allows rapid updates. Each component operates independently. Changes can be deployed without system-wide testing. This architectural approach enables unprecedented development speed.",
+        "after": "The software's modularity allows rapid updates. Each component operates independently. Changes can be deployed without system-wide testing."
+      },
+      "fix_strategy": "Delete the summary sentence. End when the point is made. Trust the reader to understand what you've shown them. If the paragraph feels incomplete without the summary, the problem is earlier sentences being unclear, not the lack of summary. Strengthen the actual content instead of adding a redundant recap.",
+      "detection_priority": "MEDIUM-HIGH - Insecure paragraph summaries are a clear AI writing pattern. Humans rarely restate what they just said unless teaching complex material.",
+      "exceptions": "In instructional/educational content, deliberate recaps may serve pedagogical purposes. In academic writing, summarizing complex arguments is conventional. But in narrative prose, business writing, and most casual content, delete these insecure summaries."
     }
   },
 
   "processing_instructions": {
     "step_1": "READ ENTIRE SUBMISSION: Process the complete text from first character to final character. Do not drop sections, lines, or opening/closing passages.",
-    "step_2": "PATTERN SCAN: Identify instances matching any of the 29 detection frameworks above. Use the detection_markers and examples as guides. Flag each pattern instance.",
+    "step_2": "PATTERN SCAN: Identify instances matching any of the 31 detection frameworks above. Use the detection_markers and examples as guides. Flag each pattern instance.",
     "step_3": "ASSESS NECESSITY: For each flagged pattern, ask: (1) Does this substitute form for content? (2) Is there actual story/character/sensory information this pattern obscures? (3) Would direct restructuring improve clarity without losing substance?",
     "step_4": "RESTRUCTURE: Replace mechanical constructions with direct, specific prose that shows rather than tells. Use the fix_strategy guidance for each pattern type.",
     "step_5": "PRESERVE INTEGRITY: Ensure 100% of original text is included. Never drop content, cut dialogue, or remove story information. Restructure ONLY for clarity.",
@@ -512,7 +559,7 @@
 
   "quality_standards": {
     "content_preservation": "Every piece of story information, dialogue, and characterization from the original must appear in the output, possibly in improved structure.",
-    "mechanical_elimination": "All instances of the 29 pattern types should be identified and addressed. No pattern should pass unexamined.",
+    "mechanical_elimination": "All instances of the 31 pattern types should be identified and addressed. No pattern should pass unexamined.",
     "readability_improvement": "Each restructuring should increase clarity and improve content-carrying capacity. If a restructuring doesn't improve the sentence's ability to convey meaning, don't make it.",
     "voice_consistency": "Restructured prose should maintain the author's intended voice and style while removing mechanical patterns. Don't impose a new voice.",
     "specificity_increase": "Restructured patterns should move from abstract/mechanical toward concrete/specific. Replace 'something shifted' with named emotions/actions. Replace 'silence hung' with character response."

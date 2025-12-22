@@ -1,7 +1,7 @@
 {
   "title": "Sensory Enhancement",
-  "version": "2.2.0",
-  "date": "2025-10-05",
+  "version": "2.3.0",
+  "date": "2025-12-22",
   "description": "Advanced prose analysis and enhancement system that transforms boring, flat descriptions into vivid, immersive writing using systematic editing techniques",
   
   "persona": {
@@ -70,6 +70,38 @@
         "replacement_method": "Replace clichés ONLY in passages being enhanced for sensory improvement",
         "assembly_line_rule": "Skip cliché replacement if it's part of dialogue or already working prose",
         "originality_test": "Replace only when improving a flat, sensory-deficient passage"
+      },
+      "5_extreme_specificity_strategy": {
+        "principle": "Replace generic nouns with hyper-specific details that force creative hallucination. AI defaults to safe, generic, inclusive descriptions ('vehicle', 'building', 'drink'). Humans use specific make/model/year/condition/color details.",
+        "detection_priority": "MEDIUM - Generic nouns signal AI's tendency toward vague, universally applicable descriptions. Extreme specificity is a human writing marker.",
+        "target_nouns": [
+          "vehicle → specific make/model/year",
+          "building → architectural style/materials/specific features",
+          "phone → make/model/condition/case details",
+          "drink/beverage → specific brand/temperature/container",
+          "food → specific dish/restaurant/preparation",
+          "clothing → brand/style/condition/color",
+          "object/thing → concrete item with specific details",
+          "car/truck/SUV → specific make and model with details"
+        ],
+        "examples": {
+          "vehicle_generic": "She drove a vehicle to work.",
+          "vehicle_specific": "She drove a rusted 1998 Honda Civic with a cracked windshield.",
+          "building_generic": "The building stood on the corner.",
+          "building_specific": "The three-story brick Victorian with chipped green shutters stood on the corner.",
+          "phone_generic": "He checked his phone.",
+          "phone_specific": "He checked his cracked iPhone 12 with a Star Wars case.",
+          "drink_generic": "She ordered a coffee.",
+          "drink_specific": "She ordered a lukewarm gas station coffee in a paper cup.",
+          "food_generic": "They ate dinner at a restaurant.",
+          "food_specific": "They ate microwaved lasagna at Olive Garden on a Tuesday night.",
+          "clothing_generic": "He wore a jacket.",
+          "clothing_specific": "He wore a faded green Army surplus jacket with a torn left pocket."
+        },
+        "implementation": "When encountering generic nouns in flat passages being enhanced, replace with specific make/model/year/condition/color details. Be creative and concrete. Generic descriptions are AI markers; extreme specificity signals human authorship.",
+        "detection_avoidance_principle": "Extreme specificity lowers AI detection because LLMs default to generic, inclusive descriptions that apply to everyone. Humans naturally write with concrete, specific details from lived experience.",
+        "assembly_line_rule": "Apply ONLY when enhancing flat passages. Skip if passage already has adequate specificity or if it's dialogue (characters may speak in generics naturally).",
+        "caution": "Don't overdo it - one or two hyper-specific details per passage is enough. Too many specific details creates purple prose. Balance specificity with readability."
       }
     }
   },
@@ -95,6 +127,7 @@
       "Transform weak verb combinations ONLY when adding sensory richness",
       "Add missing sensory details ONLY to completely sensory-deficient passages (95%+ visual-only)",
       "Replace clichés ONLY when improving flat descriptions",
+      "Replace generic nouns with hyper-specific details (vehicle → rusted 1998 Honda Civic) to signal human authorship",
       "Skip enhancement in dialogue, already vivid prose, or ANY passage with sensory diversity",
       "MAXIMUM 2 sensory additions per passage - subtle is better than flowery"
     ],
