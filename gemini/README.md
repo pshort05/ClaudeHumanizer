@@ -12,6 +12,21 @@ This 4-stage approach provides several advantages:
 - **Power:** Leverages the large context window of models like Gemini 1.5 Pro to maintain consistency across long-form documents.
 - **Maintainability:** Simplifies the pipeline, making it easier to understand, manage, and adapt.
 
+## Single-Pass Humanizer Option
+
+For users seeking maximum speed and simplicity, we also offer a **Single-Pass Humanizer** (`single_pass_humanizer_prompt.md`).
+
+This prompt consolidates the most critical aspects of all 4 stages into one comprehensive instruction set. While the 4-stage workflow offers the highest possible quality and nuance, the Single-Pass option is excellent for:
+- Quick iterations
+- Shorter texts
+- Lower cost/latency requirements
+
+**How to Use:**
+The prompt references `master_prohibited_words.json` but does not include it inline. When using this prompt:
+1. Load `single_pass_humanizer_prompt.md` as your system instruction.
+2. Append the content of `master_prohibited_words.json` to the system instruction (or provide it as context).
+3. Provide your text.
+
 The workflow is designed to be sequential, with the output of one stage becoming the input for the next. Each stage builds upon the previous one, progressively transforming the text from robotic and predictable to nuanced and authentically human.
 
 ## How to Use the Gemini Prompts
