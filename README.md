@@ -109,12 +109,12 @@ Set up n8n, Make.com, or API workflows (see [Technical Reference](docs/TECHNICAL
 | 1 | `docs/1_grammar_foundation.json` | Grammar errors only | ❌ No | - |
 | 2 | `docs/2_ai_word_cleaning.json` | AI vocabulary removal | ✅ **Required** | Pattern rules |
 | 3 | `docs/3_overwritten_language_reduction.json` | Purple prose + **nominalization** | ❌ No | ✨ **De-nominalization** |
-| 4 | `docs/4_sensory_enhancement.json` | Flat passage improvement | ❌ No | - |
-| 5 | `docs/5_subtlety_creation.json` | Obvious statement conversion | ❌ No | - |
+| 4 | `docs/4_sensory_enhancement.json` | Flat passage + **extreme specificity** | ❌ No | ✨ **Hyper-specific details** (v2.3.0) |
+| 5 | `docs/5_subtlety_creation.json` | Obvious statements + **summaries** | ❌ No | ✨ **Summary elimination** (v2.4.0) |
 | 6 | `docs/6_dialogue_enhancement.json` | Character voice (temp 1.0) | ❌ No | - |
 | 7 | `docs/7_weak_language_cleanup.json` | Weak language + **voice distribution** | ❌ No | ✨ **Active/passive monitoring** |
 | 8 | `docs/8_strategic_imperfections.json` | Rhythm + **punctuation inconsistency** | ❌ No | ✨ **Enhanced imperfections** |
-| 8.5 | `docs/8.5_structural_construction_elimination.json` | **Syntactic pattern elimination** (NEW v3.2.0) | ❌ No | ✨ **29 construction patterns** |
+| 8.5 | `docs/8.5_structural_construction_elimination.json` | **Syntactic patterns** + **Rule of Three** | ❌ No | ✨ **31 construction patterns** (v1.1.0) |
 | 9 | `docs/9_final_verification.json` | **AI patterns** (N-grams + perplexity) | ❌ No | ✨ **Pattern replacement** |
 | 10 | `docs/10_final_ai_word_sweep.json` | **Word filtering only** | ✅ **Required** (+ optional genre lists) | Pure prohibited word removal |
 
@@ -122,7 +122,7 @@ Set up n8n, Make.com, or API workflows (see [Technical Reference](docs/TECHNICAL
 
 **Phase 6.1**: `docs/6.1_character_dialogue_pass.json` - Character-specific dialogue customization for targeted voice refinement (see [Customization Guide](docs/CUSTOMIZATION.md))
 
-**Phase 8.5**: `docs/8.5_structural_construction_elimination.json` - **Syntactic pattern elimination** (NEW in v3.2.0) detecting and restructuring 29 mechanical construction patterns that substitute form for content. Recommended for commercial fiction and erotica; optional for literary fiction where patterns may be intentional. Can be used standalone or integrated as standard pipeline phase.
+**Phase 8.5**: `docs/8.5_structural_construction_elimination.json` - **Syntactic pattern elimination** (v1.1.0) detecting and restructuring 31 mechanical construction patterns that substitute form for content. Now includes **Rule of Three** symmetry breaking and **insecure paragraph summary** elimination (Chaos Method patterns). Recommended for commercial fiction and erotica; optional for literary fiction where patterns may be intentional. Can be used standalone or integrated as standard pipeline phase.
 
 **Phase 9.5**: `docs/9.5_statistical_analysis_hub.json` - **COMPREHENSIVE STATISTICAL HUB** consolidating all quantitative metrics (burstiness, POS distribution, lexical diversity/TTR) into single-pass analysis. Use when AI detection is a concern or text needs statistical optimization. Provides optional detailed metrics report.
 
@@ -195,6 +195,35 @@ Based on academic AI detector research, ClaudeHumanizer now includes targeted co
 - No statistical analysis - focuses exclusively on word-level filtering
 - Clean separation from statistical optimization (Phase 9.5)
 
+### ✨ NEW: Chaos Method Integration (v3.3.1 - December 2025)
+
+Based on "Humanizing AI Writing & The Chaos Method" research, three critical AI patterns have been integrated:
+
+**Phase 8.5 - Rule of Three Symmetry Breaking** (v1.1.0)
+- AI defaults to three-item lists for artificial symmetry (HIGH priority marker)
+- Converts to 2, 4, or 5 items to break AI's preference
+- If keeping 3, makes third item awkward/unexpected
+- Example: "fast, efficient, and reliable" → "fast and reliable" OR "fast, efficient, reliable, and surprisingly intuitive"
+
+**Phase 8.5 - Insecure Paragraph Summary Elimination** (v1.1.0)
+- AI ends paragraphs by restating what was just said (MEDIUM-HIGH priority)
+- Removes "Thus...", "Therefore...", "In conclusion..." endings
+- Principle: End when the point is made. Trust the reader.
+- Deletes redundant recap sentences that add no new information
+
+**Phase 4 - Extreme Specificity Strategy** (v2.3.0)
+- Replaces generic nouns with hyper-specific details (MEDIUM priority)
+- AI defaults to safe, generic descriptions (vehicle, building, phone)
+- Humans use specific make/model/year/condition/color
+- Example: "vehicle" → "rusted 1998 Honda Civic with a cracked windshield"
+- Forces creative hallucination that lowers AI detection rates
+
+**Phase 5 - Redundant Summary Deletion** (v2.4.0)
+- Removes insecure paragraph summaries that restate previous content (CRITICAL priority)
+- Detects final sentences that explain "what we just learned"
+- Never end paragraphs/scenes/chapters with summaries
+- Emphasizes trusting the reader vs. over-explaining
+
 ### ✨ MEDIUM PRIORITY: Additional Detection Countermeasures
 
 **Phase 7 - Active/Passive Voice Distribution Monitor** (v2.4.0)
@@ -244,13 +273,13 @@ ClaudeHumanizer/
     ├── 1_grammar_foundation.json          # Phase 1 prompt
     ├── 2_ai_word_cleaning.json            # Phase 2 prompt (with pattern rules)
     ├── 3_overwritten_language_reduction.json  # v2.4.0 + nominalization
-    ├── 4_sensory_enhancement.json
-    ├── 5_subtlety_creation.json
+    ├── 4_sensory_enhancement.json         # v2.3.0 + extreme specificity
+    ├── 5_subtlety_creation.json           # v2.4.0 + summary elimination
     ├── 6_dialogue_enhancement.json
     ├── 6.1_character_dialogue_pass.json   # Optional
     ├── 7_weak_language_cleanup.json       # v2.4.0 + voice distribution
     ├── 8_strategic_imperfections.json     # v4.1.0 + punctuation + imperfections
-    ├── 8.5_structural_construction_elimination.json  # v1.0.0 OPTIONAL - 29 syntactic patterns
+    ├── 8.5_structural_construction_elimination.json  # v1.1.0 OPTIONAL - 31 syntactic patterns (+ Chaos Method)
     ├── 9_final_verification.json          # v17.0.0 PATTERN DETECTION (qualitative)
     ├── 9.5_statistical_analysis_hub.json  # v2.0.0 OPTIONAL - ALL statistics consolidated
     ├── 10_final_ai_word_sweep.json        # v3.1.0 WORD FILTERING (pure) - supports optional genre lists
@@ -274,6 +303,7 @@ ClaudeHumanizer/
     ├── CHANGELOG.md                       # Version history & updates
     ├── STYLE_GUIDE.md                     # Writing style reference (1-page)
     ├── How AI Detectors Work.md           # Research basis for enhancements
+    ├── Summary_ Humanizing AI Writing & The _Chaos_ Method.md  # Chaos Method research & patterns
     │
     ├── Implementation Guides
     ├── PHASE_8.5_DOCUMENTATION.md         # Phase 8.5 user guide
@@ -395,11 +425,21 @@ For advanced users, see the [Technical Reference](docs/TECHNICAL_REFERENCE.md) f
 
 ---
 
-**Version**: 3.3 - JSON Optimization & Genre-Specific Optional Lists
-**Last Updated**: 2025-12-04
+**Version**: 3.3.1 - Chaos Method Integration
+**Last Updated**: 2025-12-22
 **Optimized For**: Claude Sonnet 4.5
 
-### Key Updates (v3.3)
+### Key Updates (v3.3.1)
+- ✨ **Chaos Method Integration**: Four new AI detection patterns from humanization research
+  - **Phase 8.5 v1.1.0**: Rule of Three symmetry breaking (HIGH priority marker)
+  - **Phase 8.5 v1.1.0**: Insecure paragraph summary elimination (MEDIUM-HIGH priority)
+  - **Phase 4 v2.3.0**: Extreme specificity strategy (generic → hyper-specific details)
+  - **Phase 5 v2.4.0**: Redundant summary deletion (CRITICAL priority)
+- 📚 **New Documentation**: "Summary_ Humanizing AI Writing & The _Chaos_ Method.md" in docs/
+- 🔢 **Pattern Count Update**: Phase 8.5 now detects 31 patterns (was 29)
+- ✅ **Complete Coverage**: All key Chaos Method concepts now implemented
+
+### Previous Updates (v3.3)
 - ✨ **JSON Optimization**: All 20 JSON files optimized (37.8 KB saved / 23.5% reduction)
   - master_prohibited_words.json: 82.9 → 68.0 KB (-17.9%)
   - 9_final_verification.json: 37.7 → 20.9 KB (-44.7%)
