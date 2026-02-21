@@ -1,6 +1,6 @@
 # ClaudeHumanizer
 
-**⚠️ Optimized for Claude Sonnet 4.5 (Recommended) | Also supports: Gemini 2.5 Pro, GPT-5**
+**Optimized for Claude Sonnet 4.5 (Recommended) | Also supports: Gemini 2.5 Pro, GPT-5**
 
 A professional AI text humanization system using a specialized 11-phase assembly line (with optional phases 6.1, 8.5, and 9.5) to transform AI-generated content into natural, human-like writing while preserving meaning and voice.
 
@@ -17,7 +17,7 @@ ClaudeHumanizer employs a **domain-specialized assembly line** where each phase 
 
 ## Quick Start
 
-### ⚠️ Important Usage Considerations
+### Important Usage Considerations
 
 **Non-Native English Speaker (NNES) Bias Warning**
 AI detectors exhibit documented bias against non-native English speakers. NNES writing often features simpler sentence structures, more limited vocabulary, and reliance on common phrasings—characteristics that detectors may misclassify as AI-generated.
@@ -38,13 +38,13 @@ AI detectors often fail catastrophically on hybrid texts containing both human a
 - Do NOT run mixed human/AI paragraphs through the system—process them separately
 - Consider whether detection is even a concern if substantial human contribution exists
 
-## ✨ Gemini-Optimized Workflow (NEW)
+## Gemini-Optimized Workflow (NEW)
 
 For users who prefer to use the Google Gemini API, a new, optimized 4-stage workflow is available. This workflow consolidates the 11+ Claude phases into four powerful "mega-prompts" that leverage Gemini's large context window and advanced instruction-following capabilities.
 
 This approach significantly reduces the number of API calls, leading to faster processing and lower costs, while still providing a comprehensive humanization process.
 
-### 📖 [View the Gemini Humanizer Workflow Guide](gemini/README.md)
+### [View the Gemini Humanizer Workflow Guide](gemini/README.md)
 
 For full details on the 4-stage approach and instructions on how to use the Gemini prompts and the provided `n8n_gemini_workflow.json`, please refer to the documentation in the `gemini` directory.
 
@@ -54,9 +54,9 @@ For full details on the 4-stage approach and instructions on how to use the Gemi
 
 | Model | Best For | Cost | Key Advantage |
 |-------|----------|------|---------------|
-| **Claude Sonnet 4.5** ⭐ | Maximum quality | $3-15/1M tokens | "Surgical" edits, natural human tone, best instruction-following |
-| **Gemini 2.5 Pro** 💰 | Budget/Long texts | $1.25-15/1M tokens | 40% cheaper, 1M context, fastest (372 tok/s) |
-| **GPT-5** 🔄 | ChatGPT users | Subscription | Literary style, widely available (requires stricter prompting) |
+| **Claude Sonnet 4.5** (Recommended) | Maximum quality | $3-15/1M tokens | "Surgical" edits, natural human tone, best instruction-following |
+| **Gemini 2.5 Pro** | Budget/Long texts | $1.25-15/1M tokens | 40% cheaper, 1M context, fastest (372 tok/s) |
+| **GPT-5** | ChatGPT users | Subscription | Literary style, widely available (requires stricter prompting) |
 
 **Quick Decision:**
 - **Quality priority?** → Claude Sonnet 4.5 (recommended)
@@ -106,17 +106,17 @@ Set up n8n, Make.com, or API workflows (see [Technical Reference](docs/TECHNICAL
 
 | Phase | File | Domain | Master List | NEW Features |
 |-------|------|--------|-------------|---------------|
-| 1 | `docs/1_grammar_foundation.json` | Grammar errors only | ❌ No | - |
-| 2 | `docs/2_ai_word_cleaning.json` | AI vocabulary removal | ✅ **Required** | Pattern rules |
-| 3 | `docs/3_overwritten_language_reduction.json` | Purple prose + **nominalization** | ❌ No | ✨ **De-nominalization** |
-| 4 | `docs/4_sensory_enhancement.json` | Flat passage + **extreme specificity** | ❌ No | ✨ **Hyper-specific details** (v2.3.0) |
-| 5 | `docs/5_subtlety_creation.json` | Obvious statements + **summaries** | ❌ No | ✨ **Summary elimination** (v2.4.0) |
-| 6 | `docs/6_dialogue_enhancement.json` | Character voice (temp 1.0) | ❌ No | - |
-| 7 | `docs/7_weak_language_cleanup.json` | Weak language + **voice distribution** | ❌ No | ✨ **Active/passive monitoring** |
-| 8 | `docs/8_strategic_imperfections.json` | Rhythm + **punctuation inconsistency** | ❌ No | ✨ **Enhanced imperfections** |
-| 8.5 | `docs/8.5_structural_construction_elimination.json` | **Syntactic patterns** + **Rule of Three** | ❌ No | ✨ **31 construction patterns** (v1.1.0) |
-| 9 | `docs/9_final_verification.json` | **AI patterns** (N-grams + perplexity) | ❌ No | ✨ **Pattern replacement** |
-| 10 | `docs/10_final_ai_word_sweep.json` | **Word filtering only** | ✅ **Required** (+ optional genre lists) | Pure prohibited word removal |
+| 1 | `docs/1_grammar_foundation.json` | Grammar errors only | No | - |
+| 2 | `docs/2_ai_word_cleaning.json` | AI vocabulary removal | **Required** | Pattern rules |
+| 3 | `docs/3_overwritten_language_reduction.json` | Purple prose + **nominalization** | No | **De-nominalization** |
+| 4 | `docs/4_sensory_enhancement.json` | Flat passage + **extreme specificity** | No | **Hyper-specific details** (v2.3.0) |
+| 5 | `docs/5_subtlety_creation.json` | Obvious statements + **summaries** | No | **Summary elimination** (v2.4.0) |
+| 6 | `docs/6_dialogue_enhancement.json` | Character voice (temp 1.0) | No | - |
+| 7 | `docs/7_weak_language_cleanup.json` | Weak language + **voice distribution** | No | **Active/passive monitoring** |
+| 8 | `docs/8_strategic_imperfections.json` | Rhythm + **punctuation inconsistency** | No | **Enhanced imperfections** |
+| 8.5 | `docs/8.5_structural_construction_elimination.json` | **Syntactic patterns** + **Rule of Three** | No | **31 construction patterns** (v1.1.0) |
+| 9 | `docs/9_final_verification.json` | **AI patterns** (N-grams + perplexity) | No | **Pattern replacement** |
+| 10 | `docs/10_final_ai_word_sweep.json` | **Word filtering only** | **Required** (+ optional genre lists) | Pure prohibited word removal |
 
 ### Optional Enhancements
 
@@ -128,7 +128,7 @@ Set up n8n, Make.com, or API workflows (see [Technical Reference](docs/TECHNICAL
 
 ## Key Features
 
-### ✅ Architectural Clarity (NEW)
+### Architectural Clarity (NEW)
 **Clear Separation of Concerns:**
 - **Phase 9**: QUALITATIVE pattern replacement (N-grams, formulaic phrases, AI patterns)
 - **Phase 9.5**: QUANTITATIVE statistical optimization (burstiness, POS, TTR) - all metrics in one pass
@@ -140,18 +140,18 @@ Set up n8n, Make.com, or API workflows (see [Technical Reference](docs/TECHNICAL
 - Clear conceptual boundaries = easier to understand and maintain
 - Optional statistics phase = skip if text is already optimized
 
-### ✅ Domain Specialization
+### Domain Specialization
 - Each phase handles exactly one improvement type
 - Clear boundaries prevent interference between phases
 - Specialized expertise for consistent results
 
-### ✅ Pattern-Based Intelligence
+### Pattern-Based Intelligence
 - **Dialogue Pause Rules** - Eliminates "weight of words", "silence stretched", etc.
 - **Light Description Rules** - Replaces "filtering through", "casting shadows" with simple alternatives
 - **Finger Action Rules** - Converts "fingers dancing" to direct action verbs like "typing"
 - Pattern matching catches creative variations automatically
 
-### ✨ NEW: Research-Based Detection Countermeasures
+### NEW: Research-Based Detection Countermeasures
 Based on academic AI detector research, ClaudeHumanizer now includes targeted countermeasures for the latest detection methods:
 
 **Phase 3 - Nominalization Conversion** (v2.4.0)
@@ -195,7 +195,7 @@ Based on academic AI detector research, ClaudeHumanizer now includes targeted co
 - No statistical analysis - focuses exclusively on word-level filtering
 - Clean separation from statistical optimization (Phase 9.5)
 
-### ✨ NEW: Chaos Method Integration (v3.3.1 - December 2025)
+### NEW: Chaos Method Integration (v3.3.1 - December 2025)
 
 Based on "Humanizing AI Writing & The Chaos Method" research, three critical AI patterns have been integrated:
 
@@ -224,7 +224,7 @@ Based on "Humanizing AI Writing & The Chaos Method" research, three critical AI 
 - Never end paragraphs/scenes/chapters with summaries
 - Emphasizes trusting the reader vs. over-explaining
 
-### ✨ MEDIUM PRIORITY: Additional Detection Countermeasures
+### MEDIUM PRIORITY: Additional Detection Countermeasures
 
 **Phase 7 - Active/Passive Voice Distribution Monitor** (v2.4.0)
 - Analyzes active/passive voice ratios and normalizes to human baselines
@@ -243,19 +243,19 @@ Based on "Humanizing AI Writing & The Chaos Method" research, three critical AI 
 - Added "underscoring its importance/significance" variants from research
 - Expanded phrase coverage based on academic detector documentation
 
-### ✅ Quality Assurance
+### Quality Assurance
 - Master prohibited words list with intelligent pattern rules
 - Phase 10 final sweep catches words reintroduced by phases 3-9
 - Sequential dependencies ensure cumulative improvements
 - Only Phase 6 modifies dialogue - all others preserve it
 
-### ✅ Claude Optimization
+### Claude Optimization
 - Prompts specifically designed for Claude's strengths
 - Superior literary judgment and pattern recognition
 - Best results with Claude Sonnet 4.5
 - Temperature 1.0 for Phase 6 produces natural dialogue
 
-### ✅ Flexibility
+### Flexibility
 - Optional character-specific dialogue enhancement
 - Configurable for different content types and genres
 - Compatible with automation workflows
@@ -331,65 +331,65 @@ ClaudeHumanizer/
 
 ### For Users
 
-### 📖 [Usage Guide](docs/USAGE_GUIDE.md)
+### [Usage Guide](docs/USAGE_GUIDE.md)
 Complete step-by-step instructions for processing text through the assembly line system, including troubleshooting and quality control.
 
-### ⚙️ [Technical Reference](docs/TECHNICAL_REFERENCE.md)
+### [Technical Reference](docs/TECHNICAL_REFERENCE.md)
 Advanced technical information including LLM optimization recommendations, automation integration guides (n8n, Make.com), and API configurations.
 
-### 🎛️ [Customization Guide](docs/CUSTOMIZATION.md)
+### [Customization Guide](docs/CUSTOMIZATION.md)
 Advanced customization options including character-specific dialogue enhancement and project-specific configurations.
 
-### 📋 [Changelog](docs/CHANGELOG.md)
+### [Changelog](docs/CHANGELOG.md)
 Version history, recent updates, and migration guides. See latest changes including master list consolidation and Phase 8/9 clarifications.
 
-### 🤖 [n8n Workflow](docs/n8n_workflow_sample.json)
+### [n8n Workflow](docs/n8n_workflow_sample.json)
 Ready-to-import n8n workflow for complete 10-phase automation with Claude Sonnet 4.5. Import into n8n, configure file paths and API credentials, then activate.
 
 ### For Developers (NEW)
 
-### 🛠️ [Prompt Template](docs/PROMPT_TEMPLATE.json)
+### [Prompt Template](docs/PROMPT_TEMPLATE.json)
 Master template for creating or updating phase prompts. All sections tagged as [REQUIRED], [OPTIONAL], or [PHASE-SPECIFIC] with inline guidance.
 
-### 📐 [Prompt Standards](docs/PROMPT_STANDARDS.md)
+### [Prompt Standards](docs/PROMPT_STANDARDS.md)
 Standardization rules, naming conventions, and quality guidelines for maintaining consistency across all phase prompts.
 
-### 📊 [Standardization Summary](docs/STANDARDIZATION_SUMMARY.md)
+### [Standardization Summary](docs/STANDARDIZATION_SUMMARY.md)
 Overview of the prompt standardization system including benefits, implementation details, and usage instructions.
 
-### ✅ [Validation Script](docs/validate_prompt.py)
+### [Validation Script](docs/validate_prompt.py)
 Automated validation tool to check prompt conformance. Run `python docs/validate_prompt.py --all` to audit all phase prompts.
 
 ## Processing Flow
 
 ```
-📝 Original Text
+Original Text
     ↓
-🔧 Phase 1: Grammar Foundation → Clean grammatical base
+Phase 1: Grammar Foundation → Clean grammatical base
     ↓
-🧹 Phase 2: AI Word Cleaning + Pattern Rules → Natural vocabulary
+Phase 2: AI Word Cleaning + Pattern Rules → Natural vocabulary
     ↓
-✂️ Phase 3: Purple Prose Reduction → Cleaner descriptions
+Phase 3: Purple Prose Reduction → Cleaner descriptions
     ↓
-🎨 Phase 4: Sensory Enhancement → Engaging passages
+Phase 4: Sensory Enhancement → Engaging passages
     ↓
-🎭 Phase 5: Subtlety Creation → Sophisticated implications
+Phase 5: Subtlety Creation → Sophisticated implications
     ↓
-💬 Phase 6: Dialogue Enhancement (temp 1.0) → Authentic voices
+Phase 6: Dialogue Enhancement (temp 1.0) → Authentic voices
     ↓
-🎭 Phase 6.1: Character-Specific (Optional) → Targeted refinement
+Phase 6.1: Character-Specific (Optional) → Targeted refinement
     ↓
-🔍 Phase 7: Weak Language Cleanup (12 categories) → Stronger expressions
+Phase 7: Weak Language Cleanup (12 categories) → Stronger expressions
     ↓
-🎯 Phase 8: Strategic Imperfections → Natural rhythm
+Phase 8: Strategic Imperfections → Natural rhythm
     ↓
-🏗️ Phase 8.5: Structural Construction Elimination (Optional) → Syntactic patterns removed
+Phase 8.5: Structural Construction Elimination (Optional) → Syntactic patterns removed
     ↓
-✨ Phase 9: Final Verification → AI pattern detection
+Phase 9: Final Verification → AI pattern detection
     ↓
-📊 Phase 9.5: Statistical Analysis (Optional) → Metrics optimization
+Phase 9.5: Statistical Analysis (Optional) → Metrics optimization
     ↓
-🎯 Phase 10: Final AI Word Sweep → Quality control checkpoint
+Phase 10: Final AI Word Sweep → Quality control checkpoint
 ```
 
 ## Benefits
@@ -430,22 +430,22 @@ For advanced users, see the [Technical Reference](docs/TECHNICAL_REFERENCE.md) f
 **Optimized For**: Claude Sonnet 4.5
 
 ### Key Updates (v3.3.1)
-- ✨ **Chaos Method Integration**: Four new AI detection patterns from humanization research
+- **Chaos Method Integration**: Four new AI detection patterns from humanization research
   - **Phase 8.5 v1.1.0**: Rule of Three symmetry breaking (HIGH priority marker)
   - **Phase 8.5 v1.1.0**: Insecure paragraph summary elimination (MEDIUM-HIGH priority)
   - **Phase 4 v2.3.0**: Extreme specificity strategy (generic → hyper-specific details)
   - **Phase 5 v2.4.0**: Redundant summary deletion (CRITICAL priority)
-- 📚 **New Documentation**: "Summary_ Humanizing AI Writing & The _Chaos_ Method.md" in docs/
-- 🔢 **Pattern Count Update**: Phase 8.5 now detects 31 patterns (was 29)
-- ✅ **Complete Coverage**: All key Chaos Method concepts now implemented
+- **New Documentation**: "Summary_ Humanizing AI Writing & The _Chaos_ Method.md" in docs/
+- **Pattern Count Update**: Phase 8.5 now detects 31 patterns (was 29)
+- **Complete Coverage**: All key Chaos Method concepts now implemented
 
 ### Previous Updates (v3.3)
-- ✨ **JSON Optimization**: All 20 JSON files optimized (37.8 KB saved / 23.5% reduction)
+- **JSON Optimization**: All 20 JSON files optimized (37.8 KB saved / 23.5% reduction)
   - master_prohibited_words.json: 82.9 → 68.0 KB (-17.9%)
   - 9_final_verification.json: 37.7 → 20.9 KB (-44.7%)
   - 8_strategic_imperfections.json: 40.4 → 34.3 KB (-15.0%)
-- 🎯 **Genre-Specific Lists**: Romance and erotica patterns moved to optional separate lists
+- **Genre-Specific Lists**: Romance and erotica patterns moved to optional separate lists
   - Phase 10 conditionally applies genre-specific filtering
   - Authors choose whether genre-specific patterns apply
-- 📄 **STYLE_GUIDE.md**: One-page writing style reference for text generation
-- 📊 **Comprehensive Documentation**: Analysis and optimization reports added
+- **STYLE_GUIDE.md**: One-page writing style reference for text generation
+- **Comprehensive Documentation**: Analysis and optimization reports added
